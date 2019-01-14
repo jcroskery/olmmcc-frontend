@@ -141,16 +141,19 @@ h4 {
     float: right;
     padding: 1vmax 0.5vmax;
 }
-
+.bottomCenterSpan {
+    display: inline-block;
+}
 .bottom {
+    text-align: center;
     background-color: rgba(105, 207, 74, 0.9);
     overflow: hidden;
     width: 70vw;
-    padding: 0px 8.3vw;
+    padding: 2vh 8.3vw;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
-    font-size: 1vmax;
+    font-size: 1.15vmax;
     font-family: monospace;
 }
 
@@ -334,7 +337,6 @@ select {
     flex: 40%;
     text-align: right;
 }
-
 #notificationDiv {
     text-align: center;
     top: 0;

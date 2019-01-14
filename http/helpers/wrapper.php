@@ -99,7 +99,7 @@ function bottom(){
     }
     echo <<<HTML
     <div class="bottom">
-        <p style="text-align: center">&copy; Justus Croskery Web Design.$admin</p>
+        <span class='bottomCenterSpan'>&copy; Justus Croskery. <a href='/license' class='aBlue'>License</a> <a href='/privacy/' class='aBlue'>Privacy Policy</a>$admin</span>
     </div>
 
 HTML;
