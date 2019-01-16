@@ -1,11 +1,11 @@
 <?php
 require_once '/srv/logincreds.php';
+echo hi;
 require_once '/srv/http/helpers/displayMessage.php';
 $connection = new mysqli($hn, $un, $pw, $db);
 if ($connection->connect_error) {
     die("Connection error");
 }
-
 $email = strtolower(sanitizeString($_POST['email']));
 $username = sanitizeString($_POST['username']);
 $password = sanitizeString($_POST['password']);

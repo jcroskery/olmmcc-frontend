@@ -11,9 +11,7 @@ class BasicArticle{
         
         $this->article = <<<HTML
         <p id="article-info">$this->title</p>
-        <div id="article-text">
             $this->body
-        </div>
 HTML;
     }
     function getArticle(){

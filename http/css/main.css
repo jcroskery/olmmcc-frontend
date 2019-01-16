@@ -51,8 +51,7 @@ body.contactClass {
 
 #article-info {
     font-size: 2.5vmax;
-    color: cyan;
-    text-decoration: underline;
+    color: darkcyan;
     font-weight: bold;
 }
 
@@ -64,10 +63,6 @@ hr {
     border: 0;
 }
 
-#article-text {
-    background-image: url(/images/something.jpg);
-    padding: 0.5vmax;
-}
 #emailBody {
     width: 50vw;
     height: 40vh;
@@ -79,7 +74,7 @@ hr {
     margin-bottom: 0;
     width: 70vw;
     padding: 0px 8vw;
-    background: rgba(57, 59, 59, 0.9);
+    background: rgba(255, 254, 254, 0.7);
     border: #287EC7;
     border-width: 0.3vw;
     border-style: solid;
@@ -178,7 +173,7 @@ li {
 }
 
 .a {
-    color: cyan;
+    color: darkcyan;
 }
 .aBlue {
     color: blue;

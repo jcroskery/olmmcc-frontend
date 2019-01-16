@@ -9,3 +9,14 @@ function ownvideo($video){
     '<div id=iframe-popup><video class=iframe src=$video controls></video></div>'
 HTML;
 }
+function createVideo($name, $role, $link){
+    $video;
+    if(preg_match('/https.*/', $link)){
+        $video = youtube($link);
+    } else {
+        $video = ownvideo($link);
+    }
+    return <<<HTML
+    <h4>$role: <a href="javascript:;" onclick="displayPopupVideo($video)">$name</a></h4>
+    HTML;
+}
