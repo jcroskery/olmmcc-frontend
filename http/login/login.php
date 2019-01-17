@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once '/srv/http/helpers/sessionStart.php';
     require_once '/srv/logincreds.php';
     require_once '/srv/http/helpers/displayMessage.php';
     $connection = new mysqli($hn, $un, $pw, $db);

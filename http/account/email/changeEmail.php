@@ -1,7 +1,7 @@
 <?php
-session_start();
+include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/accountFunctions.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/helpers/sessionStart.php';
 if(htmlspecialchars($_SESSION['changeEmailVerificationId']) == $_GET['changeEmailVerificationId']){
     changeEmail($_SESSION['newEmail'], $_SESSION['id']);
     setNotInvalidEmail($_SESSION['id']);

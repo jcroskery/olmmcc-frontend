@@ -1,6 +1,6 @@
 <?php
 require_once '/srv/http/helpers/sendEmail.php';
-session_start();
+include_once '/srv/http/helpers/sessionStart.php';
 $verificationid;
 if ($_SESSION['verificationid'] == '') {
     $verificationid = hash('sha512', $_SESSION['id'] . bin2hex(random_bytes(20)));

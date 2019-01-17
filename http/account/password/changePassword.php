@@ -1,7 +1,7 @@
 <?php
-session_start();
+include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/logincreds.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/helpers/sessionStart.php';
 if(htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']){
     $connection = new mysqli($hn, $un, $pw, $db);
     if($connection->connect_error) die("Connection error");

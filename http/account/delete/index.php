@@ -1,7 +1,7 @@
 <?php
-session_start();
+include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/helpers/sessionStart.php';
 require_once '/srv/http/helpers/sendEmail.php';
 if(loggedIn()){
     $deleteCode;

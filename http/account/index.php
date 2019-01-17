@@ -1,6 +1,7 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/helpers/refreshAccount.php';
+include_once '/srv/http/helpers/accountFunction.php';
+refreshAccount();
 if(wrapperBegin('Your Account', 'account', true)) {
 $email = $_SESSION['email'];
 $username = $_SESSION['username'];

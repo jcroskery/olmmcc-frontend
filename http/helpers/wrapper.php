@@ -1,6 +1,6 @@
 <?php
-session_start();
 include_once '/srv/http/helpers/displayMessage.php';
+include_once '/srv/http/helpers/sessionStart.php';
 function wrapperBegin($title, $pageId, $loginRequired = false)
 {
     $verificationCodes;

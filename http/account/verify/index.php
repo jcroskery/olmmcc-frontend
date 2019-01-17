@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once '/srv/http/helpers/displayMessage.php';
+include_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/helpers/sessionStart.php';
 require_once '/srv/http/helpers/accountFunctions.php';
 header("Refresh: 15;url='/account/verify/'");
 if ($_SESSION['id'] != '') {

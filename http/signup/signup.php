@@ -1,7 +1,7 @@
 <?php
 require_once '/srv/logincreds.php';
-echo hi;
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/helpers/accountFunctions.php';
+require_once '/srv/http/helpers/sessionStart.php';
 $connection = new mysqli($hn, $un, $pw, $db);
 if ($connection->connect_error) {
     die("Connection error");
@@ -42,9 +42,7 @@ if ($password == $passwordCheck) {
                         $message = "Sorry, this username has already been taken. Please select another.";
                         displayPopupNotification($message, '/signup/');
                     } else {
-                        $stmt = $connection->prepare("INSERT INTO userlist (email, username, password, verified, admin, subscription_policy, invalid_email) VALUES (?, ?, ?, 0, 0, 1, 0)");
-                        $stmt->bind_param("sss", $email, $username, $hashedPassword);
-                        $stmt->execute();
+                        createAccount($email, $username, $hashedPassword);
                         session_unset();
                         $message = "Congratulations! Your account was sucessfully created. Please login with your email and password.";
                         displayPopupNotification($message, '/login/', false);

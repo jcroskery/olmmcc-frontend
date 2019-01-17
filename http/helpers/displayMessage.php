@@ -1,6 +1,6 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-session_start();
+include_once '/srv/http/helpers/sessionStart.php';
 function displayError($errortext, $link, $error = 'true', $buttons = 'OK'){
     $headerError;
     if($error == 'true'){

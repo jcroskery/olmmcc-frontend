@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '/srv/http/helpers/wrapper.php';
 wrapperBegin('Login', 'login');
 echo <<<HTML

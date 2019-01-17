@@ -1,6 +1,6 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-session_start();
+include_once '/srv/http/helpers/sessionStart.php';
 if($_SESSION['admin']){
     wrapperBegin('Administrator Settings', '');
 
