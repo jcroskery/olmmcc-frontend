@@ -20,6 +20,6 @@ $article = <<<HTML
 </div>
 HTML;
 
-$tmp = new BasicArticle("Below are the songs for our November 4th children's mass:", $article, '5/11/2018');
+$tmp = new SongArticle("Below are the songs for our November 4th children's mass:", $article, '5/11/2018');
 $expiry = $tmp->getExpiry();
 $article = $tmp->getArticle();

@@ -1,6 +1,6 @@
 <?php
 include_once '../helpers/wrapper.php';
-include_once '../helpers/basicArticle.php';
+include_once '../helpers/songArticle.php';
 $files = scandir('.');
 $formatted = '';
 $articleArray = [];

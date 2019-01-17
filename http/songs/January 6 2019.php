@@ -18,6 +18,6 @@ $article = <<<HTML
 <h4>Recessional: <a href="javascript:;" onclick="displayPopupVideo($gotellitonthemountain)">Go Tell It On the Mountain</a></h4>
 HTML;
 
-$tmp = new BasicArticle("December Practice Schedule and Songs:", $article, '07/01/2019');
+$tmp = new SongArticle("December Practice Schedule and Songs:", $article, '07/01/2019');
 $expiry = $tmp->getExpiry();
 $article = $tmp->getArticle();

@@ -14,6 +14,6 @@ $communion
 $closing
 HTML;
 
-$tmp = new BasicArticle("January Practice Schedule and Songs:", $article, '04/02/2019');
+$tmp = new SongArticle("January Practice Schedule and Songs:", $article, '04/02/2019');
 $expiry = $tmp->getExpiry();
 $article = $tmp->getArticle();
