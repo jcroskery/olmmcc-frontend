@@ -7,13 +7,13 @@ if($_SESSION['admin']){
         <H1>Compose Email</H1>
         <form action='email.php' method='post'  style='text-align: center;'>
             <span class='pre'>From: </span>
-            <select class='h3p' name='subscriptionPolicy'>
+            <select name='subscriptionPolicy'>
                 <option value='justus@olmmcc.tk' selected='selected'>justus@olmmcc.tk</option>
                 <option value='justus.croskery@gmail.com'>justus.croskery@gmail.com</option>
             </select>
             <br>
 <span class='pre'>To: </span>
-<select class='h3p' name='emailAddresses'>
+<select name='emailAddresses'>
     <option value='Choir' selected='selected'>Choir</option>
     $allAccounts
 </select>

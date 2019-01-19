@@ -12,13 +12,13 @@ echo <<<HTML
         <li class='q'>Q: What are the duties of choir members?</li>
         <li class='a'>A: Choir members come to the two practices each month for an hour and they perform on the first Sunday of each month for the Children's Mass.</li>
         <li class='q'>Q: What if I can't make it to a practice?</li>
-        <li class='a'>A: Email Justus at <a class='aBlue' href="mailto:justus@olmmcc.tk">justus@olmmcc.tk</a>.</li>
+        <li class='a'>A: Email Justus at <a href="mailto:justus@olmmcc.tk">justus@olmmcc.tk</a>.</li>
         <li class='q'> Q: Is any previous singing experience required?</li>
         <li class='a'>A: No, we accept any level of singer.</li>
         <li class='q'>Q: How do I join?</li>
         <li class='a'>A: Email Justus or show up at one of our practices!</li>
     </ul>
-    <p>More questions? Email Justus at <a class='aBlue' href="mailto:justus@olmmcc.tk">justus@olmmcc.tk</a>.</p>
+    <p>More questions? Email Justus at <a href="mailto:justus@olmmcc.tk">justus@olmmcc.tk</a>.</p>
 </div>
 
 HTML;

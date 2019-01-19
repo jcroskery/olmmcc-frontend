@@ -16,8 +16,8 @@ echo <<<HTML
                     <p>Username: $username</p>
                 </div>
                 <div class='rightColumn'>
-                    <p><a class='aBlue' href='/account/email/'>Change Account Email</a></p>
-                    <p><a class='aBlue' href='/account/username/'>Change Account Username</a></p>
+                    <p><a href='/account/email/'>Change Account Email</a></p>
+                    <p><a href='/account/username/'>Change Account Username</a></p>
                 </div>
             </div>
             <form action="/account/subscription/" method='post'>
@@ -30,7 +30,7 @@ echo <<<HTML
                 <input class='submit' type="submit" value="Set Subscription Policy"/>
             </form>
             <br>
-            <span class='smallSpan'><a class='aBlue' href='/account/password/'>Change Password</a> or <a class='aBlue' href='/account/delete/'>Delete Account</a></span>
+            <span class='smallSpan'><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>
         </div>
 
 HTML;

@@ -95,11 +95,11 @@ HTML;
 function bottom(){
     $admin;
     if($_SESSION['admin']){
-        $admin = ' <a href="/admin/" class="aBlue">Go to administrator settings</a>';
+        $admin = ' <a href="/admin/">Go to administrator settings</a>';
     }
     echo <<<HTML
     <div class="bottom">
-        <span class='bottomCenterSpan'>&copy; Justus Croskery. <a href='/license' class='aBlue'>License</a> <a href='/privacy/' class='aBlue'>Privacy Policy</a>$admin</span>
+        <span>&copy; Justus Croskery. <a href='/license'>License</a> <a href='/privacy/'>Privacy Policy</a>$admin</span>
     </div>
 
 HTML;

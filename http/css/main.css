@@ -1,22 +1,19 @@
 body {
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0;
+    margin: 0;
     background-size: 100%;
     background-image: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg');
     background-repeat:no-repeat;
     background-attachment: fixed; 
 }
-h3{
-    margin-top: 4vh;
-    
+span, p {
+    font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
+}
+a {
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
+}
+h3 {
     font-size: 3vmax;
     margin-bottom: 0;
-}
-.h3p {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
 }
 body.homeClass {
     background-image: url('/images/Choir\ singing\ 2.jpg');
@@ -41,11 +38,8 @@ body.contactClass {
     top: 0;
     width: 100%;
     position: sticky;
-    position: -webkit-sticky;
-    z-index: 2;
     background-color: #333;
     overflow: hidden;
-    opacity: 1;
     font-family: 'serif';
 }
 
@@ -95,10 +89,6 @@ h4 {
     font-size: 2.5vmax;
 }
 
-#mainParagraph {
-    text-align: left;
-}
-
 #topnav a {
     text-align: center;
     text-decoration: none;
@@ -136,24 +126,17 @@ h4 {
     float: right;
     padding: 1vmax 0.5vmax;
 }
-.bottomCenterSpan {
-    display: inline-block;
-}
 .bottom {
     text-align: center;
     background-color: rgba(105, 207, 74, 0.9);
-    overflow: hidden;
-    width: 70vw;
-    padding: 2vh 8.3vw;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0;
-    font-size: 1.15vmax;
-    font-family: monospace;
+    width: 86.6vw;
+    padding: 2vh 0;
+    margin: auto;
+    font-size: 1.3vmax;
 }
 
 #tradlink {
-    color: dodgerblue;
+    color: blue;
     padding: 1vmax 1vmax;
     float: left;
 }
@@ -173,11 +156,9 @@ li {
 }
 
 .a {
-    color: darkcyan;
-}
-.aBlue {
     color: blue;
 }
+
 table, th, td {
     border: 0.2vmax solid black;
     border-collapse: collapse;
