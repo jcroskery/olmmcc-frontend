@@ -5,11 +5,8 @@ body {
     background-repeat:no-repeat;
     background-attachment: fixed; 
 }
-span, p {
+.bottom, #main-text {
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
-}
-a {
-    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
 h3 {
     font-size: 3vmax;
@@ -40,40 +37,36 @@ body.contactClass {
     position: sticky;
     background-color: #333;
     overflow: hidden;
-    font-family: 'serif';
+    font-size: 1.75vmax;
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
-
-#article-info {
+.bottom {
+    text-align: center;
+    background-color: rgba(105, 207, 74, 0.9);
+    width: 86.6vw;
+    padding: 2vh 0;
+    margin: auto;
+    font-size: 1.3vmax;
+}
+h2 {
     font-size: 2.5vmax;
     color: darkcyan;
-    font-weight: bold;
 }
-
-hr {
-    margin: 50px 0;
-    height: 0.1vmax;
-    color: black;
-    background-color: black;
-    border: 0;
-}
-
+/**/
 #emailBody {
     width: 50vw;
     height: 40vh;
     font-size: 1.25vmax;
 }
 #main-text {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0;
+    margin: auto;
     width: 70vw;
     padding: 0px 8vw;
     background: rgba(255, 254, 254, 0.7);
-    border: #287EC7;
+    border: royalblue;
     border-width: 0.3vw;
     border-style: solid;
     font-size: 2vmax;
-    font-family: Cambria;
 }
 
 h1 {
@@ -92,7 +85,6 @@ h4 {
 #topnav a {
     text-align: center;
     text-decoration: none;
-    font-size: 1.5vmax;
 }
 
 .left-align a {
@@ -125,14 +117,6 @@ h4 {
 .right-align-or {
     float: right;
     padding: 1vmax 0.5vmax;
-}
-.bottom {
-    text-align: center;
-    background-color: rgba(105, 207, 74, 0.9);
-    width: 86.6vw;
-    padding: 2vh 0;
-    margin: auto;
-    font-size: 1.3vmax;
 }
 
 #tradlink {

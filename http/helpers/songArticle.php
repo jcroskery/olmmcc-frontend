@@ -10,7 +10,7 @@ class SongArticle{
     function createArticle(){
         
         $this->article = <<<HTML
-        <p id="article-info">$this->title</p>
+        <h2>$this->title</h2>
             $this->body
 HTML;
     }

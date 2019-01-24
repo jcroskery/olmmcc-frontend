@@ -2,7 +2,6 @@
 include_once '../helpers/wrapper.php';
 include_once '../helpers/songArticle.php';
 $files = scandir('.');
-$formatted = '';
 $articleArray = [];
 foreach($files as $file){
     if($file!="index.php"){
@@ -14,10 +13,7 @@ foreach($files as $file){
     }  
 }
 ksort($articleArray);
-foreach($articleArray as $article){
-    $formatted .= $article .= '<hr>';
-}
-$formatted = substr($formatted, 0, -4);
+$formatted = reset($articleArray);
 if($formatted == ''){
     $formatted = <<<HTML
     <p>There is no post about the current schedule yet, please check back later.</p>

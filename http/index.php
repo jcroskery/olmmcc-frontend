@@ -1,6 +1,6 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-wrapperBegin('OLMM Children\'s choir', 'home');
+wrapperBegin('OLMM Children\'s Choir', 'home');
 echo <<<HTML
         <div id="main-text">
             <H1>Home</H1>
