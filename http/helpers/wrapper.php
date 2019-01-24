@@ -68,6 +68,7 @@ function topnav($id){
                 <a $active[calendar] href="/calendar">Calendar</a>
                 <a $active[faq] href="/faq">FAQ</a>
                 <a $active[contact] href="/contact">Contact</a>
+                <a class="tradlink" href="http://www.olmm.ca">Visit OLMM's homepage</a>
             </div>
             <div class="right-align">
 HTML;
@@ -80,14 +81,13 @@ HTML;
     } else {
         echo <<<HTML
             <a $active[signup] class="login" href="/signup">Sign up</a>
-            <a>or</a>
+            <span>or</span>
             <a $active[login] class="login" href="/login">Login</a>
 HTML;
     }
     echo <<<HTML
             </div>
-            <a id="tradlink" href="http://olmm.ca">Visit OLMM's homepage</a>
-
+            
         </div>
 
 HTML;

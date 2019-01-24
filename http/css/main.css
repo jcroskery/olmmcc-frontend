@@ -5,12 +5,11 @@ body {
     background-repeat:no-repeat;
     background-attachment: fixed; 
 }
-.bottom, #main-text {
+.bottom, p{
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
 }
-h3 {
-    font-size: 3vmax;
-    margin-bottom: 0;
+#topnav, caption{
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
 body.homeClass {
     background-image: url('/images/Choir\ singing\ 2.jpg');
@@ -38,7 +37,6 @@ body.contactClass {
     background-color: #333;
     overflow: hidden;
     font-size: 1.75vmax;
-    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
 .bottom {
     text-align: center;
@@ -48,10 +46,6 @@ body.contactClass {
     margin: auto;
     font-size: 1.3vmax;
 }
-h2 {
-    font-size: 2.5vmax;
-    color: darkcyan;
-}
 /**/
 #emailBody {
     width: 50vw;
@@ -60,116 +54,97 @@ h2 {
 }
 #main-text {
     margin: auto;
-    width: 70vw;
-    padding: 0px 8vw;
-    background: rgba(255, 254, 254, 0.7);
+    width: 70%;
+    padding: 0 8vw;
+    background: rgba(255,255,255,0.7);
     border: royalblue;
     border-width: 0.3vw;
     border-style: solid;
+}
+p, li {
     font-size: 2vmax;
 }
-
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial', sans-serif;
+}
 h1 {
     text-align: center;
-    font-family: Arial;
     font-size: 4vmax;
-    margin-bottom: 1vh;
 }
-
+h2 {
+    font-size: 2.5vmax;
+    color: darkcyan;
+}
+h3 {
+    font-size: 3vmax;
+    margin-bottom: 0;
+}
 h4 {
-    font-family: Arial;
     text-align: center;
     font-size: 2.5vmax;
 }
 
-#topnav a {
+#topnav a, #topnav span {
     text-align: center;
     text-decoration: none;
+    color: white;
 }
 
 .left-align a {
     float: left;
-    padding: 1vmax 1vmax;
-    color: #f3f3f3;
+    padding: 1vmax;
 }
 
-#topnav .left-align a:hover {
+#topnav a:hover {
     background-color: #ddd;
     color: black;
 }
 
 #topnav #active {
     background-color: #4CAF50;
-    color: white;
 }
 
-.right-align a {
+.right-align a, .right-align span {
     float: right;
     padding: 1vmax 0.6vw;
-    color: #f3f3f3;
 }
 
-#topnav .right-align .login:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.right-align-or {
-    float: right;
-    padding: 1vmax 0.5vmax;
-}
-
-#tradlink {
-    color: blue;
-    padding: 1vmax 1vmax;
-    float: left;
+.tradlink {
+    color: blue !important;
 }
 
 ul {
     list-style-type: none;
-    padding: 0px;
-    margin-left: 0px;
+    padding: 0;
 }
 
 li {
-    margin-bottom: 10px;
-}
-
-.q {
-    color: black;
+    margin-bottom: 2vh;
 }
 
 .a {
     color: blue;
 }
 
-table, th, td {
-    border: 0.2vmax solid black;
-    border-collapse: collapse;
-    border-color: blue;
-    width: 90%;
+th, td {
+    font-size: 2vw;
+    border: 0.2vmax solid blue;
+    font-family: 'Noto Sans', sans-serif;
+    vertical-align: top;
 }
 
 table {
     table-layout: fixed;
     background-color: lightgray;
     margin: 0px auto;
+    width: 90%;
+    border-collapse: collapse;
 }
 
-td {
-    font-weight: lighter;
-    font-family: sans-serif;
-    vertical-align: top;
-}
-
-th, td {
-    font-size: 2vw;
-}
 
 caption {
-    font-family: "Cambria";
-    padding: 1vmax 0 0 0;
-    font-size: 3vmax;
+    padding: 1vh 0;
+    font-size: 4vmax;
 }
 
 button {
