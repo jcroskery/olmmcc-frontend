@@ -2,12 +2,12 @@
 include_once '../helpers/wrapper.php';
 wrapperBegin('Calendar', 'calendar');
 echo <<<HTML
-    <button  id='leftbutton' onclick='leftClick()'><img class='img' src='../images/Leftarrow.gif' alt = 'Previous month'></button>
-    <button  id='rightbutton' onclick='rightClick()'><img class='img' src = '../images/Leftarrow.gif' alt = 'Next month'></button>
+    <button onclick='leftClick()'><img class='buttonImage' src='../images/Leftarrow.gif' alt = 'Previous month'></button>
+    <button id='rightbutton' onclick='rightClick()'><img class='buttonImage' src = '../images/Leftarrow.gif' alt = 'Next month'></button>
     <table>
 HTML;
-echo "<caption id='caption'></caption>";
 echo <<<HTML
+        <caption id='caption'></caption>
         <tr id='tr'>
             <th>Sunday</th>
             <th>Monday</th>

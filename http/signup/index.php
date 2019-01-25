@@ -3,18 +3,39 @@ include_once '../helpers/wrapper.php';
 wrapperBegin('Sign Up', 'signup');
 echo <<<HTML
 
-    <form method="post" action="signup.php" class="form">
-            <h1>Sign Up</h1>
-            <pre class="pre">
-Email: <input type="email" name="email" class="anInput" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
-Username: <input type="text" name="username" class="anInput" autofocus="true" autocomplete="on" placeholder="Your new username" required="required"/>
-Password: <input type="password" class="anInput" name="password" autocomplete="off" placeholder="Your new password"required="required"/>
-Repeat password: <input type="password" class="anInput" name="password2" autocomplete="off" placeholder="Repeat your password"required="required"/>
-</pre>
-<pre class="pre-center">
-Please look over the terms of the <a target="_blank" class='a' href="/license">license</a>: I accept<input type="checkbox" required="true"/>
-<input type="submit" name="accept" value="Sign up!" class="submit"/>
-</pre>
-        </form>
+<form method="post" action="signup.php" class='mainForm'>
+        <h1>Sign Up</h1>
+
+        <div class='rightDiv'>
+                <label for='email'>Email: </label>
+                <input type="email" id='email' name="email" class="anInput" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
+                
+                <br>
+
+
+                <label for='username'>Username: </label>
+                <input type="text" id='username' name="username" class="anInput" autofocus="true" autocomplete="on" placeholder="Your new username" required="required"/>
+
+                <br>
+
+
+                <label for='password'>Password: </label>
+                <input type="password" id='password' class="anInput" name="password" autocomplete="off" placeholder="Your new password"required="required"/>
+
+                <br>
+
+
+                <label for='password2'>Repeat password: </label>
+                <input type="password" id='password2' class="anInput" name="password2" autocomplete="off" placeholder="Repeat your password"required="required"/>
+        </div>
+        <br>
+        <span>Please look over the terms of the <a target="_blank" class='a' href="/license">license</a>: I accept</span>
+        <input type="checkbox" required="true"/>
+
+        <br>
+        <br>
+
+        <input type="submit" name="accept" value="Sign up!" class="submit"/>
+</form>
 HTML;
 wrapperEnd();

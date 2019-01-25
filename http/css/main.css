@@ -5,9 +5,18 @@ body {
     background-repeat:no-repeat;
     background-attachment: fixed; 
 }
-.bottom, p{
+
+span, p, input, label{
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
 }
+p, li, input, label, span{
+    font-size: 2vmax;
+}
+
+.rightDiv {
+    text-align: right;
+}
+
 #topnav, caption{
     font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
@@ -36,7 +45,7 @@ body.contactClass {
     position: sticky;
     background-color: #333;
     overflow: hidden;
-    font-size: 1.75vmax;
+    font-size: 2vmax;
 }
 .bottom {
     text-align: center;
@@ -44,6 +53,8 @@ body.contactClass {
     width: 86.6vw;
     padding: 2vh 0;
     margin: auto;
+}
+.bottomSpan {
     font-size: 1.3vmax;
 }
 /**/
@@ -52,7 +63,7 @@ body.contactClass {
     height: 40vh;
     font-size: 1.25vmax;
 }
-#main-text {
+#main-text, .mainForm{
     margin: auto;
     width: 70%;
     padding: 0 8vw;
@@ -60,9 +71,6 @@ body.contactClass {
     border: royalblue;
     border-width: 0.3vw;
     border-style: solid;
-}
-p, li {
-    font-size: 2vmax;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Arial', sans-serif;
@@ -141,7 +149,6 @@ table {
     border-collapse: collapse;
 }
 
-
 caption {
     padding: 1vh 0;
     font-size: 4vmax;
@@ -150,23 +157,16 @@ caption {
 button {
     border: none;
     background-color: transparent;
-    padding: 0 1vw 0 1vw;
+    padding: 0 1vw;
     position: absolute;
 }
 
-#leftbutton {
-    left: 0;
-}
-
 #rightbutton {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     right: 0;
 }
 
-.img {
+.buttonImage {
     width: 3vw;
     height: 15vh;
 }
@@ -174,67 +174,47 @@ button {
 #graydiv {
     background-color: rgba(57, 59, 59, 0.9);
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
-    z-index: 2;
 }
 
 .iframe {
-    top: 10vh;
-    width: 80vw;
-    height: 80vh;
-    position: relative;
+    top: 10%;
     left: 10%;
+    width: 80%;
+    height: 80%;
+    position: fixed;
     background-color: black;
 }
 
-.calendarEventTitle {
+.calendarEvent, .calendarEventTitle {
     padding: 0;
     margin: 0;
+}
+.calendarEventTitle {
     color: darkcyan;
     font-size: 1.5vmax;
 }
 
 .calendarEvent {
-    padding: 0;
-    margin: 0;
     font-size: 1vmax;
 }
 
-
 .submit {
     padding: 0.5vmax;
-    font-size: 1.25vmax;
 }
 
-
-
-.form {
+form {
     text-align: center;
-    background: rgba(57, 59, 59, 0.7);
-    width: 70vw;
-    margin: auto;
-    padding: 0 8vw;
-    border: #287EC7;
-    border-width: 0.3vw;
-    border-style: solid;
 }
 
 .anInput {
     width: 40vw;
     height: 8vh;
-    font-size: 1.5vmax;
     margin-bottom: 1.5vh;
     margin-right: 1vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.pre {
-    text-align: right;
-    font-size: 2vmax;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .pre-center {

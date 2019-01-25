@@ -5,7 +5,7 @@ $email = $_SESSION['email'];
 $emailAutoFocus = $email == '' ? 'autofocus="true"' : '';
 $passwordAutoFocus = $email != '' ? 'autofocus="true"' : '';
 echo <<<HTML
-<form method="post" action="/account/password/confirm.php" class="form">
+<form method="post" action="/account/password/confirm.php" class='mainForm'>
     <h1>Change your password: </h1>
     <pre class="pre">
     Email: <input type="email" name="email" class="anInput" $emailAutoFocus autocomplete="on" placeholder="Your email" required="required" value='$email'/>

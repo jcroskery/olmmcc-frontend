@@ -99,7 +99,7 @@ function bottom(){
     }
     echo <<<HTML
     <div class="bottom">
-        <span>&copy; Justus Croskery. <a href='/license'>License</a> <a href='/privacy/'>Privacy Policy</a>$admin</span>
+        <span class='bottomSpan'>&copy; Justus Croskery. <a href='/license'>License</a> <a href='/privacy/'>Privacy Policy</a>$admin</span>
     </div>
 
 HTML;
