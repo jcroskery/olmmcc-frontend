@@ -8,7 +8,7 @@ $username = $_SESSION['username'];
 $subscriptionDefault = [];
 $subscriptionDefault[$_SESSION['subscription_policy']] = 'selected="selected"';
 echo <<<HTML
-        <div id="main-text" style='text-align: center;'>
+        <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
             <div class='row'>
                 <div class='leftColumn'>
@@ -16,18 +16,21 @@ echo <<<HTML
                     <p>Username: $username</p>
                 </div>
                 <div class='rightColumn'>
-                    <p><a href='/account/email/'>Change Account Email</a></p>
+                    <button formaction='/account/email/'>Change Account Email</button>
                     <p><a href='/account/username/'>Change Account Username</a></p>
                 </div>
             </div>
+            <br>
             <form action="/account/subscription/" method='post'>
-                <span class='pre'>Subscription policy: </span>
+                <span>Subscription policy: </span>
                 <select name='subscriptionPolicy'>
                     <option value='0' $subscriptionDefault[0]>No emails</option>
                     <option value='1' $subscriptionDefault[1]>Emails</option>
                     <option value='2' $subscriptionDefault[2]>Emails and reminders</option>
-                </select>&ensp;&ensp;
-                <input class='submit' type="submit" value="Set Subscription Policy"/>
+                </select>
+                <br>
+                <br>
+                <input type="submit" value="Set Subscription Policy"/>
             </form>
             <br>
             <span class='smallSpan'><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>

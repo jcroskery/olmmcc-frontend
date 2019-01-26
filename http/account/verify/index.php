@@ -21,7 +21,7 @@ if ($_SESSION['id'] != '') {
             displayPopupNotification($message, '/account/email');
         } else {
             $message = 'Your account has not been verified yet. An email containing the verification link has been sent to ' . $_SESSION['notVerifiedEmail'] . '. Please note that it may take a few minutes for the email to be sent.';
-            displayError($message, '/account/verify/email.php', 'Verify your account', 'Resend Verification Email');
+            displayMessage($message, '/account/verify/email.php', 'Verify your account', 'Resend Verification Email');
         }
     } else {
         $message = 'Your account has already been verified.';

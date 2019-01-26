@@ -23,7 +23,7 @@ if($row[1] != null){
         $message = "<p>Hi,</p>Click this link to change your password: " . $link;
         sendEmail($subject, $message, $username, $email);
         $message = 'An email containing the password reset link has been sent to ' . $email . '. Please check your email for the link, including the spam folder. Please note that it may take a few minutes for the email to be sent.';
-        displayError($message, '/account/password/confirm.php', 'Password change link sent', 'Resend confirmation email');
+        displayMessage($message, '/account/password/confirm.php', 'Password change link sent', 'Resend confirmation email');
     } else {
         $message = "Passwords do not match. Please try again.";
         displayPopupNotification($message, '/account/password/');

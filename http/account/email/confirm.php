@@ -31,7 +31,7 @@ if (loggedIn()) {
         $message = "<p>Hi,</p>Click this link to change your email address: " . $link;
         sendEmail($subject, $message, $_SESSION['username'], $_SESSION['email']);
         $message = 'An email containing the confirmation link has been sent to ' . $_SESSION['email'] . '. Please check your email, including the spam folder, for the link. Please note that it may take a few minutes for the email to be sent.';
-        displayError($message, '/account/email/confirm.php', 'Confirm email change', 'Resend confirmation email');
+        displayMessage($message, '/account/email/confirm.php', 'Confirm email change', 'Resend confirmation email');
     }
 } else if ($_SESSION['invalid_email'] == 1) {
     $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);

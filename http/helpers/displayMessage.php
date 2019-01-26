@@ -1,7 +1,7 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/helpers/sessionStart.php';
-function displayError($errortext, $link, $error = 'true', $buttons = 'OK'){
+function displayMessage($errortext, $link, $error = 'true', $buttons = 'OK'){
     $headerError;
     if($error == 'true'){
         $headerError = "Error!";
@@ -13,9 +13,9 @@ function displayError($errortext, $link, $error = 'true', $buttons = 'OK'){
     wrapperBegin($headerError, '');
     
     echo <<<HTML
-    <form method="post" action="$link" class="form">
-    <h1>$headerError</h1>
-    <p class="formParagraph">$errortext</p>
+    <form method="post" action="$link" class="mainForm">
+        <h1>$headerError</h1>
+        <p>$errortext</p>
 HTML;
     if($buttons!="none"){
         echo '<input type="submit" value="' . $buttons . '" class="submit" />';
