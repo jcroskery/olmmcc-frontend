@@ -7,12 +7,12 @@ echo <<<HTML
 
         <div class='rightDiv'>
                 <label for='email'>Email: </label>
-                <input type="email" id = 'email' name="email" class="anInput" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
+                <input type="email" id = 'email' name="email" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
 
                 <br>
 
                 <label for='password'>Password: </label>
-                <input type="password" class="anInput" id='password' name="password" autocomplete="off" placeholder="Your password"required="required"/>
+                <input type="password" id='password' name="password" autocomplete="off" placeholder="Your password"required="required"/>
         </div>
         <br>
 
