@@ -2,6 +2,7 @@
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/sessionStart.php';
 require_once '/srv/http/helpers/accountFunctions.php';
+refreshAccount();
 header("Refresh: 15;url='/account/verify/'");
 if ($_SESSION['id'] != '') {
     if (!$_SESSION['verified']) {

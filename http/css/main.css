@@ -6,18 +6,30 @@ body {
     background-attachment: fixed; 
 }
 
-span, p, input, label{
+span, p, input, label, button, select{
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
 }
-p, li, input, label, span, select{
+p, li, input:not([type='submit']), label, span{
     font-size: 2vmax;
+}
+select, button, input[type='submit']{
+    font-size: 1.5vmax;
 }
 
 .rightDiv {
     text-align: right;
 }
+.rightFloat {
+    float: right;
+}
 .centerDiv {
     text-align: center;
+}
+.leftFloat {
+    float: left;
+}
+.leftDiv {
+    text-align: left;
 }
 
 #topnav, caption{
@@ -157,7 +169,7 @@ caption {
     font-size: 4vmax;
 }
 
-button {
+.calendarButton {
     border: none;
     background-color: transparent;
     padding: 0 1vw;
@@ -218,21 +230,6 @@ input[type="text"], input[type='email'], input[type='password'] {
     height: 8vh;
     margin-bottom: 1.5vh;
     margin-right: 1vw;
-}
-.row {
-    display: flex;
-}
-
-.leftColumn, .rightColumn {
-    font-size: 2.2vmax;
-}
-.leftColumn {
-    flex: 60%;
-    text-align: left;
-}
-.rightColumn {
-    flex: 40%;
-    text-align: right;
 }
 #notificationDiv {
     text-align: center;
