@@ -5,16 +5,15 @@ refreshAccount();
 if(wrapperBegin('Your Account', 'account', true)) {
 $email = $_SESSION['email'];
 $username = $_SESSION['username'];
-$subscriptionDefault = [];
-$subscriptionDefault[$_SESSION['subscription_policy']] = 'selected="selected"';
-$accountLevel; 
-$disabled='';
-if($_SESSION['admin'] == 1){
-    $accountLevel = 'Admin';
-} else {
-    $accountLevel = 'Member';
-    $disabled = 'disabled="disabled"';
+$subscriptionName = getSubscriptionPolicyName($_SESSION['subscription_policy']);
+$subscriptionOptions = '<option disabled selected>' . $subscriptionName . '</option>';
+for($i = 0; $i < 3; $i++){
+    if($i != $_SESSION['subscription_policy']) {
+        $subscriptionOptions .= "<option value='$i'>" . getSubscriptionPolicyName($i) . "</option>";
+    }
 }
+$accountLevel = $_SESSION['admin'] ? 'Admin' : 'Member'; 
+$disabled = $_SESSION['admin'] ? '' : "disabled='disabled'";
 echo <<<HTML
         <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
@@ -28,12 +27,10 @@ echo <<<HTML
                 <button class='rightFloat' type='submit'>Change Account Username</button>
             </form>
             <br><br><br>
-            <span class='leftFloat'>Subscription policy: </span>
+            <span class='leftFloat'>Subscription policy: $subscriptionName</span>
             <form action="/account/subscription/" method='post'>
                 <select class='rightFloat' name='subscriptionPolicy' onchange="this.form.submit()">
-                    <option value='0' $subscriptionDefault[0]>No emails</option>
-                    <option value='1' $subscriptionDefault[1]>Emails</option>
-                    <option value='2' $subscriptionDefault[2]>Emails and reminders</option>
+                    $subscriptionOptions
                 </select>
             </form>
             <br>

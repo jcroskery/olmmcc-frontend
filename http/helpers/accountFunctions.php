@@ -60,3 +60,7 @@ function refreshAccount(){
     $_SESSION['subscription_policy'] = $row[6];
     $_SESSION['invalid_email'] = $row[7];
 }
+function getSubscriptionPolicyName($subscriptionPolicy){
+    $subscriptionNames = ['No emails', 'Emails', 'Emails and reminders'];
+    return $subscriptionNames[$subscriptionPolicy];
+}

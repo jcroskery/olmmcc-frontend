@@ -12,7 +12,7 @@ span, p, input, label, button, select{
 p, li, input:not([type='submit']), label, span{
     font-size: 2vmax;
 }
-select, button, input[type='submit']{
+select, button, input[type='submit'], .calendarEventTitle{
     font-size: 1.5vmax;
 }
 
@@ -210,7 +210,6 @@ caption {
 }
 .calendarEventTitle {
     color: darkcyan;
-    font-size: 1.5vmax;
 }
 
 .calendarEvent {
@@ -234,13 +233,11 @@ input[type="text"], input[type='email'], input[type='password'] {
 #notificationDiv {
     text-align: center;
     top: 0;
-    left: 20vw;
-    right: 20vw;
-    position: absolute;
+    left: 20%;
+    right: 20%;
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 3;
     width: 60%;
-    border: 0 solid rgba(0, 0, 0, 0);
     border-radius: 2vmax;
 }
 #notificationP {
