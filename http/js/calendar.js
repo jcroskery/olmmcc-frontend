@@ -95,9 +95,9 @@ function displayDetails(clickedId){
     
     eventsArray.forEach(calendarClassEvent => {
         if (calendarClassEvent.isCorrectDate(date)) {
-            detailsDiv.innerHTML = '<h4 class="calendarEventTitleDetails">' + calendarClassEvent.getName + '</h4>';
-            detailsDiv.innerHTML += '<h5 class="calendarEventTime">Time: ' + calendarClassEvent.getTime + '</h5>';
-            detailsDiv.innerHTML += '<h5 class="calendarEventTime">Description: ' + calendarClassEvent.getDescription + '</h5>';
+            detailsDiv.innerHTML = '<h4>' + calendarClassEvent.getName + '</h4>';
+            detailsDiv.innerHTML += '<p>Time: ' + calendarClassEvent.getTime + '</p>';
+            detailsDiv.innerHTML += '<p>Description: ' + calendarClassEvent.getDescription + '</p>';
         }
     });
     

@@ -43,7 +43,10 @@ echo <<<HTML
             <br>
             <br>
             <br>
-            <span class='smallSpan'><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>
+            <br>
+            <span><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>
+            <br>
+            <br>
         </div>
 
 HTML;

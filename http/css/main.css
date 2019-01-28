@@ -83,9 +83,7 @@ body.contactClass {
     width: 70%;
     padding: 0 8vw;
     background: rgba(255,255,255,0.7);
-    border: royalblue;
-    border-width: 0.3vw;
-    border-style: solid;
+    border: 0.3vw solid royalblue;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Arial', sans-serif;
@@ -241,13 +239,12 @@ input[type="text"], input[type='email'], input[type='password'] {
     border-radius: 2vmax;
 }
 #notificationP {
-    padding: 0 2vw 0 2vw;
-    font-size: 2vmax;
-    color: whitesmoke;
+    padding: 0 3vw;
+    color: white;
 }
 
 #closeVideo {
-    left: 88.75vw;
+    left: 88vw;
     top: 8.75vh;
 }
 #closeNotification {
@@ -264,34 +261,26 @@ input[type="text"], input[type='email'], input[type='password'] {
     z-index: 3;
     width: 2.5vmax;
 }
-a[href^="javascript"] {
-    color: blue;
-}
 .selectedDate {
     color: green;
-    border-width: 0.5vmax;
+    border-width: 0.25vmax;
+    border-color: green;
 }
 #detailsDiv {
     position: fixed;
-    top: 30vh;
-    left: 30vw;
-    width: 40vw;
-    height: 40vh;
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
     background-color: white;
-    z-index: 3;
-    border: #287EC7;
-    border-width: 0.3vw;
-    border-style: solid;
+    border: 0.3vw solid royalblue;
     border-radius: 2vmax;
 }
-h4.calendarEventTitleDetails{
-    margin-top: 4vh;
-    margin-bottom: 4vh;
+
+h4 {
+    margin: 6vh 0;
 }
-h5.calendarEventTime {
-    padding-left: 1vw;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-    font-family:sans-serif;
-    font-size: 1.5vmax;
+
+#detailsDiv p{
+    margin-left: 1vw;
 }

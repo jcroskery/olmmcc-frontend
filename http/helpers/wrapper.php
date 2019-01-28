@@ -93,13 +93,9 @@ HTML;
 HTML;
 }
 function bottom(){
-    $admin;
-    if($_SESSION['admin']){
-        $admin = ' <a href="/admin/">Go to administrator settings</a>';
-    }
     echo <<<HTML
     <div class="bottom">
-        <span class='bottomSpan'>&copy; Justus Croskery. <a href='/license'>License</a> <a href='/privacy/'>Privacy Policy</a>$admin</span>
+        <span class='bottomSpan'>&copy; Justus Croskery. <a href='/license'>License</a> <a href='/privacy/'>Privacy Policy</a></span>
     </div>
 
 HTML;
