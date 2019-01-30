@@ -30,5 +30,4 @@ echo <<<HTML
     </table> 
     
 HTML;
-$jsonFile = file_get_contents('/srv/http/json/calendar/calendarEvents.json');
-wrapperEnd('<script>var mydata = ' . $jsonFile . '</script><script src="/js/calendarclass.js"></script><script src="/js/calendar.js"></script>', false);
+wrapperEnd('<script src="/js/calendarclass.js"></script><script src="/js/calendar.js"></script>', false);

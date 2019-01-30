@@ -6,9 +6,19 @@ body {
     background-attachment: fixed; 
 }
 
-span, p, input, label, button, select{
+span, p, input, label, button, select, li{
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
 }
+th, td{
+    font-family: 'Noto Sans', sans-serif;
+}
+#topnav, caption{
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial', sans-serif;
+}
+
 p, li, input:not([type='submit']), label, span{
     font-size: 2vmax;
 }
@@ -32,9 +42,6 @@ select, button, input[type='submit'], .calendarEventTitle{
     text-align: left;
 }
 
-#topnav, caption{
-    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
-}
 body.homeClass {
     background-image: url('/images/Choir\ singing\ 2.jpg');
 }
@@ -84,9 +91,6 @@ body.contactClass {
     padding: 0 8vw;
     background: rgba(255,255,255,0.7);
     border: 0.3vw solid royalblue;
-}
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Arial', sans-serif;
 }
 h1 {
     text-align: center;
@@ -150,7 +154,6 @@ li {
 th, td {
     font-size: 2vw;
     border: 0.2vmax solid blue;
-    font-family: 'Noto Sans', sans-serif;
     vertical-align: top;
 }
 

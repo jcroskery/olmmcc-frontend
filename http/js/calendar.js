@@ -1,6 +1,19 @@
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
+function loadJSON(callback) {
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', '/json/calendar/calendarEvents.json', true);
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+            callback(xobj.responseText);
+        }
+    };
+    xobj.send(null);
+}
+
 function leftClick() {
     date.setMonth(date.getMonth() - 1);
     drawCalendar();
@@ -9,19 +22,18 @@ function rightClick() {
     date.setMonth(date.getMonth() + 1);
     drawCalendar();
 }
-let eventsArray = [];
-for (var key in mydata) {
-    var obj = mydata[key];
-    console.log(obj);
-    eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.description));
-}
-let date = new Date();
-let caption = document.getElementById('caption');
-let month = monthNames[date.getMonth()];
-let year = date.getFullYear();
-let firstDay = 0;
-let lastDay = 0;
+
+eventsArray = [];
+
+date = new Date();
+caption = document.getElementById('caption');
+month = monthNames[date.getMonth()];
+year = date.getFullYear();
+firstDay = 0;
+lastDay = 0;
 caption.innerHTML = month + ' ' + year;
+
+
 function drawCalendar() {
     month = monthNames[date.getMonth()];
     year = date.getFullYear()
@@ -29,10 +41,10 @@ function drawCalendar() {
     firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     for (let i = 1; i <= 42; i++) {
-        
+
         let calendarDate = i - firstDay;
         var currentDate = new Date(date.getFullYear(), date.getMonth(), calendarDate);
-        if(calendarDate == date.getDate()){
+        if (calendarDate == date.getDate()) {
             document.getElementById(i).className = 'selectedDate';
         } else {
             document.getElementById(i).className = '';
@@ -41,7 +53,7 @@ function drawCalendar() {
             document.getElementById(i).innerHTML = calendarDate;
             eventsArray.forEach(calendarClassEvent => {
                 if (calendarClassEvent.isCorrectDate(currentDate)) {
-                
+
                     document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + calendarClassEvent.getName + '</p>' + '<p class="calendarEvent">' + calendarClassEvent.getTime + '</p>');
                 }
             });
@@ -71,28 +83,28 @@ function keydown(event) {
     } else if (event.keyCode == 39) {
         date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
         drawCalendar();
-    } else if(event.keyCode == 38) {
+    } else if (event.keyCode == 38) {
         date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
         drawCalendar();
-    } else if(event.keyCode == 40){
+    } else if (event.keyCode == 40) {
         date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
         drawCalendar();
     }
 }
-function clearDetails(){
+function clearDetails() {
     var element = document.getElementById("graydiv");
     if (element != null) {
         element.parentNode.removeChild(element);
     }
 }
-function displayDetails(clickedId){
+function displayDetails(clickedId) {
     clearDetails();
     let grayDiv = document.createElement('div');
     grayDiv.id = 'graydiv';
     document.getElementById('myPage').append(grayDiv);
     let detailsDiv = document.createElement('div');
     detailsDiv.id = 'detailsDiv';
-    
+
     eventsArray.forEach(calendarClassEvent => {
         if (calendarClassEvent.isCorrectDate(date)) {
             detailsDiv.innerHTML = '<h4>' + calendarClassEvent.getName + '</h4>';
@@ -100,7 +112,7 @@ function displayDetails(clickedId){
             detailsDiv.innerHTML += '<p>Description: ' + calendarClassEvent.getDescription + '</p>';
         }
     });
-    
+
     document.getElementById('graydiv').append(detailsDiv);
     let close = document.createElement('img');
     close.src = '../images/close.gif';
@@ -108,14 +120,25 @@ function displayDetails(clickedId){
     close.onclick = clearDetails;
     document.getElementById('graydiv').append(close);
 }
-function onClick(clickedId){
+function onClick(clickedId) {
     date = new Date(date.getFullYear(), date.getMonth(), clickedId - firstDay);
-    if(document.getElementById(clickedId).innerHTML.includes('<p ')){
+    if (document.getElementById(clickedId).innerHTML.includes('<p ')) {
         displayDetails(date);
     }
     drawCalendar();
 }
-document.onkeydown = keydown;
-drawCalendar()
-adjustCalendar();
-window.onresize = function () { window.location = window.location }
+function init(){
+    document.onkeydown = keydown;
+    drawCalendar()
+    adjustCalendar();
+    window.onresize = function () { window.location = window.location }
+}
+
+loadJSON(function (response) {
+    actual_JSON = JSON.parse(response);
+    for (var key in actual_JSON) {
+        obj = actual_JSON[key];
+        eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.description));
+    }
+    init();
+});
