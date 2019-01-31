@@ -1,25 +1,25 @@
 <?php
 include_once '../helpers/wrapper.php';
 include_once '../helpers/songArticle.php';
+
 $files = scandir('.');
 $articleArray = [];
 foreach($files as $file){
-    if($file!="index.php"){
-        include_once $file;
-        if($expiry > time()){
-            $articleArray[$expiry] = $article;
-        }
+    include_once $file;
         
-    }  
+    if($songArticle->expiry > time()){
+        $articleArray[$songArticle->title] = $songArticle;
+    }
+        
 }
 ksort($articleArray);
-$formatted = reset($articleArray);
+$formatted = reset($articleArray)->article;
 if($formatted == ''){
     $formatted = <<<HTML
     <p>There is no post about the current schedule yet, please check back later.</p>
 HTML;
 }
-wrapperBegin('Songs', 'songs');
+wrapperBegin(reset($articleArray)->title, 'songs');
 echo <<<HTML
 <div id="main-text">
     <h1>Practice Information</h1>

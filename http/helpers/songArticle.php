@@ -1,9 +1,10 @@
 <?php
-class SongArticle{
-    private $title, $body, $article, $expiry;
+include_once '/srv/http/helpers/basicArticle.php';
+
+class SongArticle extends BasicArticle{
+    private $article, $expiry;
     function __construct($title, $body, $dmy){
-        $this->title = $title;
-        $this->body = $body;
+        parent::__construct($title, $body);
         $this->expiry = DateTime::createFromFormat('d/m/Y', $dmy)->getTimestamp();
         $this->createArticle();
     }
@@ -14,10 +15,9 @@ class SongArticle{
             $this->body
 HTML;
     }
-    function getArticle(){
-        return $this->article;
-    }
-    function getExpiry(){
-        return $this->expiry;
+    public function __get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
     }
 }
