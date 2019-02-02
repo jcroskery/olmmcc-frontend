@@ -156,6 +156,9 @@ th, td {
     border: 0.2vmax solid blue;
     vertical-align: top;
 }
+td {
+    height: 10vh;
+}
 
 table {
     table-layout: fixed;
@@ -175,6 +178,7 @@ caption {
     background-color: transparent;
     padding: 0 1vw;
     position: absolute;
+    top: 42.5vh;
 }
 
 #rightbutton {
@@ -266,7 +270,7 @@ input[type="text"], input[type='email'], input[type='password'] {
 }
 .selectedDate {
     color: green;
-    border-width: 0.25vmax;
+    border-width: 0.35vmax;
     border-color: green;
 }
 #detailsDiv {

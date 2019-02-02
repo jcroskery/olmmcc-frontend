@@ -24,7 +24,6 @@ function rightClick() {
 }
 
 eventsArray = [];
-
 date = new Date();
 caption = document.getElementById('caption');
 month = monthNames[date.getMonth()];
@@ -61,17 +60,6 @@ function drawCalendar() {
             document.getElementById(i).innerHTML = '';
         }
 
-    }
-}
-function adjustCalendar() {
-    let adjustValue = (document.documentElement.clientHeight - document.getElementById('topnav').clientHeight - document.getElementsByTagName('caption')[0].clientHeight - document.getElementById('tr').clientHeight) / 6 - 1;
-    let nodes = document.getElementsByTagName('tr');
-    for (let i = 1; i < nodes.length; i++) {
-        nodes[i].style.height = adjustValue + 'px';
-    }
-    for (let i = 0; i < 2; i++) {
-        document.getElementsByTagName("button")[i].style.bottom = 42.5 / 100 * document.documentElement.clientHeight
-            - (document.getElementById('topnav').clientHeight / 2) + "px";
     }
 }
 function keydown(event) {
@@ -130,7 +118,6 @@ function onClick(clickedId) {
 function init(){
     document.onkeydown = keydown;
     drawCalendar()
-    adjustCalendar();
     window.onresize = function () { window.location = window.location }
 }
 
@@ -141,4 +128,4 @@ loadJSON(function (response) {
         eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.description));
     }
     init();
-});
+}); 
