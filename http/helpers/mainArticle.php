@@ -5,7 +5,7 @@ class MainArticle extends BasicArticle{
     function __construct($filepath){
         $json = file_get_contents($filepath);
         $article = json_decode($json, true);
-        $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1><p>' . $article['text'] . '</p></div>';
+        $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1>' . $article['text'] . '</div>';
         parent::__construct($article['title'], $text);
         wrapperBegin($this->title, $article['topnavId']);
         echo $this->body;

@@ -138,13 +138,8 @@ h4 {
     color: blue !important;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 2vh;
+.reducedPadding p{
+    margin: 2vh 0;
 }
 
 .a {
