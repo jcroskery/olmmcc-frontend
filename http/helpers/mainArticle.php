@@ -6,9 +6,4 @@ class MainArticle extends BasicArticle{
         $text = '<div id="main-text"><H1>' . $title .  '</H1><p>' . $article['text'] . '/<p></div>';
         parent::__construct($article['title'], $text);
     }
-    public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        }
-    }
 }
