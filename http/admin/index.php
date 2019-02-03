@@ -1,7 +1,7 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
 if($_SESSION['admin']){
-    wrapperBegin('Administrator Settings', '');
+    wrapperBegin('Administrator Settings');
 
     echo <<<HTML
     <div id="main-text">

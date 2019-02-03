@@ -2,10 +2,10 @@
 include_once '../helpers/wrapper.php';
 include_once '../helpers/songArticle.php';
 
-$files = scandir('.');
+$files = scandir('/srv/http/articles/songs/');
 $articleArray = [];
 foreach($files as $file){
-    include_once $file;
+    
         
     if($songArticle->expiry > time()){
         $articleArray[$songArticle->title] = $songArticle;

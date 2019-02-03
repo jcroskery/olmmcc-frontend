@@ -14,4 +14,4 @@ $communion
 $closing
 HTML;
 
-$songArticle = new SongArticle("January Practice Schedule and Songs:", $article, '04/02/2019');
+$songArticle = new SongArticle("January Practice Schedule and Songs:", $article, '03/02/2019');

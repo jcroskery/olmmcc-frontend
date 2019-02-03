@@ -1,7 +1,7 @@
 <?php
 include_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/helpers/sessionStart.php';
-function wrapperBegin($title, $pageId, $loginRequired = false)
+function wrapperBegin($title, $pageId = '', $loginRequired = false)
 {
     $verificationCodes;
     $bodyClassName = $pageId . 'Class';
@@ -20,7 +20,7 @@ HTML;
 
     <head>
     <meta charset="UTF-8" />
-        <title>OLMM Children's Choir-$title</title>
+        <title>OLMM Children's Choir - $title</title>
         <link rel="stylesheet" type="text/css" href="/css/main.css"> 
         $verificationCodes
         <meta name="description" content="Official site of the OLMM Children's Choir, or the OLMMCC for short. We are a group of children who love singing for God and performing music at various events in and around our parish.">

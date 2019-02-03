@@ -18,7 +18,7 @@ function changeLink($link, $id){
     $stmt->bind_param("ss", $link, $id);
     $stmt->execute();
 }
-function deleteAccount($id)
+function deleteSong($id)
 {
     global $connection;
     $stmt = $connection->prepare("delete from songs where id = ?");
