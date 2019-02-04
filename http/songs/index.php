@@ -1,28 +1,31 @@
 <?php
-include_once '../helpers/wrapper.php';
 include_once '../helpers/songArticle.php';
 
 $files = scandir('/srv/http/articles/songs/');
-$articleArray = [];
+$article;
 foreach($files as $file){
-    
-        
-    if($songArticle->expiry > time()){
-        $articleArray[$songArticle->title] = $songArticle;
-    }
-        
+    $json = json_decode(file_get_contents('/srv/http/articles/songs/' . $file), true);
+    if(!isset($article) || $article['expiry'] <= $json['expiry']){
+        $article = $json;
+    }    
 }
-ksort($articleArray);
-$formatted = reset($articleArray)->article;
-if($formatted == ''){
+
+$formatted;
+if(strtotime($article['expiry']) < time() || !isset($article)){
+    
     $formatted = <<<HTML
     <p>There is no post about the current schedule yet, please check back later.</p>
 HTML;
+} else {
+    $formatted = <<<HTML
+
+HTML;
 }
-wrapperBegin(reset($articleArray)->title, 'songs');
+
+wrapperBegin($article['title'], 'songs');
 echo <<<HTML
 <div id="main-text">
-    <h1>Practice Information</h1>
+    <h1>This Month's Songs</h1>
     $formatted
 </div>
 HTML;

@@ -1,5 +1,6 @@
 <?php
 include_once '/srv/http/helpers/basicArticle.php';
+include_once '../helpers/wrapper.php';
 
 class SongArticle extends BasicArticle{
     public $article, $expiry;
