@@ -6,12 +6,8 @@ $communion = createVideo('Reign In Us','Communion','https://www.youtube.com/embe
 $closing = createVideo('You Will Never Run','Closing','https://www.youtube.com/embed/ONYUM3v35S4');
 $article = <<<HTML
 
-<p>Our practices this month will be on Thursday, January 17th and Thursday, January 31rd. Below are the songs we will be singing at the Children's Mass on February 3rd:</p>
-
 $opening
 $offertory
 $communion
 $closing
 HTML;
-
-$songArticle = new SongArticle("January Practice Schedule and Songs:", $article, '03/02/2019');

@@ -6,7 +6,7 @@ body {
     background-attachment: fixed; 
 }
 
-span, p, input, label, button, select, li{
+span, p, input, label, button, select, li, pre{
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
 }
 th, td{
@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Arial', sans-serif;
 }
 
-p, li, input:not([type='submit']), label, span{
+p, li, input:not([type='submit']), label, span, pre{
     font-size: 2vmax;
 }
 select, button, input[type='submit'], .calendarEventTitle{
@@ -285,4 +285,7 @@ h4 {
 
 #detailsDiv p{
     margin-left: 1vw;
+}
+pre {
+    white-space: pre-wrap;
 }

@@ -4,7 +4,8 @@ $license = file_get_contents('/srv/LICENSE');
 wrapperBegin('License Agreement', '');
 echo <<<HTML
 <div id="main-text">
-<pre style="font-size: 1.5vw;white-space: pre-wrap;">
+<h1>License</h1>
+<pre>
 $license
 </pre>
 </div>

@@ -1,12 +1,6 @@
-logincreds.php
 /http/videos/*.php
 PrivateVideos/
-vendor/
-logs/
 json/
-composer*
-credentials*
-token*
-cloudflareApiKey.php
+privateVars.php
 ftp/
 images/

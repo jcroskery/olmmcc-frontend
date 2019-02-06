@@ -1,19 +1,18 @@
 <?php
-include_once '/srv/http/helpers/basicArticle.php';
 include_once '../helpers/wrapper.php';
 
-class SongArticle extends BasicArticle{
-    public $article, $expiry;
-    function __construct($title, $body, $dmy){
-        parent::__construct($title, $body);
-        $this->expiry = DateTime::createFromFormat('d/m/Y', $dmy)->getTimestamp();
-        $this->createArticle();
-    }
-    function createArticle(){
-        
-        $this->article = <<<HTML
-        <h2>$this->title</h2>
-            $this->body
+function songArticle($article){
+    wrapperBegin('Current Songs', 'songs');
+    echo <<<HTML
+    <div id="main-text">
+        <h1>This Month's Songs</h1>
 HTML;
+    if($article['expiry'] < time() || !isset($article)){
+        echo '<p>There is no post about the current songs yet, please check back later.</p>';
+    } else {
+        echo '<h2>' . $article['title'] . '</h2>';
+        echo "<p>Our practices this month will be on Thursday, January 17th and Thursday, January 31rd. Below are the songs we will be singing at the Children's Mass on February 3rd:</p>";
     }
+    echo '</div>';
+    wrapperEnd('<script src="/js/songs.js"></script>');
 }

@@ -1,5 +1,5 @@
 <?php
-include_once 'cloudflareApiKey.php';
+include_once 'privateVars.php';
 define('apiKey', $key);
 define('email', 'justus.croskery@gmail.com');
 
