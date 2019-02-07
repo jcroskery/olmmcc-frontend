@@ -13,7 +13,7 @@ HTML;
         echo '<p>There is no post about the current songs yet, please check back later.</p>';
     } else {
         echo '<h2>' . $article['title'] . '</h2>';
-        echo "<p>Our practices this month will be on Thursday, January 17th and Thursday, January 31rd. Below are the songs we will be singing at the Children's Mass on February 3rd:</p>";
+        echo "<p>" . $article['text'] . "</p>";
         foreach($article as $role => $song){
             $songData = getSong($song);
             if($songData){
