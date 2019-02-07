@@ -38,5 +38,5 @@ function getSongs(){
     $stmt = $connection->prepare("SELECT * FROM songs");
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_array(MYSQLI_NUM);
+    return mysqli_fetch_all ($result, MYSQLI_ASSOC);
 }

@@ -3,7 +3,6 @@ require_once '/srv/http/helpers/accountFunctions.php';
 require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/sendEmail.php';
 require_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/helpers/sessionStart.php';
 if (loggedIn()) {
 
     $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);

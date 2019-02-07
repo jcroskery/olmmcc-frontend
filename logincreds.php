@@ -1,5 +1,5 @@
 <?php
-    
+    include_once 'privateVars.php';
     function sanitizeString($var)
     {
         if(get_magic_quotes_gpc){
