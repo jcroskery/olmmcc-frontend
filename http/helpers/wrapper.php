@@ -53,8 +53,13 @@ function loggedIn(){
     return $_SESSION['verified'];
 }
 function notLoggedIn(){
-    $message = "Please log in to view this page";
-    displayPopupNotification($message, '/login/');
+    if($_SESSION['id']){
+        $message = "Please log in to an administrator account to view this page.";
+        displayPopupNotification($message, '/login/');
+    } else {
+        $message = "Please log in to view this page.";
+        displayPopupNotification($message, '/login/');
+    }
 }
 function topnav($id){
     $active = array();

@@ -14,7 +14,7 @@ if($_SESSION['admin']){
         <p>Send emails at a certain time, useful for special announcements.</p>
         <h3><a href='/admin/songs' class='a'>Songs</a></h3>
         <p>Add, view, modify, and delete songs.</p>
-        <h3><a href='/admin/pages' class='a'>Articles</a></h3>
+        <h3><a href='/admin/articles' class='a'>Articles</a></h3>
         <p>Create and edit articles.</p>
         <h3><a href='/admin/css' class='a'>CSS</a></h3>
         <p>Change the style of pages with Cascading Style Sheets (CSS).</p>
