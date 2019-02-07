@@ -32,6 +32,9 @@ select, button, input[type='submit'], .calendarEventTitle{
 .rightFloat {
     float: right;
 }
+.centerFloat{
+    float: center;
+}
 .centerDiv {
     text-align: center;
 }
@@ -91,6 +94,9 @@ body.contactClass {
     padding: 0 8vw;
     background: rgba(255,255,255,0.7);
     border: 0.3vw solid royalblue;
+}
+.mainForm {
+    text-align: center;
 }
 h1 {
     text-align: center;
@@ -218,10 +224,6 @@ caption {
 
 .submit {
     padding: 0.5vmax;
-}
-
-form {
-    text-align: center;
 }
 
 input[type="text"], input[type='email'], input[type='password'] {
