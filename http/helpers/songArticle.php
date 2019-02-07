@@ -1,5 +1,7 @@
 <?php
 include_once '../helpers/wrapper.php';
+include_once '/srv/http/helpers/songFunctions.php';
+include_once '/srv/http/songs/videohelper.php';
 
 function songArticle($article){
     wrapperBegin('Current Songs', 'songs');
@@ -12,7 +14,12 @@ HTML;
     } else {
         echo '<h2>' . $article['title'] . '</h2>';
         echo "<p>Our practices this month will be on Thursday, January 17th and Thursday, January 31rd. Below are the songs we will be singing at the Children's Mass on February 3rd:</p>";
-        
+        foreach($article as $role => $song){
+            $songData = getSong($song);
+            if($songData){
+                echo createVideo($song, $role, $songData[2]);
+            }
+        }
     }
     echo '</div>';
     wrapperEnd('<script src="/js/songs.js"></script>');
