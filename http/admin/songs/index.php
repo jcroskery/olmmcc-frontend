@@ -12,11 +12,11 @@ if($_SESSION['admin']){
         $link = $song['link'];
         $tableContents .= <<<HTML
         <tr>
-            <form action='/admin/songs/changeSong.php' method='post'>
+            <form action='change/' method='post'>
             <td><input type='textarea' name='name' value='$name'/><button type='submit' name=$id value='name'>Change Name</button></td>
             <td><input type='textarea' name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
             </form>
-            <form action='/admin/songs/deleteSong.php' method='post'>
+            <form action='delete/' method='post'>
             <td><button type='submit' name=$id value='delete' class='delete'>Delete Song</button></td>
             </form>
         <tr>
@@ -32,7 +32,7 @@ HTML;
         </tr>
         $tableContents
         <tr>
-            <form action='addSong.php' method='post'>
+            <form action='add/' method='post'>
                 <td><input type='textarea' name='name' value='New Name'/></td>
                 <td><input type='textarea' name='link' value='New Link'/></td>
                 <td><button type='submit' name='add'>Add Song</button></td>
