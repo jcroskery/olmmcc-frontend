@@ -17,13 +17,13 @@ if($_SESSION['admin']){
             <td><input type='textarea' name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
             </form>
             <form action='/admin/songs/deleteSong.php' method='post'>
-            <td><button type='submit' name=$id value='delete'>Delete Song</button></td>
+            <td><button type='submit' name=$id value='delete' class='delete'>Delete Song</button></td>
             </form>
         <tr>
 HTML;
     }
     echo <<<HTML
-        <table>
+        <table class='database'>
             <caption>Song Database</caption>
         <tr>
             <th>Song Name</th>

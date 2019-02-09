@@ -4,7 +4,7 @@ wrapperBegin('Calendar', 'calendar');
 echo <<<HTML
     <button class='calendarButton' onclick='leftClick()'><img class='buttonImage' src='../images/Leftarrow.gif' alt = 'Previous month'></button>
     <button class='calendarButton' id='rightbutton' onclick='rightClick()'><img class='buttonImage' src = '../images/Leftarrow.gif' alt = 'Next month'></button>
-    <table>
+    <table class='calendar'>
 HTML;
 echo <<<HTML
         <caption id='caption'></caption>
