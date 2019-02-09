@@ -267,8 +267,8 @@ input[type="text"], input[type='email'], input[type='password'] {
 }
 .selectedDate {
     color: green;
-    border-width: 0.35vmax;
-    border-color: green;
+    border-width: 0.35vmax !important;
+    border-color: green !important;
 }
 #detailsDiv {
     position: fixed;
