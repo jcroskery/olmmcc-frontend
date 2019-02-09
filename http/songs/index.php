@@ -9,4 +9,4 @@ foreach($files as $file){
         $article = $json;
     }    
 }
-songArticle($article);
+displaySongArticle($article);

@@ -3,7 +3,19 @@ include_once '../helpers/wrapper.php';
 include_once '/srv/http/helpers/songFunctions.php';
 include_once '/srv/http/songs/videohelper.php';
 
-function songArticle($article){
+function createSongArticle($location) {
+    $file = fopen($location, 'w');
+    $json = <<<JSON
+{
+    "title" : "",
+    "text" : "",
+    "expiry" : ""
+}
+JSON;
+    fwrite($file, $json);
+    fclose($file);
+}
+function displaySongArticle($article){
     wrapperBegin('Current Songs', 'songs');
     echo <<<HTML
     <div id="main-text">

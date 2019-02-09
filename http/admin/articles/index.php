@@ -14,7 +14,7 @@ function makeRows($type, $location)
                         <button type='submit' name=$type value='name'>Change Name</button>
                     </form>
                 </td>
-                <td>$type</td>
+                <td>$type Article</td>
                 <td>
                     <form action="/admin/articles/edit/" method="post">
                         <button type='submit' name=$type value='edit'>Edit $file</button>
