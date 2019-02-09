@@ -5,6 +5,7 @@ require_once '/srv/http/helpers/displayMessage.php';
 if($_SESSION['admin']) { 
     $link;
     $name;
+    $notes;
     foreach($_POST as $first => $second){
         if(is_int($first)){
             switch($second) {
@@ -16,13 +17,19 @@ if($_SESSION['admin']) {
                 changeLink($link, $first);
                 displayPopupNotification('Changed song link to ' . $link . '.', '/admin/songs');
                 break;
+            case 'notes':
+                changeNotes($notes, $first);
+                displayPopupNotification('Changed song notes to ' . $notes . '.', '/admin/songs');
+                break;
             default:
                 displayPopupNotification('An unknown error occurred, please try again.');
             }
         } else if($first=='name'){
             $name=$second;
-        } else {
+        } else if($first=='link'){
             $link=$second;
+        } else {
+            $notes = $second;
         }
     }
 } else {

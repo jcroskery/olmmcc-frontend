@@ -299,9 +299,10 @@ pre {
 }
 .database td, .database th {
     border: 1px solid blue;
+    padding: 1vmax;
 }
 .database {
-    width: 90%;
+    width: 100%;
     margin: auto;
     background-color: gray;
     border: 1px solid blue;

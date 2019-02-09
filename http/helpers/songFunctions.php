@@ -1,9 +1,9 @@
 <?php
 require_once '/srv/logincreds.php';
-function addSong($name, $link){
+function addSong($name, $link, $notes){
     global $connection;
-    $stmt = $connection->prepare("INSERT INTO songs (name, link) VALUES (?, ?)");
-    $stmt->bind_param("ss", $name, $link);
+    $stmt = $connection->prepare("INSERT INTO songs (name, link, notes) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $link, $notes);
     $stmt->execute();
 }
 function changeName($name, $id){
@@ -16,6 +16,12 @@ function changeLink($link, $id){
     global $connection;
     $stmt = $connection->prepare("UPDATE songs set link = ? where id = ?");
     $stmt->bind_param("ss", $link, $id);
+    $stmt->execute();
+}
+function changeNotes($notes, $id){
+    global $connection;
+    $stmt = $connection->prepare("UPDATE songs set notes = ? where id = ?");
+    $stmt->bind_param("ss", $notes, $id);
     $stmt->execute();
 }
 function deleteSong($id)

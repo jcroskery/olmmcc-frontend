@@ -5,7 +5,8 @@ require_once '/srv/http/helpers/displayMessage.php';
 if($_SESSION['admin']) {
     $name = sanitizeString($_POST['name']);
     $link = sanitizeString($_POST['link']);
-    addSong($name, $link);
+    $notes = sanitizeString($_POST['notes']);
+    addSong($name, $link, $notes);
     $message = "Sucessfully added ". $name . ".";
     displayPopupNotification($message, '/admin/songs');
 } else {
