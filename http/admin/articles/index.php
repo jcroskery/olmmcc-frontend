@@ -22,7 +22,7 @@ function makeRows($type, $location)
                 </td>
                 <td>
                     <form action="/admin/articles/delete/" method="post">
-                        <button class='delete' type='submit' onclick='alert("To cancel deletion, close the tab now!");' name='$type' value=$file>Delete $file</button>
+                        <button class='delete' type='submit' onclick='alert("To cancel deletion, close the tab now!");' name='$type' value='$file'>Delete $file</button>
                     </form>
                 </td>
             </tr>
