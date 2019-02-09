@@ -291,15 +291,14 @@ h4 {
 pre {
     white-space: pre-wrap;
 }
-.database button {
-    margin: 1vh 0.5vw;
-}
 .database input {
-    margin: 1vh 0.5vw;
+    width: auto;
+    font-size: 1vmax;
+    margin: 0 1vw 0 0;
 }
 .database td, .database th {
     border: 1px solid blue;
-    padding: 1vmax;
+    padding: 1vh;
 }
 .database {
     width: 100%;

@@ -1,46 +1,69 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-if($_SESSION['admin']){
+function makeRows($type, $location)
+{
+    $files = scandir($location);
+    $articles;
+    foreach ($files as $file) {
+        if (is_file($location . $file)) {
+            $articles .= <<<HTML
+            <tr>
+                <td>
+                    <form action="/admin/articles/edit/" method="post">
+                        <input type='textarea' name='name' value='$file'/>
+                        <button type='submit' name=$type value='name'>Change Name</button>
+                    </form>
+                </td>
+                <td>$type</td>
+                <td>
+                    <form action="/admin/articles/edit/" method="post">
+                        <button type='submit' name=$type value='edit'>Edit $file</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/admin/articles/delete/" method="post">
+                        <button class='delete' type='submit' onclick='alert("To cancel deletion, close the tab now!");' name='$type' value=$file>Delete $file</button>
+                    </form>
+                </td>
+            </tr>
+HTML;
+        }
+    }
+    return $articles;
+}
+if ($_SESSION['admin']) {
     wrapperBegin('Articles');
-    $files = scandir('/srv/http/articles/songs/');
-    $songArticles;
-    $mainArticles;
-    foreach($files as $file){
-        if(is_file('/srv/http/articles/songs/' . $file)){
-            $songArticles .= <<<HTML
-            <form class='leftFloat' action="/admin/articles/edit/" method="post">
-            <button type='submit' name='songs' value=$file>$file</button>
-            </form>
-            <form class='rightFloat' action="/admin/articles/delete/" method="post">
-            <button type='submit' name='songs' value=$file>Delete $file</button>
-            </form>
-            <br><br><br>
-HTML;
-        }
-    }
-    $files = scandir('/srv/http/articles/main/');
-    foreach($files as $file){
-        if(is_file('/srv/http/articles/main/' . $file)){
-            $mainArticles .= <<<HTML
-            <form class='leftFloat' action="/admin/articles/edit/" method="post">
-            <button type='submit' name='main' value=$file>$file</button>
-            </form>
-            <form class='rightFloat' action="/admin/articles/delete/" method="post">
-            <button type='submit' name='main' value=$file>Delete $file</button>
-            </form>
-            <br><br><br>
-HTML;
-        }
-    }
+    $articles = makeRows('Main', '/srv/http/articles/main/') . makeRows('Song', '/srv/http/articles/songs/');
     echo <<<HTML
-    <div id="main-text">
-        <h1>Main Articles</h1>
-        $mainArticles
-        <h1>Song Articles</h1>
-        $songArticles
-    </div>
+        <table class='database'>
+            <caption>Articles</caption>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Edit</th>
+                <th>Options</th>
+            </tr>
+            $articles
+            <form action="/admin/articles/add/" method="post">
+                <tr>
+                    <td>
+                        <input type='textarea' name='name' value='New Name'/>
+                    </td>
+                    <td>
+                        <select name='type'>
+                            <option value='songs'>Song Article</option>
+                            <option value='main'>Main Article</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td>
+                        <button type='submit' name='$type' value=$file>Add New Article</button>
+                    </td>
+                </tr>
+            </form>
+        </table>
 HTML;
-    wrapperEnd();
+    wrapperEnd('', false);
 } else {
     notLoggedIn();
 }
