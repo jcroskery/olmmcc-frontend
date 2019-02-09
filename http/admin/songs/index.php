@@ -17,7 +17,7 @@ if($_SESSION['admin']){
             <td><input type='textarea' name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
             </form>
             <form action='delete/' method='post'>
-            <td><button type='submit' name=$id value='delete' class='delete'>Delete Song</button></td>
+            <td><button onclick='alert("To cancel deletion, close the tab now!");' name=$id value='delete' class='delete'>Delete Song</button></td>
             </form>
         <tr>
 HTML;
