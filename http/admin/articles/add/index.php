@@ -4,7 +4,6 @@ include_once '/srv/logincreds.php';
 require_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/helpers/songArticle.php';
 include_once '/srv/http/helpers/mainArticle.php';
-/*
 if ($_SESSION['admin']) {
     $name = sanitizeString($_POST['name']);
     $type = sanitizeString($_POST['type']);
@@ -25,4 +24,3 @@ if ($_SESSION['admin']) {
 } else {
     notLoggedIn();
 }
-*/

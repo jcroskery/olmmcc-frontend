@@ -2,8 +2,6 @@
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/logincreds.php';
 require_once '/srv/http/helpers/displayMessage.php';
-include_once '/srv/http/helpers/songArticle.php';
-include_once '/srv/http/helpers/mainArticle.php';
 function changeArticleName($oldfile, $newfile)
 {
     rename($oldfile, $newfile);
@@ -19,7 +17,7 @@ if ($_SESSION['admin']) {
         $filepath = '/srv/http/articles/main/';
         changeArticleName($filepath . $_POST['main'], $filepath . $name);
     }
-
+    
 } else {
     notLoggedIn();
 }

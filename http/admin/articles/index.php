@@ -1,6 +1,6 @@
 <?php
 include_once '/srv/http/helpers/wrapper.php';
-function makeRows($type, $location)
+function makeRows($fancyType, $type, $location)
 {
     $files = scandir($location);
     $articles;
@@ -9,12 +9,12 @@ function makeRows($type, $location)
             $articles .= <<<HTML
             <tr>
                 <td>
-                    <form action="/admin/articles/edit/" method="post">
+                    <form action="/admin/articles/rename/" method="post">
                         <input type='textarea' name='name' value='$file'/>
                         <button type='submit' name=$type value='$file'>Change Name</button>
                     </form>
                 </td>
-                <td>$type Article</td>
+                <td>$fancyType Article</td>
                 <td>
                     <form action="/admin/articles/edit/" method="post">
                         <button type='submit' name=$type value='edit'>Edit $file</button>
@@ -33,7 +33,7 @@ HTML;
 }
 if ($_SESSION['admin']) {
     wrapperBegin('Articles');
-    $articles = makeRows('Main', '/srv/http/articles/main/') . makeRows('Song', '/srv/http/articles/songs/');
+    $articles = makeRows('Main', 'main',  '/srv/http/articles/main/') . makeRows('Song', 'songs', '/srv/http/articles/songs/');
     echo <<<HTML
         <table class='database'>
             <caption>Articles</caption>

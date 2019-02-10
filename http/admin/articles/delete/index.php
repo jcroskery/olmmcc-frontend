@@ -3,10 +3,10 @@ include_once '/srv/http/helpers/wrapper.php';
 require_once '/srv/http/helpers/displayMessage.php';
 if ($_SESSION['admin']) {
     $path = '/srv/http/articles/';
-    if(isset($_POST['Song'])){
-        $path .= ('songs/' . $_POST['Song']);
+    if(isset($_POST['songs'])){
+        $path .= ('songs/' . $_POST['songs']);
     } else {
-        $path .= ('main/' . $_POST['Main']);
+        $path .= ('main/' . $_POST['main']);
     }
     if(unlink($path)){
         $message = "Sucesfully deleted " . $path . ".";
