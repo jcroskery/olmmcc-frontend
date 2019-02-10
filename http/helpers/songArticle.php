@@ -1,8 +1,7 @@
 <?php
 include_once '../helpers/wrapper.php';
-include_once '/srv/http/helpers/songFunctions.php';
+include_once 'songFunctions.php';
 include_once '/srv/http/songs/videohelper.php';
-
 function createSongArticle($location) {
     $file = fopen($location, 'w');
     $json = <<<JSON

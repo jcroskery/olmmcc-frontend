@@ -11,7 +11,7 @@ function makeRows($type, $location)
                 <td>
                     <form action="/admin/articles/edit/" method="post">
                         <input type='textarea' name='name' value='$file'/>
-                        <button type='submit' name=$type value='name'>Change Name</button>
+                        <button type='submit' name=$type value='$file'>Change Name</button>
                     </form>
                 </td>
                 <td>$type Article</td>
