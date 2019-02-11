@@ -264,6 +264,9 @@ input[type="text"], input[type='email'], input[type='password'] {
     z-index: 3;
     width: 2.5vmax;
 }
+select {
+    margin: 0 0.5vw;
+}
 .selectedDate {
     color: green;
     border-width: 0.35vmax !important;
@@ -306,6 +309,6 @@ pre {
     border: 1px solid blue;
     border-collapse: collapse;
 }
-.delete {
+.delete{
     background-color: red;
 }

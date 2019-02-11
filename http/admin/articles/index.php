@@ -22,7 +22,7 @@ function makeRows($fancyType, $type, $location)
                 </td>
                 <td>
                     <form action="/admin/articles/delete/" method="post">
-                        <button class='delete' type='submit' onclick='alert("To cancel deletion, close the browser window now!");' name='$type' value='$file'>Delete $file</button>
+                        <button class='delete' type='submit' name='$type' value='$file'>Delete $file</button>
                     </form>
                 </td>
             </tr>
@@ -63,7 +63,7 @@ if ($_SESSION['admin']) {
             </form>
         </table>
 HTML;
-    wrapperEnd('', false);
+    wrapperEnd('<script src="/js/alert.js"></script>', false);
 } else {
     notLoggedIn();
 }

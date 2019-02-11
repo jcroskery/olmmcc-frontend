@@ -1,7 +1,7 @@
 <?php
 include_once '/srv/http/helpers/songFunctions.php';
 include_once '/srv/http/helpers/wrapper.php';
-if($_SESSION['admin']){
+if(loggedIn()){
     wrapperBegin('Song Database');
 
     $songs = getSongs();
@@ -19,7 +19,7 @@ if($_SESSION['admin']){
             <td><input type='textarea' name='notes' value='$notes'/><button type='submit' name=$id value='notes'>Change Notes</button></td>
             </form>
             <form action='delete/' method='post'>
-            <td><button onclick='alert("To cancel deletion, close the browser window now!");' name=$id value='delete' class='delete'>Delete Song</button></td>
+            <td><button class='delete' name=$id value='delete'>Delete Song</button></td>
             </form>
         <tr>
 HTML;
@@ -44,5 +44,7 @@ HTML;
         </tr>
         </table>
 HTML;
-    wrapperEnd('', false);
+    wrapperEnd('<script src="/js/alert.js"></script>', false);
+} else {
+    notLoggedIn();
 }

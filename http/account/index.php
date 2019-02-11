@@ -29,7 +29,8 @@ echo <<<HTML
             <br><br><br>
             <span class='leftFloat'>Subscription policy: $subscriptionName</span>
             <form action="/account/subscription/" method='post'>
-                <select class='rightFloat' name='subscriptionPolicy' onchange="this.form.submit()">
+                <input class='rightFloat' type='submit' value='Save Changes'/>
+                <select class='rightFloat' name='subscriptionPolicy'>
                     $subscriptionOptions
                 </select>
             </form>
