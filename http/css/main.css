@@ -82,8 +82,7 @@ body.contactClass {
 .bottomSpan , .smallSpan{
     font-size: 1.3vmax;
 }
-/**/
-#emailBody {
+.largeTextarea {
     width: 50vw;
     height: 40vh;
     font-size: 1.25vmax;

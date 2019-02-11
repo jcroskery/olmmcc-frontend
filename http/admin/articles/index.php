@@ -16,8 +16,8 @@ function makeRows($fancyType, $type, $location)
                 </td>
                 <td>$fancyType Article</td>
                 <td>
-                    <form action="/admin/articles/edit/" method="post">
-                        <button type='submit' name=$type value='edit'>Edit $file</button>
+                    <form action="/admin/articles/edit/$type/" method="post">
+                        <button type='submit' name='edit' value='$file'>Edit $file</button>
                     </form>
                 </td>
                 <td>

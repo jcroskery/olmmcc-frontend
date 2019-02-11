@@ -21,7 +21,7 @@ if($_SESSION['admin']){
 <br>
 <span class='pre'>Body: </span>
 <br>
-<textarea id="emailBody" placeholder='Email body here' name="body"></textarea>
+<textarea class='largeTextarea' placeholder='Email body here' name="body"></textarea>
 <br>
 <input class='submit' type="submit" value="Send Email"/>
         </form>
