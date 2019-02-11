@@ -2,7 +2,7 @@
 include_once '/srv/http/helpers/wrapper.php';
 if(wrapperBegin('Change Username', '', true)){
 echo <<<HTML
-<form method='post' action="/account/changeUsername.php" class='form'>
+<form method='post' action="/account/changeUsername.php" class='mainForm'>
     <h1>Change Your Username</h1>
     <pre class='pre'>
     Enter your new username: <input name='newUsername' type='text' autofocus='true' autocomplete='on' placeholder='Your new username' required='required'/></pre>
