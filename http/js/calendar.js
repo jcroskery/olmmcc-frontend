@@ -1,8 +1,14 @@
+dates = document.getElementsByTagName('td');
+for (i = 0; i < dates.length; i++) {
+    dates[i].onclick = onClick;
+}
+document.getElementById('leftbutton').onclick = leftClick;
+document.getElementById('rightbutton').onclick = rightClick;
+
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 function loadJSON(callback) {
-
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.open('GET', '/json/calendar/calendarEvents.json', true);
@@ -108,9 +114,9 @@ function displayDetails(clickedId) {
     close.onclick = clearDetails;
     document.getElementById('graydiv').append(close);
 }
-function onClick(clickedId) {
-    date = new Date(date.getFullYear(), date.getMonth(), clickedId - firstDay);
-    if (document.getElementById(clickedId).innerHTML.includes('<p ')) {
+function onClick() {
+    date = new Date(date.getFullYear(), date.getMonth(), this.id - firstDay);
+    if (document.getElementById(this.id).innerHTML.includes('<p ')) {
         displayDetails(date);
     }
     drawCalendar();
@@ -118,7 +124,6 @@ function onClick(clickedId) {
 function init(){
     document.onkeydown = keydown;
     drawCalendar()
-    window.onresize = function () { window.location = window.location }
 }
 
 loadJSON(function (response) {

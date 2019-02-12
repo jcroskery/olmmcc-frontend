@@ -17,6 +17,6 @@ function createVideo($name, $role, $link){
         $video = ownvideo($link);
     }
     return <<<HTML
-    <h4>$role: <a href="javascript:;" onclick="displayPopupVideo($video)">$name</a></h4>
+    <h4>$role: <a href="javascript:;" id="$video" class='songLink'>$name</a></h4>
     HTML;
 }

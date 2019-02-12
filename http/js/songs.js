@@ -1,12 +1,16 @@
+links = document.getElementsByClassName('songLink');
+for (i = 0; i < links.length; i++) {
+    links[i].onclick = displayPopupVideo;
+}
 function closeVideo() {
     close();
 }
 let currentCode;
 let displayed = false;
-function displayPopupVideo(videocode) {
+function displayPopupVideo() {
     displayed = true;
     removeGraydiv();
-    display(videocode);
+    display(this.id);
 }
 function removeGraydiv() {
     var element = document.getElementById("graydiv");
