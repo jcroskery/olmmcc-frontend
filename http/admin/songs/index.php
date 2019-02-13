@@ -14,9 +14,9 @@ if(loggedIn()){
         $tableContents .= <<<HTML
         <tr>
             <form action='change/' method='post'>
-            <td><input type='textarea' name='name' value='$name'/><button type='submit' name=$id value='name'>Change Name</button></td>
-            <td><input type='textarea' name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
-            <td><input type='textarea' name='notes' value='$notes'/><button type='submit' name=$id value='notes'>Change Notes</button></td>
+            <td><input name='name' value='$name'/><button type='submit' name=$id value='name'>Change Name</button></td>
+            <td><input name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
+            <td><input name='notes' value='$notes'/><button type='submit' name=$id value='notes'>Change Notes</button></td>
             </form>
             <form action='delete/' method='post'>
             <td><button class='delete' name=$id value='delete'>Delete Song</button></td>
@@ -36,9 +36,9 @@ HTML;
         $tableContents
         <tr>
             <form action='add/' method='post'>
-                <td><input type='textarea' name='name' value='New Name'/></td>
-                <td><input type='textarea' name='link' value='New Link'/></td>
-                <td><input type='textarea' name='notes' value='New Notes'/></td>
+                <td><input name='name' value='New Name'/></td>
+                <td><input name='link' value='New Link'/></td>
+                <td><input name='notes' value='New Notes'/></td>
                 <td><button type='submit' name='add'>Add Song</button></td>
             </form>
         </tr>

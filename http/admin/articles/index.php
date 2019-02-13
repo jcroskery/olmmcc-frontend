@@ -10,7 +10,7 @@ function makeRows($fancyType, $type, $location)
             <tr>
                 <td>
                     <form action="/admin/articles/rename/" method="post">
-                        <input type='textarea' name='name' value='$file'/>
+                        <input name='name' value='$file'/>
                         <button type='submit' name=$type value='$file'>Change Name</button>
                     </form>
                 </td>
@@ -47,7 +47,7 @@ if ($_SESSION['admin']) {
             <form action="/admin/articles/add/" method="post">
                 <tr>
                     <td>
-                        <input type='textarea' name='name' value='New Name'/>
+                        <input name='name' value='New Name'/>
                     </td>
                     <td>
                         <select name='type'>
