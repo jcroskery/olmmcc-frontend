@@ -1,7 +1,7 @@
 <?php
 include_once '/srv/http/helpers/songFunctions.php';
 include_once '/srv/http/helpers/wrapper.php';
-if(loggedIn()){
+if($_SESSION['admin']){
     wrapperBegin('Song Database');
 
     $songs = getSongs();
@@ -14,13 +14,16 @@ if(loggedIn()){
         $tableContents .= <<<HTML
         <tr>
             <form action='change/' method='post'>
-            <td><input name='name' value='$name'/><button type='submit' name=$id value='name'>Change Name</button></td>
-            <td><input name='link' value='$link'/><button type='submit' name=$id value='link'>Change Link</button></td>
-            <td><input name='notes' value='$notes'/><button type='submit' name=$id value='notes'>Change Notes</button></td>
+                <td><input name='name' value='$name'/></td>
+                <td><input name='link' value='$link'/></td>
+                <td><input name='notes' value='$notes'/></td>
             </form>
-            <form action='delete/' method='post'>
-            <td><button class='delete' name=$id value='delete'>Delete Song</button></td>
-            </form>
+            <td><button type='submit' name=$id value='save'>Save Changes</button></td>
+            <td>
+                <form action='delete/' method='post'>
+                    <button class='delete' name=$id value='delete'>Delete Song</button>
+                </form>
+            </td>
         <tr>
 HTML;
     }
@@ -31,7 +34,7 @@ HTML;
             <th>Song Name</th>
             <th>Link</th>
             <th>Notes</th>
-            <th>Options</th>
+            <th colspan='2'>Options</th>
         </tr>
         $tableContents
         <tr>
@@ -39,7 +42,7 @@ HTML;
                 <td><input name='name' value='New Name'/></td>
                 <td><input name='link' value='New Link'/></td>
                 <td><input name='notes' value='New Notes'/></td>
-                <td><button type='submit' name='add'>Add Song</button></td>
+                <td colspan='2' class='centerDiv'><button type='submit' name='add'>Add Song</button></td>
             </form>
         </tr>
         </table>
