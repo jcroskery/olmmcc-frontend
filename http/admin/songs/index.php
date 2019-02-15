@@ -17,8 +17,8 @@ if($_SESSION['admin']){
                 <td><input name='name' value='$name'/></td>
                 <td><input name='link' value='$link'/></td>
                 <td><input name='notes' value='$notes'/></td>
+                <td><button type='submit' name='id' value='$id'>Save Changes</button></td>
             </form>
-            <td><button type='submit' name=$id value='save'>Save Changes</button></td>
             <td>
                 <form action='delete/' method='post'>
                     <button class='delete' name=$id value='delete'>Delete Song</button>

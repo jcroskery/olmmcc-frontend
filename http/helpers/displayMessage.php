@@ -24,7 +24,7 @@ HTML;
     echo '</form>';
     wrapperEnd();
 }
-function displayPopupNotification($errortext, $link){
-    $_SESSION['popupNotification'] = '<script>' . str_replace('$errortext', $errortext, file_get_contents('/srv/http/js/notification.js')) . '</script>';
+function displayPopupNotification($message, $link){
+    setcookie('Notification', $message, time() + 5, '/', 'www.olmmcc.tk', 'true', false);
     header('location: ' . $link);
 }

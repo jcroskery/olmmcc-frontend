@@ -5,12 +5,6 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
 {
     $verificationCodes;
     $bodyClassName = $pageId . 'Class';
-    if($pageId == 'home'){
-        $verificationCodes = <<<HTML
-        <meta name="google-site-verification" content="1jz_Cu9-cImeDq9RlvewQ2dcjKSnz8AJZU6p_4w0Fq0"/> 
-        <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
-HTML;
-    }
     if($loginRequired && !loggedIn()){
         return false;
     }
@@ -22,9 +16,10 @@ HTML;
     <meta charset="UTF-8" />
         <title>OLMM Children's Choir - $title</title>
         <link rel="stylesheet" type="text/css" href="/css/main.css"> 
-        $verificationCodes
+        <meta name="google-site-verification" content="1jz_Cu9-cImeDq9RlvewQ2dcjKSnz8AJZU6p_4w0Fq0"/> 
+        <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
         <meta name="description" content="Official site of the OLMM Children's Choir, or the OLMMCC for short. We are a group of children who love singing for God and performing music at various events in and around our parish.">
-        <meta name="keywords" content="olmm, olmmcc, children, choir, russell, tk, childrens, children's, $pageId">
+        <meta name="keywords" content="olmm, olmmcc, choir, russell, tk, childrens, $pageId">
     </head>
 
     <body class='$bodyClassName'>
@@ -38,9 +33,8 @@ function wrapperEnd($otherScripts = '', $bottom = true)
     if($bottom){
         bottom();
     }
-    if($_SESSION['popupNotification'] != ''){
-        $otherScripts .= $_SESSION['popupNotification'];
-        $_SESSION['popupNotification'] = '';
+    if($_COOKIE['Notification'] != ''){
+        $otherScripts .= '<script src="/js/notification.js"></script>';
     }
     echo <<<HTML
         </div>
