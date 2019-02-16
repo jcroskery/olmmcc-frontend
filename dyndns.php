@@ -54,7 +54,7 @@ function changeIp($name)
 			'type' => 'A',
 			'name' => $name,
 			'content' => ip,
-			'proxied' => true
+			'proxied' => false
 		];
 		$response = makeCurlRequest('https://api.cloudflare.com/client/v4/zones/' . $zoneid . '/dns_records/' . $recordid, $arrayPassed, true);
 		print_r($response);

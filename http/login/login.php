@@ -32,6 +32,6 @@ include_once '/srv/http/helpers/sessionStart.php';
         }
         
     } else {
-        $message = "Wrong email or password. Please try again.";
+        $message = "Wrong email or password, please try again.";
         displayPopupNotification($message, '/login/');
     }

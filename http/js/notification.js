@@ -9,7 +9,7 @@ function keydown(event) {
         closeNotification();
     }
 }
-message = document.cookie.substring(13).split('+').join(' ');
+message = decodeURIComponent(document.cookie.substring(13).split('+').join(' '));
 document.onkeydown = keydown;
 let notificationDiv = document.createElement('div');
 notificationDiv.id = 'notificationDiv';

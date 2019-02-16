@@ -7,45 +7,63 @@ function deleteAccount($id)
     $stmt->bind_param("s", $id);
     $stmt->execute();
 }
-function createAccount($email, $username, $password){
+function createAccount($email, $username, $password)
+{
     global $connection;
     $stmt = $connection->prepare("INSERT INTO userlist (email, username, password, verified, admin, subscription_policy, invalid_email) VALUES (?, ?, ?, 0, 0, 1, 0)");
     $stmt->bind_param("sss", $email, $username, $password);
     $stmt->execute();
 }
-function verifyAccount($id){
+function verifyAccount($id)
+{
     global $connection;
     $stmt = $connection->prepare("UPDATE userlist set verified = 1 where id = ?");
     echo $id;
     $stmt->bind_param("s", $id);
     $stmt->execute();
 }
-function changeEmail($newEmail, $id){
+function changeEmail($newEmail, $id)
+{
     global $connection;
     $stmt = $connection->prepare("update userlist set email=? where id=?");
     $stmt->bind_param("ss", $newEmail, $id);
     $stmt->execute();
 }
-function unVerifyAccount($id){
+function unVerifyAccount($id)
+{
     global $connection;
     $stmt = $connection->prepare("update userlist set verified=0 where id=?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
 }
-function getAccountFromEmail($email){
+function getAccountFromEmail($email)
+{
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM userlist WHERE email=?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    return $stmt->get_result();
+    $result = $stmt->get_result();
+    return $result->fetch_array(MYSQLI_NUM);
 }
-function setNotInvalidEmail($id){
+function getAccountFromUsername($username)
+{
+    global $connection;
+    $stmt = $connection->prepare("SELECT * FROM userlist WHERE username=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_array(MYSQLI_NUM);
+
+}
+function setNotInvalidEmail($id)
+{
     global $connection;
     $stmt = $connection->prepare("update userlist set invalid_email=0 where id=?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
 }
-function refreshAccount(){
+function refreshAccount()
+{
     include_once '/srv/http/helpers/sessionStart.php';
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM userlist WHERE id = ?");
@@ -60,7 +78,8 @@ function refreshAccount(){
     $_SESSION['subscription_policy'] = $row[6];
     $_SESSION['invalid_email'] = $row[7];
 }
-function getSubscriptionPolicyName($subscriptionPolicy){
+function getSubscriptionPolicyName($subscriptionPolicy)
+{
     $subscriptionNames = ['No emails', 'Emails', 'Emails and reminders'];
     return $subscriptionNames[$subscriptionPolicy];
 }
