@@ -19,8 +19,8 @@ echo <<<HTML
                 <br>
 
 
-                <label for='password'>Password: </label>
-                <input type="password" id='password' name="password" autocomplete="off" placeholder="Your new password"required="required"/>
+                <label for='password1'>Password: </label>
+                <input type="password" id='password1' name="password1" autocomplete="off" placeholder="Your new password"required="required"/>
 
                 <br>
 

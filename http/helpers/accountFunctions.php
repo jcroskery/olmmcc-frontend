@@ -49,7 +49,7 @@ function getAccountFromUsername($username)
 {
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM userlist WHERE username=?");
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_array(MYSQLI_NUM);
