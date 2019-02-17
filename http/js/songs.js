@@ -2,9 +2,6 @@ links = document.getElementsByClassName('songLink');
 for (i = 0; i < links.length; i++) {
     links[i].onclick = displayPopupVideo;
 }
-function closeVideo() {
-    close();
-}
 let currentCode;
 let displayed = false;
 function displayPopupVideo() {
@@ -28,10 +25,10 @@ function display(videocode) {
     let close = document.createElement('img');
     close.src = '../images/close.gif';
     close.id = 'closeVideo';
-    close.onclick = closeVideo;
+    close.onclick = closeDiv;
     document.getElementById("iframe-popup").appendChild(close);
 }
-function close() {
+function closeDiv() {
     displayed = false;
     removeGraydiv();
 }
@@ -50,7 +47,7 @@ function aFunction() {
 }
 function keydown(event) {
     if (event.keyCode == 27) {
-        close();
+        closeDiv();
     }
 }
 document.onkeydown = keydown;

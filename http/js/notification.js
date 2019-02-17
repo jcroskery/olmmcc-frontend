@@ -20,3 +20,4 @@ close.id = 'closeNotification';
 document.getElementById('myPage').appendChild(notificationDiv);
 document.getElementById('notificationDiv').appendChild(close);
 close.onclick = closeNotification;
+document.cookie = document.cookie = "Notification=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";

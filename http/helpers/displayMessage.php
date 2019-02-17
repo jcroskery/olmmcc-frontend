@@ -25,6 +25,6 @@ HTML;
     wrapperEnd();
 }
 function displayPopupNotification($message, $link){
-    setcookie('Notification', $message, time() + 5, '/', 'www.olmmcc.tk', 'true', false);
+    setcookie('Notification', $message, time() + 86400, '/', '', 'true', false);
     header('location: ' . $link);
 }
