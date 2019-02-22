@@ -1,10 +1,10 @@
 class calendarclass{
-    constructor(date, name, starttime, endtime, description){
+    constructor(date, name, starttime, endtime, notes){
         this.date = date;
         this.name = name;
         this.starttime = starttime;
         this.endtime = endtime;
-        this.description = description;
+        this.notes = notes;
     }
     isCorrectDate(testDate){
         
@@ -22,7 +22,7 @@ class calendarclass{
     get getDate(){
         return this.date;
     }
-    get getDescription() {
-        return this.description;
+    get getNotes() {
+        return this.notes;
     }
 }

@@ -1,5 +1,5 @@
 {
     "title" : "Home",
-    "text" : "<p>Hello, and welcome! To read about the choir, visit the About tab. To see the current songs, go to the Songs tab. The choir's schedule is visible in the Calendar tab. You can read the Frequently Asked Questions in the FAQ tab. If you notice a problem in the site or you have questions, go to the Contact tab.</p>", 
+    "text" : "<p>Welcome to the OLMM Children's Choir website! On this website you can find information about our choir, view the upcoming songs, and read the FAQ. The login and signup pages are not ready yet, so please don't use them. If you would like to join the Children's Choir, please read the FAQ and send Justus an email at <a href='mailto:justus@olmmcc.tk'>justus@olmmcc.tk</a>. If you notice a problem with the site or you have more questions, please contact Justus.</p>", 
     "topnavId": "home"
 }

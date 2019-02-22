@@ -103,7 +103,7 @@ function displayDetails(clickedId) {
         if (calendarClassEvent.isCorrectDate(date)) {
             detailsDiv.innerHTML = '<h4>' + calendarClassEvent.getName + '</h4>';
             detailsDiv.innerHTML += '<p>Time: ' + calendarClassEvent.getTime + '</p>';
-            detailsDiv.innerHTML += '<p>Description: ' + calendarClassEvent.getDescription + '</p>';
+            detailsDiv.innerHTML += '<p>Notes: ' + calendarClassEvent.getNotes + '</p>';
         }
     });
 
@@ -130,7 +130,7 @@ loadJSON(function (response) {
     actual_JSON = JSON.parse(response);
     for (var key in actual_JSON) {
         obj = actual_JSON[key];
-        eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.description));
+        eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.notes));
     }
     init();
 }); 
