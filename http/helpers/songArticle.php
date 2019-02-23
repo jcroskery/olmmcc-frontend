@@ -23,7 +23,7 @@ HTML;
     if($article['expiry'] < time() || !isset($article)){
         echo '<p>There is no post about the current songs yet, please check back later.</p>';
     } else {
-        echo '<h2>' . $article['title'] . '</h2>';
+        echo '<h3>' . $article['title'] . '</h3>';
         echo "<p>" . $article['text'] . "</p>";
         foreach($article as $role => $song){
             $songData = getSong($song);

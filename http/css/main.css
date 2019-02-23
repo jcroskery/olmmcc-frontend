@@ -101,11 +101,11 @@ h1 {
     text-align: center;
     font-size: 4vmax;
 }
-h2 {
+h3 {
     font-size: 2.5vmax;
     color: darkcyan;
 }
-h3 {
+h2 {
     font-size: 3vmax;
     margin-bottom: 0;
 }
@@ -311,4 +311,7 @@ pre {
 }
 .delete{
     background-color: red;
+}
+.bold {
+    font-weight: bold;
 }
