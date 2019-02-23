@@ -6,7 +6,7 @@ echo <<<HTML
 <div id='main-text'>
 <h1>Human-Readable Summary</h1>
 <p class='bold'>Please note: This section is not part of the privacy policy.</p>
-<p>We collect usage data from you (browser, OS, date and time, etc). If you don't want us to collect this data, then turn the Do Not Track header option in your browser on, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
+<p>We collect usage data from you (browser, OS, date and time, etc). If you don't want us to collect this data, then turn Do Not Track on, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
 
 <p>We also use cookies to operate our notification system and to log you in to your account. You can tell your browser to reject cookies, as outlined <a href='https://www.howtogeek.com/63721/how-to-block-all-cookies-except-for-sites-you-use/'>here</a>.</p>
 
@@ -15,7 +15,7 @@ echo <<<HTML
 <h1>Privacy Policy</h1>
 
 
-<p>Effective date: February 22, 2019</p>
+<p>Effective date: February 23, 2019</p>
 
 
 <p>OLMMCC ("us", "we", or "our") operates the https://www.olmmcc.tk/ website (hereinafter referred to as the "Service").</p>
@@ -26,26 +26,18 @@ echo <<<HTML
 
 <h2>Information Collection And Use</h2>
 
-<p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
-
-<h3>Types of Data Collected</h3>
+<p>We collect two different types of information for various purposes to provide and improve our Service to you.</p>
 
 <h4>Personal Data</h4>
 
-<p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). The only personally identifiable information that we collect are your email address and username, and only if you sign up for an account.</p>
+<p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). We collect your username and email address when you sign up for an account, and store it in our database. If you do not wish to have this personal data uploaded to our servers, then please do not sign up for an account.</p>
 
 <h4>Usage Data</h4>
 
-<p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your browser type, browser version, the pages of our Service that you visit, the time and date of your visit, and your operating system. This data will be anonymized and in no way will be personally identified with you. If you do not wish to have this data collected, turn the Do Not Track header option in your browser on as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
-
-<h4>Cookie Data</h4>
-<p>OLMMCC uses cookies to authenticate you (session cookies) and to display notifications on the site.</p>
-<p>We do not collect any data from cookies.  However, we use them for some parts of the service.</p>
-<p>Cookies are files with small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device.</p>
-<p>If you do not want cookies to be used, then you can instruct your browser to refuse all cookies, as outlined <a href='https://www.howtogeek.com/63721/how-to-block-all-cookies-except-for-sites-you-use/'>here</a>. Please note that you cannot login to the service if you do not accept cookies, and notifications will not be displayed.</p>
+<p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your browser type, browser version, the pages of our Service that you visit, the time and date of your visit, and your operating system. This data will be anonymized and in no way be personally identified with you. If you do not wish to have this data collected, turn Do Not Track on in your browser, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
 
 <h2>Use of Data</h2>
-    
+
 <p>OLMMCC uses the collected data for various purposes:</p>    
 <ul>
     <li>To provide and maintain the Service</li>
@@ -53,7 +45,15 @@ echo <<<HTML
     <li>To monitor the usage of the Service</li>
     <li>To detect, prevent and address technical issues</li>
 </ul>
-<p>We do not share your personal data with any third party,except if required by law.</p>
+<p>We do not share your personal data with any third party, except if required to by law.</p>
+
+<h2>Cookies</h2>
+
+<p>OLMMCC uses cookies to authenticate you (session cookies) and to display notifications on the site.</p>
+<p>We do not collect any data from cookies.  However, we use them for some parts of the service.</p>
+<p>Cookies are files with small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device.</p>
+<p>If you do not want cookies to be used, then you can instruct your browser to refuse all cookies, as outlined <a href='https://www.howtogeek.com/63721/how-to-block-all-cookies-except-for-sites-you-use/'>here</a>. Please note that you cannot login to the service if you do not accept cookies, and notifications will not be displayed.</p>
+
 
 <h2>Transfer Of Data</h2>
 <p>If you are located outside Canada and choose to provide information to us, please note that we transfer the data, including Personal Data, to Canada and process it there.</p>
