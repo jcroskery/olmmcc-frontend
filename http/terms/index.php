@@ -11,7 +11,7 @@ echo <<<HTML
 
 <h2>2. Use License</h2>
 
-<p>Permission is granted to use, modify, and distribute this software, which can be downloaded from <a href='https://github.com/Somebody62/olmmcc.tk/'>GitHub</a>, under the terms of our <a href='/license/'>license</a>.</p>
+<p>Permission is granted to use, modify, and distribute this software, which can be downloaded from <a href='https://github.com/Somebody62/olmmcc.tk/'>GitHub</a>, under the terms of our <a href='/license/'>license</a>. This work is Copyright (C) 2019 Justus Croskery.</p>
 
 <h2>3. Errors and Revisions</h2>
 
