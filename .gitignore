@@ -1,6 +1,8 @@
-/http/videos/*.php
+videos/
 PrivateVideos/
 json/
 privateVars.php
 ftp/
 images/
+articles/
+logs/
