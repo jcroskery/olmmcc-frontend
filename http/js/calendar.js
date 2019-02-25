@@ -147,7 +147,7 @@ loadJSON(function (response) {
     actual_JSON = JSON.parse(response);
     for (var key in actual_JSON) {
         obj = actual_JSON[key];
-        eventsArray.push(new calendarclass(new Date(obj.date + " 0:00"), obj.title, obj.starttime, obj.endtime, obj.notes));
+        eventsArray.push(new calendarclass(new Date(obj.date + "T12:00:00"), obj.title, obj.starttime, obj.endtime, obj.notes));
     }
     init();
 }); 
