@@ -25,16 +25,12 @@ document.getElementById('rightbutton').onclick = rightClick;
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
-function loadJSON(callback) {
+function loadJSON() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', '/json/calendar/calendarEvents.json', true);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
+    xobj.open("get", "/helpers/getCalendarEvents.php", true);
+    xobj.send();
+    xobj.onload = onGetEvents;
 }
 
 function leftClick() {
@@ -142,12 +138,17 @@ function init(){
     document.onkeydown = keydown;
     drawCalendar()
 }
-
-loadJSON(function (response) {
+function timeFormatter(time){
+    var hours = Number(time.substr(0, 2));
+    return ((hours > 12) ? hours - 12 : hours) + time.slice(2, -3) + ((hours < 12) ? " AM" : " PM")
+}
+function onGetEvents() {
+    response = this.responseText;
     actual_JSON = JSON.parse(response);
-    for (var key in actual_JSON) {
-        obj = actual_JSON[key];
-        eventsArray.push(new calendarclass(new Date(obj.date + "T12:00:00"), obj.title, obj.starttime, obj.endtime, obj.notes));
+    for (var i = 0; i < actual_JSON.length; i++) {
+        obj = actual_JSON[i];
+        eventsArray.push(new calendarclass(new Date(obj.date + "T12:00:00"), obj.title, timeFormatter(obj.startTime), timeFormatter(obj.endTime), obj.notes));
     }
     init();
-}); 
+}; 
+loadJSON();
