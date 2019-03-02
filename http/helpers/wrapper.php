@@ -34,7 +34,7 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
         <link rel="stylesheet" type="text/css" href="/css/main.css"> 
         <meta name="google-site-verification" content="1jz_Cu9-cImeDq9RlvewQ2dcjKSnz8AJZU6p_4w0Fq0"/> 
         <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
-        <meta name="description" content="Official site of the OLMM Children's Choir, or the OLMMCC for short. We are a group of children who love singing for God and performing music at various events in and around our parish.">
+        <meta name="description" content="Official site of the OLMM Children's Choir (OLMMCC).">
         <meta name="keywords" content="olmm, olmmcc, choir, russell, tk, childrens, $pageId">
     </head>
 
