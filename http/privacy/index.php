@@ -27,11 +27,15 @@ echo <<<HTML
 
 <h2>Information Collection And Use</h2>
 
-<p>We may collect up to two different types of information when you use our Service. OLMMCC uses the collected data to provide, maintain, improve and monitor the Service. We do not share your data with any third party, except if required to by law:</p>
+<p>We may collect up to three different types of information when you use our Service. OLMMCC uses the collected data to provide, maintain, improve and monitor the Service. We do not share your data with any third party, except if required to by law:</p>
 
 <h4>Personal Data</h4>
 
 <p>When signing up for and modifying your account, we collect your name and email address, and store it in our database. If you do not wish to have this personal data uploaded to our servers, then please do not sign up for an account.</p>
+
+<h4>Cookie Data</h4>
+
+<p>When you use our Service, we set a Session Cookie in your browser. This cookie lets us know if you are logged in or not, and it also lets us know your account details. We do not track you with these cookies. For more details on cookies, see the Cookies section of our Privacy Policy.</p>
 
 <h4>Usage Data</h4>
 
