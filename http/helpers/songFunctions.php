@@ -17,11 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 require_once '/srv/logincreds.php';
+require_once '/srv/http/api/database/accessTable.php';
 function addSong($name, $link, $notes){
-    global $connection;
-    $stmt = $connection->prepare("INSERT INTO songs (name, link, notes) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $link, $notes);
-    $stmt->execute();
+    createColumn('songs', ['name', 'link', 'notes'], [$name, $link, $notes]);
 }
 function changeName($name, $id){
     global $connection;
@@ -43,10 +41,7 @@ function changeNotes($notes, $id){
 }
 function deleteSong($id)
 {
-    global $connection;
-    $stmt = $connection->prepare("delete from songs where id = ?");
-    $stmt->bind_param("s", $id);
-    $stmt->execute();
+    deleteColumn('songs', $id);
 }
 function getSong($name){
     global $connection;

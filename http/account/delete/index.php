@@ -18,7 +18,6 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
-require_once '/srv/http/helpers/sessionStart.php';
 require_once '/srv/http/helpers/sendEmail.php';
 if(loggedIn()){
     $deleteCode;

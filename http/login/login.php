@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/sessionStart.php';
+include_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/logincreds.php';
 require_once '/srv/http/helpers/displayMessage.php';
 $connection = new mysqli($hn, $un, $pw, $db);

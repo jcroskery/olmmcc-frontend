@@ -19,7 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 include_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/helpers/accountFunctions.php';
-require_once '/srv/http/helpers/sessionStart.php';
+require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['deleteCode']) == $_GET['deleteCode']){
     deleteAccount($_SESSION['id']);
     session_unset();

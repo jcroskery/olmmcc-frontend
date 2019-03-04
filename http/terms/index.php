@@ -40,7 +40,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.</p>
 
-<p>The full text of the GNU General Public License can be found <a href='/license/'>here</a>.</p>
+<p>The source code for this program can be found on <a href='https://github.com/Somebody62/olmmcc.tk'>GitHub</a>. The full text of the GNU General Public License can be found <a href='/license/'>here</a>.</p>
 
 <h2>3. Errors and Revisions</h2>
 

@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/logincreds.php';
-require_once '/srv/http/helpers/sessionStart.php';
+require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']){
     $connection = new mysqli($hn, $un, $pw, $db);
     if($connection->connect_error) die("Connection error");

@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 require_once '/srv/http/helpers/sendEmail.php';
-include_once '/srv/http/helpers/sessionStart.php';
+include_once '/srv/http/api/session/sessionStart.php';
 $verificationid;
 if ($_SESSION['verificationid'] == '') {
     $verificationid = hash('sha512', $_SESSION['id'] . bin2hex(random_bytes(20)));

@@ -81,7 +81,7 @@ function setNotInvalidEmail($id)
 }
 function refreshAccount()
 {
-    include_once '/srv/http/helpers/sessionStart.php';
+    include_once '/srv/http/api/session/sessionStart.php';
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM userlist WHERE id = ?");
     $stmt->bind_param("s", $_SESSION['id']);

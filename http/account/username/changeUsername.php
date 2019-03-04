@@ -18,7 +18,6 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/logincreds.php';
-require_once '/srv/http/helpers/sessionStart.php';
 require_once '/srv/http/helpers/wrapper.php';
 if (loggedIn()) {
     $newUsername = sanitizeString($_POST['newUsername']);
@@ -33,7 +32,7 @@ if (loggedIn()) {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $row = $result->fetch_array(MYSQLI_NUM);
-            if ($row[1] == $newUsername) {
+            if ($row[1] == $_SESSION['username']) {
                 $message = "This username is already registered to your account.";
                 displayPopupNotification($message, '/account/');
             } else {

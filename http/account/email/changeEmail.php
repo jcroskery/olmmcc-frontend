@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/accountFunctions.php';
-require_once '/srv/http/helpers/sessionStart.php';
+require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['changeEmailVerificationId']) == $_GET['changeEmailVerificationId']){
     changeEmail($_SESSION['newEmail'], $_SESSION['id']);
     setNotInvalidEmail($_SESSION['id']);
