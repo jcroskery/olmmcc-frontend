@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/songFunctions.php';
+include_once '/srv/http/api/songs/songFunctions.php';
 include_once '/srv/http/helpers/wrapper.php';
 if($_SESSION['admin']){
     wrapperBegin('Song Database');

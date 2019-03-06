@@ -17,23 +17,47 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/logincreds.php';
-function deleteColumn($table, $id)
+function deleteRow($table, $id)
 {
     global $connection;
     $stmt = $connection->prepare("delete from " . $table . "  where id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
 }
-function createColumn($table, $namesArray, $valuesArray)
+function createRow($table, $namesArray, $valuesArray)
 {
     global $connection;
     $names = '';
-    $questionMarks = str_repeat('?,', sizeof($namesArray)-1) . "?";
+    $questionMarks = str_repeat('?,', sizeof($namesArray) - 1) . "?";
     for ($i = 0; $i < sizeof($namesArray); $i++) {
         $appendCharacter = ($i - 1 != sizeof($names)) ? ',' : '';
         $names .= ($namesArray[$i] . $appendCharacter);
     }
     $stmt = $connection->prepare("INSERT INTO " . $table . " (" . $names . ") VALUES (" . $questionMarks . ")");
     $stmt->bind_param(str_repeat('s', sizeof($namesArray)), ...$valuesArray);
+    $stmt->execute();
+}
+function getRow($table, $columnName, $columnValue)
+{
+    global $connection;
+    $stmt = $connection->prepare("SELECT * FROM " . $table . " WHERE " . $columnName . "= ?");
+    $stmt->bind_param("s", $columnValue);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_array(MYSQLI_NUM);
+}
+function getAllRows($table)
+{
+    global $connection;
+    $stmt = $connection->prepare("SELECT * FROM " . $table);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function changeRow($table, $id, $columnName, $newValue)
+{
+    global $connection;
+    $stmt = $connection->prepare("UPDATE " . $table . " set " . $columnName . " = ? where id = ?");
+    $stmt->bind_param("ss", $newValue, $id);
     $stmt->execute();
 }

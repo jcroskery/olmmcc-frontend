@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '../helpers/wrapper.php';
-include_once 'songFunctions.php';
+include_once '/srv/http/api/songs/songFunctions.php';
 include_once '/srv/http/songs/videohelper.php';
 function createSongArticle($location) {
     $file = fopen($location, 'w');
@@ -38,7 +38,7 @@ function displaySongArticle($article){
         <h1>This Month's Songs</h1>
 HTML;
     if($article['expiry'] < time() || !isset($article)){
-        echo '<p>There is no post about the current songs yet, please check back later.</p>';
+        echo '<p>There is no post about the current songs yet, please check again soon!</p>';
     } else {
         echo '<h3>' . $article['title'] . '</h3>';
         echo "<p>" . $article['text'] . "</p>";
