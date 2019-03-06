@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/api/session/sessionStart.php';
-require_once '/srv/http/helpers/accountFunctions.php';
+require_once '/srv/http/api/account/accountFunctions.php';
 refreshAccount();
 header("Refresh: 15;url='/account/verify/'");
 if ($_SESSION['id'] != '') {
@@ -26,10 +26,7 @@ if ($_SESSION['id'] != '') {
         $files = scandir('/srv/http/json/incoming/');
         foreach ($files as $file) {
             if ($file == 'Email does not exist' . $_SESSION['notVerifiedEmail'] . '.json') {
-                $stmt = $connection->prepare("update userlist set invalid_email=1 where id=?");
-    
-                $stmt->bind_param("s", $_SESSION['id']);
-                $stmt->execute();
+                setInvalidEmail($_SESSION['id']);
                 unlink('/srv/http/json/incoming/' . $file);
                 $_SESSION['invalid_email'] = '1';
             }

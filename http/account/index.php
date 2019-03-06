@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/helpers/accountFunctions.php';
+include_once '/srv/http/api/account/accountFunctions.php';
 refreshAccount();
 if(wrapperBegin('Your Account', 'account', true)) {
 $email = $_SESSION['email'];

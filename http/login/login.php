@@ -17,22 +17,12 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/api/session/sessionStart.php';
-require_once '/srv/logincreds.php';
+require_once '/srv/http/api/account/accountFunctions.php';
 require_once '/srv/http/helpers/displayMessage.php';
-$connection = new mysqli($hn, $un, $pw, $db);
-if ($connection->connect_error) {
-    die("Connection error");
-}
 
 $email = strtolower(sanitizeString($_POST['email']));
 $password = sanitizeString($_POST['password']);
-$stmt = $connection->prepare("SELECT * FROM userlist WHERE email = ?");
-
-$stmt->bind_param("s", $email);
-$stmt->execute();
-
-$result = $stmt->get_result();
-$row = $result->fetch_array(MYSQLI_NUM);
+$row = getAccountFromEmail($email);
 if (password_verify($password, $row[2])) {
     session_unset();
     $_SESSION['id'] = $row[3];

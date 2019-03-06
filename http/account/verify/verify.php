@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
-require_once '/srv/http/helpers/accountFunctions.php';
+require_once '/srv/http/api/account/accountFunctions.php';
 require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['verificationid']) == $_GET['verification']){
     verifyAccount($_SESSION['id']);
