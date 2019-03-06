@@ -61,3 +61,11 @@ function changeRow($table, $id, $columnName, $newValue)
     $stmt->bind_param("ss", $newValue, $id);
     $stmt->execute();
 }
+function getAllColumns($table)
+{
+    global $connection;
+    $stmt = $connection->prepare("SHOW columns FROM " . $table);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
