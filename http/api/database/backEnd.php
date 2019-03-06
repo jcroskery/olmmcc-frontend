@@ -16,12 +16,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/api/database/frontEnd.php';
-if ($_SESSION['admin']) {
-    wrapperBegin('Calendar Events');
-    outputTable('Calendar Events', 'calendar', "Event");
-    wrapperEnd('<script src="/js/alert.js"></script>', false);
-} else {
-    notLoggedIn();
+require_once '/srv/http/api/database/accessTable.php';
+require_once '/srv/http/helpers/displayMessage.php';
+function add($table, $post)
+{
+    $columns = getAllColumns($table);
+    $names = [];
+    $contents = [];
+    foreach ($columns as $column) {
+        $columnName = $column['Field'];
+        if ($column['Key'] != 'PRI') {
+            $contents[] = sanitizeString($post[$columnName]);
+            $names[] = $columnName;
+        }
+    }
+    $result = createRow($table, $names, $contents);
+    displayPopupNotification($result ? $result : "Successfully added!", '/admin/' . $table);
 }

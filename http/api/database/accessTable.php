@@ -30,12 +30,13 @@ function createRow($table, $namesArray, $valuesArray)
     $names = '';
     $questionMarks = str_repeat('?,', sizeof($namesArray) - 1) . "?";
     for ($i = 0; $i < sizeof($namesArray); $i++) {
-        $appendCharacter = ($i - 1 != sizeof($names)) ? ',' : '';
-        $names .= ($namesArray[$i] . $appendCharacter);
+        $names .= ($namesArray[$i] . ',');
     }
+    $names = substr($names, 0, strlen($names)-1);
     $stmt = $connection->prepare("INSERT INTO " . $table . " (" . $names . ") VALUES (" . $questionMarks . ")");
     $stmt->bind_param(str_repeat('s', sizeof($namesArray)), ...$valuesArray);
     $stmt->execute();
+    return mysqli_error($connection);
 }
 function getRow($table, $columnName, $columnValue)
 {

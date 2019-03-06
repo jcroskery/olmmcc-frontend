@@ -27,7 +27,7 @@ function getTableContents($table, $name)
         foreach ($columns as $column) {
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
-                $rowContents .= "<td><input name='" . $columnName . "' value='" . $row[$columnName] ."'/></td>";
+                $rowContents .= '<td><input name="' . $columnName . '" value="' . $row[$columnName] .'"/></td>';
             }
         }
         $id = $row['id'];
@@ -55,9 +55,10 @@ function outputTable($title, $table, $name)
     $addRow = '';
     foreach ($columns as $column) {
         $columnName = $column['Field'];
+        $formattedColumnName = ucfirst(preg_replace('/(?<!\ )[A-Z]/', ' $0', $columnName));
         if ($column['Key'] != 'PRI') {
-            $tableHeader .= '<th>' . ucfirst($columnName) . '</th>';
-            $addRow .= '<td><input name="' . $columnName . '" value="New ' . ucfirst($columnName) . '"/></td>';
+            $tableHeader .= '<th>' . $formattedColumnName . '</th>';
+            $addRow .= '<td><input name="' . $columnName . '" value="New ' . $formattedColumnName . '"/></td>';
         }
     }
     echo <<<HTML

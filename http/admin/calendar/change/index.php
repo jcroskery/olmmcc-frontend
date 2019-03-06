@@ -15,13 +15,17 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
- */
+*/
 include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/api/database/frontEnd.php';
-if ($_SESSION['admin']) {
-    wrapperBegin('Calendar Events');
-    outputTable('Calendar Events', 'calendar', "Event");
-    wrapperEnd('<script src="/js/alert.js"></script>', false);
+include_once '/srv/http/api/songs/songFunctions.php';
+require_once '/srv/http/helpers/displayMessage.php';
+if($_SESSION['admin']) { 
+    $id = sanitizeString($_POST['id']);
+    changeName(sanitizeString($_POST['name']), $id);
+    changeLink(sanitizeString($_POST['link']), $id);
+    changeNotes(sanitizeString($_POST['notes']), $id);
+    $message = 'Sucessfully updated song.';
+    displayPopupNotification($message, '/admin/songs');
 } else {
     notLoggedIn();
 }
