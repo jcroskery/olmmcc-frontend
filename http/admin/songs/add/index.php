@@ -16,16 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/api/songs/songFunctions.php';
-require_once '/srv/http/helpers/displayMessage.php';
-if($_SESSION['admin']) {
-    $name = sanitizeString($_POST['name']);
-    $link = sanitizeString($_POST['link']);
-    $notes = sanitizeString($_POST['notes']);
-    addSong($name, $link, $notes);
-    $message = "Sucessfully added ". $name . ".";
-    displayPopupNotification($message, '/admin/songs');
+include_once '/srv/http/api/database/backEnd.php';
+if ($_SESSION['admin']) {
+    add('songs', $_POST);
 } else {
     notLoggedIn();
 }

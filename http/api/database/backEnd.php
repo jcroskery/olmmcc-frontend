@@ -41,7 +41,7 @@ function change($table, $post)
             $message .= changeRow($table, $id, $key, $value);
         }
     }
-    displayPopupNotification($message != '' ? $message : 'Sucessfully updated song.', '/admin/' . $table);
+    displayPopupNotification($message != '' ? $message : 'Sucessfully updated!', '/admin/' . $table);
 }
 function delete($table, $post)
 {

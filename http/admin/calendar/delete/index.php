@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/api/database/backEnd.php';
-
 if($_SESSION['admin']) {
     delete('calendar', $_POST);
 } else {
