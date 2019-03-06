@@ -27,11 +27,11 @@ echo <<<HTML
 
 <h2>Information Collection And Use</h2>
 
-<p>We may collect up to three different types of information when you use our Service. OLMMCC uses the collected data to provide, maintain, improve and monitor the Service. We do not share your data with any third party, except if required to by law:</p>
+<p>We may collect different types of information when you use our Service. OLMMCC uses the collected data to provide, maintain, improve and monitor the Service. We do not share your data with any third party, except if required to by law:</p>
 
 <h4>Personal Data</h4>
 
-<p>When signing up for and modifying your account, we collect your name and email address, and store it in our database. If you do not wish to have this personal data uploaded to our servers, then please do not sign up for an account.</p>
+<p>When signing up for and modifying your account, we collect your name and email address, and store it in our database. If you do not wish to have this personal data uploaded to our servers, then please do not sign up for an account. Your IP address may also be considered Personal Information, so see the Usage Data section for information on its collection.</p>
 
 <h4>Cookie Data</h4>
 
@@ -39,7 +39,7 @@ echo <<<HTML
 
 <h4>Usage Data</h4>
 
-<p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your browser type, browser version, the pages of our Service that you visit, the time and date of your visit, and your operating system. If you are signed into your account, your usage data will be linked with your account, and you can delete it in your account settings. If you are not signed in to an account, your usage data will be randomized and will contain no personally identifiable information. To stop data collection, turn Do Not Track on in your browser, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
+<p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your browser type, browser version, the pages of our Service that you visit, the time and date of your visit, your IP address, and your operating system. To stop usage data from being collected, turn Do Not Track on in your browser, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
 
 <h2>Cookies</h2>
 <p>Cookies are files with small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device.</p>
