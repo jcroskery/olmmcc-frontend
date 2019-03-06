@@ -16,20 +16,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-require_once '/srv/logincreds.php';
+require_once '/srv/http/api/database/accessTable.php';
 function addEvent($title, $date, $startTime, $endTime, $notes)
 {
-    global $connection;
-    $stmt = $connection->prepare("INSERT INTO calendar (title, date, startTime, endTime, notes) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $title, $date, $startTime, $endTime, $notes);
-    $stmt->execute();
+    createRow('calendar', ['title', 'date', 'startTime', 'endTime', 'notes'], [$title, $date, $startTime, $endTime, $notes]);
 }
-
 function getEvents()
 {
-    global $connection;
-    $stmt = $connection->prepare("SELECT * FROM calendar");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return getAllRows('calendar');
+
 }

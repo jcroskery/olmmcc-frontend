@@ -28,7 +28,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 function loadJSON() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open("get", "/helpers/getCalendarEvents.php", true);
+    xobj.open("get", "/api/calendar/echoCalendarEvents.php", true);
     xobj.send();
     xobj.onload = onGetEvents;
 }
