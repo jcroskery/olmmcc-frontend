@@ -57,6 +57,9 @@ function setInvalidEmail($id)
 {
     changeRow('users', $id, 'invalid_email', 1);
 }
+function updateSubscription($id, $subscriptionPolicy){
+    changeRow('users', $id, 'subscription_policy', $subscriptionPolicy);
+}
 function refreshAccount()
 {
     include_once '/srv/http/api/session/sessionStart.php';
