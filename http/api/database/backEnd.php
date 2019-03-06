@@ -33,3 +33,18 @@ function add($table, $post)
     $result = createRow($table, $names, $contents);
     displayPopupNotification($result ? $result : "Successfully added!", '/admin/' . $table);
 }
+function change($table, $post)
+{
+    $id = sanitizeString($post['id']);
+    foreach ($post as $key => $value) {
+        if ($key != 'id') {
+            $message .= changeRow($table, $id, $key, $value);
+        }
+    }
+    displayPopupNotification($message != '' ? $message : 'Sucessfully updated song.', '/admin/' . $table);
+}
+function delete($table, $post)
+{
+    $result = deleteRow($table, $post['delete']);
+    displayPopupNotification($message ? $message : "Deletion successful.", '/admin/' . $table);
+}

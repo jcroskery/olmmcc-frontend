@@ -23,6 +23,7 @@ function deleteRow($table, $id)
     $stmt = $connection->prepare("delete from " . $table . "  where id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
+    return mysqli_error($connection);
 }
 function createRow($table, $namesArray, $valuesArray)
 {
@@ -61,6 +62,7 @@ function changeRow($table, $id, $columnName, $newValue)
     $stmt = $connection->prepare("UPDATE " . $table . " set " . $columnName . " = ? where id = ?");
     $stmt->bind_param("ss", $newValue, $id);
     $stmt->execute();
+    return mysqli_error($connection);
 }
 function getAllColumns($table)
 {

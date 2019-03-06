@@ -39,7 +39,7 @@ function getTableContents($table, $name)
             </form>
             <td>
                 <form action='delete/' method='post'>
-                    <button class='delete' name=$id value='delete'>Delete $name</button>
+                    <button class='delete' name=delete value=$id>Delete $name</button>
                 </form>
             </td>
         <tr>
