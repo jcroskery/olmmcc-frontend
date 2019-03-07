@@ -16,22 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/wrapper.php';
-require_once '/srv/http/helpers/displayMessage.php';
+include_once '/srv/http/api/database/backEnd.php';
 if ($_SESSION['admin']) {
-    $path = '/srv/http/articles/';
-    if(isset($_POST['songs'])){
-        $path .= ('songs/' . $_POST['songs']);
-    } else {
-        $path .= ('main/' . $_POST['main']);
-    }
-    if(unlink($path)){
-        $message = "Sucesfully deleted " . $path . ".";
-        displayPopupNotification($message, '/admin/articles');
-    } else {
-        $message = "Error, please try again.";
-        displayPopupNotification($message, '/admin/articles');
-    }
+    delete('articles', $_POST);
 } else {
     notLoggedIn();
 }

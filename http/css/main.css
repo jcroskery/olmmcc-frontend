@@ -244,7 +244,7 @@ caption {
 
 input[type="text"], input[type='email'], input[type='password'] {
     width: 40vw;
-    height: 8vh;
+    padding: 1vh 0;
     margin-bottom: 1.5vh;
     margin-right: 1vw;
 }
@@ -310,10 +310,15 @@ h4 {
 pre {
     white-space: pre-wrap;
 }
-.database input {
+.database input, .database textarea{
     width: auto;
     font-size: 1vmax;
-    margin: 0 1vw 0 0;
+    margin: 0;
+}
+.database textarea {
+    width: 100%;
+    height: 10vh;
+    display: table-cell;
 }
 .database td, .database th {
     border: 1px solid blue;

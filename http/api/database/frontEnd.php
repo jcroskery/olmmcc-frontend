@@ -27,7 +27,21 @@ function getTableContents($table, $name)
         foreach ($columns as $column) {
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
-                $rowContents .= '<td><input name="' . $columnName . '" value="' . $row[$columnName] .'"/></td>';
+                switch ($column['Type']) {
+                    case 'date':
+                        $type = 'date';
+                        break;
+                    case 'text':
+                        $type = 'textarea';
+                        break;
+                    default:
+                        $type = 'text';
+                }
+
+                $rowContents .= ($type=='textarea') ?
+                '<td><textarea name="' . $columnName . '">' . $row[$columnName] . '</textarea></td>'
+                 :
+                 '<td><input type="' . $type . '" name="' . $columnName . '" value="' . $row[$columnName] . '"/></td>';
             }
         }
         $id = $row['id'];
@@ -57,8 +71,21 @@ function outputTable($title, $table, $name)
         $columnName = $column['Field'];
         $formattedColumnName = ucfirst(preg_replace('/(?<!\ )[A-Z]/', ' $0', $columnName));
         if ($column['Key'] != 'PRI') {
+            switch ($column['Type']) {
+                case 'date':
+                    $type = 'date';
+                    break;
+                case 'text':
+                    $type = 'textarea';
+                    break;
+                default:
+                    $type = 'text';
+            }
             $tableHeader .= '<th>' . $formattedColumnName . '</th>';
-            $addRow .= '<td><input name="' . $columnName . '" value="New ' . $formattedColumnName . '"/></td>';
+            $addRow .= ($type == 'textarea') ?
+            '<td><textarea name="' . $columnName . '">New ' . $formattedColumnName . '</textarea></td>'
+            :
+            '<td><input type="' . $type . '" name="' . $columnName . '" value="New ' . $formattedColumnName . '"/></td>';
         }
     }
     echo <<<HTML
