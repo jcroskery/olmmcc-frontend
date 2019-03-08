@@ -47,13 +47,13 @@ function getTableContents($table, $name)
         $id = $row['id'];
         $tableContents .= <<<HTML
         <tr>
-            <form action='change/' method='post'>
+            <form action='/api/database/change.php' method='post'>
                 $rowContents
-                <td><button type='submit' name='id' value='$id'>Save Changes</button></td>
+                <td><button type='submit' name=$table value='$id'>Save Changes</button></td>
             </form>
             <td>
-                <form action='delete/' method='post'>
-                    <button class='delete' name=delete value=$id>Delete $name</button>
+                <form action='/api/database/delete.php' method='post'>
+                    <button class='delete' name=$table value=$id>Delete $name</button>
                 </form>
             </td>
         <tr>
@@ -97,9 +97,9 @@ function outputTable($title, $table, $name)
         </tr>
         $tableContents
         <tr>
-            <form action='add/' method='post'>
+            <form action='/api/database/add.php' method='post'>
                 $addRow
-                <td colspan='2' class='centerDiv'><button type='submit' name='add'>Add $name</button></td>
+                <td colspan='2' class='centerDiv'><button type='submit' name=$table>Add $name</button></td>
             </form>
         </tr>
         </table>
