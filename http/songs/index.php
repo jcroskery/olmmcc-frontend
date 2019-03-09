@@ -16,14 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '../helpers/songArticle.php';
-
-$files = scandir('/srv/http/articles/songs/');
-$article;
-foreach($files as $file){
-    $json = json_decode(file_get_contents('/srv/http/articles/songs/' . $file), true);
-    if(!isset($article) || $article['expiry'] <= $json['expiry']){
-        $article = $json;
-    }    
+include_once '/srv/http/api/songs/songArticle.php';
+include_once '/srv/http/api/database/accessTable.php';
+$formattedArticle;
+foreach(getAllRows('articles') as $article){
+    $json = [];
+    foreach($article as $propertyName => $property){
+        if($propertyName!=='id'){
+            $json[$propertyName] = $property;
+        }
+    }
+    $json['expiry'] = DateTime::createFromFormat('Y-m-d', $article['expiry'])->getTimestamp();
+    if(!isset($formattedArticle) || $formattedArticle['expiry'] <= $json['expiry']){
+        $formattedArticle = $json;
+    }   
 }
-displaySongArticle($article);
+displaySongArticle($formattedArticle);

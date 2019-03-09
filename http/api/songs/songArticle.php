@@ -15,37 +15,27 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
-include_once '../helpers/wrapper.php';
+ */
+include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/songs/songFunctions.php';
 include_once '/srv/http/songs/videohelper.php';
-function createSongArticle($location) {
-    $file = fopen($location, 'w');
-    $json = <<<JSON
+function displaySongArticle($article)
 {
-    "title" : "",
-    "text" : "",
-    "expiry" : ""
-}
-JSON;
-    fwrite($file, $json);
-    fclose($file);
-}
-function displaySongArticle($article){
     wrapperBegin('Current Songs', 'songs');
     echo <<<HTML
     <div id="main-text">
         <h1>This Month's Songs</h1>
 HTML;
-    if($article['expiry'] < time() || !isset($article)){
+    if ($article['expiry'] < time() || !isset($article)) {
         echo '<p>There is no post about the current songs yet, please check again soon!</p>';
     } else {
         echo '<h3>' . $article['title'] . '</h3>';
         echo "<p>" . $article['text'] . "</p>";
-        foreach($article as $role => $song){
-            $songData = getSong($song);
-            if($songData){
-                echo createVideo($song, $role, $songData[2]);
+        foreach (getAllRows('songs') as $song) {
+            if ($song['article'] == $article['title']) {
+                if ($song['name']) {
+                    echo createVideo($song['name'], $song['role'], $song['link']);
+                }
             }
         }
     }
