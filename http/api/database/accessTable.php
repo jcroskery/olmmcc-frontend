@@ -51,7 +51,7 @@ function getRow($table, $columnName, $columnValue)
 function getAllRows($table)
 {
     global $connection;
-    $stmt = $connection->prepare("SELECT * FROM " . $table);
+    $stmt = $connection->prepare("SELECT * FROM " . $table . " order by id");
     $stmt->execute();
     $result = $stmt->get_result();
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
