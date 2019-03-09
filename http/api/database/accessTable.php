@@ -19,6 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 require_once '/srv/logincreds.php';
 function deleteRow($table, $id)
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("delete from " . $table . "  where id = ?");
     $stmt->bind_param("i", $id);
@@ -27,6 +28,7 @@ function deleteRow($table, $id)
 }
 function createRow($table, $namesArray, $valuesArray)
 {
+    $table = sanitizeString($table);
     global $connection;
     $names = '';
     $questionMarks = str_repeat('?,', sizeof($namesArray) - 1) . "?";
@@ -41,6 +43,7 @@ function createRow($table, $namesArray, $valuesArray)
 }
 function getRow($table, $columnName, $columnValue)
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM " . $table . " WHERE " . $columnName . "= ?");
     $stmt->bind_param("s", $columnValue);
@@ -50,14 +53,35 @@ function getRow($table, $columnName, $columnValue)
 }
 function getAllRows($table)
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM " . $table . " order by id");
     $stmt->execute();
     $result = $stmt->get_result();
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+function getMaxId($table)
+{
+    $table = sanitizeString($table);
+    global $connection;
+    $stmt = $connection->prepare("SELECT MAX(id) FROM " . $table);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function getMinId($table)
+{
+    $table = sanitizeString($table);
+    global $connection;
+    $stmt = $connection->prepare("SELECT MIN(id) FROM " . $table);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
 function changeRow($table, $id, $columnName, $newValue)
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("UPDATE " . $table . " set " . $columnName . " = ? where id = ?");
     $stmt->bind_param("ss", $newValue, $id);
@@ -66,6 +90,7 @@ function changeRow($table, $id, $columnName, $newValue)
 }
 function getAllColumns($table)
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SHOW columns FROM " . $table);
     $stmt->execute();
@@ -74,12 +99,13 @@ function getAllColumns($table)
 }
 function getTables()
 {
+    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("show tables");
     $stmt->execute();
     $result = $stmt->get_result();
     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    foreach($rows as $row){
+    foreach ($rows as $row) {
         $formattedRows[] = $row[array_key_first($row)];
     }
     return $formattedRows;

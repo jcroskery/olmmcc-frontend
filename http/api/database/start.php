@@ -21,8 +21,9 @@ require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
     $table = array_key_first($_POST);
-    $result = deleteRow($table, $_POST[$table]);
-    displayPopupNotification($message ? $message : "Deletion successful.", '/admin/' . $table);
+    $newId = array_pop(getMinId($table)[0]) - 1;
+    $message = changeRow($table, $_POST[$table], 'id', $newId);
+    displayPopupNotification($message ? $message : "Successfully moved to start.", '/admin/' . $table);
 } else {
     notLoggedIn();
 }
