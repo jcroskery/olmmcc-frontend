@@ -33,7 +33,7 @@ function createRow($table, $namesArray, $valuesArray)
     for ($i = 0; $i < sizeof($namesArray); $i++) {
         $names .= ($namesArray[$i] . ',');
     }
-    $names = substr($names, 0, strlen($names)-1);
+    $names = substr($names, 0, strlen($names) - 1);
     $stmt = $connection->prepare("INSERT INTO " . $table . " (" . $names . ") VALUES (" . $questionMarks . ")");
     $stmt->bind_param(str_repeat('s', sizeof($namesArray)), ...$valuesArray);
     $stmt->execute();
@@ -71,4 +71,16 @@ function getAllColumns($table)
     $stmt->execute();
     $result = $stmt->get_result();
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function getTables()
+{
+    global $connection;
+    $stmt = $connection->prepare("show tables");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    foreach($rows as $row){
+        $formattedRows[] = $row[array_key_first($row)];
+    }
+    return $formattedRows;
 }

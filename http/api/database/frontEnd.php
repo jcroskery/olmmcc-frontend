@@ -17,31 +17,61 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
+function determineCellContents($column, $columnName, $currentValue)
+{
+    if ($column["Type"] == 'date') {
+        return <<<HTML
+        <td>
+            <input type="date" name="$columnName" value="$currentValue"/>
+        </td>
+HTML;
+    }
+    if ($column["Type"] == 'text') {
+        return <<<HTML
+        <td>
+            <textarea name="$columnName">$currentValue</textarea>
+        </td>
+HTML;
+    }
+    $type = false;
+    foreach (getTables() as $tableName) {
+        if ($columnName . 's' === $tableName) {$type = $tableName;}
+    }
+    if ($type) {
+        $options = '';
+        foreach (getAllRows($type) as $tableRow) {
+            if ($currentValue !== $tableRow['title']) {
+                $options .= '<option ' . ' value="' . $tableRow['title'] . '">' . $tableRow['title'] . '</option>';
+            }
+        }
+        $noneOption = ($currentValue !== 'None') ? "<option value=''>None</option>" : '';
+        return <<<HTML
+        <td>
+            <select name="$columnName">
+                <option disabled selected='selected'>$currentValue</option>
+                $options
+                $noneOption
+            </select>
+        </td>
+HTML;
+    }
+    return <<<HTML
+    <td>
+        <input type="text" name="$columnName" value="$currentValue"/>
+    </td>
+HTML;
+
+}
 function getTableContents($table, $name)
 {
-    $rows = getAllRows($table);
     $columns = getAllColumns($table);
-    $tableContents = '';
-    foreach ($rows as $row) {
+    foreach (getAllRows($table) as $row) {
         $rowContents = '';
         foreach ($columns as $column) {
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
-                switch ($column['Type']) {
-                    case 'date':
-                        $type = 'date';
-                        break;
-                    case 'text':
-                        $type = 'textarea';
-                        break;
-                    default:
-                        $type = 'text';
-                }
-
-                $rowContents .= ($type=='textarea') ?
-                '<td><textarea name="' . $columnName . '">' . $row[$columnName] . '</textarea></td>'
-                 :
-                 '<td><input type="' . $type . '" name="' . $columnName . '" value="' . $row[$columnName] . '"/></td>';
+                $currentValue = ($row[$columnName]) ? $row[$columnName] : 'None';
+                $rowContents .= determineCellContents($column, $columnName, $currentValue);
             }
         }
         $id = $row['id'];
@@ -63,31 +93,17 @@ HTML;
 }
 function outputTable($title, $table, $name)
 {
-    $tableContents = getTableContents($table, $name);
-    $columns = getAllColumns($table);
-    $tableHeader = '';
-    $addRow = '';
-    foreach ($columns as $column) {
+    
+    foreach (getAllColumns($table) as $column) {
         $columnName = $column['Field'];
         $formattedColumnName = ucfirst(preg_replace('/(?<!\ )[A-Z]/', ' $0', $columnName));
         if ($column['Key'] != 'PRI') {
-            switch ($column['Type']) {
-                case 'date':
-                    $type = 'date';
-                    break;
-                case 'text':
-                    $type = 'textarea';
-                    break;
-                default:
-                    $type = 'text';
-            }
             $tableHeader .= '<th>' . $formattedColumnName . '</th>';
-            $addRow .= ($type == 'textarea') ?
-            '<td><textarea name="' . $columnName . '">New ' . $formattedColumnName . '</textarea></td>'
-            :
-            '<td><input type="' . $type . '" name="' . $columnName . '" value="New ' . $formattedColumnName . '"/></td>';
+            $defaultValue = 'New ' . $formattedColumnName;
+            $addRow .= determineCellContents($column, $columnName, $defaultValue);
         }
     }
+    $tableContents = getTableContents($table, $name);
     echo <<<HTML
         <table class='database'>
             <caption>$title</caption>
