@@ -19,8 +19,16 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 include_once '../helpers/wrapper.php';
 wrapperBegin('Calendar', 'calendar');
 echo <<<HTML
-    <button class='calendarButton' id='leftbutton'><img class='buttonImage' src='../images/Leftarrow.gif' alt = 'Previous month'></button>
-    <button class='calendarButton' id='rightbutton'><img class='buttonImage' src = '../images/Leftarrow.gif' alt = 'Next month'></button>
+    <button class='calendarButton' id='leftbutton'>
+        <svg class='buttonSvg' viewBox='0, 0, 100, 200'>
+            <polygon class='buttonPolygon' points="100,0 0,100 100,200"/>
+        </svg>
+    </button>
+    <button class='calendarButton' id='rightbutton'>
+        <svg class='buttonSvg' viewBox='0, 0, 100, 200'>
+            <polygon class='buttonPolygon' points="0,0 100,100 0,200"/>
+        </svg>
+    </button>
     <table class='calendar'>
 HTML;
 echo <<<HTML

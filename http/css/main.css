@@ -17,14 +17,10 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 body {
     margin: 0;
-    background-size: 100%;
-    background-image: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg');
-    background-repeat:no-repeat;
-    background-attachment: fixed; 
-}
-
-span, p, input, label, button, select, li, pre{
+    background: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg') no-repeat center center fixed;
+    background-size: cover;
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
+    font-size: 27px;
 }
 th, td{
     font-family: 'Noto Sans', sans-serif;
@@ -35,14 +31,9 @@ th, td{
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Arial', sans-serif;
 }
-
-p, li, input:not([type='submit']), label, span, pre, th, td{
-    font-size: 2vmax;
-}
 select, button, input[type='submit'], .calendarEventTitle{
-    font-size: 1.5vmax;
+    font-size: 20px;
 }
-
 .rightDiv {
     text-align: right;
 }
@@ -87,22 +78,20 @@ body.contactClass {
     position: sticky;
     background-color: #333;
     overflow: hidden;
-    font-size: 2vmax;
 }
 .bottom {
     text-align: center;
     background-color: rgba(105, 207, 74, 0.9);
     width: 86.6vw;
-    padding: 2vh 0;
+    padding: 10px 0;
     margin: auto;
 }
-.bottomSpan , .smallSpan{
-    font-size: 1.3vmax;
+.bottomSpan , .smallSpan, .largeTextarea{
+    font-size: 18px;
 }
 .largeTextarea {
-    width: 50vw;
-    height: 40vh;
-    font-size: 1.25vmax;
+    width: 100%;
+    height: 250px;
 }
 #main-text, .mainForm{
     margin: auto;
@@ -164,7 +153,7 @@ h4 {
 }
 
 .reducedPadding p{
-    margin: 2vh 0;
+    margin: 11px 0;
 }
 
 .a {
@@ -172,12 +161,11 @@ h4 {
 }
 
 .calendar th, .calendar td {
-    font-size: 2vw;
     border: 0.2vmax solid blue;
     vertical-align: top;
 }
 .calendar td {
-    height: 10vh;
+    height: 50px;
 }
 
 .calendar {
@@ -189,28 +177,29 @@ h4 {
 }
 
 caption {
-    padding: 1vh 0;
-    font-size: 4vmax;
+    padding: 6px 0;
+    font-size: 56px;
 }
 
 .calendarButton {
     border: none;
     background-color: transparent;
-    padding: 0 1vw;
-    position: absolute;
-    top: 42.5vh;
+    padding: 0 1%;
+    position: fixed;
+    top: 42.5%;
 }
 
 #rightbutton {
-    transform: scaleX(-1);
     right: 0;
 }
 
-.buttonImage {
-    width: 3vw;
-    height: 15vh;
+.buttonPolygon {
+    fill: gray;
 }
-
+.buttonSvg {
+    width: 3vw;
+    height: 15%;
+}
 #graydiv {
     background-color: rgba(57, 59, 59, 0.9);
     position: fixed;
@@ -238,7 +227,7 @@ caption {
 }
 
 .calendarEvent {
-    font-size: 1vmax;
+    font-size: 13px;
 }
 
 .submit {
@@ -247,8 +236,8 @@ caption {
 
 input[type="text"], input[type='email'], input[type='password'] {
     width: 40vw;
-    padding: 1vh 0;
-    margin-bottom: 1.5vh;
+    padding: 5px 0;
+    margin-bottom: 8px;
     margin-right: 1vw;
 }
 #notificationDiv {
@@ -268,7 +257,7 @@ input[type="text"], input[type='email'], input[type='password'] {
 
 #closeVideo {
     left: 88vw;
-    top: 8.75vh;
+    top: 8.75%;
 }
 #closeNotification {
     left: 77.5vw;
@@ -276,7 +265,7 @@ input[type="text"], input[type='email'], input[type='password'] {
 }
 #closeDetails {
     left: 68vw;
-    top: 30vh;
+    top: 30%;
 }
 #closeVideo, #closeNotification , #closeDetails{
     position: fixed;
@@ -304,7 +293,7 @@ select {
 }
 
 h4 {
-    margin: 6vh 0;
+    margin: 30px 0;
 }
 
 #detailsDiv p{
@@ -315,17 +304,17 @@ pre {
 }
 .database input, .database textarea{
     width: auto;
-    font-size: 1vmax;
+    font-size: 12px;
     margin: 0;
 }
 .database textarea {
     width: 100%;
-    height: 10vh;
+    height: 60px;
     display: table-cell;
 }
 .database td, .database th {
     border: 1px solid blue;
-    padding: 1vh;
+    padding: 5px;
 }
 .database {
     width: 100%;

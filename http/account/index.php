@@ -38,12 +38,12 @@ echo <<<HTML
             <form action='/account/email'>
                 <button class='rightFloat' type='submit'>Change Account Email</button>
             </form>
-            <br><br><br>
+            <br><br>
             <span class='leftFloat'>Username: $username</span>
             <form action='/account/username'>
                 <button class='rightFloat' type='submit'>Change Account Username</button>
             </form>
-            <br><br><br>
+            <br><br>
             <span class='leftFloat'>Subscription policy: $subscriptionName</span>
             <form action="/account/subscription/" method='post'>
                 <input class='rightFloat' type='submit' value='Save Changes'/>
@@ -51,19 +51,13 @@ echo <<<HTML
                     $subscriptionOptions
                 </select>
             </form>
-            <br>
-            <br>
-            <br>
+            <br><br>
             <span class='leftFloat'>Account type: $accountLevel</span>
             <form action='/admin/'>
                 <button $disabled class='rightFloat' type='submit'>Go to Administrator settings</button>
             </form>
-            <br>
-            <br>
-            <br>
-            <br>
+            <br><br>
             <span><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>
-            <br>
             <br>
         </div>
 
