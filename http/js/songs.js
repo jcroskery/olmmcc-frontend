@@ -39,11 +39,8 @@ function display(videocode) {
     graydiv.id = 'graydiv';
     document.getElementById("myPage").appendChild(graydiv);
     graydiv.innerHTML = videocode;
-    let close = document.createElement('img');
-    close.src = '../images/close.gif';
-    close.id = 'closeVideo';
-    close.onclick = closeDiv;
-    document.getElementById("iframe-popup").appendChild(close);
+    let close = "<svg viewBox='0, 0, 100, 100'><circle cx=50 cy=50 r=50 fill=black /></svg>";
+    document.getElementById("iframe-popup").innerHTML += close;
 }
 function closeDiv() {
     displayed = false;

@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/songs/songFunctions.php';
-include_once '/srv/http/songs/videohelper.php';
+include_once 'videohelper.php';
 function displaySongArticle($article)
 {
     wrapperBegin('Current Songs', 'songs');

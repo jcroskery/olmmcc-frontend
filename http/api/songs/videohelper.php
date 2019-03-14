@@ -18,12 +18,12 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 function youtube($video){
     return <<<HTML
-    '<div id=iframe-popup><iframe class=iframe src=$video frameborder=0 allowfullscreen></iframe></div>'
+    <div id=iframe-popup><iframe class=iframe src=$video frameborder=0 allowfullscreen></iframe></div>
 HTML;
 }
 function ownvideo($video){
     return <<<HTML
-    '<div id=iframe-popup><video class=iframe src=$video controls></video></div>'
+    <div id=iframe-popup><video class=iframe src=$video controls></video></div>
 HTML;
 }
 function createVideo($name, $role, $link){
