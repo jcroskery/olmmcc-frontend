@@ -76,35 +76,44 @@ function notLoggedIn(){
 function topnav($id){
     $active = array();
     $active[$id] = "id='active'";
+    $links .= <<<HTML
+        <a $active[home] href="/">Home</a>
+        <a $active[about] href="/about">About</a>
+        <a $active[songs] href="/songs">Songs</a>
+        <a $active[calendar] href="/calendar">Calendar</a>
+        <a $active[faq] href="/faq">FAQ</a>
+        <a $active[contact] href="/contact">Contact</a>
+        <a class="tradlink" href="http://www.olmm.ca">Visit OLMM's homepage</a>
+HTML;
     echo <<<HTML
     <div id="topnav">
             <div class="left-align">
-                <a $active[home] href="/">Home</a>
-                <a $active[about] href="/about">About</a>
-                <a $active[songs] href="/songs">Songs</a>
-                <a $active[calendar] href="/calendar">Calendar</a>
-                <a $active[faq] href="/faq">FAQ</a>
-                <a $active[contact] href="/contact">Contact</a>
-                <a class="tradlink" href="http://www.olmm.ca">Visit OLMM's homepage</a>
+                $links
             </div>
             <div class="right-align">
 HTML;
 $username = $_SESSION['username'];
-    if(isset($_SESSION['username'])){
-        echo <<<HTML
-        <a $active[logout] class="login" href="/logout">Logout</a>
-        <a $active[account] class="login" href="/account">Welcome, $username</a>
-HTML;
-    } else {
-        echo <<<HTML
+    $rightLinks = (isset($_SESSION['username'])) ? 
+        '<a $active[logout] class="login" href="/logout">Logout</a>
+        <a $active[account] class="login" href="/account">Welcome, $username</a>' : <<<HTML
             <a $active[signup] class="login" href="/signup">Sign up</a>
             <span>or</span>
             <a $active[login] class="login" href="/login">Login</a>
 HTML;
-    }
+    echo $rightLinks;
+    $links .= $rightLinks;
     echo <<<HTML
             </div>
-            
+            <div class='dropdown'>
+                <svg class='dropdownSvg' viewBox='0, 0, 50, 50'>
+                    <rect x='1' y='10' width='48' height='5' rx='2.5' ry='2.5' />
+                    <rect x='1' y='22.5' width='48' height='5' rx='2.5' ry='2.5' />
+                    <rect x='1' y='35' width='48' height='5' rx='2.5' ry='2.5' />
+                </svg>
+                <div class="dropdown-content">
+                    $links
+                </div>
+            </div>
         </div>
 
 HTML;
