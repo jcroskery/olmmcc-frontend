@@ -51,7 +51,6 @@ firstDay = 0;
 lastDay = 0;
 caption.innerHTML = month + ' ' + year;
 
-
 function drawCalendar() {
     month = monthNames[date.getMonth()];
     year = date.getFullYear()
@@ -119,13 +118,13 @@ function displayDetails(clickedId) {
             detailsDiv.innerHTML += '<p>Notes: ' + calendarClassEvent.getNotes + '</p>';
         }
     });
-
     document.getElementById('graydiv').append(detailsDiv);
-    let close = document.createElement('img');
-    close.src = '../images/close.gif';
-    close.id = 'closeDetails';
-    close.onclick = clearDetails;
-    document.getElementById('graydiv').append(close);
+    let close = "<svg id='closeDetails' viewBox='0, 0, 100, 100'>";
+    close += "<circle cx=50 cy=50 r=50 fill=black />";
+    close += "<text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>";
+    close += "</svg>";
+    document.getElementById("detailsDiv").innerHTML += close;
+    document.getElementById('closeDetails').onclick = clearDetails;
 }
 function onClick() {
     date = new Date(date.getFullYear(), date.getMonth(), this.id - firstDay);
