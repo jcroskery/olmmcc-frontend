@@ -110,8 +110,13 @@ body.contactClass {
 .inline {
     display: inline;
 }
-h1, caption {
+h1, caption{
     font-size: 56px;
+}
+#closeX {
+    font-size: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
 h1 {
     text-align: center;
