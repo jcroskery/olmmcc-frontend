@@ -21,6 +21,7 @@ body {
     background-size: cover;
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
     font-size: 27px;
+    word-wrap: break-word;
 }
 th, td{
     font-family: 'Noto Sans', sans-serif;
@@ -89,19 +90,12 @@ body.contactClass {
     #topnav a, #topnav span{
         display: none;
     }
-    #topnav .left-align, #topnav .right-align {
-        margin: 0 auto;
-        width: 50%;
-    }
     #topnav #active{
         display: block;
-        float: none;
     }
     .dropdown{
-        position: absolute;
+        position: inline;
         display: block;
-        top: 0;
-        right: 0;
     }
     .dropdown-content {
         position: fixed;
