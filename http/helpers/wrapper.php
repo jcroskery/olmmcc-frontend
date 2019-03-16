@@ -105,11 +105,14 @@ HTML;
     echo <<<HTML
             </div>
             <div class='dropdown'>
-                <svg class='dropdownSvg' viewBox='0, 0, 50, 50'>
-                    <rect x='1' y='10' width='48' height='5' rx='2.5' ry='2.5' />
-                    <rect x='1' y='22.5' width='48' height='5' rx='2.5' ry='2.5' />
-                    <rect x='1' y='35' width='48' height='5' rx='2.5' ry='2.5' />
-                </svg>
+                <input type='checkbox' id='dropdownCheck' />
+                <label for='dropdownCheck'>
+                    <svg class='dropdownSvg' viewBox='0, 0, 50, 50'>
+                        <rect x='1' y='10' width='48' height='5' rx='2.5' ry='2.5' />
+                        <rect x='1' y='22.5' width='48' height='5' rx='2.5' ry='2.5' />
+                        <rect x='1' y='35' width='48' height='5' rx='2.5' ry='2.5' />
+                    </svg>
+                </label>
                 <div class="dropdown-content">
                     $links
                 </div>

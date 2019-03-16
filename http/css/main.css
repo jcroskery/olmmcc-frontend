@@ -105,7 +105,7 @@ body.contactClass {
         top: 2em;
         min-width: 160px;
     }
-    .dropdown:hover .dropdown-content {
+    #dropdownCheck:checked ~ .dropdown-content{
         display: block;
     }
     #topnav .dropdown-content a{
@@ -115,6 +115,9 @@ body.contactClass {
         display: block;
     }
     #topnav .dropdown-content #active {
+        display: none;
+    }
+    #dropdownCheck {
         display: none;
     }
 }
