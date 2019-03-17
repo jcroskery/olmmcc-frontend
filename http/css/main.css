@@ -80,60 +80,52 @@ body.contactClass {
     overflow: hidden;
     position: sticky;
 }
-.dropdown label{
+.dropdownSvg rect{
+    fill: white;
+}
+.dropdownSvg {
+    height: 2em;
+    float: right;
+    margin-right: 3px;
+}
+#topnav > #active, .dropdown label, #dropdownCheck{
     display: none;
 }
-#dropdownCheck {
-    display: none;
+#topnav a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 11px;
+}
+#topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+#topnav #active {
+    background-color: #4CAF50;
 }
 @media only screen and (max-width: 1050px) {
-    #topnav a, #topnav span{
-        display: none;
-    }
-    .dropdown{
-        position: static;
-        display: block;
-    }
     .dropdown label{
-        display: block !important;
-    }
-    .dropdown-content {
-        background-color: #333;
-        right: 0;
-        top: 2em;
-        min-width: 160px;
-        position: fixed;
-    }
-    .dropdown-content a:not(#active) {
-        display: none !important;
+        display: block;
     }
     #dropdownCheck:checked ~ .dropdown-content a{
         display: block !important;
     }
     #dropdownCheck:checked ~ .dropdown-content {
         border: 4px solid royalblue;
+        background-color: #333;
+        right: 0;
+        top: 2em;
+        min-width: 160px;
+        position: fixed;
     }
     #topnav .dropdown-content a{
         color: white;
         padding: 3px 4px;
         text-decoration: none;
-        display: block;
+        display: none !important;
         float: none;
     }
-    #topnav #active{
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 11px;
-    }
-}
-.dropdownSvg rect{
-    fill: whitesmoke;
-}
-.dropdownSvg {
-    height: 2em;
-    float: right;
-    margin-right: 3px;
 }
 .bottom {
     text-align: center;
@@ -185,31 +177,6 @@ h3 {
 }
 h4 {
     text-align: center;
-}
-
-#topnav a, #topnav span {
-    text-align: center;
-    text-decoration: none;
-    color: white;
-}
-
-.left-align a {
-    float: left;
-    padding: 11px;
-}
-
-#topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-#topnav #active {
-    background-color: #4CAF50;
-}
-
-.right-align a, .right-align span {
-    float: right;
-    padding: 11px 6px;
 }
 
 .tradlink {

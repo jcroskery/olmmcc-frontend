@@ -73,40 +73,36 @@ function notLoggedIn(){
         displayPopupNotification($message, '/login/');
     }
 }
+function createLinks($classes, $linkId, $href, $title, $activeId){
+    $active = ($linkId===$activeId && $linkId!=='') ? 'id="active"' : '';
+    return <<<HTML
+    <a class='$classes' $active href='$href'>$title</a>
+HTML;
+}
 function topnav($id){
-    $active = array();
-    $active[$id] = "id='active'";
-    $links .= <<<HTML
-    <div class='left-align'>
-        <a $active[home] href="/">Home</a>
-        <a $active[about] href="/about">About</a>
-        <a $active[songs] href="/songs">Songs</a>
-        <a $active[calendar] href="/calendar">Calendar</a>
-        <a $active[faq] href="/faq">FAQ</a>
-        <a $active[contact] href="/contact">Contact</a>
-        <a class="tradlink" href="http://www.olmm.ca">Visit OLMM's homepage</a>
-    </div>
-HTML;
+    $links[] = createLinks('leftFloat', 'home', "/", 'Home', $id);
+    $links[] = createLinks('leftFloat', 'about', '/about', "About", $id);
+    $links[] = createLinks('leftFloat', 'songs', '/songs', "Songs", $id);
+    $links[] = createLinks('leftFloat', 'calendar', '/calendar', "Calendar", $id);
+    $links[] = createLinks('leftFloat', 'faq', '/faq', "FAQ", $id);
+    $links[] = createLinks('leftFloat', 'contact', '/contact', "Contact", $id);
+    $links[] = createLinks('leftFloat tradlink', '', 'http://www.olmm.ca', "Visit OLMM's homepage", $id);
+    if(isset($_SESSION['username'])) {
+        $links[] = createLinks('rightFloat', '', '/logout', 'Logout', $id);
+        $links[] = createLinks('rightFloat', 'account', '/account', 'Welcome, ' . $_SESSION['username'], $id);
+    } else {
+        $links[] = createLinks('rightFloat', 'signup', '/signup', 'Sign up', $id);
+        $links[] = createLinks('rightFloat', 'login', '/login', 'Login', $id);
+    }
+    foreach($links as $link){
+        if(strpos($link, 'id="active"')){
+            $activeLink = $link;
+        }
+        $otherLinks .= $link;
+    }
     echo <<<HTML
-    <div id="topnav">
-HTML;
-    $username = $_SESSION['username'];
-    $loggedIn = <<<HTML
-    <div class='right-align'>
-        <a $active[logout] class="login" href="/logout">Logout</a>
-        <a $active[account] class="login" href="/account">Welcome, $username</a>
-    </div>
-HTML;
-    $notLoggedIn = <<<HTML
-        <div class='right-align'>
-            <a $active[signup] class="login" href="/signup">Sign up</a>
-            <span>or</span>
-            <a $active[login] class="login" href="/login">Login</a>
-        </div>
-HTML;
-    $rightLinks = (isset($username)) ? $loggedIn : $notLoggedIn;
-    $links .= $rightLinks;
-    echo <<<HTML
+        <div id="topnav">
+            $activeLink
             <div class='dropdown'>
                 <input type='checkbox' id='dropdownCheck' />
                 <label for='dropdownCheck'>
@@ -117,7 +113,7 @@ HTML;
                     </svg>
                 </label>
                 <div class="dropdown-content">
-                    $links
+                    $otherLinks
                 </div>
             </div>
         </div>
