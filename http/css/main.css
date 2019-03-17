@@ -80,45 +80,51 @@ body.contactClass {
     overflow: hidden;
     position: sticky;
 }
-.dropdown, .dropdown-content{
+.dropdown label{
+    display: none;
+}
+#dropdownCheck {
     display: none;
 }
 @media only screen and (max-width: 1050px) {
-    #topnav {
-        position: inherit;
-    }
     #topnav a, #topnav span{
         display: none;
     }
-    #topnav #active{
+    .dropdown{
+        position: static;
         display: block;
     }
-    .dropdown{
-        position: inline;
-        display: block;
+    .dropdown label{
+        display: block !important;
     }
     .dropdown-content {
-        position: fixed;
         background-color: #333;
-        border: 4px solid royalblue;
         right: 0;
         top: 2em;
         min-width: 160px;
+        position: fixed;
     }
-    #dropdownCheck:checked ~ .dropdown-content{
-        display: block;
+    .dropdown-content a:not(#active) {
+        display: none !important;
+    }
+    #dropdownCheck:checked ~ .dropdown-content a{
+        display: block !important;
+    }
+    #dropdownCheck:checked ~ .dropdown-content {
+        border: 4px solid royalblue;
     }
     #topnav .dropdown-content a{
         color: white;
         padding: 3px 4px;
         text-decoration: none;
         display: block;
+        float: none;
     }
-    #topnav .dropdown-content #active {
-        display: none;
-    }
-    #dropdownCheck {
-        display: none;
+    #topnav #active{
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 11px;
     }
 }
 .dropdownSvg rect{

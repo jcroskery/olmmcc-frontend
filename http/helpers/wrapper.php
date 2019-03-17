@@ -77,6 +77,7 @@ function topnav($id){
     $active = array();
     $active[$id] = "id='active'";
     $links .= <<<HTML
+    <div class='left-align'>
         <a $active[home] href="/">Home</a>
         <a $active[about] href="/about">About</a>
         <a $active[songs] href="/songs">Songs</a>
@@ -84,26 +85,28 @@ function topnav($id){
         <a $active[faq] href="/faq">FAQ</a>
         <a $active[contact] href="/contact">Contact</a>
         <a class="tradlink" href="http://www.olmm.ca">Visit OLMM's homepage</a>
+    </div>
 HTML;
     echo <<<HTML
     <div id="topnav">
-            <div class="left-align">
-                $links
-            </div>
-            <div class="right-align">
 HTML;
-$username = $_SESSION['username'];
-    $rightLinks = (isset($_SESSION['username'])) ? 
-        '<a $active[logout] class="login" href="/logout">Logout</a>
-        <a $active[account] class="login" href="/account">Welcome, $username</a>' : <<<HTML
+    $username = $_SESSION['username'];
+    $loggedIn = <<<HTML
+    <div class='right-align'>
+        <a $active[logout] class="login" href="/logout">Logout</a>
+        <a $active[account] class="login" href="/account">Welcome, $username</a>
+    </div>
+HTML;
+    $notLoggedIn = <<<HTML
+        <div class='right-align'>
             <a $active[signup] class="login" href="/signup">Sign up</a>
             <span>or</span>
             <a $active[login] class="login" href="/login">Login</a>
+        </div>
 HTML;
-    echo $rightLinks;
+    $rightLinks = (isset($username)) ? $loggedIn : $notLoggedIn;
     $links .= $rightLinks;
     echo <<<HTML
-            </div>
             <div class='dropdown'>
                 <input type='checkbox' id='dropdownCheck' />
                 <label for='dropdownCheck'>
