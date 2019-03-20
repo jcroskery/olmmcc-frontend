@@ -86,7 +86,7 @@ function topnav($id){
     $links[] = createLinks('leftFloat', 'calendar', '/calendar', "Calendar", $id);
     $links[] = createLinks('leftFloat', 'faq', '/faq', "FAQ", $id);
     $links[] = createLinks('leftFloat', 'contact', '/contact', "Contact", $id);
-    $links[] = createLinks('leftFloat tradlink', '', 'http://www.olmm.ca', "Visit OLMM's homepage", $id);
+    $links[] = createLinks('leftFloat blue', '', 'http://www.olmm.ca', "Visit OLMM's homepage", $id);
     if(isset($_SESSION['username'])) {
         $links[] = createLinks('rightFloat', '', '/logout', 'Logout', $id);
         $links[] = createLinks('rightFloat', 'account', '/account', 'Welcome, ' . $_SESSION['username'], $id);

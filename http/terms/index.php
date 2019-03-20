@@ -20,7 +20,7 @@ include_once '/srv/http/helpers/wrapper.php';
 wrapperBegin('Terms of Use');
 echo <<<HTML
 <div id='main-text'>
-<h1>Terms and Conditions</h1>
+<h1>Terms of Use</h1>
 
 <h2>1. Terms</h2>
 

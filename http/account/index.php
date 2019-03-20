@@ -41,7 +41,8 @@ echo <<<HTML
             <br><br>
             <span class='leftFloat'>Username: $username</span>
             <form action='/account/username'>
-                <button class='rightFloat' type='submit'>Change Account Username</button>
+                <button class='rightFloat' type='submit'>Save Changes</button>
+                <input name='username' type='text' autocomplete='on' placeholder='Your new username' required='required' value='$username'/>
             </form>
             <br><br>
             <span class='leftFloat'>Subscription policy: $subscriptionName</span>
