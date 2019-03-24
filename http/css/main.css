@@ -15,13 +15,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+
+/*Beginning of font family*/
 body {
-    margin: 0;
-    background: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg') no-repeat center center fixed;
-    background-size: cover;
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
     font-size: 27px;
-    word-wrap: break-word;
 }
 th, td{
     font-family: 'Noto Sans', sans-serif;
@@ -32,25 +30,58 @@ th, td{
 h1, h2, h3, h4, h5, h6, #closeX{
     font-family: 'Arial', 'Helvetica', sans-serif;
 }
-.rightDiv {
-    text-align: right;
+/*End of font family*/
+
+/*Beginning of font size*/
+h1, caption{
+    font-size: 56px;
 }
-.rightFloat {
-    float: right;
+#closeX {
+    font-size: 100px;
+}
+select, button, input[type='submit'], .calendarEventTitle, .bottomSpan {
+    font-size: 20px;
+}
+h3, h4{
+    font-size: 31px;
+}
+h2 {
+    font-size: 40px;
+}
+.database input, .database textarea, .calendarEvent{
+    font-size: 12px;
+}
+input[type="text"], input[type='email'], input[type='password'] {
+    font-size: 23px;
+}
+/*End of font size*/
+
+/*Beginning of align/float classes*/
+.leftFloat {
+    float: left;
 }
 .centerFloat{
     float: center;
 }
-.centerDiv, .mainForm, h1, h4, #notificationDiv, .bottom, #topnav a {
-    text-align: center;
-}
-.leftFloat {
-    float: left;
+.rightFloat {
+    float: right;
 }
 .leftDiv {
     text-align: left;
 }
+.centerDiv {
+    text-align: center;
+}
+.rightDiv {
+    text-align: right;
+}
+/*End of align/float classes*/
 
+/*Beginning of background selector*/
+body {
+    background: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 body.homeClass {
     background-image: url('/images/Choir\ singing\ 2.jpg');
 }
@@ -70,22 +101,15 @@ body.faqClass {
 body.contactClass {
     background-image: url('/images/Violin\ 1.jpg');
 }
+/*End of background selector*/
 
 /*Beginning of topnav*/
 #topnav {
-    top: 0;
-    width: 100%;
-    background-color: #333;
     overflow: hidden;
     position: sticky;
 }
-.dropdownSvg rect{
-    fill: white;
-}
 .dropdownSvg {
-    height: 2em;
     float: right;
-    margin-right: 3px;
     cursor: pointer;
 }
 #topnav > #active, .dropdown label, #dropdownCheck{
@@ -93,11 +117,7 @@ body.contactClass {
 }
 #topnav a {
     text-decoration: none;
-    color: white;
-    padding: 11px;
-}
-#topnav #active {
-    background-color: #4CAF50;
+    text-align: center;
 }
 @media only screen and (max-width: 1034px) {
     .dropdown label{
@@ -111,7 +131,7 @@ body.contactClass {
         background-color: #333;
         right: 0;
         top: 2em;
-        min-width: 160px;
+        width: 250px;
         position: fixed;
     }
     #topnav .dropdown-content a{
@@ -123,219 +143,266 @@ body.contactClass {
     }
     #topnav > #active {
         display: block;
+        float: left;
     }
-}
-#topnav a:hover {
-    background-color: #ddd;
-    color: black;
 }
 /*End of topnav*/
 
-.bottom {
-    background-color: rgba(105, 207, 74, 0.9);
-    width: 86%;
-    padding: 10px 0;
-    margin: auto;
-}
-#main-text, .mainForm{
-    margin: auto;
-    width: 70%;
-    padding: 0 8%;
-    background: rgba(255,255,255,0.7);
-    border: 4px solid royalblue;
-}
-.inline {
-    display: inline;
-}
-select, button, input[type='submit'], .calendarEventTitle, .bottomSpan {
-    font-size: 20px;
-}
-h1, caption{
-    font-size: 56px;
-}
-#closeX {
-    font-size: 100px;
-    font-weight: bold;
-}
-h2 {
-    font-size: 40px;
-    margin-bottom: 0;
-}
-h3, h4{
-    font-size: 31px;
-}
-.database input, .database textarea, .calendarEvent{
-    width: auto;
-    font-size: 12px;
+/*Beginning of margin*/
+body, .database input, .database textarea, .calendarEvent, .calendarEventTitle, h2 {
     margin: 0;
 }
-
+#main-text, .mainForm, .bottom, .calendar, .database {
+    margin: auto;
+}
 input[type="text"], input[type='email'], input[type='password'] {
-    width: auto;
-    padding: 5px 0;
     margin-bottom: 8px;
-    font-size: 23px;
 }
-h3 {
-    color: darkcyan;
-}
-
-.blue {
-    color: blue !important;
-}
-
 .reducedPadding p{
     margin: 11px 0;
 }
-
-.calendar th, .calendar td {
-    border: 2px solid blue;
-    vertical-align: top;
+#closeVideo, #closeNotification {
+    margin-left: -40px;
 }
-.calendar td {
-    height: 50px;
+#closeDetails {
+    margin-left: -32px;
 }
+select {
+    margin: 0 5px;
+}
+#detailsDiv p {
+    margin-left: 10px;
+}
+h4 {
+    margin: 30px 0;
+}
+.dropdownSvg {
+    margin-right: 3px;
+}
+/*End of margin*/
 
+/*Beginning of width/height*/
+.bottom {
+    width: 86%;
+}
+#main-text, .mainForm {
+    width: 70%;
+}
+.database input, .database textarea, .calendarEvent, 
+input[type="text"], input[type='email'], input[type='password'] {
+    width: auto;
+}
 .calendar {
-    table-layout: fixed;
-    background-color: lightgray;
-    margin: 0px auto;
     width: 90%;
-    border-collapse: collapse;
-}
-
-caption {
-    padding: 6px 0;
-}
-
-.calendarButton {
-    border: none;
-    background-color: transparent;
-    padding: 0 1%;
-    position: fixed;
-    top: 42.5%;
-}
-
-#rightbutton {
-    right: 0;
-}
-
-.buttonPolygon {
-    fill: gray;
 }
 .buttonSvg {
     width: 3vw;
     height: 15%;
 }
+.dropdownSvg {
+    height: 2em;
+}
 #graydiv {
-    background-color: rgba(57, 59, 59, 0.9);
-    position: fixed;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
 }
-
 .iframe {
-    top: 10%;
-    left: 10%;
     width: 80%;
     height: 80%;
-    position: fixed;
-    background-color: black;
 }
+#notificationDiv {
+    width: 60%;
+}
+#closeVideo, #closeNotification , #closeDetails {
+    width: 40px;
+}
+#detailsDiv {
+    width: 40%;
+    height: 40%;
+}
+.database textarea {
+    height: 60px;
+}
+.database, .database textarea, #topnav {
+    width: 100%;
+}
+.calendar td {
+    height: 50px;
+}
+/*End of width/height*/
 
-.calendarEvent, .calendarEventTitle {
+/*Beginning of padding*/
+.bottom {
+    padding: 10px 0;
+}
+#main-text, .mainForm {
+    padding: 0 8%;
+}
+input[type="text"], input[type='email'], input[type='password'], caption, .database td, .database th {
+    padding: 5px;
+}
+.calendarEvent, .calendarEventTitle, .calendarButton {
     padding: 0;
-    margin: 0;
 }
-.calendarEventTitle {
-    color: darkcyan;
+.notificationP {
+    padding: 0 33px;
 }
+#topnav a {
+    padding: 11px;
+}
+/*End of padding*/
 
+/*Beginning of absolute positioning*/
+#rightbutton {
+    right: 1%;
+}
+#leftbutton {
+    left: 1%;
+}
 #notificationDiv {
     top: 0;
     left: 20%;
     right: 20%;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 60%;
-    border-radius: 22px;
 }
-#notificationP {
-    padding: 0 33px;
-    color: white;
+#graydiv{
+    left: 0;
 }
-
+.iframe {
+    top: 10%;
+    left: 10%;
+}
 #closeVideo {
     left: 90%;
-    margin-left: -40px;
     top: 10%;
 }
 #closeNotification {
     left: 80%;
-    margin-left: -40px;
-    top: 0;
 }
 #closeDetails {
     left: 70%;
-    margin-left: -32px;
     top: 30%;
+}
+#detailsDiv {
+    top: 30%;
+    left: 30%;
+}
+.calendarButton {
+    top: 42.5%;
+}
+#topnav, #graydiv, #closeNotification{
+    top: 0;
+}
+/*End of absolute positioning*/
+
+/*Beginning of color/border*/
+.bottom {
+    background-color: rgba(105, 207, 74, 0.9);
+}
+#main-text, .mainForm {
+    background: rgba(255,255,255,0.7);
+    border: 4px solid royalblue;
+}
+.blue {
+    color: blue !important;
+}
+.calendar {
+    background-color: lightgray;
+    border-collapse: collapse;
+}
+.calendar th, .calendar td {
+    border: 2px solid blue;
+}
+.buttonPolygon {
+    fill: gray;
+}
+.calendarButton {
+    background-color: transparent;
+    border: none;
+}
+#graydiv {
+    background-color: rgba(57, 59, 59, 0.9);
+}
+.calendarEventTitle {
+    color: darkcyan;
+}
+.iframe {
+    background-color: black;
+}
+#notificationDiv {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 22px;
+}
+.selectedDate {
+    color: green;
+    border: 4px solid green !important;
+}
+.delete{
+    background-color: red;
+}
+.database td, .database th {
+    border: 1px solid blue;
+}
+.database {
+    background-color: gray;
+    border: 1px solid blue;
+    border-collapse: collapse;
+}
+#detailsDiv {
+    background-color: white;
+    border: 4px solid royalblue;
+    border-radius: 18px;
+}
+.dropdownSvg rect{
+    fill: white;
+}
+#topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+#topnav #active {
+    background-color: #4CAF50;
+}
+h3 {
+    color: darkcyan;
+}
+#topnav {
+    background-color: #333;
+}
+#topnav a, #notificationP{
+    color: white;
+}
+/*End of color/border*/
+
+/*Beginning of other font details*/
+#closeX, .bold {
+    font-weight: bold;
+}
+/*End of other font details*/
+
+body {
+    word-wrap: break-word;
+}
+.bottom, .mainForm, #notificationDiv, h1, h4 {
+    text-align: center;
+}
+.inline {
+    display: inline;
+}
+
+.calendar th, .calendar td {
+    vertical-align: top;
+}
+.calendar {
+    table-layout: fixed;
+}
+.calendarButton, #graydiv, .iframe, #notificationDiv, #detailsDiv {
+    position: fixed;
 }
 #closeVideo, #closeNotification , #closeDetails{
     position: fixed;
     cursor: pointer;
     z-index: 3;
-    width: 40px;
-}
-select {
-    margin: 0 5px;
-}
-.selectedDate {
-    color: green;
-    border-width: 4px !important;
-    border-color: green !important;
-}
-#detailsDiv {
-    position: fixed;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 40%;
-    background-color: white;
-    border: 4px solid royalblue;
-    border-radius: 18px;
-}
-
-h4 {
-    margin: 30px 0;
-}
-
-#detailsDiv p{
-    margin-left: 10px;
 }
 pre {
     white-space: pre-wrap;
-}
-.database textarea {
-    width: 100%;
-    height: 60px;
-    display: table-cell;
-}
-.database td, .database th {
-    border: 1px solid blue;
-    padding: 5px;
-}
-.database {
-    width: 100%;
-    margin: auto;
-    background-color: gray;
-    border: 1px solid blue;
-    border-collapse: collapse;
-}
-.delete{
-    background-color: red;
-}
-.bold {
-    font-weight: bold;
 }
