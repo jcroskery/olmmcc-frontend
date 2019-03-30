@@ -16,18 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-require_once '/srv/http/api/email/queueEmail.php';
-include_once '/srv/http/api/session/sessionStart.php';
-$verificationid;
-if ($_SESSION['verificationid'] == '') {
-    $verificationid = hash('sha512', $_SESSION['id'] . bin2hex(random_bytes(20)));
-    $_SESSION['verificationid'] = $verificationid;
-} else {
-    $verificationid = $_SESSION['verificationid'];
+require_once '/srv/http/api/database/accessTable.php';
+function queueEmail($subject, $message, $username, $email)
+{
+    $messageWithAppend = $message . '<p>(This message was automatically sent by the OLMMCC website. If this message was received in error please notify justus@olmmcc.tk immediately.)</p>';
+    createRow('outgoing', ['subject', 'message', 'name', 'email', 'send_after'], [$subject, $messageWithAppend, $username, $email, time()]);
 }
-
-$subject = "Verify your account";
-$link = "http://" . $_SERVER['HTTP_HOST'] . "/account/verify/verify.php?verification=3D" . $verificationid;
-$message = "<p>Hi,</p>Here is your verification link: " . $link;
-queueEmail($subject, $message, $_SESSION['notVerifiedUsername'], $_SESSION['notVerifiedEmail']);
-header('location: /account/verify/');
