@@ -23,7 +23,7 @@ echo <<<HTML
 <form method="post" action="signup.php" class='mainForm'>
         <h1>Sign Up</h1>
 
-        <div class='rightDiv'>
+        <div class='centerDiv'>
                 <label for='email'>Email: </label>
                 <input type="email" id='email' name="email" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
 
