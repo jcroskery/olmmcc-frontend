@@ -77,7 +77,7 @@ function changeIp($name)
 		print_r($response);
     }
 }
-$domains = ['olmmcc.tk', 'www.olmmcc.tk', 'mail.olmmcc.tk'];
+$domains = ['olmmcc.tk', 'www.olmmcc.tk'];
 foreach($domains as $domain){
 	changeIp($domain);
 }
