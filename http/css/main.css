@@ -377,20 +377,22 @@ h3 {
 #closeX, .bold {
     font-weight: bold;
 }
-/*End of other font details*/
-
 body {
     word-wrap: break-word;
 }
+/*End of other font details*/
+
+/*Beginning of other aligns*/
 .bottom, .mainForm, #notificationDiv, h1, h4 {
     text-align: center;
 }
-.inline {
-    display: inline;
-}
-
 .calendar th, .calendar td {
     vertical-align: top;
+}
+/*End of other aligns*/
+/*Beginning of other random stuff*/
+.inline {
+    display: inline;
 }
 .calendar {
     table-layout: fixed;
@@ -401,8 +403,8 @@ body {
 #closeVideo, #closeNotification , #closeDetails{
     position: fixed;
     cursor: pointer;
-    z-index: 3;
 }
 pre {
     white-space: pre-wrap;
 }
+/*End of other random stuff*/
