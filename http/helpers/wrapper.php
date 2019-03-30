@@ -123,7 +123,7 @@ HTML;
 function bottom(){
     echo <<<HTML
     <div class="bottom">
-        <span class='bottomSpan'>&copy; Justus Croskery. <a href='/terms'>Terms of Use</a> <a href='/privacy/'>Privacy Policy</a></span>
+        <span class='smallSpan'>&copy; Justus Croskery. <a href='/terms'>Terms of Use</a> <a href='/privacy/'>Privacy Policy</a></span>
     </div>
 
 HTML;

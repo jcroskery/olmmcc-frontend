@@ -22,20 +22,16 @@ echo <<<HTML
 <form method="post" action="login.php" class='mainForm'>
         <h1>Login</h1>
         <div class='centerDiv'>
-                <label class='leftDiv' for='email'>Email: </label>
+                <label for='email'>Email: </label>
                 <input type="email" id = 'email' name="email" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
-        </div>
                 <br>
-
                 <label for='password'>Password: </label>
                 <input type="password" id='password' name="password" autocomplete="off" placeholder="Your password"required="required"/>
+        </div>
         <br>
-
         <input type="submit" value="Login" class="submit" />
-
         <br>
-
-        <span><a href='/account/password/'>Forgot your password?</a></span>
+        <span class='smallSpan'><a href='/account/password/'>Forgot your password?</a></span>
 </form>
 HTML;
 wrapperEnd();

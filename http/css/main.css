@@ -39,7 +39,7 @@ h1, caption{
 #closeX {
     font-size: 100px;
 }
-select, button, input[type='submit'], .calendarEventTitle, .bottomSpan {
+select, button, input[type='submit'], .calendarEventTitle, .smallSpan {
     font-size: 20px;
 }
 h3, h4{
@@ -119,7 +119,7 @@ body.contactClass {
     text-decoration: none;
     text-align: center;
 }
-@media only screen and (max-width: 1034px) {
+@media only screen and (max-width: 1199px) {
     .dropdown label{
         display: block;
     }
@@ -188,9 +188,12 @@ h4 {
 #main-text, .mainForm {
     width: 70%;
 }
-.database input, .database textarea, .calendarEvent, 
-input[type="text"], input[type='email'], input[type='password'] {
+input[type="text"], input[type='email'], input[type='password'], .calendarEvent{
     width: auto;
+}
+.database input, .database textarea {
+    width: 100%;
+    box-sizing: border-box;
 }
 .calendar {
     width: 90%;
@@ -238,7 +241,7 @@ input[type="text"], input[type='email'], input[type='password'] {
 #main-text, .mainForm {
     padding: 0 8%;
 }
-input[type="text"], input[type='email'], input[type='password'], caption, .database td, .database th {
+input[type="text"], input[type='email'], input[type='password'], caption {
     padding: 5px;
 }
 .calendarEvent, .calendarEventTitle, .calendarButton {
