@@ -17,25 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
-function createMainArticle($location)
-{
-    $file = fopen($location, 'w');
-    $json = <<<JSON
-{
-    "title" : "",
-    "text" : "",
-    "topnavId" : ""
-}
-JSON;
-    fwrite($file, $json);
-    fclose($file);
-}
-
-function displayMainArticle($filepath) {
-    $json = file_get_contents($filepath);
-    $article = json_decode($json, true);
-    $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1>' . $article['text'] . '</div>';
-    wrapperBegin($article['title'], $article['topnavId']);
+require_once '/srv/http/api/database/accessTable.php';
+function displayPage($topnavId) {
+    $article = getRow('pages', 'topnav_id', $topnavId);
+    $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1><p>' . $article['text'] . '</p></div>';
+    wrapperBegin($article['title'], $article['topnav_id']);
     echo $text;
     wrapperEnd();
 }

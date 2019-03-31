@@ -23,24 +23,23 @@ require_once '/srv/http/helpers/displayMessage.php';
 $email = strtolower(sanitizeString($_POST['email']));
 $password = sanitizeString($_POST['password']);
 $row = getAccountFromEmail($email);
-if (password_verify($password, $row[2])) {
+if (password_verify($password, $row['password'])) {
     session_unset();
-    $_SESSION['id'] = $row[3];
-    $_SESSION['verified'] = $row[4];
-    $_SESSION['invalid_email'] = $row[7];
-    if ($row[4]) {
-        $_SESSION['email'] = $row[0];
-        $_SESSION['username'] = $row[1];
-        $_SESSION['admin'] = $row[5];
-        $_SESSION['subscription_policy'] = $row[6];
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['verified'] = $row['verified'];
+    $_SESSION['invalid_email'] = $row['invalid_email'];
+    if ($row['verified']) {
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['admin'] = $row['admin'];
+        $_SESSION['subscription_policy'] = $row['subscription_policy'];
         $message = 'Successfully logged in!';
         displayPopupNotification($message, '/');
     } else {
-        $_SESSION['notVerifiedEmail'] = $row[0];
-        $_SESSION['notVerifiedUsername'] = $row[1];
+        $_SESSION['notVerifiedEmail'] = $row['email'];
+        $_SESSION['notVerifiedUsername'] = $row['username'];
         header('location: /account/verify/email.php');
     }
-
 } else {
     $message = "Wrong email or password, please try again.";
     displayPopupNotification($message, '/login/');

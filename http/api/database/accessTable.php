@@ -49,7 +49,7 @@ function getRow($table, $columnName, $columnValue)
     $stmt->bind_param("s", $columnValue);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_array(MYSQLI_NUM);
+    return $result->fetch_array(MYSQLI_ASSOC);
 }
 function getAllRows($table)
 {
