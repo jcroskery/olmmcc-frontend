@@ -64,12 +64,12 @@ function refreshAccount()
 {
     include_once '/srv/http/api/session/sessionStart.php';
     $row = getAccountFromId($_SESSION['id']);
-    $_SESSION['email'] = $row[0];
-    $_SESSION['username'] = $row[1];
-    $_SESSION['verified'] = $row[4];
-    $_SESSION['admin'] = $row[5];
-    $_SESSION['subscription_policy'] = $row[6];
-    $_SESSION['invalid_email'] = $row[7];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['verified'] = $row['verified'];
+    $_SESSION['admin'] = $row['admin'];
+    $_SESSION['subscription_policy'] = $row['subscription_policy'];
+    $_SESSION['invalid_email'] = $row['invalid_email'];
 }
 function getSubscriptionPolicyName($subscriptionPolicy)
 {

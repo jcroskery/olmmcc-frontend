@@ -16,5 +16,5 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/mainArticle.php';
-displayMainArticle('/srv/http/articles/main/faq.json');
+include_once '/srv/http/api/pages/displayPage.php';
+displayPage('faq');
