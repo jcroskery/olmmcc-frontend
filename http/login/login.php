@@ -19,9 +19,9 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 include_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/http/api/account/accountFunctions.php';
 require_once '/srv/http/helpers/displayMessage.php';
-
-$email = strtolower(sanitizeString($_POST['email']));
-$password = sanitizeString($_POST['password']);
+sanitizePost($_POST);
+$email = strtolower($_POST['email']);
+$password = $_POST['password'];
 $row = getAccountFromEmail($email);
 if (password_verify($password, $row['password'])) {
     session_unset();
