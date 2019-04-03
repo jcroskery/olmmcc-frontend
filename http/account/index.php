@@ -35,16 +35,16 @@ echo <<<HTML
         <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
             <span class='leftFloat'>Email: $email</span>
-            <form action='/account/email'>
+            <form action='/account/email' method='post'>
                 <button class='rightFloat' type='submit'>Change Account Email</button>
             </form>
             <br><br>
-            <span class='leftFloat'>Username: $username</span>
-            <form action='/account/username'>
+            <span class='leftFloat'>Username: </span>
+            <form action='/account/username/' method='post'>
                 <button class='rightFloat' type='submit'>Save Changes</button>
                 <input name='username' type='text' autocomplete='on' placeholder='Your new username' required='required' value='$username'/>
             </form>
-            <br><br>
+            <br>
             <span class='leftFloat'>Subscription policy: $subscriptionName</span>
             <form action="/account/subscription/" method='post'>
                 <input class='rightFloat' type='submit' value='Save Changes'/>

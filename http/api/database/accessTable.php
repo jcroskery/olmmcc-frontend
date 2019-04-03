@@ -16,10 +16,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-require_once '/srv/logincreds.php';
+include_once '/etc/httpd/privateVars.php';
+$connection = new mysqli($hn, $un, $pw, $db);
+if ($connection->connect_error) {
+    die("Connection error");
+}
+function sanitizePost($post){
+    foreach($post as $postvar){
+        $postvar = stripslashes($postvar);
+        $postvar = strip_tags($postvar, '<p>');
+        $postvar = htmlentities($postvar);
+    }
+}
 function deleteRow($table, $id)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("delete from " . $table . "  where id = ?");
     $stmt->bind_param("i", $id);
@@ -28,7 +38,6 @@ function deleteRow($table, $id)
 }
 function createRow($table, $namesArray, $valuesArray)
 {
-    $table = sanitizeString($table);
     global $connection;
     $names = '';
     $questionMarks = str_repeat('?,', sizeof($namesArray) - 1) . "?";
@@ -43,7 +52,6 @@ function createRow($table, $namesArray, $valuesArray)
 }
 function getRow($table, $columnName, $columnValue)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM " . $table . " WHERE " . $columnName . "= ?");
     $stmt->bind_param("s", $columnValue);
@@ -53,7 +61,6 @@ function getRow($table, $columnName, $columnValue)
 }
 function getAllRows($table)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT * FROM " . $table . " order by id");
     $stmt->execute();
@@ -62,7 +69,6 @@ function getAllRows($table)
 }
 function getMaxId($table)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT MAX(id) FROM " . $table);
     $stmt->execute();
@@ -71,7 +77,6 @@ function getMaxId($table)
 }
 function getMinId($table)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SELECT MIN(id) FROM " . $table);
     $stmt->execute();
@@ -81,7 +86,6 @@ function getMinId($table)
 
 function changeRow($table, $id, $columnName, $newValue)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("UPDATE " . $table . " set " . $columnName . " = ? where id = ?");
     $stmt->bind_param("ss", $newValue, $id);
@@ -90,7 +94,6 @@ function changeRow($table, $id, $columnName, $newValue)
 }
 function getAllColumns($table)
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("SHOW columns FROM " . $table);
     $stmt->execute();
@@ -99,7 +102,6 @@ function getAllColumns($table)
 }
 function getTables()
 {
-    $table = sanitizeString($table);
     global $connection;
     $stmt = $connection->prepare("show tables");
     $stmt->execute();

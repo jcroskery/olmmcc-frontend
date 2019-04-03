@@ -15,19 +15,30 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
-include_once '/srv/http/helpers/wrapper.php';
-if(wrapperBegin('Change Username', '', true)){
-echo <<<HTML
-<form method='post' action="/account/username/changeUsername.php" class='mainForm'>
-    <h1>Change Your Username</h1>
-    <pre class='pre'>
-    Enter your new username: <input name='newUsername' type='text' autofocus='true' autocomplete='on' placeholder='Your new username' required='required'/></pre>
-    <pre class='pre-center'>
-    <input class='submit' type="submit" value="Change Username"/></pre>
-</form>
-HTML;
-wrapperEnd();
+ */
+include_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/database/accessTable.php';
+require_once '/srv/http/helpers/wrapper.php';
+if (loggedIn()) {
+    sanitizePost($_POST); 
+    if ($_POST['username'] != '') {
+        if (getRow('users', 'username', $_POST['username'])) {
+            if ($_POST['username'] == $_SESSION['username']) {
+                $message = "This username is already registered to your account.";
+                displayPopupNotification($message, '/account/');
+            } else {
+                $message = "Sorry, this username has already been taken. Please select another.";
+                displayPopupNotification($message, '/account/');
+            }
+        } else {
+            changeRow('users', $_SESSION['id'], 'username', $_POST['username']);
+            $message = 'Sucessfully updated username!';
+            displayPopupNotification($message, '/account/');
+        }
+    } else {
+        $message = 'An error occurred, please try again.';
+        displayPopupNotification($message, '/account/');
+    }
 } else {
     notLoggedIn();
 }

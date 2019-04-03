@@ -17,16 +17,17 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/etc/httpd/privateVars.php';
+$connection = new mysqli($hn, $un, $pw, $db);
+if ($connection->connect_error) {
+    die("Connection error");
+}
 function sanitizeString($var)
 {
     if (get_magic_quotes_gpc) {
         $var = stripslashes($var);
     }
-    $var = strip_tags($var);
+    $var = strip_tags($var, '<p>');
     $var = htmlentities($var);
     return $var;
 }
-$connection = new mysqli($hn, $un, $pw, $db);
-if ($connection->connect_error) {
-    die("Connection error");
-}
+
