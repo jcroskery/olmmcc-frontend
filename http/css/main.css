@@ -244,8 +244,8 @@ input[type="text"], input[type='email'], input[type='password'], caption {
 .calendarEvent, .calendarEventTitle, .calendarButton {
     padding: 0;
 }
-.notificationP {
-    padding: 0 33px;
+#notificationP {
+    padding: 0 40px;
 }
 #topnav a {
     padding: 11px;
