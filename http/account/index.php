@@ -34,23 +34,24 @@ $disabled = $_SESSION['admin'] ? '' : "disabled='disabled'";
 echo <<<HTML
         <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
-            <span class='leftFloat'>Email: $email</span>
-            <form action='/account/email' method='post'>
-                <button class='rightFloat' type='submit'>Change Account Email</button>
+            <form action='/account/email/' method='post'>
+                <label class='leftFloat' for='email'>Email: </label>
+                <input class='leftFloat' id='email' name='email' type='email' autocomplete='on' placeholder='Your new email address' required='required' value='$email'/>
+                <button class='rightFloat' type='submit'>Change Email</button>
             </form>
             <br><br>
-            <span class='leftFloat'>Username: </span>
             <form action='/account/username/' method='post'>
-                <button class='rightFloat' type='submit'>Save Changes</button>
-                <input name='username' type='text' autocomplete='on' placeholder='Your new username' required='required' value='$username'/>
+                <label class='leftFloat' for='username'>Username: </label>
+                <input name='username' class='leftFloat' id='username' type='text' autocomplete='on' placeholder='Your new username' required='required' value='$username'/>
+                <button class='rightFloat' type='submit'>Change Username</button>
             </form>
-            <br>
-            <span class='leftFloat'>Subscription policy: $subscriptionName</span>
+            <br><br>
             <form action="/account/subscription/" method='post'>
-                <input class='rightFloat' type='submit' value='Save Changes'/>
-                <select class='rightFloat' name='subscriptionPolicy'>
+                <label class='leftFloat' for='subscription'>Subscription policy: </label>
+                <select class='leftFloat' id='subscription' name='subscriptionPolicy'>
                     $subscriptionOptions
                 </select>
+                <input class='rightFloat' type='submit' value='Change Subscription'/>
             </form>
             <br><br>
             <span class='leftFloat'>Account type: $accountLevel</span>

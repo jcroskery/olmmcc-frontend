@@ -32,8 +32,26 @@ if ($_SESSION['id'] != '') {
             }
         }
         if($_SESSION['invalid_email'] == 1){
-            $message = 'Your email address is invalid. Please enter a new one and try again.';
+            /*
+} else if ($_SESSION['invalid_email'] == 1) {
+    $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);
+    $result = getAccountFromEmail($_SESSION['newEmail']);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_NUM);
+        if ($_SESSION['notVerifiedEmail'] == $_SESSION['newEmail']) {
+            $message = "This email address is already registered to this account.";
+            displayPopupNotification($message, '/account/email/');
+        } else {
+            $message = "Sorry, your email address has already been registered. Please use a different one.";
             displayPopupNotification($message, '/account/email');
+        }
+
+    } else {
+        $_SESSION['changeEmailVerificationId'] = 0;
+        refreshAccount();
+        header('location: /account/email/changeEmail.php?changeEmailVerificationId=' . $_SESSION['changeEmailVerificationId']);
+    }
+            */
         } else {
             $message = 'Your account has not been verified yet. An email containing the verification link has been sent to ' . $_SESSION['notVerifiedEmail'] . '. Please note that it may take a few minutes for the email to be sent.';
             displayMessage($message, '/account/verify/email.php', 'Verify your account', 'Resend Verification Email');
