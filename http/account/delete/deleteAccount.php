@@ -18,14 +18,14 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 
 include_once '/srv/http/helpers/displayMessage.php';
-include_once '/srv/http/api/account/accountFunctions.php';
+include_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['deleteCode']) == $_GET['deleteCode']){
-    deleteAccount($_SESSION['id']);
+    deleteRow('users', $_SESSION['id']);
     session_unset();
     $message = "Your account has been successfully deleted. Sorry to see you go!";
     displayPopupNotification($message, '/');
 } else {
-    $message = "An error occurred. Please try to login again or contact the webmaster.";
-    displayPopupNotification($message, '/login/');
+    $message = "An error occurred.";
+    displayPopupNotification($message, '/account/');
 }

@@ -18,24 +18,27 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/api/session/sessionStart.php';
+require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/account/accountFunctions.php';
 refreshAccount();
 header("Refresh: 15;url='/account/verify/'");
 if ($_SESSION['id'] != '') {
     if (!$_SESSION['verified']) {
+        /*
         $files = scandir('/srv/http/json/incoming/');
         foreach ($files as $file) {
             if ($file == 'Email does not exist' . $_SESSION['notVerifiedEmail'] . '.json') {
-                setInvalidEmail($_SESSION['id']);
+                changeRow('users', $_SESSION['id'], 'invalid_email', 1);
                 unlink('/srv/http/json/incoming/' . $file);
                 $_SESSION['invalid_email'] = '1';
             }
         }
+        */
         if($_SESSION['invalid_email'] == 1){
             /*
 } else if ($_SESSION['invalid_email'] == 1) {
     $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);
-    $result = getAccountFromEmail($_SESSION['newEmail']);
+    $result = Get Account From Email ($_SESSION['newEmail']);
     if ($result->num_rows > 0) {
         $row = $result->fetch_array(MYSQLI_NUM);
         if ($_SESSION['notVerifiedEmail'] == $_SESSION['newEmail']) {

@@ -17,10 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
-require_once '/srv/http/api/account/accountFunctions.php';
+require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['verificationid']) == $_GET['verification']){
-    verifyAccount($_SESSION['id']);
+    changeRow('users', $_SESSION['id'], 'verified', 1);
     $message = "Your account was successfully verified! Please login to your newly verified account.";
     displayPopupNotification($message, '/login/');
 } else {

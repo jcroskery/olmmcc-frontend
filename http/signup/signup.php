@@ -17,13 +17,14 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 require_once '/srv/http/api/account/validationFunctions.php';
-require_once '/srv/http/api/account/accountFunctions.php';
+require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/http/helpers/displayMessage.php';
-$email = strtolower(sanitizeString($_POST['email']));
-$username = sanitizeString($_POST['username']);
-$password1 = sanitizeString($_POST['password1']);
-$password2 = sanitizeString($_POST['password2']);
+sanitizePost($_POST);
+$email = strtolower($_POST['email']);
+$username = $_POST['username'];
+$password1 = $_POST['password1'];
+$password2 = $_POST['password2'];
 $emailValid = checkEmail($email);
 $usernameValid = checkUsername($username);
 $passwordValid = checkPassword($password1);
@@ -40,6 +41,6 @@ if ($emailValid!==true) {
 if ($usernameValid !== true) {
     return displayPopupNotification($usernameValid, '/signup/');
 }
-createAccount($email, $username, password_hash($password1, PASSWORD_DEFAULT));
+createRow('users', ['email', 'username', 'password', 'verified', 'admin', 'subscription_policy', 'invalid_email'], [$email, $username, password_hash($password1, PASSWORD_DEFAULT), 0, 0, 1, 0]);
 session_unset();
 displayPopupNotification("Your account was sucessfully created! Please login to your new account.", '/login/');

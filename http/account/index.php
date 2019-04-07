@@ -15,23 +15,23 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
+ */
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/account/accountFunctions.php';
 refreshAccount();
-if(wrapperBegin('Your Account', 'account', true)) {
-$email = $_SESSION['email'];
-$username = $_SESSION['username'];
-$subscriptionName = getSubscriptionPolicyName($_SESSION['subscription_policy']);
-$subscriptionOptions = '<option disabled selected>' . $subscriptionName . '</option>';
-for($i = 0; $i < 3; $i++){
-    if($i != $_SESSION['subscription_policy']) {
-        $subscriptionOptions .= "<option value='$i'>" . getSubscriptionPolicyName($i) . "</option>";
+if (wrapperBegin('Your Account', 'account', true)) {
+    $email = $_SESSION['email'];
+    $username = $_SESSION['username'];
+    $subscriptionName = getSubscriptionPolicyName($_SESSION['subscription_policy']);
+    $subscriptionOptions = '<option disabled selected>' . $subscriptionName . '</option>';
+    for ($i = 0; $i < 3; $i++) {
+        if ($i != $_SESSION['subscription_policy']) {
+            $subscriptionOptions .= "<option value='$i'>" . getSubscriptionPolicyName($i) . "</option>";
+        }
     }
-}
-$accountLevel = $_SESSION['admin'] ? 'Admin' : 'Member'; 
-$disabled = $_SESSION['admin'] ? '' : "disabled='disabled'";
-echo <<<HTML
+    $accountLevel = $_SESSION['admin'] ? 'Admin' : 'Member';
+    $disabled = $_SESSION['admin'] ? '' : "disabled='disabled'";
+    echo <<<HTML
         <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
             <form action='/account/email/' method='post'>
@@ -64,7 +64,7 @@ echo <<<HTML
         </div>
 
 HTML;
-wrapperEnd();
+    wrapperEnd();
 } else {
     notLoggedIn();
 }

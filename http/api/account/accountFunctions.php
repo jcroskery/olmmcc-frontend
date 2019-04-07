@@ -17,53 +17,9 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-function deleteAccount($id)
-{
-    deleteRow('users', $id);
-}
-function createAccount($email, $username, $password)
-{
-    createRow('users', ['email', 'username', 'password', 'verified', 'admin', 'subscription_policy', 'invalid_email'], [$name, $link, $notes, 0, 0, 1, 0]);
-}
-function verifyAccount($id)
-{
-    changeRow('users', $id, 'verified', 1);
-}
-function changeEmail($newEmail, $id)
-{
-    changeRow('users', $id, 'email', $newEmail);
-}
-function unVerifyAccount($id)
-{
-    changeRow('users', $id, 'verified', 0);
-}
-function getAccountFromEmail($email)
-{
-    return getRow('users', 'email', $email);
-}
-function getAccountFromUsername($username)
-{
-    return getRow('users', 'username', $username);
-}
-function getAccountFromId($id)
-{
-    return getRow('users', 'id', $id);
-}
-function setNotInvalidEmail($id)
-{
-    changeRow('users', $id, 'invalid_email', 0);
-}
-function setInvalidEmail($id)
-{
-    changeRow('users', $id, 'invalid_email', 1);
-}
-function updateSubscription($id, $subscriptionPolicy){
-    changeRow('users', $id, 'subscription_policy', $subscriptionPolicy);
-}
 function refreshAccount()
 {
-    include_once '/srv/http/api/session/sessionStart.php';
-    $row = getAccountFromId($_SESSION['id']);
+    $row = getRow('users', 'id', $_SESSION['id']);
     $_SESSION['email'] = $row['email'];
     $_SESSION['username'] = $row['username'];
     $_SESSION['verified'] = $row['verified'];

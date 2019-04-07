@@ -21,7 +21,7 @@ require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
 if(htmlspecialchars($_SESSION['changeEmailVerificationId']) == $_GET['changeEmailVerificationId']){
     changeRow('users', $_SESSION['id'], 'email', $_SESSION['newEmail']);
-    //setNotInvalidEmail($_SESSION['id']);
+    //Set email not invalid
     changeRow('users', $_SESSION['id'], 'verified', 0);
     session_unset();
     $message = "Your email was successfully changed. Please login to your account and verify it.";
