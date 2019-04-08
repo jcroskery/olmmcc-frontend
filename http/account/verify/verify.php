@@ -24,6 +24,6 @@ if(htmlspecialchars($_SESSION['verificationid']) == $_GET['verification']){
     $message = "Your account was successfully verified! Please login to your newly verified account.";
     displayPopupNotification($message, '/login/');
 } else {
-    $message = "An error occurred. Please try to login again or contact the webmaster.";
+    $message = "An error occurred.";
     displayPopupNotification($message, '/login/');
 }

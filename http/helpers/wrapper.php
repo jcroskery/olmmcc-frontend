@@ -65,7 +65,7 @@ function loggedIn(){
     return $_SESSION['verified'];
 }
 function notLoggedIn(){
-    if($_SESSION['id']){
+    if($_SESSION['verified']){
         $message = "Please log in to an administrator account to view this page.";
         displayPopupNotification($message, '/login/');
     } else {
@@ -87,7 +87,7 @@ function topnav($id){
     $links[] = createLinks('leftFloat', 'faq', '/faq', "FAQ", $id);
     $links[] = createLinks('leftFloat', 'contact', '/contact', "Contact", $id);
     $links[] = createLinks('leftFloat blue', '', 'http://www.olmm.ca', "Visit OLMM's homepage", $id);
-    if(isset($_SESSION['username'])) {
+    if($_SESSION['verified']) {
         $links[] = createLinks('rightFloat', '', '/logout', 'Logout', $id);
         $links[] = createLinks('rightFloat', 'account', '/account', 'Welcome, ' . $_SESSION['username'], $id);
     } else {
