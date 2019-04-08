@@ -15,7 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
+ */
 include_once '../helpers/wrapper.php';
 wrapperBegin('Sign Up', 'signup');
 echo <<<HTML
@@ -46,7 +46,7 @@ echo <<<HTML
                 <input type="password" id='password2' name="password2" autocomplete="off" placeholder="Repeat your password"required="required"/>
         </div>
         <br>
-        <label for='licenseCheckbox'>Please review the <a target="_blank" href="/terms">Terms of Use</a> and the <a target='_blank' href='/license'>Privacy Policy</a>: I accept</label>
+        <label for='licenseCheckbox'>Please review the <a target="_blank" href="/terms">Terms of Use</a> and the <a target='_blank' href='/privacy'>Privacy Policy</a>: I accept</label>
         <input id='licenseCheckbox' type="checkbox" required="true"/>
 
         <br>
