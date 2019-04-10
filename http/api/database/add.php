@@ -27,7 +27,7 @@ if ($_SESSION['admin']) {
     foreach ($columns as $column) {
         $columnName = $column['Field'];
         if ($column['Key'] != 'PRI') {
-            $contents[] = sanitizeString($_POST[$columnName]);
+            $contents[] = $_POST[$columnName];
             $names[] = $columnName;
         }
     }

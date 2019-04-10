@@ -23,7 +23,7 @@ if ($_SESSION['admin']) {
     $table = array_key_last($_POST);
     foreach ($_POST as $key => $value) {
         if ($key != $table) {
-            $message .= changeRow($table, sanitizeString($_POST[$table]), $key, $value);
+            $message .= changeRow($table, $_POST[$table], $key, $value);
         }
     }
     displayPopupNotification($message != '' ? $message : 'Sucessfully updated!', '/admin/' . $table);

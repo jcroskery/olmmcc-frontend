@@ -20,7 +20,6 @@ require_once '/srv/http/api/account/validationFunctions.php';
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/http/helpers/displayMessage.php';
-sanitizePost($_POST);
 $email = strtolower($_POST['email']);
 $username = $_POST['username'];
 $password1 = $_POST['password1'];

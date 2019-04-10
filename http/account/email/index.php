@@ -21,7 +21,6 @@ require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/api/email/queueEmail.php';
 require_once '/srv/http/helpers/wrapper.php';
 if (loggedIn()) {
-    sanitizePost($_POST);
     $_SESSION['newEmail'] = $_POST['newEmail'];
     if (getRow('users', 'email', $_SESSION['newEmail'])) {
         if ($_SESSION['email'] == $_SESSION['newEmail']) {

@@ -20,7 +20,6 @@ include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/wrapper.php';
 if (loggedIn()) {
-    sanitizePost($_POST);
     if ($_POST['username'] != '') {
         if (getRow('users', 'username', $_POST['username'])) {
             if ($_POST['username'] == $_SESSION['username']) {

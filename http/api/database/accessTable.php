@@ -21,12 +21,9 @@ $connection = new mysqli($hn, $un, $pw, $db);
 if ($connection->connect_error) {
     die("Connection error");
 }
-function sanitizePost(&$post){
-    foreach($post as &$postVar){
-        $postVar = stripslashes($postVar);
-        $postVar = strip_tags($postVar, '<p>');
-        $postVar = htmlentities($postVar);
-    }
+foreach ($_POST as &$postVar) {
+    $postVar = stripslashes($postVar);
+    $postVar = htmlentities($postVar);
 }
 function deleteRow($table, $id)
 {

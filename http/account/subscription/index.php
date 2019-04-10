@@ -21,7 +21,6 @@ include_once '/srv/http/api/database/accessTable.php';
 include_once '/srv/http/helpers/displayMessage.php';
 $subscriptionOptions = ['You are now unsubscribed from receiving emails.', 'You are now subscribed to receive emails.', 'You are now subscribed to receive emails and reminders.'];
 if (loggedIn()) {
-    sanitizePost($_POST);
     $subscription_policy = $_POST['subscriptionPolicy'];
     if ($subscription_policy > -1 && $subscription_policy < 3) {
         changeRow('users', $_SESSION['id'], 'subscription_policy', $subscription_policy);
