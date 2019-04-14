@@ -21,7 +21,7 @@ require_once '/srv/http/api/database/accessTable.php';
 function displayPage($topnavId) {
     $article = getRow('pages', 'topnav_id', $topnavId);
     $articleText = html_entity_decode($article['text']);
-    $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1><p>' . $articleText . '</p></div>';
+    $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1>' . $articleText . '</div>';
     wrapperBegin($article['title'], $article['topnav_id']);
     echo $text;
     wrapperEnd();
