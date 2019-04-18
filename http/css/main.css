@@ -387,17 +387,19 @@ body {
 .calendar {
     table-layout: fixed;
 }
-.calendarButton, #graydiv {
+.calendarButton, #graydiv, .iframe, #notificationDiv, #closeVideo, #closeNotification {
     position: fixed;
 }
 #closeVideo, #closeNotification, #closeDetails {
-    position: absolute;
     cursor: pointer;
+}
+#closeDetails {
+    position: absolute; 
 }
 pre {
     white-space: pre-wrap;
 }
-#detailsDiv, .iframe, #notificationDiv {
+#detailsDiv {
     position: relative;
 }
 #graydiv {
