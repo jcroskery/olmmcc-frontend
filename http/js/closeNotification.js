@@ -26,16 +26,5 @@ function keydown(event) {
         closeNotification();
     }
 }
-message = decodeURIComponent(document.cookie.substring(13).split('+').join(' '));
 document.onkeydown = keydown;
-let notificationDiv = document.createElement('div');
-notificationDiv.id = 'notificationDiv';
-notificationDiv.innerHTML = '<p id="notificationP">' + message + '</p>';
-document.getElementById('myPage').appendChild(notificationDiv);
-let close = "<svg id='closeNotification' viewBox='0, 0, 100, 100'>";
-close += "<circle cx=50 cy=50 r=50 fill=black />";
-close += "<text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>";
-close += "</svg>";
-document.getElementById("notificationDiv").innerHTML += close;
 document.getElementById('closeNotification').onclick = closeNotification;
-document.cookie = document.cookie = "Notification=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";

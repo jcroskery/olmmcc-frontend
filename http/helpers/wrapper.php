@@ -36,7 +36,7 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
         <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
         <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
         <meta name="description" content="Official site of the OLMM Children's Choir (OLMMCC).">
-        <meta name="keywords" content="olmm, olmmcc, choir, russell, tk, childrens, $pageId">
+        <meta name="keywords" content="olmmcc, choir, russell, childrens, $pageId">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -51,8 +51,19 @@ function wrapperEnd($otherScripts = '', $bottom = true)
     if($bottom){
         bottom();
     }
-    if($_COOKIE['Notification'] != ''){
-        $otherScripts .= '<script src="/js/notification.js"></script>';
+    $notificationText = $_SESSION['notification'];
+    if($notificationText != ''){
+        echo <<<HTML
+        <div id='notificationDiv'>
+            <p id='notificationP'>$notificationText</p>
+            <svg id='closeNotification' viewBox='0, 0, 100, 100'>
+                <circle cx=50 cy=50 r=50 fill=black />
+                <text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>
+            </svg>
+        </div>
+HTML;
+        $otherScripts .= '<script src="/js/closeNotification.js"></script>';
+        $_SESSION['notification'] = '';
     }
     echo <<<HTML
         </div>

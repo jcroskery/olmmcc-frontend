@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+/*
 include_once '/srv/http/helpers/wrapper.php';
 function displayMessage($errortext, $link, $error = 'true', $buttons = 'OK'){
     $headerError;
@@ -40,7 +41,9 @@ HTML;
     echo '</form>';
     wrapperEnd();
 }
+*/
+include_once '/srv/http/api/session/sessionStart.php';
 function displayPopupNotification($message, $link){
-    setcookie('Notification', $message, time() + 86400, '/', '', 'true', false);
+    $_SESSION['notification'] = $message;
     header('location: ' . $link);
 }

@@ -35,17 +35,15 @@ echo <<<HTML
 
 <h4>Cookie Data</h4>
 
-<p>When you use our Service, we set a Session Cookie in your browser. This cookie lets us know if you are logged in or not, and it also lets us know your account details. We do not track you with these cookies. For more details on cookies, see the Cookies section of our Privacy Policy.</p>
+<p>When you use our Service, we set a Session Cookie in your browser. This cookie lets us know if you are logged in or not, and it also lets us know your account details. We do not track you with these cookies. For more details on cookies, see the Cookies section below.</p>
 
 <h4>Usage Data</h4>
 
 <p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your browser type, browser version, the pages of our Service that you visit, the time and date of your visit, your IP address, and your operating system. To stop usage data from being collected, turn Do Not Track on in your browser, as outlined <a href='https://allaboutdnt.com/#adjust-settings'>here</a>.</p>
 
 <h2>Cookies</h2>
-<p>Cookies are files with small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device.</p>
-<p>OLMMCC uses cookies to authenticate you (session cookies) and to display notifications on the site. We do not track you using cookies.</p>
-<p>If you do not want cookies to be used, then you can instruct your browser to refuse cookies, as outlined <a href='https://www.howtogeek.com/63721/how-to-block-all-cookies-except-for-sites-you-use/'>here</a>. Please note that you cannot login to the service if you do not accept cookies, and notifications will not be displayed.</p>
-
+<p>OLMMCC uses session cookies for some parts of the service. These cookies consist of a randomly generated unique identifier which only our server can read. Our server uses this identifier to determine your login status and to show you notifications.</p>
+<p>If you do not want session cookies to be used, then you can instruct your browser to refuse cookies, as outlined <a href='https://www.howtogeek.com/63721/how-to-block-all-cookies-except-for-sites-you-use/'>here</a>. Please note that you cannot login to the service if you do not accept cookies, and notifications will not be displayed.</p>
 
 <h2>Transfer Of Data</h2>
 <p>If you are located outside Canada and choose to provide information to us, please note that we transfer the data, including Personal Data, to Canada and process it there.</p>
