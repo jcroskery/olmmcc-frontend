@@ -39,10 +39,7 @@ function display(videocode) {
     graydiv.id = 'graydiv';
     document.getElementById("myPage").appendChild(graydiv);
     graydiv.innerHTML = videocode;
-    let close = "<svg id='closeVideo' viewBox='0, 0, 100, 100'>";
-    close += "<circle cx=50 cy=50 r=50 fill=black />";
-    close += "<text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>";
-    close += "</svg>";
+    let close = getCloseButton('closeVideo');
     document.getElementById("iframe-popup").innerHTML += close;
     document.getElementById('closeVideo').onclick = closeDiv;
 }

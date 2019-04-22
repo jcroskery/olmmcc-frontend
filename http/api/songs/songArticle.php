@@ -40,5 +40,5 @@ HTML;
         }
     }
     echo '</div>';
-    wrapperEnd('<script src="/js/songs.js"></script>');
+    wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/songs.js"></script>');
 }

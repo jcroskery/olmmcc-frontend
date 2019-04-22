@@ -21,7 +21,7 @@ for (i = 0; i < dates.length; i++) {
 }
 document.getElementById('leftbutton').onclick = leftClick;
 document.getElementById('rightbutton').onclick = rightClick;
-
+document.onkeydown = keydown;
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
@@ -119,10 +119,7 @@ function displayDetails(clickedId) {
         }
     });
     document.getElementById('graydiv').append(detailsDiv);
-    let close = "<svg id='closeDetails' viewBox='0, 0, 100, 100'>";
-    close += "<circle cx=50 cy=50 r=50 fill=black />";
-    close += "<text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>";
-    close += "</svg>";
+    let close = getCloseButton('closeDetails');
     document.getElementById("detailsDiv").innerHTML += close;
     document.getElementById('closeDetails').onclick = clearDetails;
 }
@@ -132,10 +129,6 @@ function onClick() {
         displayDetails(date);
     }
     drawCalendar();
-}
-function init(){
-    document.onkeydown = keydown;
-    drawCalendar()
 }
 function timeFormatter(time){
     var hours = Number(time.substr(0, 2));
@@ -148,6 +141,6 @@ function onGetEvents() {
         obj = actual_JSON[i];
         eventsArray.push(new calendarclass(new Date(obj.date + "T12:00:00"), obj.title, timeFormatter(obj.startTime), timeFormatter(obj.endTime), obj.notes));
     }
-    init();
+    drawCalendar();
 }; 
 loadJSON();
