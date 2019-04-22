@@ -55,4 +55,4 @@ echo <<<HTML
     </table> 
     
 HTML;
-wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/calendarclass.js"></script><script src="/js/calendar.js"></script>', false);
+wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/calendar.js"></script>', false);

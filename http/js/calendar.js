@@ -41,6 +41,9 @@ function rightClick() {
     date.setMonth(date.getMonth() + 1);
     drawCalendar();
 }
+function isCorrectDate(firstDate, secondDate) {
+    return (firstDate.toDateString() == secondDate.toDateString());
+}
 
 eventsArray = [];
 date = new Date();
@@ -68,10 +71,9 @@ function drawCalendar() {
         }
         if (calendarDate > 0 && calendarDate <= lastDay) {
             document.getElementById(i).innerHTML = calendarDate;
-            eventsArray.forEach(calendarClassEvent => {
-                if (calendarClassEvent.isCorrectDate(currentDate)) {
-
-                    document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + calendarClassEvent.getName + '</p>' + '<p class="calendarEvent">' + calendarClassEvent.getTime + '</p>');
+            eventsArray.forEach(event => {
+                if (isCorrectDate(currentDate, event['date'])) {
+                    document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
                 }
             });
         } else {
@@ -81,21 +83,23 @@ function drawCalendar() {
     }
 }
 function keydown(event) {
-    if (event.keyCode == 27) {
-        clearDetails();
-    } else if (event.keyCode == 37) {
-        date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
-        drawCalendar();
-    } else if (event.keyCode == 39) {
-        date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-        drawCalendar();
-    } else if (event.keyCode == 38) {
-        date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
-        drawCalendar();
-    } else if (event.keyCode == 40) {
-        date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
-        drawCalendar();
+    switch(event.keyCode) {
+        case 27:
+            clearDetails();
+            return;
+        case 37:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+            break;
+        case 39:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+            break;
+        case 38:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
+            break;
+        case 40:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
     }
+    drawCalendar();
 }
 function clearDetails() {
     var element = document.getElementById("graydiv");
@@ -111,11 +115,11 @@ function displayDetails(clickedId) {
     let detailsDiv = document.createElement('div');
     detailsDiv.id = 'detailsDiv';
 
-    eventsArray.forEach(calendarClassEvent => {
-        if (calendarClassEvent.isCorrectDate(date)) {
-            detailsDiv.innerHTML = '<h4>' + calendarClassEvent.getName + '</h4>';
-            detailsDiv.innerHTML += '<p>Time: ' + calendarClassEvent.getTime + '</p>';
-            detailsDiv.innerHTML += '<p>Notes: ' + calendarClassEvent.getNotes + '</p>';
+    eventsArray.forEach(event => {
+        if (isCorrectDate(date, event['date'])) {
+            detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4>';
+            detailsDiv.innerHTML += '<p>Time: ' + event['time'] + '</p>';
+            detailsDiv.innerHTML += '<p>Notes: ' + event['notes'] + '</p>';
         }
     });
     document.getElementById('graydiv').append(detailsDiv);
@@ -139,7 +143,12 @@ function onGetEvents() {
     actual_JSON = JSON.parse(response);
     for (var i = 0; i < actual_JSON.length; i++) {
         obj = actual_JSON[i];
-        eventsArray.push(new calendarclass(new Date(obj.date + "T12:00:00"), obj.title, timeFormatter(obj.startTime), timeFormatter(obj.endTime), obj.notes));
+        eventsArray.push({
+            date : new Date(obj.date + "T12:00:00"), 
+            title : obj.title, 
+            time : timeFormatter(obj.startTime) + ' to ' + timeFormatter(obj.endTime), 
+            notes : obj.notes
+        });
     }
     drawCalendar();
 }; 
