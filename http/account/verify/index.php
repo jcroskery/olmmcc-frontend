@@ -15,49 +15,61 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
+ */
 include_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/account/accountFunctions.php';
+require_once '/srv/http/api/email/queueEmail.php';
 refreshAccount();
-header("Refresh: 15;url='/account/verify/'");
 if ($_SESSION['id'] != '') {
     if (!$_SESSION['verified']) {
         /*
         $files = scandir('/srv/http/json/incoming/');
         foreach ($files as $file) {
-            if ($file == 'Email does not exist' . $_SESSION['notVerifiedEmail'] . '.json') {
-                changeRow('users', $_SESSION['id'], 'invalid_email', 1);
-                unlink('/srv/http/json/incoming/' . $file);
-                $_SESSION['invalid_email'] = '1';
-            }
+        if ($file == 'Email does not exist' . $_SESSION['notVerifiedEmail'] . '.json') {
+        changeRow('users', $_SESSION['id'], 'invalid_email', 1);
+        unlink('/srv/http/json/incoming/' . $file);
+        $_SESSION['invalid_email'] = '1';
         }
-        */
-        if($_SESSION['invalid_email'] == 1){
+        }
+         */
+        if ($_SESSION['invalid_email'] == 1) {
             /*
-} else if ($_SESSION['invalid_email'] == 1) {
-    $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);
-    $result = Get Account From Email ($_SESSION['newEmail']);
-    if ($result->num_rows > 0) {
+        } else if ($_SESSION['invalid_email'] == 1) {
+        $_SESSION['newEmail'] = sanitizeString($_POST['newEmail']);
+        $result = Get Account From Email ($_SESSION['newEmail']);
+        if ($result->num_rows > 0) {
         $row = $result->fetch_array(MYSQLI_NUM);
         if ($_SESSION['notVerifiedEmail'] == $_SESSION['newEmail']) {
-            $message = "This email address is already registered to this account.";
-            displayPopupNotification($message, '/account/email/');
+        $message = "This email address is already registered to this account.";
+        displayPopupNotification($message, '/account/email/');
         } else {
-            $message = "Sorry, your email address has already been registered. Please use a different one.";
-            displayPopupNotification($message, '/account/email');
+        $message = "Sorry, your email address has already been registered. Please use a different one.";
+        displayPopupNotification($message, '/account/email');
         }
 
-    } else {
+        } else {
         $_SESSION['changeEmailVerificationId'] = 0;
         refreshAccount();
         header('location: /account/email/changeEmail.php?changeEmailVerificationId=' . $_SESSION['changeEmailVerificationId']);
-    }
-            */
+        }
+         */
         } else {
-            $message = 'Your account has not been verified yet. An email containing the verification link has been sent to ' . $_SESSION['notVerifiedEmail'] . '. Please note that it may take a few minutes for the email to be sent.';
-            displayMessage($message, '/account/verify/email.php', 'Verify your account', 'Resend Verification Email');
+            $verificationid;
+            if ($_SESSION['verificationid'] == '') {
+                $verificationid = hash('sha512', $_SESSION['id'] . bin2hex(random_bytes(20)));
+                $_SESSION['verificationid'] = $verificationid;
+            } else {
+                $verificationid = $_SESSION['verificationid'];
+            }
+
+            $subject = "Verify your account";
+            $link = "http://" . $_SERVER['HTTP_HOST'] . "/account/verify/verify.php?verification=3D" . $verificationid;
+            $message = "<p>Hi,</p>Here is your verification link: " . $link;
+            queueEmail($subject, $message, $_SESSION['notVerifiedUsername'], $_SESSION['notVerifiedEmail']);
+            $message = 'An email containing an link to verify your account has been sent to ' . $_SESSION['notVerifiedEmail'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
+            displayPopupNotification($message, '/login/');
         }
     } else {
         $message = 'Your account has already been verified.';

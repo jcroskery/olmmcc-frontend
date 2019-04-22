@@ -16,32 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-/*
-include_once '/srv/http/helpers/wrapper.php';
-function displayMessage($errortext, $link, $error = 'true', $buttons = 'OK'){
-    $headerError;
-    if($error == 'true'){
-        $headerError = "Error!";
-    } else if($error == false){
-        $headerError = "Success!";
-    } else {
-        $headerError = $error;
-    }
-    wrapperBegin($headerError, '');
-    
-    echo <<<HTML
-    <form method="post" action="$link" class="mainForm">
-        <h1>$headerError</h1>
-        <p>$errortext</p>
-HTML;
-    if($buttons!="none"){
-        echo '<input type="submit" value="' . $buttons . '" class="submit" />';
-    }
-    
-    echo '</form>';
-    wrapperEnd();
-}
-*/
 include_once '/srv/http/api/session/sessionStart.php';
 function displayPopupNotification($message, $link){
     $_SESSION['notification'] = $message;

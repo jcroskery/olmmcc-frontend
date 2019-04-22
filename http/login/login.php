@@ -37,7 +37,7 @@ if (password_verify($password, $row['password'])) {
     } else {
         $_SESSION['notVerifiedEmail'] = $row['email'];
         $_SESSION['notVerifiedUsername'] = $row['username'];
-        header('location: /account/verify/email.php');
+        header('location: /account/verify/');
     }
 } else {
     $message = "Wrong email or password, please try again.";
