@@ -53,14 +53,27 @@ if (wrapperBegin('Your Account', 'account', true)) {
                 </select>
                 <input class='rightFloat' type='submit' value='Change Subscription'/>
             </form>
-            <br><br>
-            <span class='leftFloat'>Account type: $accountLevel</span>
-            <form action='/admin/'>
-                <button $disabled class='rightFloat' type='submit'>Go to Administrator settings</button>
+            <br><br><br>
+            <form action='/account/password/changePassword.php' method='post'>
+                <label class='leftFloat' for='currentPassword'>Current Password: </label>
+                <input name='currentPassword' class='leftFloat' id='currentPassword' type='text' placeholder='Your current password' required='required' />
+                <br><br>
+                <label class='leftFloat' for='newPassword1'>New Password: </label>
+                <input name='newPassword1' class='leftFloat' id='newPassword1' type='text' placeholder='Your new password' required='required' />
+                <br><br>
+                <label class='leftFloat' for='newPassword2'>Repeat Password: </label>
+                <input name='newPassword2' class='leftFloat' id='newPassword2' type='text' placeholder='Repeat your new password' required='required' />
+                <button class='rightFloat' type='submit'>Change Password</button>
+            </form>
+            <br><br><br>
+            <label for='admin' class='leftFloat'>Account type: $accountLevel</label>
+            <form action='/account/delete'>
+                <button class='rightFloat delete' type='submit'>Delete Account</button>
+            </form>
+            <form class='inline' action='/admin/'>
+                <button $disabled id='admin' class='centerDiv inline' type='submit'>Go to Administrator settings</button>
             </form>
             <br><br>
-            <span><a href='/account/password/'>Change Password</a> or <a href='/account/delete/'>Delete Account</a></span>
-            <br>
         </div>
 
 HTML;
