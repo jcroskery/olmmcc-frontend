@@ -15,20 +15,27 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
+ */
 include_once '/srv/http/helpers/displayMessage.php';
-require_once '/srv/logincreds.php';
 require_once '/srv/http/api/session/sessionStart.php';
-if(htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']){
-    $connection = new mysqli($hn, $un, $pw, $db);
-    if($connection->connect_error) die("Connection error");
-    $stmt = $connection->prepare("update userlist set password=? where id=?");
-    $stmt->bind_param("ss", $_SESSION['newHashedPassword'], $_SESSION['newPasswordId']);
-    $stmt->execute();
-    session_unset();
-    $message = "Your password was successfully changed. Please login to your account.";
-    displayPopupNotification($message, '/login/');
+require_once '/srv/http/helpers/wrapper.php';
+require_once '/srv/http/api/database/accessTable.php';
+require_once '/srv/http/api/account/validationFunctions.php';
+if (loggedIn()) {
+    $correctPassword = getRow('users', 'id', $_SESSION['id'])['password'];
+    if(password_verify($_POST['currentPassword'], $correctPassword)){
+        if (!checkPasswords($_POST['newPassword1'], $_POST['newPassword2'], '/account/')) {return;}
+        changeRow('users', $_SESSION['id'], 'password', password_hash($_POST['newPassword1'], PASSWORD_DEFAULT));
+        session_unset();
+        $message = "Your password was successfully changed. Please login to your account with your new password.";
+        displayPopupNotification($message, '/login/');
+    } else {
+        $message = "Wrong password. Please try again.";
+        displayPopupNotification($message, '/account/');
+    }
+} else if (htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']) {
+    //This was for people who weren't logged in---now it doesn't work
+
 } else {
-    $message = "An error occurred. Please resend the email or contact the webmaster.";
-    displayPopupNotification($message, '/login/');
+    notLoggedIn();
 }

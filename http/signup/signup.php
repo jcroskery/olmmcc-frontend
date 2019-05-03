@@ -24,22 +24,11 @@ $email = strtolower($_POST['email']);
 $username = $_POST['username'];
 $password1 = $_POST['password1'];
 $password2 = $_POST['password2'];
-$emailValid = checkEmail($email);
-$usernameValid = checkUsername($username);
-$passwordValid = checkPassword($password1);
-$passwordsMatch = checkPasswordsMatch($password1, $password2);
-if ($passwordsMatch !== true) {
-    return displayPopupNotification($passwordsMatch, '/signup/');
-}
-if ($passwordValid !== true) {
-    return displayPopupNotification($passwordValid, '/signup/');
-}
-if ($emailValid!==true) {
-    return displayPopupNotification($emailValid, '/signup/');
-}
-if ($usernameValid !== true) {
-    return displayPopupNotification($usernameValid, '/signup/');
-}
+
+if(!checkPasswords($password1, $password2, '/signup/')) {return;}
+if (!checkEmail($email, '/signup/')) {return;}
+if (!checkUsername($username, '/signup/')) {return;}
+
 createRow('users', ['email', 'username', 'password', 'verified', 'admin', 'subscription_policy', 'invalid_email'], [$email, $username, password_hash($password1, PASSWORD_DEFAULT), 0, 0, 1, 0]);
 session_unset();
 displayPopupNotification("Your account was sucessfully created! Please login to your new account.", '/login/');

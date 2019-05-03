@@ -15,27 +15,45 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
+ */
 require_once '/srv/http/api/database/accessTable.php';
-function checkPasswordsMatch($password1, $password2)
+require_once '/srv/http/helpers/displayMessage.php';
+function checkPasswords($password1, $password2, $returnLink)
 {
-    return ($password1 === $password2) ? true : "Your passwords do not match, please re-enter them.";
-}
-function checkPassword($password)
-{
-    return (strlen($password) <= 128 && strlen($password) >= 8) ? true : 'Please use a password between 8 and 128 characters long.';
-}
-function checkUsername($username)
-{
-    if(strlen($username) <= 16 && strlen($username) >= 4 && !preg_match('/[^A-Za-z0-9]/', $username)){
-        return (getRow('users', 'username', $username)) ? "Sorry, this username has already been taken. Please select another." : true;
+    if ($password1 === $password2) {
+        if (strlen($password1) <= 128 && strlen($password1) >= 8) {
+            return true;
+        } else {
+            displayPopupNotification('Please use a password between 8 and 128 characters long.', $returnLink);
+        }
+    } else {
+        displayPopupNotification("Your passwords do not match. Please try again.", $returnLink);
     }
-    return 'Sorry, your username is invalid. Please use between 4 and 16 characters and only letters and numbers for your username.';
+    return false;
 }
-function checkEmail($email)
+function checkUsername($username, $returnLink)
 {
-    if(strlen($email) <= 64){
-        return (getRow('users', 'email', $email)) ? 'Sorry, your email address has already been registered. Please use a different address or log in with your account.' : true;
+    if (strlen($username) <= 16 && strlen($username) >= 4 && !preg_match('/[^A-Za-z0-9]/', $username)) {
+        if (getRow('users', 'username', $username)) {
+            displayPopupNotification("Sorry, this username has already been taken. Please select another.", $returnLink);
+        } else {
+            return true;
+        }
+    } else {
+        displayPopupNotification('Sorry, your username is invalid. Please use between 4 and 16 characters and only letters and numbers for your username.', $returnLink);
     }
-    return 'Sorry, your email address is too long. Please use a different email address.';
+    return false;
+}
+function checkEmail($email, $returnLink)
+{
+    if (strlen($email) <= 64) {
+        if (getRow('users', 'email', $email)) {
+            displayPopupNotification('Sorry, your email address has already been registered. Please use a different email address or log in with your account.', $returnLink);
+        } else {
+            return true;
+        }
+    } else {
+        displayPopupNotification('Sorry, your email address is too long. Please use a different email address.', $returnLink);
+    }
+    return false;
 }

@@ -56,13 +56,13 @@ if (wrapperBegin('Your Account', 'account', true)) {
             <br><br><br>
             <form action='/account/password/changePassword.php' method='post'>
                 <label class='leftFloat' for='currentPassword'>Current Password: </label>
-                <input name='currentPassword' class='leftFloat' id='currentPassword' type='text' placeholder='Your current password' required='required' />
+                <input name='currentPassword' class='leftFloat' id='currentPassword' type='password' placeholder='Your current password' required='required' />
                 <br><br>
                 <label class='leftFloat' for='newPassword1'>New Password: </label>
-                <input name='newPassword1' class='leftFloat' id='newPassword1' type='text' placeholder='Your new password' required='required' />
+                <input name='newPassword1' class='leftFloat' id='newPassword1' type='password' placeholder='Your new password' required='required' />
                 <br><br>
                 <label class='leftFloat' for='newPassword2'>Repeat Password: </label>
-                <input name='newPassword2' class='leftFloat' id='newPassword2' type='text' placeholder='Repeat your new password' required='required' />
+                <input name='newPassword2' class='leftFloat' id='newPassword2' type='password' placeholder='Repeat your new password' required='required' />
                 <button class='rightFloat' type='submit'>Change Password</button>
             </form>
             <br><br><br>
