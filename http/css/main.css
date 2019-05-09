@@ -74,7 +74,7 @@ input[type="text"], input[type='email'], input[type='password'] {
 }
 /*End of align/float classes*/
 
-/*Beginning of background selector*/
+/*Beginning of backgrounds*/
 body {
     background: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -95,10 +95,18 @@ body.calendarClass {
 body.faqClass {
     background-image: url('/images/Everyone\ 3.jpg');
 }
-body.contactClass {
-    background-image: url('/images/Violin\ 1.jpg');
+body.galleryClass {
+    background-image: none;
+    background-color: black;
 }
-/*End of background selector*/
+#imageBackgroundDiv {
+    background-image: url('/images/Violin 1.jpg');
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: contain;
+}
+/*End of backgrounds*/
 
 /*Beginning of topnav*/
 #topnav {
@@ -203,6 +211,9 @@ input[type="text"], input[type='email'], input[type='password'], .calendarEvent{
 #graydiv {
     width: 100%;
     height: 100%;
+}
+.galleryClass #myPage {
+    height: 100vh;
 }
 .iframe {
     width: 80%;
@@ -406,5 +417,12 @@ pre {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.galleryClass #myPage {
+    flex-direction: column;
+    display: flex;
+}
+#imageBackgroundDiv {
+    flex: 1;
 }
 /*End of other random stuff*/

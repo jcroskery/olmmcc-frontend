@@ -30,7 +30,7 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
     <html lang='en'>
 
     <head>
-    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>OLMM Children's Choir - $title</title>
         <link rel="stylesheet" type="text/css" href="/css/main.css"> 
         <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
@@ -96,7 +96,7 @@ function topnav($id){
     $links[] = createLinks('leftFloat', 'songs', '/songs', "Songs", $id);
     $links[] = createLinks('leftFloat', 'calendar', '/calendar', "Calendar", $id);
     $links[] = createLinks('leftFloat', 'faq', '/faq', "FAQ", $id);
-    $links[] = createLinks('leftFloat', 'contact', '/contact', "Contact", $id);
+    $links[] = createLinks('leftFloat', 'gallery', '/gallery', "Gallery", $id);
     $links[] = createLinks('leftFloat blue', '', 'http://www.olmm.ca', "Visit OLMM's homepage", $id);
     if($_SESSION['verified']) {
         $links[] = createLinks('rightFloat', '', '/logout', 'Logout', $id);
