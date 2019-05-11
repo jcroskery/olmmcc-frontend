@@ -21,14 +21,14 @@ body {
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
     font-size: 27px;
 }
-th, td{
+td {
     font-family: 'Noto Sans', sans-serif;
 }
 #topnav, caption{
     font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
 }
-h1, h2, h3, h4, h5, h6, #closeX{
-    font-family: 'Arial', 'Helvetica', sans-serif;
+h1, h2, h3, h4, h5, h6, #closeX, th{
+    font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
 }
 /*End of font family*/
 
@@ -39,7 +39,10 @@ h1, caption{
 #closeX {
     font-size: 100px;
 }
-select, button, input[type='submit'], .calendarEventTitle, .smallSpan {
+.calendar th, .calendarEventTitle {
+    font-size: 18px;
+}
+select, button, input[type='submit'], .smallSpan, .calendar td{
     font-size: 20px;
 }
 h3, h4{
@@ -48,7 +51,7 @@ h3, h4{
 h2 {
     font-size: 40px;
 }
-.database input, .database textarea, .calendarEvent{
+.database input, .database textarea, .calendarEvent {
     font-size: 12px;
 }
 input[type="text"], input[type='email'], input[type='password'] {
@@ -153,6 +156,13 @@ body.galleryClass {
 }
 /*End of topnav*/
 
+/*Beginning of calendar*/
+@media only screen and (max-width: 740px) {
+    .calendar th {
+        color: red;
+    }
+}
+/*End of calendar*/
 /*Beginning of margin*/
 body, .database input, .database textarea, .calendarEvent, .calendarEventTitle, h2 {
     margin: 0;
@@ -381,6 +391,9 @@ h3 {
 body {
     word-wrap: break-word;
 }
+.calendar th {
+    font-weight: 300;
+}
 /*End of other font details*/
 
 /*Beginning of other aligns*/
@@ -391,6 +404,22 @@ body {
     vertical-align: top;
 }
 /*End of other aligns*/
+
+/*Beginning of flex*/
+#graydiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.galleryClass #myPage {
+    flex-direction: column;
+    display: flex;
+}
+#imageBackgroundDiv {
+    flex: 1;
+}
+/*Ending of flex*/
+
 /*Beginning of other random stuff*/
 .inline {
     display: inline;
@@ -412,17 +441,5 @@ pre {
 }
 #detailsDiv {
     position: relative;
-}
-#graydiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.galleryClass #myPage {
-    flex-direction: column;
-    display: flex;
-}
-#imageBackgroundDiv {
-    flex: 1;
 }
 /*End of other random stuff*/

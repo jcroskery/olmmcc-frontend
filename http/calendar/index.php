@@ -30,9 +30,7 @@ echo <<<HTML
         </svg>
     </button>
     <table class='calendar'>
-HTML;
-echo <<<HTML
-        <caption id='caption'></caption>
+        <caption></caption>
         <tr id='tr'>
             <th>Sunday</th>
             <th>Monday</th>

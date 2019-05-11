@@ -47,7 +47,7 @@ function isCorrectDate(firstDate, secondDate) {
 
 eventsArray = [];
 date = new Date();
-caption = document.getElementById('caption');
+caption = document.getElementsByTagName('caption')[0];
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 firstDay = 0;
