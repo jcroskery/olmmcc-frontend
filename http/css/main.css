@@ -16,109 +16,40 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 
-/*Beginning of font family*/
+/*Beginning of wrapper css (all files)*/
 body {
     font-family: 'new baskerville', 'calibri', 'cambria', 'noto sans', 'sans';
     font-size: 27px;
-}
-td {
-    font-family: 'Noto Sans', sans-serif;
-}
-#topnav, caption{
-    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
-}
-h1, h2, h3, h4, h5, h6, #closeX, th{
-    font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
-}
-/*End of font family*/
-
-/*Beginning of font size*/
-h1, caption{
-    font-size: 56px;
-}
-#closeX {
-    font-size: 100px;
-}
-.calendar th, .calendarEventTitle {
-    font-size: 18px;
-}
-select, button, input[type='submit'], .smallSpan, .calendar td{
-    font-size: 20px;
-}
-h3, h4{
-    font-size: 31px;
-}
-h2 {
-    font-size: 40px;
-}
-.database input, .database textarea, .calendarEvent {
-    font-size: 12px;
-}
-input[type="text"], input[type='email'], input[type='password'] {
-    font-size: 23px;
-}
-/*End of font size*/
-
-/*Beginning of align/float classes*/
-.leftFloat {
-    float: left;
-}
-.rightFloat {
-    float: right;
-}
-.leftDiv {
-    text-align: left;
-}
-.centerDiv {
-    text-align: center;
-}
-.rightDiv {
-    text-align: right;
-}
-/*End of align/float classes*/
-
-/*Beginning of backgrounds*/
-body {
     background: url('/images/Do\ you\ hear\ what\ I\ hear\ Justus.jpg') no-repeat center center fixed;
     background-size: cover;
+    margin: 0;
+    word-wrap: break-word;
 }
-body.homeClass {
-    background-image: url('/images/Choir\ singing\ 2.jpg');
+.mainForm {
+    text-align: center;
 }
-body.songsClass {
-    background-image: url('/images/Do\ you\ hear\ what\ I\ hear\ Faith.jpg');
+#main-text, .mainForm {
+    width: 70%;
+    margin: auto;
+    padding: 0 8%;
+    background: rgba(255,255,255,0.7);
+    border: 4px solid royalblue;
 }
-body.aboutClass {
-    background-image: url('/images/Everyone\ 2.jpg');
+.bottom {
+    width: 86%;
+    margin: auto;
+    padding: 10px 0;
+    background-color: rgba(105, 207, 74, 0.9);
+    text-align: center;
 }
-body.calendarClass {
-    background-image: none;
-    background-color: lightblue;
-}
-body.faqClass {
-    background-image: url('/images/Everyone\ 3.jpg');
-}
-body.galleryClass {
-    background-image: none;
-    background-color: black;
-}
-#imageBackgroundDiv {
-    background-image: url('/images/Violin 1.jpg');
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: contain;
-}
-/*End of backgrounds*/
-
 /*Beginning of topnav*/
 #topnav {
     overflow: hidden;
     position: sticky;
-}
-.dropdownSvg {
-    float: right;
-    cursor: pointer;
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
+    width: 100%;
+    top: 0;
+    background-color: #333;
 }
 #topnav > #active, .dropdown label, #dropdownCheck{
     display: none;
@@ -126,8 +57,28 @@ body.galleryClass {
 #topnav a {
     text-decoration: none;
     text-align: center;
+    padding: 11px;
+}
+#topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+#topnav #active {
+    background-color: #4CAF50;
+}
+#topnav a, #notificationP{
+    color: white;
 }
 @media only screen and (max-width: 1199px) {
+    .dropdownSvg {
+        float: right;
+        cursor: pointer;
+        height: 2em;
+        margin-right: 3px;
+    }
+    .dropdownSvg rect{
+        fill: white;
+    }
     .dropdown label{
         display: block;
     }
@@ -155,200 +106,89 @@ body.galleryClass {
     }
 }
 /*End of topnav*/
+/*End of wrapper css (all files)*/
 
+/*Beginning of tables (calendar and database)*/
+caption {
+    font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
+    font-size: 56px;
+}
+td {
+    font-family: 'Noto Sans', sans-serif;
+}
+th {
+    font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
+}
 /*Beginning of calendar*/
-@media only screen and (max-width: 740px) {
+.calendarEventTitle {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    color: darkcyan;
+}
+.calendar th {
+    border: 2px solid blue;
+    font-size: 18px;
+    font-weight: 300;
+    vertical-align: top;
+}
+.calendar td {
+    font-size: 20px;
+    height: 50px;
+    border: 2px solid blue;
+    vertical-align: top;
+}
+.calendarEvent {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+body.calendarClass {
+    background-image: none;
+    background-color: lightblue;
+}
+.calendar {
+    margin: auto;
+    width: 90%;
+    table-layout: fixed;
+    background-color: lightgray;
+    border-collapse: collapse;
+}
+/*Beginning of calendar popup (details)*/
+#detailsDiv p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#closeDetails {
+    width: 40px;
+    right: 0;
+    top: 0;
+    position: absolute; 
+    cursor: pointer;
+}
+#detailsDiv {
+    background-color: white;
+    border: 4px solid royalblue;
+    border-radius: 25px;
+    position: relative;
+}
+/*End of calendar popup (details)*/
+@media only screen and (max-width: 739px) {
     .calendar th {
         color: red;
     }
 }
 /*End of calendar*/
-/*Beginning of margin*/
-body, .database input, .database textarea, .calendarEvent, .calendarEventTitle, h2 {
-    margin: 0;
-}
-#main-text, .mainForm, .bottom, .calendar, .database {
-    margin: auto;
-}
-input[type="text"], input[type='email'], input[type='password'] {
-    margin-bottom: 8px;
-}
-.reducedPadding p{
-    margin: 11px 0;
-}
-#closeVideo, #closeNotification {
-    margin-left: -40px;
-}
-select {
-    margin: 0 5px;
-}
-#detailsDiv p {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-h4 {
-    margin: 30px 0;
-}
-.dropdownSvg {
-    margin-right: 3px;
-}
-/*End of margin*/
 
-/*Beginning of width/height*/
-.bottom {
-    width: 86%;
-}
-#main-text, .mainForm {
-    width: 70%;
-}
-input[type="text"], input[type='email'], input[type='password'], .calendarEvent{
-    width: auto;
-}
+/*Beginning of database*/
 .database input, .database textarea {
+    font-size: 12px;
     width: 100%;
     box-sizing: border-box;
-}
-.calendar {
-    width: 90%;
-}
-.buttonSvg {
-    width: 3vw;
-    height: 15%;
-}
-.dropdownSvg {
-    height: 2em;
-}
-#graydiv {
-    width: 100%;
-    height: 100%;
-}
-.galleryClass #myPage {
-    height: 100vh;
-}
-.iframe {
-    width: 80%;
-    height: 80%;
-}
-#notificationDiv {
-    width: 60%;
-}
-#closeVideo, #closeNotification , #closeDetails {
-    width: 40px;
+    margin: 0;
 }
 .database textarea {
     height: 60px;
-}
-.database, .database textarea, #topnav {
-    width: 100%;
-}
-.calendar td {
-    height: 50px;
-}
-/*End of width/height*/
-
-/*Beginning of padding*/
-.bottom {
-    padding: 10px 0;
-}
-#main-text, .mainForm {
-    padding: 0 8%;
-}
-input[type="text"], input[type='email'], input[type='password'], caption {
-    padding: 5px;
-}
-.calendarEvent, .calendarEventTitle, .calendarButton {
-    padding: 0;
-}
-#notificationP {
-    padding: 0 40px;
-}
-#topnav a {
-    padding: 11px;
-}
-/*End of padding*/
-
-/*Beginning of absolute positioning*/
-#rightbutton {
-    right: 1%;
-}
-#leftbutton {
-    left: 1%;
-}
-#notificationDiv {
-    top: 0;
-    left: 20%;
-    right: 20%;
-}
-#graydiv{
-    left: 0;
-}
-.iframe {
-    top: 10%;
-    left: 10%;
-}
-#closeVideo {
-    left: 90%;
-    top: 10%;
-}
-#closeDetails {
-    right: 0;
-    top: 0;
-}
-#closeNotification {
-    left: 80%;
-}
-.calendarButton {
-    top: 42.5%;
-}
-#topnav, #graydiv, #closeNotification{
-    top: 0;
-}
-/*End of absolute positioning*/
-
-/*Beginning of color/border*/
-.bottom {
-    background-color: rgba(105, 207, 74, 0.9);
-}
-#main-text, .mainForm {
-    background: rgba(255,255,255,0.7);
-    border: 4px solid royalblue;
-}
-.blue {
-    color: blue !important;
-}
-.calendar {
-    background-color: lightgray;
-    border-collapse: collapse;
-}
-.calendar th, .calendar td {
-    border: 2px solid blue;
-}
-.buttonPolygon {
-    fill: gray;
-}
-.calendarButton {
-    background-color: transparent;
-    border: none;
-}
-#graydiv {
-    background-color: rgba(57, 59, 59, 0.9);
-}
-.calendarEventTitle {
-    color: darkcyan;
-}
-.iframe {
-    background-color: black;
-}
-#notificationDiv {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 22px;
-}
-.selectedDate {
-    color: green;
-    border: 4px solid green !important;
-}
-.delete{
-    background-color: red;
 }
 .database td, .database th {
     border: 1px solid blue;
@@ -357,89 +197,230 @@ input[type="text"], input[type='email'], input[type='password'], caption {
     background-color: gray;
     border: 1px solid blue;
     border-collapse: collapse;
+    margin: auto;
+    width: 100%;
 }
-#detailsDiv {
-    background-color: white;
-    border: 4px solid royalblue;
-    border-radius: 25px;
+/*End of database*/
+
+/*End of tables (calendar and database)*/
+
+/*Beginning of notification*/
+#notificationP {
+    color: white;
+    padding: 0 40px;
 }
-.dropdownSvg rect{
-    fill: white;
+#notificationDiv {
+    width: 60%;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 22px;
+    text-align: center;
+    position: fixed;
 }
-#topnav a:hover {
-    background-color: #ddd;
-    color: black;
+#closeNotification {
+    margin-left: -40px;
+    width: 40px;
+    left: 80%;
+    top: 0;
+    position: fixed;
+    cursor: pointer;
 }
-#topnav #active {
-    background-color: #4CAF50;
+/*End of notification*/
+
+/*Beginning of left/right button*/
+.leftButton, .rightButton {
+    top: 42.5%;
+    background-color: transparent;
+    border: none;
+    position: fixed;
+    padding: 0;
+}
+.leftButton {
+    left: 1%;
+}
+.rightButton {
+    right: 1%;
+}
+.leftButton svg, .rightButton svg {
+    width: 3vw;
+    height: 15%;
+}
+/*End of left/right button*/
+
+/*Beginning of headers*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+}
+h1 {
+    font-size: 56px;
+    text-align: center;
+}
+h2 {
+    font-size: 40px;
+    margin: 0;
 }
 h3 {
     color: darkcyan;
+    font-size: 31px;
 }
-#topnav {
-    background-color: #333;
-}
-#topnav a, #notificationP{
-    color: white;
-}
-/*End of color/border*/
-
-/*Beginning of other font details*/
-#closeX, .bold {
-    font-weight: bold;
-}
-body {
-    word-wrap: break-word;
-}
-.calendar th {
-    font-weight: 300;
-}
-/*End of other font details*/
-
-/*Beginning of other aligns*/
-.bottom, .mainForm, #notificationDiv, h1, h4 {
+h4 {
+    margin: 30px 0;
+    font-size: 31px;
     text-align: center;
 }
-.calendar th, .calendar td {
-    vertical-align: top;
-}
-/*End of other aligns*/
+/*End of headers*/
 
-/*Beginning of flex*/
+/*Beginning of songs page*/
+body.songsClass {
+    background-image: url('/images/Do\ you\ hear\ what\ I\ hear\ Faith.jpg');
+}
+/*Beginning of songs popup*/
+#closeVideo {
+    margin-left: -40px;
+    width: 40px;
+    left: 90%;
+    top: 10%;
+    position: fixed;
+    cursor: pointer;
+}
+.video {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    background-color: black;
+    position: fixed;
+}
+/*End of songs popup*/
+/*End of songs page*/
+
+/*Beginning of generic popup*/
+#closeX {
+    font-size: 100px;
+    font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
+    font-weight: bold;
+}
 #graydiv {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(57, 59, 59, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+}
+/*End of generic popup*/
+
+/*Beginning of font size*/
+select, button, input[type='submit'], .smallSpan {
+    font-size: 20px;
+}
+input[type="text"], input[type='email'], input[type='password'] {
+    font-size: 23px;
+}
+/*End of font size*/
+
+/*Beginning of generic style classes*/
+.leftFloat {
+    float: left;
+}
+.rightFloat {
+    float: right;
+}
+.leftDiv {
+    text-align: left;
+}
+.centerDiv {
+    text-align: center;
+}
+.rightDiv {
+    text-align: right;
+}
+.bold {
+    font-weight: bold;
+}
+.inline {
+    display: inline;
+}
+.blue {
+    color: blue !important;
+}
+/*End of generic style classes*/
+
+/*Beginning of other backgrounds*/
+body.homeClass {
+    background-image: url('/images/Choir\ singing\ 2.jpg');
+}
+body.aboutClass {
+    background-image: url('/images/Everyone\ 2.jpg');
+}
+body.faqClass {
+    background-image: url('/images/Everyone\ 3.jpg');
+}
+/*End of other backgrounds*/
+
+/*Beginning of gallery*/
+body.galleryClass {
+    background-image: none;
+    background-color: black;
+}
+#imageBackgroundDiv {
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: contain;
+    flex: 1;
 }
 .galleryClass #myPage {
     flex-direction: column;
     display: flex;
+    height: 100vh;
 }
-#imageBackgroundDiv {
-    flex: 1;
+/*End of gallery*/
+
+/*Beginning of margin*/
+input[type="text"], input[type='email'], input[type='password'] {
+    margin-bottom: 8px;
 }
-/*Ending of flex*/
+.reducedPadding p{
+    margin: 11px 0;
+}
+select {
+    margin: 0 5px;
+}
+/*End of margin*/
+
+/*Beginning of width/height*/
+input[type="text"], input[type='email'], input[type='password'] {
+    width: auto;
+}
+/*End of width/height*/
+
+/*Beginning of padding*/
+input[type="text"], input[type='email'], input[type='password'], caption {
+    padding: 5px;
+}
+/*End of padding*/
+
+/*Beginning of color/border*/
+.buttonPolygon {
+    fill: gray;
+}
+.selectedDate {
+    color: green;
+    border: 4px solid green !important;
+}
+/*End of color/border*/
 
 /*Beginning of other random stuff*/
-.inline {
-    display: inline;
-}
-.calendar {
-    table-layout: fixed;
-}
-.calendarButton, #graydiv, .iframe, #notificationDiv, #closeVideo, #closeNotification {
-    position: fixed;
-}
-#closeVideo, #closeNotification, #closeDetails {
-    cursor: pointer;
-}
-#closeDetails {
-    position: absolute; 
-}
 pre {
     white-space: pre-wrap;
 }
-#detailsDiv {
-    position: relative;
+.delete{
+    background-color: red;
 }
 /*End of other random stuff*/

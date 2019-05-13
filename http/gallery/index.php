@@ -20,13 +20,13 @@ include_once '/srv/http/helpers/wrapper.php';
 wrapperBegin('Gallery', 'gallery');
 echo <<<HTML
 <div id='imageBackgroundDiv'>
-    <button class='calendarButton' id='leftbutton'>
-        <svg class='buttonSvg' viewBox='0, 0, 100, 200'>
+    <button class='leftButton'>
+        <svg viewBox='0, 0, 100, 200'>
             <polygon class='buttonPolygon' points="100,0 0,100 100,200"/>
         </svg>
     </button>
-    <button class='calendarButton' id='rightbutton'>
-        <svg class='buttonSvg' viewBox='0, 0, 100, 200'>
+    <button class='rightButton'>
+        <svg viewBox='0, 0, 100, 200'>
             <polygon class='buttonPolygon' points="0,0 100,100 0,200"/>
         </svg>
     </button>

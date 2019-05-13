@@ -19,9 +19,6 @@ dates = document.getElementsByTagName('td');
 for (i = 0; i < dates.length; i++) {
     dates[i].onclick = onClick;
 }
-document.getElementById('leftbutton').onclick = leftClick;
-document.getElementById('rightbutton').onclick = rightClick;
-document.onkeydown = keydown;
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
@@ -151,5 +148,8 @@ function onGetEvents() {
         });
     }
     drawCalendar();
+    document.getElementsByClassName('leftButton')[0].onclick = leftClick;
+    document.getElementsByClassName('rightButton')[0].onclick = rightClick;
+    document.onkeydown = keydown;
 }; 
 loadJSON();

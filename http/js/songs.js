@@ -31,7 +31,6 @@ function removeGraydiv() {
     if (element != null) {
         element.parentNode.removeChild(element);
     }
-
 }
 function display(videocode) {
     currentCode = videocode;
@@ -40,25 +39,12 @@ function display(videocode) {
     document.getElementById("myPage").appendChild(graydiv);
     graydiv.innerHTML = videocode;
     let close = getCloseButton('closeVideo');
-    document.getElementById("iframe-popup").innerHTML += close;
+    document.getElementsByClassName("videoPopup")[0].innerHTML += close;
     document.getElementById('closeVideo').onclick = closeDiv;
 }
 function closeDiv() {
     displayed = false;
     removeGraydiv();
-}
-function onResize() {
-    if (!window.innerHeight == screen.height) {
-        if (displayed) {
-            displayPopupVideo(currentCode);
-        }
-    }
-
-}
-
-function aFunction() {
-    clearTimeout(resizeId);
-    resizeId = setTimeout(onResize, 50);
 }
 function keydown(event) {
     if (event.keyCode == 27) {
@@ -66,4 +52,3 @@ function keydown(event) {
     }
 }
 document.onkeydown = keydown;
-window.onresize = aFunction;

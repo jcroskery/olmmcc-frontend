@@ -26,9 +26,10 @@ function onLoadImageList() {
     var response = this.responseText;
     imageList = JSON.parse(response);
     currentImage = 0;
+    displayImage(imageList[currentImage]);
     document.onkeydown = keydown;
-    document.getElementById('leftbutton').onclick = leftClick;
-    document.getElementById('rightbutton').onclick = rightClick;
+    document.getElementsByClassName('leftButton')[0].onclick = leftClick;
+    document.getElementsByClassName('rightButton')[0].onclick = rightClick;
 }
 function keydown(event) {
     switch (event.keyCode) {
@@ -40,7 +41,7 @@ function keydown(event) {
             break;
     }
 }
-function changeImage(imageUrl) {
+function displayImage(imageUrl) {
     var imageBackgroundDiv = document.getElementById('imageBackgroundDiv');
     imageBackgroundDiv.style.backgroundImage = "url('/images/" + imageUrl + "')";
 }
@@ -51,9 +52,9 @@ function offsetCurrentImage(offset) {
     return currentImage;
 }
 function leftClick() {
-    changeImage(imageList[offsetCurrentImage(-1)]);
+    displayImage(imageList[offsetCurrentImage(-1)]);
 }
 function rightClick(){
-    changeImage(imageList[offsetCurrentImage(1)]);
+    displayImage(imageList[offsetCurrentImage(1)]);
 }
 loadImageList();
