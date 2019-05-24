@@ -126,35 +126,55 @@ pre {
 /*End of wrapper css (all files)*/
 
 /*Beginning of tables (calendar and database)*/
-caption {
+caption, .calendar h1 {
     font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
     font-size: 56px;
     padding: 5px;
+    margin: 0;
 }
-td {
+td, .calendar .bodyUl li {
     font-family: 'Noto Sans', sans-serif;
 }
-th {
+th, .calendar .headerUl li {
     font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
 }
 /*Beginning of calendar*/
 .calendarEventTitle {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     color: darkcyan;
 }
-.calendar th {
-    border: 2px solid blue;
-    font-size: 18px;
-    font-weight: 300;
-    vertical-align: top;
+.calendar ul {
+    list-style: none;
+	padding: 0;
+	margin: 0;
+    width: 100%;
 }
-.calendar td {
-    font-size: 20px;
-    height: 50px;
-    border: 2px solid blue;
+.calendar li {
+    display: block;
+    float: left;
+    width: 14.285%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+	margin-right: -1px;
+    margin-bottom: -1px;
+    border: 1px solid blue;
+}
+.calendar .bodyUl li:hover {
+	background-color: lightcyan;
+}
+.calendar .headerUl li {
+    font-size: 18px;
     vertical-align: top;
+    text-align: center;
+}
+.calendar .bodyUl li {
+    font-size: 18px;
+    height: 50px;
+    vertical-align: top;
+    height: 120px;
+    padding: 4px;
 }
 .calendarEvent {
     margin: 0;
@@ -168,13 +188,10 @@ body.calendarClass {
 .calendar {
     margin: auto;
     width: 90%;
-    table-layout: fixed;
-    background-color: lightgray;
-    border-collapse: collapse;
 }
 .selectedDate {
     color: green;
-    border: 4px solid green !important;
+    border: 2px solid green !important;
 }
 /*Beginning of calendar popup (details)*/
 #detailsDiv p {
@@ -189,7 +206,7 @@ body.calendarClass {
     cursor: pointer;
 }
 #detailsDiv {
-    background-color: white;
+    background-color: rgb(150,150,150);
     border: 4px solid royalblue;
     border-radius: 25px;
     position: relative;
@@ -322,10 +339,8 @@ body.songsClass {
 /*End of songs page*/
 
 /*Beginning of generic popup*/
-#closeX {
-    font-size: 100px;
-    font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
-    font-weight: bold;
+.whiteRect {
+    fill: white;
 }
 #graydiv {
     width: 100%;
@@ -370,6 +385,9 @@ select, button, input[type='submit'], .smallSpan {
 }
 .blue {
     color: blue !important;
+}
+.hide {
+    display: none;
 }
 /*End of generic style classes*/
 

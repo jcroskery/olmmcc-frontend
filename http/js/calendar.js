@@ -15,9 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-dates = document.getElementsByTagName('td');
-for (i = 0; i < dates.length; i++) {
-    dates[i].onclick = onClick;
+allLis = document.getElementsByTagName('li');
+for(var i = 7; i < allLis.length; i++){
+    allLis[i].onclick = onClick;  
 }
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -44,7 +44,7 @@ function isCorrectDate(firstDate, secondDate) {
 
 eventsArray = [];
 date = new Date();
-caption = document.getElementsByTagName('caption')[0];
+caption = document.getElementsByTagName('h1')[0];
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 firstDay = 0;
@@ -73,8 +73,14 @@ function drawCalendar() {
                     document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
                 }
             });
+            if (i == 36) { //If sixth week is needed
+                document.getElementsByClassName("bodyUl")[5].classList = "bodyUl";
+            }
         } else {
             document.getElementById(i).innerHTML = '';
+            if (i == 36) { //If sixth week is unneeded
+                document.getElementsByClassName("bodyUl")[5].classList += ' hide';
+            }
         }
 
     }

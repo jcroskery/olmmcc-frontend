@@ -18,7 +18,8 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 function getCloseButton(id) {
     let close = "<svg id='" + id + "' viewBox='0, 0, 100, 100'>";
     close += "<circle cx=50 cy=50 r=50 fill=black />";
-    close += "<text id='closeX' x='50%' text-anchor='middle' y='85' fill='white'>X</text>";
+    close += "<rect class='whiteRect' y='55' rx=13 ry=13 x='-45' transform='rotate(-45 0 0)' width='90' height='25' />";
+    close += "<rect class='whiteRect' y='-15' rx=13 ry=13 x='25' transform='rotate(45 0 0)' width='90' height='25' />";
     close += "</svg>";
     return close;
 }

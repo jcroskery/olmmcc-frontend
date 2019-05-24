@@ -29,28 +29,25 @@ echo <<<HTML
             <polygon class='buttonPolygon' points="0,0 100,100 0,200"/>
         </svg>
     </button>
-    <table class='calendar'>
-        <caption></caption>
-        <tr id='tr'>
-            <th>Sunday</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-        </tr>
+    <div class='calendar'>
+        <h1></h1>
+        <ul class='headerUl'>
+            <li>Sunday</li>
+            <li>Monday</li>
+            <li>Tuesday</li>
+            <li>Wednesday</li>
+            <li>Thursday</li>
+            <li>Friday</li>
+            <li>Saturday</li>
+        </ul>
 HTML;
 for($i = 0; $i < 6; $i++){
-    echo "<tr class='bodytr'>";
+    echo "<ul class='bodyUl'>";
     for($j = 1; $j <= 7; $j++){
         $id = $i*7+$j;
-        echo "<td id='" . $id . "'></td>";
+        echo "<li id='" . $id . "'></li>";
     }
-    echo "</tr>";
+    echo "</ul>";
 }
-echo <<<HTML
-    </table> 
-    
-HTML;
+echo "</div>";
 wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/calendar.js"></script>', false);
