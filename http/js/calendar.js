@@ -22,6 +22,7 @@ for(var i = 7; i < allLis.length; i++){
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
+const days = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.'];
 function loadJSON() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -67,7 +68,7 @@ function drawCalendar() {
             document.getElementById(i).className = '';
         }
         if (calendarDate > 0 && calendarDate <= lastDay) {
-            document.getElementById(i).innerHTML = calendarDate;
+            document.getElementById(i).innerHTML = "<span class='weekday'>" + days[currentDate.getDay()] + " </span>" + calendarDate;
             eventsArray.forEach(event => {
                 if (isCorrectDate(currentDate, event['date'])) {
                     document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
@@ -77,6 +78,7 @@ function drawCalendar() {
                 document.getElementsByClassName("bodyUl")[5].classList = "bodyUl";
             }
         } else {
+            document.getElementById(i).className = 'unNeededDate';
             document.getElementById(i).innerHTML = '';
             if (i == 36) { //If sixth week is unneeded
                 document.getElementsByClassName("bodyUl")[5].classList += ' hide';

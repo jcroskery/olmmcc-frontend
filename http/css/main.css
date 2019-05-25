@@ -59,10 +59,13 @@ pre {
 .delete{
     background-color: red;
 }
+#myPage {
+    margin-top: 55px;
+}
 /*Beginning of topnav*/
 #topnav {
     overflow: hidden;
-    position: sticky;
+    position: fixed;
     font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
     width: 100%;
     top: 0;
@@ -171,7 +174,6 @@ th, .calendar .headerUl li {
 }
 .calendar .bodyUl li {
     font-size: 18px;
-    height: 50px;
     vertical-align: top;
     height: 120px;
     padding: 4px;
@@ -211,10 +213,23 @@ body.calendarClass {
     border-radius: 25px;
     position: relative;
 }
+.weekday {
+    display: none;
+}
 /*End of calendar popup (details)*/
 @media only screen and (max-width: 739px) {
-    .calendar th {
-        color: red;
+    .calendar li {
+		height: auto !important;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: -1px;
+    }
+    .unNeededDate, .calendar .headerUl li {
+        display: none !important;
+    }
+    .weekday {
+        display: initial;
+        color: gray;
     }
 }
 /*End of calendar*/
