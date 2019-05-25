@@ -79,17 +79,21 @@ function getTableContents($table, $name)
         <tr>
             <form action='/api/database/change.php' method='post'>
                 $rowContents
-                <td><button type='submit' name=$table value='$id'>Save Changes</button></td>
+                <td class='centerDiv'>
+                    <button type='submit' name=$table value='$id'>Save Changes</button>
+                </td>
             </form>
-            <td>
+            <td class='centerDiv'>
                 <form action='/api/database/start.php' class='inline' method='post'>
                     <button name=$table value=$id>&#8593;</button>
                 </form>
+            </td>
+            <td class='centerDiv'>
                 <form action='/api/database/end.php' class='inline' method='post'>
                     <button name=$table value=$id>&#8595;</button>
                 </form>
             </td>
-            <td>
+            <td class='centerDiv'>
                 <form action='/api/database/delete.php' method='post'>
                     <button class='delete' name=$table value=$id>Delete $name</button>
                 </form>
@@ -117,13 +121,15 @@ function outputTable($title, $table, $name)
             <caption>$title</caption>
         <tr>
             $tableHeader
-            <th colspan='3'>Options</th>
+            <th colspan='4'>Options</th>
         </tr>
         $tableContents
         <tr>
             <form action='/api/database/add.php' method='post'>
                 $addRow
-                <td colspan='3' class='centerDiv'><button type='submit' name=$table>Add $name</button></td>
+                <td colspan='4' class='centerDiv'>
+                    <button type='submit' name=$table>Add $name</button>
+                </td>
             </form>
         </tr>
         </table>
