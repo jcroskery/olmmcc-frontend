@@ -20,19 +20,23 @@ include_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/api/session/sessionStart.php';
 function wrapperBegin($title, $pageId = '', $loginRequired = false)
 {
-    $verificationCodes;
-    $bodyClassName = $pageId . 'Class';
-    if($loginRequired && !loggedIn()){
+    
+    echoHead($title, $pageId . 'Class', $loginRequired);
+    topnav($pageId);
+    return true;
+}
+function echoHead($title, $bodyClassName, $loginRequired) {
+    if ($loginRequired && !loggedIn()) {
         return false;
     }
-    echo <<<HTML
+echo <<<HTML
     <!DOCTYPE html>
     <html lang='en'>
 
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>OLMM Children's Choir - $title</title>
-        <link rel="stylesheet" type="text/css" href="/css/main.css"> 
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
         <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
         <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
         <meta name="description" content="Official site of the OLMM Children's Choir (OLMMCC).">
@@ -43,8 +47,6 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
     <body class='$bodyClassName'>
         <div id="myPage">
 HTML;
-    topnav($pageId);
-    return true;
 }
 function wrapperEnd($otherScripts = '', $bottom = true)
 {
