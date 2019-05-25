@@ -157,12 +157,11 @@ th, .calendar .headerUl li {
 .calendar li {
     display: block;
     float: left;
-    width: 14.285%;
+    width: calc(14.285% + 1px); /*To account for -1 margins*/
     box-sizing: border-box;
-    border: 1px solid #ccc;
-	margin-right: -1px;
-    margin-bottom: -1px;
     border: 1px solid blue;
+    margin-right: -1px;
+    margin-bottom: -1px;
 }
 .calendar .bodyUl li:hover {
 	background-color: lightcyan;
@@ -285,24 +284,26 @@ body.calendarClass {
 
 /*Beginning of left/right button*/
 .leftButton, .rightButton {
-    top: 42.5%;
+    top: 50%;
     background-color: transparent;
     border: none;
     position: fixed;
     padding: 0;
+    margin-top: calc(calc(-25px - 2vw) + 27.5px); /*27.5 px (half of topnav) minus 50px*/
 }
 .leftButton {
-    left: 1%;
+    left: 0.5%;
 }
 .rightButton {
-    right: 1%;
+    right: 0.5%;
 }
 .leftButton svg, .rightButton svg {
-    width: 3vw;
-    height: 15%;
+    width: calc(25px + 2vw);
+    height: calc(50px + 4vw);
 }
 .buttonPolygon {
-    fill: gray;
+    fill: rgba(100,100,100,0.7);
+    cursor: pointer;
 }
 /*End of left/right button*/
 
