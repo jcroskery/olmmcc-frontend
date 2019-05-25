@@ -433,6 +433,6 @@ body.galleryClass {
 .galleryClass #myPage {
     flex-direction: column;
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 55px);
 }
 /*End of gallery*/
