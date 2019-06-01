@@ -32,7 +32,6 @@ function loadJSON(yearMonthString) {
     xobj.addEventListener("load", onGetEvents);
     xobj.open("POST", "/api/ajax/echoCalendarEvents.php", true);
     xobj.send(data);
-    console.log(yearMonthString);
 }
 function previousMonth() {
     setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
