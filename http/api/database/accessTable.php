@@ -56,6 +56,15 @@ function getRow($table, $columnName, $columnValue)
     $result = $stmt->get_result();
     return $result->fetch_array(MYSQLI_ASSOC);
 }
+function getRowsContainingSubstring($table, $columnName, $substring)
+{
+    global $connection;
+    $stmt = $connection->prepare("SELECT * FROM " . $table . " WHERE " . $columnName . " LIKE ?");
+    $stmt->bind_param("s", $substring);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 function getAllRows($table)
 {
     global $connection;

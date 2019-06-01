@@ -15,67 +15,69 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-allLis = document.getElementsByTagName('li');
-for(var i = 7; i < allLis.length; i++){
-    allLis[i].onclick = onClick;  
-}
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const days = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.'];
-function loadJSON() {
+allLis = document.getElementsByTagName('li');
+for (var i = 7; i < allLis.length; i++) {
+    allLis[i].addEventListener("click", onClick);
+}
+date = new Date();
+caption = document.getElementsByTagName('h1')[0];
+
+function loadJSON(yearMonthString) {
+    var data = new FormData();
+    data.append("yearMonthString", yearMonthString);
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open("get", "/api/ajax/echoCalendarEvents.php", true);
-    xobj.send();
-    xobj.onload = onGetEvents;
+    xobj.addEventListener("load", onGetEvents);
+    xobj.open("POST", "/api/ajax/echoCalendarEvents.php", true);
+    xobj.send(data);
+    console.log(yearMonthString);
 }
-
-function leftClick() {
-    date.setMonth(date.getMonth() - 1);
-    drawCalendar();
+function previousMonth() {
+    setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
 }
-function rightClick() {
-    date.setMonth(date.getMonth() + 1);
-    drawCalendar();
+function nextMonth() {
+    setSelectedDate(date.getFullYear(), date.getMonth() + 1, 1);
 }
 function isCorrectDate(firstDate, secondDate) {
     return (firstDate.toDateString() == secondDate.toDateString());
 }
-
-eventsArray = [];
-date = new Date();
-caption = document.getElementsByTagName('h1')[0];
-month = monthNames[date.getMonth()];
-year = date.getFullYear();
-firstDay = 0;
-lastDay = 0;
-caption.innerHTML = month + ' ' + year;
-
+function setSelectedDate(year, month, day, forcedRefresh = false) {
+    let newDate = new Date(year, month, day);
+    if (!forcedRefresh && newDate.getMonth() === date.getMonth()) {
+        document.getElementById(date.getDate() + firstDay).className = '';
+        document.getElementById(newDate.getDate() + firstDay).className = 'selectedDate';
+    } else {
+        let newMonth = newDate.getMonth();
+        loadJSON(newDate.getFullYear() + "-" + (++newMonth > 9 ? newMonth : "0" + newMonth) + "%");
+    }
+    date = newDate;
+}
 function drawCalendar() {
-    month = monthNames[date.getMonth()];
-    year = date.getFullYear()
-    caption.innerHTML = month + ' ' + year;
+    caption.innerHTML = monthNames[date.getMonth()] + ' ' + date.getFullYear();
     firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    let lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     let hide = document.getElementsByClassName("hide")[0] //Reset the sixth week
     if (hide) {
         hide.className = "bodyUl"; //Unhide the sixth week
     }
     for (let i = 1; i <= 42; i++) {
         let currentElement = document.getElementById(i);
+        currentElement.className = '';
         let calendarDate = i - firstDay;
         var currentDate = new Date(date.getFullYear(), date.getMonth(), calendarDate);
         if (calendarDate == date.getDate()) {
             currentElement.className = 'selectedDate';
-        } else {
-            currentElement.className = '';
         }
-        if (calendarDate > 0 && calendarDate <= lastDay) {
-            currentElement.innerHTML = "<span class='weekday'>" + days[currentDate.getDay()] + " </span>" + calendarDate;
+        if (calendarDate > 0 && calendarDate <= lastDate) {
+            currentElement.innerHTML = "<span class='weekday'>" + days[currentDate.getDay()]
+                + " </span>" + calendarDate;
             eventsArray.forEach(event => {
                 if (isCorrectDate(currentDate, event['date'])) {
-                    currentElement.innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
+                    currentElement.innerHTML += ('<p class="calendarEventTitle">' +
+                        event['title'] + '</p>' + '<p class="calendarEvent">' + event['time']
+                        + '</p>');
                 }
             });
         } else {
@@ -88,43 +90,36 @@ function drawCalendar() {
     }
 }
 function monthViewKeydown(event) {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
         case 27:
-            clearDetails();
-            return;
+            return clearDetails();
         case 37:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
-            break;
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() - 1);
         case 39:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-            break;
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() + 1);
         case 38:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
-            break;
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() - 7);
         case 40:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7);
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() + 7);
     }
-    drawCalendar();
 }
 function weekViewKeydown(event) {
     switch (event.keyCode) {
         case 27:
             return clearDetails();
         case 37:
-            return leftClick();
+            return previousMonth();
         case 39:
-            return rightClick();
+            return nextMonth();
         case 38:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
-            break;
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() - 1);
         case 40:
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+            return setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate() + 1);
     }
-    drawCalendar();
 }
 function clearDetails() {
     var element = document.getElementById("graydiv");
-    if (element != null) {
+    if (element) {
         element.parentNode.removeChild(element);
     }
 }
@@ -135,12 +130,10 @@ function displayDetails() {
     document.getElementById('myPage').append(grayDiv);
     let detailsDiv = document.createElement('div');
     detailsDiv.id = 'detailsDiv';
-
     eventsArray.forEach(event => {
         if (isCorrectDate(date, event['date'])) {
-            detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4>';
-            detailsDiv.innerHTML += '<p>Time: ' + event['time'] + '</p>';
-            detailsDiv.innerHTML += '<p>Notes: ' + event['notes'] + '</p>';
+            detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4><p>Time: ' + 
+                event['time'] + '</p><p>Notes: ' + event['notes'] + '</p>';
         }
     });
     document.getElementById('graydiv').append(detailsDiv);
@@ -149,39 +142,39 @@ function displayDetails() {
     document.getElementById('closeDetails').onclick = clearDetails;
 }
 function onClick() {
-    date = new Date(date.getFullYear(), date.getMonth(), this.id - firstDay);
+    setSelectedDate(date.getFullYear(), date.getMonth(), this.id - firstDay);
     if (document.getElementById(this.id).innerHTML.includes('<p ')) {
-        displayDetails(date);
+        displayDetails();
     }
-    drawCalendar();
 }
-function timeFormatter(time){
+function timeFormatter(time) {
     var hours = Number(time.substr(0, 2));
     return ((hours > 12) ? hours - 12 : hours) + time.slice(2, -3) + ((hours < 12) ? " AM" : " PM")
 }
 function onResize() {
-    if(window.outerWidth > 739) {
+    if (window.outerWidth > 739) {
         document.onkeydown = monthViewKeydown;
     } else {
         document.onkeydown = weekViewKeydown;
     }
 }
 function onGetEvents() {
-    response = this.responseText;
+    var response = this.responseText;
     actual_JSON = JSON.parse(response);
+    eventsArray = [];
     for (var i = 0; i < actual_JSON.length; i++) {
         obj = actual_JSON[i];
         eventsArray.push({
-            date : new Date(obj.date + "T12:00:00"), 
-            title : obj.title, 
-            time : timeFormatter(obj.startTime) + ' to ' + timeFormatter(obj.endTime), 
-            notes : obj.notes
+            date: new Date(obj.date + "T12:00:00"),
+            title: obj.title,
+            time: timeFormatter(obj.startTime) + ' to ' + timeFormatter(obj.endTime),
+            notes: obj.notes
         });
     }
     drawCalendar();
-    document.getElementsByClassName('leftButton')[0].onclick = leftClick;
-    document.getElementsByClassName('rightButton')[0].onclick = rightClick;
-    window.addEventListener("resize", onResize, false); //For switching between month and week key bindings
-    onResize(); //Set initial key bindings
-}; 
-loadJSON();
+};
+document.getElementsByClassName('leftButton')[0].onclick = previousMonth;
+document.getElementsByClassName('rightButton')[0].onclick = nextMonth;
+window.addEventListener("resize", onResize, false); //For switching between month and week key bindings
+onResize(); //Set initial key bindings
+setSelectedDate(date.getFullYear(), date.getMonth(), date.getDate(), true);

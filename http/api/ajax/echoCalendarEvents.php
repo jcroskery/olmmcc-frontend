@@ -16,6 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-require_once '/srv/http/api/calendar/calendarFunctions.php';
-$calendarEvents = getEvents();
+require_once '/srv/http/api/database/accessTable.php';
+$calendarEvents = getRowsContainingSubstring('calendar', 'date', $_POST['yearMonthString']);
 echo json_encode($calendarEvents);
