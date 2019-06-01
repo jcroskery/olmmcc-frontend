@@ -176,6 +176,7 @@ th, .calendar .headerUl li {
     vertical-align: top;
     height: 120px;
     padding: 4px;
+    cursor: pointer;
 }
 .calendarEvent {
     margin: 0;
@@ -191,8 +192,11 @@ body.calendarClass {
     width: 90%;
 }
 .selectedDate {
-    color: green;
     border: 2px solid green !important;
+    background-color: rgb(0, 228, 144);
+}
+.selectedDate:hover {
+    background-color: lightgreen !important;
 }
 /*Beginning of calendar popup (details)*/
 #detailsDiv p {

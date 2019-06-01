@@ -58,36 +58,36 @@ function drawCalendar() {
     caption.innerHTML = month + ' ' + year;
     firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    let hide = document.getElementsByClassName("hide")[0] //Reset the sixth week
+    if (hide) {
+        hide.className = "bodyUl"; //Unhide the sixth week
+    }
     for (let i = 1; i <= 42; i++) {
-
+        let currentElement = document.getElementById(i);
         let calendarDate = i - firstDay;
         var currentDate = new Date(date.getFullYear(), date.getMonth(), calendarDate);
         if (calendarDate == date.getDate()) {
-            document.getElementById(i).className = 'selectedDate';
+            currentElement.className = 'selectedDate';
         } else {
-            document.getElementById(i).className = '';
+            currentElement.className = '';
         }
         if (calendarDate > 0 && calendarDate <= lastDay) {
-            document.getElementById(i).innerHTML = "<span class='weekday'>" + days[currentDate.getDay()] + " </span>" + calendarDate;
+            currentElement.innerHTML = "<span class='weekday'>" + days[currentDate.getDay()] + " </span>" + calendarDate;
             eventsArray.forEach(event => {
                 if (isCorrectDate(currentDate, event['date'])) {
-                    document.getElementById(i).innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
+                    currentElement.innerHTML += ('<p class="calendarEventTitle">' + event['title'] + '</p>' + '<p class="calendarEvent">' + event['time'] + '</p>');
                 }
             });
-            if (i == 36) { //If sixth week is needed
-                document.getElementsByClassName("bodyUl")[5].classList = "bodyUl";
-            }
         } else {
-            document.getElementById(i).className = 'unNeededDate';
-            document.getElementById(i).innerHTML = '';
+            currentElement.className = 'unNeededDate';
+            currentElement.innerHTML = '';
             if (i == 36) { //If sixth week is unneeded
-                document.getElementsByClassName("bodyUl")[5].classList += ' hide';
+                document.getElementsByClassName("bodyUl")[5].className = 'hide';
             }
         }
-
     }
 }
-function keydown(event) {
+function monthViewKeydown(event) {
     switch(event.keyCode) {
         case 27:
             clearDetails();
@@ -106,13 +106,29 @@ function keydown(event) {
     }
     drawCalendar();
 }
+function weekViewKeydown(event) {
+    switch (event.keyCode) {
+        case 27:
+            return clearDetails();
+        case 37:
+            return leftClick();
+        case 39:
+            return rightClick();
+        case 38:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+            break;
+        case 40:
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+    }
+    drawCalendar();
+}
 function clearDetails() {
     var element = document.getElementById("graydiv");
     if (element != null) {
         element.parentNode.removeChild(element);
     }
 }
-function displayDetails(clickedId) {
+function displayDetails() {
     clearDetails();
     let grayDiv = document.createElement('div');
     grayDiv.id = 'graydiv';
@@ -143,6 +159,13 @@ function timeFormatter(time){
     var hours = Number(time.substr(0, 2));
     return ((hours > 12) ? hours - 12 : hours) + time.slice(2, -3) + ((hours < 12) ? " AM" : " PM")
 }
+function onResize() {
+    if(window.outerWidth > 739) {
+        document.onkeydown = monthViewKeydown;
+    } else {
+        document.onkeydown = weekViewKeydown;
+    }
+}
 function onGetEvents() {
     response = this.responseText;
     actual_JSON = JSON.parse(response);
@@ -158,6 +181,7 @@ function onGetEvents() {
     drawCalendar();
     document.getElementsByClassName('leftButton')[0].onclick = leftClick;
     document.getElementsByClassName('rightButton')[0].onclick = rightClick;
-    document.onkeydown = keydown;
+    window.addEventListener("resize", onResize, false); //For switching between month and week key bindings
+    onResize(); //Set initial key bindings
 }; 
 loadJSON();
