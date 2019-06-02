@@ -23,10 +23,11 @@ for (var i = 7; i < allLis.length; i++) {
 }
 date = new Date();
 caption = document.getElementsByTagName('h1')[0];
+eventsArray = [];
 
-function loadJSON(yearMonthString) {
+function loadJSON() {
     var data = new FormData();
-    data.append("yearMonthString", yearMonthString);
+    data.append("yearMonthString", currentYearMonthString);
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.addEventListener("load", onGetEvents);
@@ -42,16 +43,24 @@ function nextMonth() {
 function isCorrectDate(firstDate, secondDate) {
     return (firstDate.toDateString() == secondDate.toDateString());
 }
+function getFormattedYearMonthString(year, month){
+    return year + "-" + (++month > 9 ? month : "0" + month) + "%";
+}
 function setSelectedDate(year, month, day, forcedRefresh = false) {
     let newDate = new Date(year, month, day);
     if (!forcedRefresh && newDate.getMonth() === date.getMonth()) {
         document.getElementById(date.getDate() + firstDay).className = '';
         document.getElementById(newDate.getDate() + firstDay).className = 'selectedDate';
+        date = newDate;
     } else {
-        let newMonth = newDate.getMonth();
-        loadJSON(newDate.getFullYear() + "-" + (++newMonth > 9 ? newMonth : "0" + newMonth) + "%");
+        date = newDate;
+        currentYearMonthString = getFormattedYearMonthString(date.getFullYear(), date.getMonth());
+        if (eventsArray[currentYearMonthString] !== undefined) { //We already have the events
+            drawCalendar();
+        } else {
+            loadJSON();
+        }
     }
-    date = newDate;
 }
 function drawCalendar() {
     caption.innerHTML = monthNames[date.getMonth()] + ' ' + date.getFullYear();
@@ -72,7 +81,8 @@ function drawCalendar() {
         if (calendarDate > 0 && calendarDate <= lastDate) {
             currentElement.innerHTML = "<span class='weekday'>" + days[currentDate.getDay()]
                 + " </span>" + calendarDate;
-            eventsArray.forEach(event => {
+            eventsArray[getFormattedYearMonthString(date.getFullYear(), date.getMonth())].forEach
+            (event => {
                 if (isCorrectDate(currentDate, event['date'])) {
                     currentElement.innerHTML += ('<p class="calendarEventTitle">' +
                         event['title'] + '</p>' + '<p class="calendarEvent">' + event['time']
@@ -129,7 +139,8 @@ function displayDetails() {
     document.getElementById('myPage').append(grayDiv);
     let detailsDiv = document.createElement('div');
     detailsDiv.id = 'detailsDiv';
-    eventsArray.forEach(event => {
+    eventsArray[getFormattedYearMonthString(date.getFullYear(), date.getMonth())].forEach
+    (event => {
         if (isCorrectDate(date, event['date'])) {
             detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4><p>Time: ' + 
                 event['time'] + '</p><p>Notes: ' + event['notes'] + '</p>';
@@ -158,12 +169,12 @@ function onResize() {
     }
 }
 function onGetEvents() {
+    eventsArray[currentYearMonthString] = [];
     var response = this.responseText;
-    actual_JSON = JSON.parse(response);
-    eventsArray = [];
+    let actual_JSON = JSON.parse(response);
     for (var i = 0; i < actual_JSON.length; i++) {
         obj = actual_JSON[i];
-        eventsArray.push({
+        eventsArray[currentYearMonthString].push({
             date: new Date(obj.date + "T12:00:00"),
             title: obj.title,
             time: timeFormatter(obj.startTime) + ' to ' + timeFormatter(obj.endTime),
