@@ -19,7 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/database/frontEnd.php';
 if($_SESSION['admin']){
-    wrapperBegin('Song Articles');
+    wrapperBegin('Song Articles', 'database');
     outputTable('Song Articles', 'articles', "Article");
     wrapperEnd('<script src="/js/alert.js"></script>', false);
 } else {

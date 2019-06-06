@@ -141,6 +141,10 @@ td, .calendar .bodyUl li {
 th, .calendar .headerUl li {
     font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
 }
+body.calendarClass, body.databaseClass {
+    background-image: none;
+    background-color: lightblue;
+}
 /*Beginning of calendar*/
 .calendarEventTitle {
     font-size: 16px;
@@ -182,10 +186,6 @@ th, .calendar .headerUl li {
     margin: 0;
     padding: 0;
     font-size: 12px;
-}
-body.calendarClass {
-    background-image: none;
-    background-color: lightblue;
 }
 .calendar {
     margin: auto;
@@ -243,6 +243,9 @@ body.calendarClass {
     width: 100%;
     box-sizing: border-box;
     margin: 0;
+}
+.database button {
+    font-size: 15px;
 }
 .database textarea {
     height: 60px;
