@@ -26,7 +26,7 @@ if ($_SESSION['admin']) {
             $message .= changeRow($table, $_POST['id'], $key, $value);
         }
     }
-    echo $message != '' ? $message : 'Sucessfully updated!';
+    echo $message != '' ? $message : 'Sucessfully updated row ' . $_POST['id'] . '!';
 } else {
     notLoggedIn();
 }
