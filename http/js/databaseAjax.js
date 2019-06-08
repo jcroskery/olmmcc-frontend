@@ -15,6 +15,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function onChange() {
-    console.log('hi');
+function onChange(element) {
+    changeForm = new FormData();
+    let rowElements = document.getElementsByClassName(element.className);
+    for(let i = 0; i < rowElements.length; i++) {
+        changeForm.append(rowElements[i].name, rowElements[i].value);
+    }
+    changeForm.append('id', element.className);
+    changeForm.append('table', document.getElementsByTagName('table')[0].id);
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.addEventListener("load", onSubmitForm);
+    xobj.open("POST", "/api/database/change.php", true);
+    xobj.send(changeForm);
+}
+function onSubmitForm() {
+    createNotification(this.responseText);
 }

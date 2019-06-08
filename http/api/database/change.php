@@ -20,13 +20,13 @@ require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $table = array_key_last($_POST);
+    $table = $_POST['table'];
     foreach ($_POST as $key => $value) {
-        if ($key != $table) {
-            $message .= changeRow($table, $_POST[$table], $key, $value);
+        if($key != 'table' && $key != 'id') {
+            $message .= changeRow($table, $_POST['id'], $key, $value);
         }
     }
-    displayPopupNotification($message != '' ? $message : 'Sucessfully updated!', '/admin/' . $table);
+    echo $message != '' ? $message : 'Sucessfully updated!';
 } else {
     notLoggedIn();
 }

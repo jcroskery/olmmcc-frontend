@@ -19,7 +19,7 @@ function createNotification(notificationText) { //This is needed for ajax notifi
     let notificationDiv = document.createElement("div");
     notificationDiv.id = 'notificationDiv';
     notificationDiv.innerHTML = "\
-        <p id='notificationP'>$notificationText</p>\
+        <p id='notificationP'>" + notificationText + "</p>\
         <svg id='closeNotification' viewBox='0, 0, 100, 100'>\
             <circle cx=50 cy=50 r=50 fill=black />\
             <rect class='whiteRect' y='55' rx=13 ry=13 x='-45' transform='rotate(-45 0 0)' width='90' height='25' />\

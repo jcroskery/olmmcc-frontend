@@ -18,19 +18,19 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 include_once '/srv/http/helpers/wrapper.php';
-function determineCellContents($column, $columnName, $currentValue)
+function determineCellContents($column, $columnName, $currentValue, $id)
 {
     if ($column["Type"] == 'date') {
         return <<<HTML
         <td>
-            <input type="date" name="$columnName" onchange='onChange' value="$currentValue"/>
+            <input type="date" name="$columnName" class='$id' onchange='onChange(this)' value="$currentValue"/>
         </td>
 HTML;
     }
     if ($column["Type"] == 'text') {
         return <<<HTML
         <td>
-            <textarea name="$columnName">$currentValue</textarea>
+            <textarea name="$columnName" class='$id' onchange='onChange(this)'>$currentValue</textarea>
         </td>
 HTML;
     }
@@ -48,7 +48,7 @@ HTML;
         $noneOption = ($currentValue !== 'None') ? "<option value=''>None</option>" : '';
         return <<<HTML
         <td>
-            <select name="$columnName">
+            <select name="$columnName" class='$id' onchange='onChange(this)'>
                 <option disabled selected='selected'>$currentValue</option>
                 $options
                 $noneOption
@@ -58,7 +58,7 @@ HTML;
     }
     return <<<HTML
     <td>
-        <input type="text" name="$columnName" value="$currentValue"/>
+        <input type="text" name="$columnName" value="$currentValue" class='$id' onchange='onChange(this)'/>
     </td>
 HTML;
 
@@ -68,20 +68,17 @@ function getTableContents($table, $name)
     $columns = getAllColumns($table);
     foreach (getAllRows($table) as $row) {
         $rowContents = '';
+        $id = $row['id'];
         foreach ($columns as $column) {
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
                 $currentValue = ($row[$columnName]) ? $row[$columnName] : 'None';
-                $rowContents .= determineCellContents($column, $columnName, $currentValue);
+                $rowContents .= determineCellContents($column, $columnName, $currentValue, $id);
             }
         }
-        $id = $row['id'];
         $tableContents .= <<<HTML
         <tr>
-            <form action='/api/database/change.php' method='post'>
-                $rowContents
-                <button type='submit' name=$table value='$id'>Save Changes</button>
-            </form>
+            $rowContents
             <td class='centerDiv'>
                 <form action='/api/database/start.php' class='inline' method='post'>
                     <button name=$table value=$id>&#8593;</button>
@@ -111,12 +108,12 @@ function outputTable($title, $table, $name)
         if ($column['Key'] != 'PRI') {
             $tableHeader .= '<th>' . $formattedColumnName . '</th>';
             $defaultValue = 'New ' . $formattedColumnName;
-            $addRow .= determineCellContents($column, $columnName, $defaultValue);
+            $addRow .= determineCellContents($column, $columnName, $defaultValue, 'add');
         }
     }
     $tableContents = getTableContents($table, $name);
     echo <<<HTML
-        <table class='database'>
+        <table class='database' id='$table'>
             <caption>$title</caption>
         <tr>
             $tableHeader
@@ -124,12 +121,12 @@ function outputTable($title, $table, $name)
         </tr>
         $tableContents
         <tr>
-            <form action='/api/database/add.php' method='post'>
-                $addRow
-                <td colspan='3' class='centerDiv'>
+            $addRow
+            <td colspan='3' class='centerDiv'>
+                <form action='/api/database/add.php' method='post' id='add'>
                     <button type='submit' name=$table>Add $name</button>
-                </td>
-            </form>
+                </form>
+            </td>
         </tr>
         </table>
 HTML;
