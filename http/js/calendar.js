@@ -163,9 +163,9 @@ function timeFormatter(time) {
 }
 function onResize() {
     if (window.outerWidth > 739) {
-        document.onkeydown = monthViewKeydown;
+        document.addEventListener('keydown', monthViewKeydown);
     } else {
-        document.onkeydown = weekViewKeydown;
+        document.addEventListener('keydown', weekViewKeydown);
     }
 }
 function onGetEvents() {

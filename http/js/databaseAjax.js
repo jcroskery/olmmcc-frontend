@@ -15,15 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function closeNotification() {
-    var element = document.getElementById("notificationDiv");
-    if (element != null) {
-        element.parentNode.removeChild(element);
-    }
+function onChange() {
+    console.log('hi');
 }
-function keydown(event) {
-    if (event.keyCode == 27) {
-        closeNotification();
-    }
-}
-document.addEventListener('keydown', keydown);

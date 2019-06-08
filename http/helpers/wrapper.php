@@ -58,7 +58,7 @@ function wrapperEnd($otherScripts = '', $bottom = true)
         echo <<<HTML
         <div id='notificationDiv'>
             <p id='notificationP'>$notificationText</p>
-            <svg id='closeNotification' viewBox='0, 0, 100, 100'>
+            <svg id='closeNotification' viewBox='0, 0, 100, 100' onclick='closeNotification()'>
                 <circle cx=50 cy=50 r=50 fill=black />
                 <rect class='whiteRect' y='55' rx=13 ry=13 x='-45' transform='rotate(-45 0 0)' width='90' height='25' />
                 <rect class='whiteRect' y='-15' rx=13 ry=13 x='25' transform='rotate(45 0 0)' width='90' height='25' />
@@ -89,9 +89,7 @@ function notLoggedIn(){
 }
 function createLinks($classes, $linkId, $href, $title, $activeId){
     $active = ($linkId===$activeId && $linkId!=='') ? 'id="active"' : '';
-    return <<<HTML
-    <a class='$classes' $active href='$href'>$title</a>
-HTML;
+    return "<a class='$classes' $active href='$href'>$title</a>";
 }
 function topnav($id){
     $links[] = createLinks('leftFloat', 'home', "/", 'Home', $id);
@@ -139,6 +137,5 @@ function bottom(){
     <div class="bottom">
         <span class='smallSpan'>&copy; Justus Croskery. <a href='/terms'>Terms of Use</a> <a href='/privacy/'>Privacy Policy</a></span>
     </div>
-
 HTML;
 }
