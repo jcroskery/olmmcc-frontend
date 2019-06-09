@@ -16,8 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/other/leftRightButtons.php';
-buttonsBegin('Calendar', 'calendar'); //buttonsBegin adds left/right buttons to the page
+wrapperBegin('Calendar', 'calendar');
+echoButtons(); //Adds left/right buttons to the page
 echo <<<HTML
     <div class='calendar'>
         <h1></h1>

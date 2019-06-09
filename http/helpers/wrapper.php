@@ -20,16 +20,11 @@ include_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/api/session/sessionStart.php';
 function wrapperBegin($title, $pageId = '', $loginRequired = false)
 {
-    
-    echoHead($title, $pageId . 'Class', $loginRequired);
-    topnav($pageId);
-    return true;
-}
-function echoHead($title, $bodyClassName, $loginRequired) {
     if ($loginRequired && !loggedIn()) {
         return false;
     }
-echo <<<HTML
+    $bodyClassName = $pageId . 'Class';
+    echo <<<HTML
     <!DOCTYPE html>
     <html lang='en'>
 
@@ -47,6 +42,8 @@ echo <<<HTML
     <body class='$bodyClassName'>
         <div id="myPage">
 HTML;
+    topnav($pageId);
+    return true;
 }
 function wrapperEnd($otherScripts = '', $bottom = true)
 {

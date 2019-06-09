@@ -16,10 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-include_once '/srv/http/helpers/wrapper.php';
-function buttonsBegin($title, $pageId, $loginRequired = false) {
-    echoHead($title, $pageId . "Class", $loginRequired);
-echo <<<HTML
+function echoButtons() {
+    echo <<<HTML
     <button class='leftButton'>
         <svg viewBox='0, 0, 100, 200'>
             <polygon class='buttonPolygon' points="100,0 0,100 100,200"/>
@@ -31,5 +29,4 @@ echo <<<HTML
         </svg>
     </button>
 HTML;
-    topnav($pageId);
 }

@@ -16,7 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/other/leftRightButtons.php';
-buttonsBegin('Gallery', 'gallery'); //buttonsBegin adds left/right buttons to the page
+wrapperBegin('Gallery', 'gallery');
+echoButtons(); //Adds left/right buttons to the page
 echo "<div id='imageBackgroundDiv'></div>";
 wrapperEnd('<script src="/js/gallery.js"></script>', false);
