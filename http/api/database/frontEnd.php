@@ -18,19 +18,19 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 include_once '/srv/http/helpers/wrapper.php';
-function determineCellContents($column, $columnName, $currentValue, $id)
+function determineCellContents($column, $columnName, $currentValue, $rowName)
 {
     if ($column["Type"] == 'date') {
         return <<<HTML
         <td>
-            <input type="date" name="$columnName" class='$id' onchange='onChange(this)' value="$currentValue"/>
+            <input type="date" name="$columnName" $rowName value="$currentValue"/>
         </td>
 HTML;
     }
     if ($column["Type"] == 'text') {
         return <<<HTML
         <td>
-            <textarea name="$columnName" class='$id' onchange='onChange(this)'>$currentValue</textarea>
+            <textarea name="$columnName" $rowName>$currentValue</textarea>
         </td>
 HTML;
     }
@@ -48,7 +48,7 @@ HTML;
         $noneOption = ($currentValue !== 'None') ? "<option value=''>None</option>" : '';
         return <<<HTML
         <td>
-            <select name="$columnName" class='$id' onchange='onChange(this)'>
+            <select name="$columnName" $rowName>
                 <option disabled selected='selected'>$currentValue</option>
                 $options
                 $noneOption
@@ -58,7 +58,7 @@ HTML;
     }
     return <<<HTML
     <td>
-        <input type="text" name="$columnName" value="$currentValue" class='$id' onchange='onChange(this)'/>
+        <input type="text" name="$columnName" value="$currentValue" $rowName/>
     </td>
 HTML;
 
@@ -73,7 +73,7 @@ function getTableContents($table, $name)
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
                 $currentValue = ($row[$columnName]) ? $row[$columnName] : 'None';
-                $rowContents .= determineCellContents($column, $columnName, $currentValue, $id);
+                $rowContents .= determineCellContents($column, $columnName, $currentValue, "class='$id' onchange='onChange(this)'");
             }
         }
         $tableContents .= <<<HTML
