@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 include_once '../helpers/wrapper.php';
-wrapperBegin('Sign Up', 'signup');
+wrapperBegin('Sign Up');
 echo <<<HTML
 
 <form method="post" action="signup.php" class='mainForm'>
@@ -55,4 +55,4 @@ echo <<<HTML
         <input type="submit" name="accept" value="Sign up!" class="submit"/>
 </form>
 HTML;
-wrapperEnd();
+wrapperEnd('signup');

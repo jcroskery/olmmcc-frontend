@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
-wrapperBegin('Login', 'login');
+wrapperBegin('Login');
 echo <<<HTML
 <form method="post" action="login.php" class='mainForm'>
         <h1>Login</h1>
@@ -34,4 +34,4 @@ echo <<<HTML
         <span class='smallSpan'><a href='/account/password/'>Forgot your password?</a></span>
 </form>
 HTML;
-wrapperEnd();
+wrapperEnd('login');

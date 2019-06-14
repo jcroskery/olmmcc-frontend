@@ -101,7 +101,7 @@ HTML;
 }
 function outputTable($title, $table, $name)
 {
-    wrapperBegin($title, 'database');
+    wrapperBegin($title, 'databaseClass');
     foreach (getAllColumns($table) as $column) {
         $columnName = $column['Field'];
         $formattedColumnName = ucfirst(preg_replace('/(?<!\ )[A-Z]/', ' $0', $columnName));
@@ -130,5 +130,5 @@ function outputTable($title, $table, $name)
         </tr>
         </table>
 HTML;
-    wrapperEnd('<script src="/js/alert.js"></script><script src="/js/createNotification.js"></script><script src="/js/closeNotification.js"></script><script src="/js/databaseAjax.js"></script>', false);
+    wrapperEnd('account', '<script src="/js/alert.js"></script><script src="/js/createNotification.js"></script><script src="/js/closeNotification.js"></script><script src="/js/databaseAjax.js"></script>', false);
 }

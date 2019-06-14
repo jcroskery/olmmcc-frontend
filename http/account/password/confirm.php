@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+/*
 require_once '/srv/logincreds.php';
 require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/sendEmail.php';
@@ -49,3 +50,4 @@ if($row[1] != null){
     $message = "Email not found in our database. Please try again.";
     displayPopupNotification($message, '/account/password/');
 }
+*/

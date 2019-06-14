@@ -17,23 +17,16 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
-wrapperBegin('Change Password', '');
-$email = $_SESSION['email'];
-if($email == ''){
-    $emailInput = <<<HTML
-    <label for='email'>Email: </label>
-    <input id='email' type="email" name="email" autofocus autocomplete="on" placeholder="Your email" required="required" value='$email'/>
-    <br>
-HTML;
-}
-$passwordAutoFocus = $email != '' ? 'autofocus="true"' : '';
+wrapperBegin('Change Password');
 echo <<<HTML
 <form method="post" action="/account/password/confirm.php" class='mainForm'>
-    <h1>Change your password: </h1>
-    <div class='rightDiv'>
-        $emailInput
+    <h1>Forgot your password?</h1>
+    <div class='centerDiv'>
+        <label for='email'>Email: </label>
+        <input id='email' type="email" name="email" autofocus autocomplete="on" placeholder="Your email" required="required" value='$email'/>
+        <br>
         <label for='password1'>New Password: </label>
-        <input id='password1' type="password" name="password" $passwordAutoFocus autocomplete="off" placeholder="Your password"required="required"/>
+        <input id='password1' type="password" name="password" autocomplete="off" placeholder="Your password"required="required"/>
         <br>
         <label for='password2'>Repeat New Password: </label>
         <input id='password2' type="password" name="password1" autocomplete="off" placeholder="Repeat your password"required="required"/>

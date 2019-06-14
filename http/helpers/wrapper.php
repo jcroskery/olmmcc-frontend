@@ -18,12 +18,11 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/displayMessage.php';
 include_once '/srv/http/api/session/sessionStart.php';
-function wrapperBegin($title, $pageId = '', $loginRequired = false)
+function wrapperBegin($title, $className = '', $loginRequired = false)
 {
     if ($loginRequired && !loggedIn()) {
         return false;
     }
-    $bodyClassName = $pageId . 'Class';
     echo <<<HTML
     <!DOCTYPE html>
     <html lang='en'>
@@ -39,14 +38,14 @@ function wrapperBegin($title, $pageId = '', $loginRequired = false)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body class='$bodyClassName'>
+    <body class='$className'>
         <div id="myPage">
 HTML;
-    topnav($pageId);
     return true;
 }
-function wrapperEnd($otherScripts = '', $bottom = true)
+function wrapperEnd($pageId = '', $otherScripts = '', $bottom = true)
 {
+    topnav($pageId);
     if($bottom){
         bottom();
     }

@@ -21,7 +21,7 @@ include_once '/srv/http/api/songs/songFunctions.php';
 include_once 'videohelper.php';
 function displaySongArticle($article)
 {
-    wrapperBegin('Current Songs', 'songs');
+    wrapperBegin('Current Songs');
     echo <<<HTML
     <div id="main-text">
         <h1>This Month's Songs</h1>
@@ -40,5 +40,5 @@ HTML;
         }
     }
     echo '</div>';
-    wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/songs.js"></script>');
+    wrapperEnd('songs', '<script src="/js/popupHelper.js"></script><script src="/js/songs.js"></script>');
 }

@@ -40,7 +40,7 @@ if($_SESSION['admin']){
     </div>
 HTML;
 
-    wrapperEnd();
+    wrapperEnd('account');
 } else {
     notLoggedIn();
 }

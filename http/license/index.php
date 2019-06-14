@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '../helpers/wrapper.php';
 $license = file_get_contents('/srv/LICENSE');
-wrapperBegin('License Agreement', '');
+wrapperBegin('License Agreement');
 echo <<<HTML
 <div id="main-text">
 <h1>License</h1>
@@ -27,5 +27,4 @@ $license
 </pre>
 </div>
 HTML;
-
 wrapperEnd();

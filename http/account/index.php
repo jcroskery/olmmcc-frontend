@@ -19,7 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/account/accountFunctions.php';
 refreshAccount();
-if (wrapperBegin('Your Account', 'account', true)) {
+if (wrapperBegin('Your Account', true)) {
     $email = $_SESSION['email'];
     $username = $_SESSION['username'];
     $subscriptionName = getSubscriptionPolicyName($_SESSION['subscription_policy']);
@@ -77,7 +77,7 @@ if (wrapperBegin('Your Account', 'account', true)) {
         </div>
 
 HTML;
-    wrapperEnd();
+    wrapperEnd('account');
 } else {
     notLoggedIn();
 }

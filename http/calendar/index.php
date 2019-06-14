@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/other/leftRightButtons.php';
-wrapperBegin('Calendar', 'calendar');
+wrapperBegin('Calendar', 'calendarBody');
 echoButtons(); //Adds left/right buttons to the page
 echo <<<HTML
     <div class='calendar'>
@@ -42,4 +42,4 @@ for($i = 0; $i < 6; $i++){
     echo "</ul>";
 }
 echo "</div>";
-wrapperEnd('<script src="/js/popupHelper.js"></script><script src="/js/calendar.js"></script>', false);
+wrapperEnd('calendar', '<script src="/js/popupHelper.js"></script><script src="/js/calendar.js"></script>', false);
