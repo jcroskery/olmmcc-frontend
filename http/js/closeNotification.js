@@ -27,3 +27,7 @@ function keydown(event) {
     }
 }
 document.addEventListener('keydown', keydown);
+let button = document.getElementById('closeNotification');
+if (button) {
+    button.addEventListener('click', closeNotification);
+}

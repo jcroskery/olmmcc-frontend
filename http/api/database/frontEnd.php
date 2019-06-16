@@ -73,11 +73,11 @@ function getTableContents($table, $name)
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
                 $currentValue = ($row[$columnName]) ? $row[$columnName] : 'None';
-                $rowContents .= determineCellContents($column, $columnName, $currentValue, "class='$id' onchange='onChange(this)'");
+                $rowContents .= determineCellContents($column, $columnName, $currentValue, "class='onChange'");
             }
         }
         $tableContents .= <<<HTML
-        <tr>
+        <tr id=$id>
             $rowContents
             <td class='centerDiv'>
                 <form action='/api/database/start.php' class='inline' method='post'>

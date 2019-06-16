@@ -54,7 +54,7 @@ function wrapperEnd($pageId = '', $otherScripts = '', $bottom = true)
         echo <<<HTML
         <div id='notificationDiv'>
             <p id='notificationP'>$notificationText</p>
-            <svg id='closeNotification' viewBox='0, 0, 100, 100' onclick='closeNotification()'>
+            <svg id='closeNotification' viewBox='0, 0, 100, 100'>
                 <circle cx=50 cy=50 r=50 fill=black />
                 <rect class='whiteRect' y='55' rx=13 ry=13 x='-45' transform='rotate(-45 0 0)' width='90' height='25' />
                 <rect class='whiteRect' y='-15' rx=13 ry=13 x='25' transform='rotate(45 0 0)' width='90' height='25' />

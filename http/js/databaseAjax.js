@@ -15,13 +15,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function onChange(element) {
+function onChange(event) {
+    let element = event.target;
     changeForm = new FormData();
-    let rowElements = document.getElementsByClassName(element.className);
-    for(let i = 0; i < rowElements.length; i++) {
-        changeForm.append(rowElements[i].name, rowElements[i].value);
-    }
-    changeForm.append('id', element.className);
+    changeForm.append(element.name, element.value);
+    console.log(element)
+    changeForm.append('id', element.parentNode.id);
     changeForm.append('table', document.getElementsByTagName('table')[0].id);
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -31,4 +30,8 @@ function onChange(element) {
 }
 function onSubmitForm() {
     createNotification(this.responseText);
+}
+let fields = document.getElementsByClassName('onChange');
+for(let i = 0; i < fields.length; i++) {
+    fields[i].addEventListener('change', onChange);
 }

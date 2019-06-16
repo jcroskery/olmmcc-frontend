@@ -27,4 +27,5 @@ function createNotification(notificationText) { //This is needed for ajax notifi
             <rect class='whiteRect' y='-15' rx=13 ry=13 x='25' transform='rotate(45 0 0)' width='90' height='25' />\
         </svg>";
     document.getElementById('myPage').appendChild(notificationDiv);
+    document.getElementById('closeNotification').addEventListener('click', closeNotification);
 }
