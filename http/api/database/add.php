@@ -17,22 +17,18 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $table = array_key_last($_POST);
-    $columns = getAllColumns($table);
     $names = [];
     $contents = [];
-    foreach ($columns as $column) {
-        $columnName = $column['Field'];
-        if ($column['Key'] != 'PRI') {
-            $contents[] = $_POST[$columnName];
-            $names[] = $columnName;
+    foreach ($_POST as $postName => $postValue) {
+        if($postName!='table') {
+            $names[] = $postName;
+            $contents[] = $postValue;
         }
     }
-    $result = createRow($table, $names, $contents);
-    displayPopupNotification($result ? $result : "Successfully added!", '/admin/' . $table);
+    $result = createRow($_POST['table'], $names, $contents);
+    echo $result ? $result : "Successfully added!";
 } else {
     notLoggedIn();
 }

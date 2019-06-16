@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/displayMessage.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
     $table = $_POST['table'];

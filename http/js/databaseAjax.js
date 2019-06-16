@@ -17,10 +17,8 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 function onChange(event) {
     let element = event.target;
-    changeForm = new FormData();
+    let changeForm = new FormData();
     changeForm.append(element.name, element.value);
-    console.log(element)
-    changeForm.append('id', element.parentNode.id);
     changeForm.append('table', document.getElementsByTagName('table')[0].id);
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -31,7 +29,21 @@ function onChange(event) {
 function onSubmitForm() {
     createNotification(this.responseText);
 }
+function onClickAdd() {
+    let changeForm = new FormData();
+    changeForm.append('table', document.getElementsByTagName('table')[0].id);
+    let addInputs = document.getElementsByClassName('add');
+    for(let i = 0; i < addInputs.length; i++) {
+        changeForm.append(addInputs[i].name, addInputs[i].value);
+    }
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.addEventListener("load", onSubmitForm);
+    xobj.open("POST", "/api/database/add.php", true);
+    xobj.send(changeForm);
+}
 let fields = document.getElementsByClassName('onChange');
 for(let i = 0; i < fields.length; i++) {
     fields[i].addEventListener('change', onChange);
 }
+document.getElementById('addSubmit').addEventListener('click', onClickAdd);

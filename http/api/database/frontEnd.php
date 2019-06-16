@@ -18,19 +18,19 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 include_once '/srv/http/helpers/wrapper.php';
-function determineCellContents($column, $columnName, $currentValue, $rowName)
+function determineCellContents($column, $columnName, $currentValue, $class = '')
 {
     if ($column["Type"] == 'date') {
         return <<<HTML
         <td>
-            <input type="date" name="$columnName" $rowName value="$currentValue"/>
+            <input type="date" name="$columnName" class='$class' value="$currentValue"/>
         </td>
 HTML;
     }
     if ($column["Type"] == 'text') {
         return <<<HTML
         <td>
-            <textarea name="$columnName" $rowName>$currentValue</textarea>
+            <textarea name="$columnName" class='$class'>$currentValue</textarea>
         </td>
 HTML;
     }
@@ -48,7 +48,7 @@ HTML;
         $noneOption = ($currentValue !== 'None') ? "<option value=''>None</option>" : '';
         return <<<HTML
         <td>
-            <select name="$columnName" $rowName>
+            <select name="$columnName" class='$class'>
                 <option disabled selected='selected'>$currentValue</option>
                 $options
                 $noneOption
@@ -58,7 +58,7 @@ HTML;
     }
     return <<<HTML
     <td>
-        <input type="text" name="$columnName" value="$currentValue" $rowName/>
+        <input type="text" name="$columnName" value="$currentValue" class='$class'/>
     </td>
 HTML;
 
@@ -73,7 +73,7 @@ function getTableContents($table, $name)
             $columnName = $column['Field'];
             if ($column['Key'] != 'PRI') {
                 $currentValue = ($row[$columnName]) ? $row[$columnName] : 'None';
-                $rowContents .= determineCellContents($column, $columnName, $currentValue, "class='onChange'");
+                $rowContents .= determineCellContents($column, $columnName, $currentValue, "onChange");
             }
         }
         $tableContents .= <<<HTML
@@ -123,9 +123,7 @@ function outputTable($title, $table, $name)
         <tr>
             $addRow
             <td colspan='3' class='centerDiv'>
-                <form action='/api/database/add.php' method='post' id='add'>
-                    <button type='submit' name=$table>Add $name</button>
-                </form>
+                <button id='addSubmit' type='submit' name=$table>Add $name</button>
             </td>
         </tr>
         </table>
