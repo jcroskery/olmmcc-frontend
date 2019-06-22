@@ -21,4 +21,4 @@ include_once '/srv/http/api/other/leftRightButtons.php';
 wrapperBegin('Gallery', 'galleryClass');
 echoButtons(); //Adds left/right buttons to the page
 echo "<div id='imageBackgroundDiv'></div>";
-wrapperEnd('gallery', '<script src="/js/gallery.js"></script>', false);
+wrapperEnd('gallery', '<script src="/gallery/gallery.js"></script>', false);

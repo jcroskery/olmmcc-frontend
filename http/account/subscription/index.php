@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/database/accessTable.php';
-include_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 $subscriptionOptions = ['You are now unsubscribed from receiving emails.', 'You are now subscribed to receive emails.', 'You are now subscribed to receive emails and reminders.'];
 if (loggedIn()) {
     $subscription_policy = $_POST['subscriptionPolicy'];

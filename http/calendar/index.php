@@ -42,4 +42,4 @@ for($i = 0; $i < 6; $i++){
     echo "</ul>";
 }
 echo "</div>";
-wrapperEnd('calendar', '<script src="/js/popupHelper.js"></script><script src="/js/calendar.js"></script>', false);
+wrapperEnd('calendar', '<script src="/js/popupHelper.js"></script><script src="/calendar/calendar.js"></script>', false);

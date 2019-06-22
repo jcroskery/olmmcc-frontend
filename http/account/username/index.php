@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-include_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/wrapper.php';
 if (loggedIn()) {

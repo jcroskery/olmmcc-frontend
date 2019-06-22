@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 include_once '/srv/http/api/session/sessionStart.php';
 function wrapperBegin($title, $className = '', $loginRequired = false)
 {
@@ -61,7 +61,7 @@ function wrapperEnd($pageId = '', $otherScripts = '', $bottom = true)
             </svg>
         </div>
 HTML;
-        $otherScripts .= '<script src="/js/closeNotification.js"></script>';
+        $otherScripts .= '<script src="/api/notification/closeNotification.js"></script>';
         $_SESSION['notification'] = '';
     }
     echo <<<HTML

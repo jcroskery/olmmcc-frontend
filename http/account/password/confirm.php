@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 /*
 require_once '/srv/logincreds.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/helpers/sendEmail.php';
 $email = sanitizeString($_POST['email']);
 $password = sanitizeString($_POST['password']);

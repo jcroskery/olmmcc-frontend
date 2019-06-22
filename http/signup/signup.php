@@ -19,7 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 require_once '/srv/http/api/account/validationFunctions.php';
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/session/sessionStart.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 $email = strtolower($_POST['email']);
 $username = $_POST['username'];
 $password1 = $_POST['password1'];

@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/api/session/sessionStart.php';
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/displayMessage.php';
+require_once '/srv/http/api/notification/displayNotification.php';
 $email = strtolower($_POST['email']);
 $password = $_POST['password'];
 $row = getRow('users', 'email', $email);
