@@ -31,7 +31,7 @@ function loadJSON() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.addEventListener("load", onGetEvents);
-    xobj.open("POST", "/api/ajax/echoCalendarEvents.php", true);
+    xobj.open("POST", "/api/calendar/echoCalendarEvents.php", true);
     xobj.send(data);
 }
 function previousMonth() {

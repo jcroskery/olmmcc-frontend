@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 function loadImageList() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open("get", "/api/ajax/echoImageList.php", true);
+    xobj.open("get", "/api/gallery/echoImageList.php", true);
     xobj.send();
     xobj.onload = onLoadImageList;
 }
