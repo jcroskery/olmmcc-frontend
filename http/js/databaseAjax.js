@@ -56,12 +56,40 @@ function onClickDelete(event) {
         xobj.send(changeForm);
     }
 }
+function onClickMoveToStart(event) {
+    let changeForm = new FormData();
+    changeForm.append('id', event.target.parentElement.parentElement.id);
+    changeForm.append('table', document.getElementsByTagName('table')[0].id);
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.addEventListener("load", onSubmitForm);
+    xobj.open("POST", "/api/database/start.php", true);
+    xobj.send(changeForm);
+}
+function onClickMoveToEnd(event) {
+    let changeForm = new FormData();
+    changeForm.append('id', event.target.parentElement.parentElement.id);
+    changeForm.append('table', document.getElementsByTagName('table')[0].id);
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.addEventListener("load", onSubmitForm);
+    xobj.open("POST", "/api/database/end.php", true);
+    xobj.send(changeForm);
+}
 let fields = document.getElementsByClassName('onChange');
 for(let i = 0; i < fields.length; i++) {
     fields[i].addEventListener('change', onChange);
 }
-let deleteButtons = document.getElementsByClassName('delete');
+let deleteButtons = document.getElementsByName('delete');
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', onClickDelete);
+}
+let startButtons = document.getElementsByName('start');
+for (let i = 0; i < startButtons.length; i++) {
+    startButtons[i].addEventListener('click', onClickMoveToStart);
+}
+let endButtons = document.getElementsByName('end');
+for (let i = 0; i < endButtons.length; i++) {
+    endButtons[i].addEventListener('click', onClickMoveToEnd);
 }
 document.getElementById('addSubmit').addEventListener('click', onClickAdd);

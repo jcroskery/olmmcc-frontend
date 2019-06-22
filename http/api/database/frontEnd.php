@@ -80,17 +80,13 @@ function getTableContents($table, $name)
         <tr id=$id>
             $rowContents
             <td class='centerDiv'>
-                <form action='/api/database/start.php' class='inline' method='post'>
-                    <button name=$table value=$id>&#8593;</button>
-                </form>
+                <button name='start'>&#8593;</button>
             </td>
             <td class='centerDiv'>
-                <form action='/api/database/end.php' class='inline' method='post'>
-                    <button name=$table value=$id>&#8595;</button>
-                </form>
+                <button name='end'>&#8595;</button>
             </td>
             <td class='centerDiv'>
-                <button class='delete' name=$table value=$id>Delete $name</button>
+                <button class='delete' name='delete'>Delete $name</button>
             </td>
         <tr>
 HTML;

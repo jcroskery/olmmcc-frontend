@@ -17,13 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $table = array_key_first($_POST);
-    $newId = array_pop(getMaxId($table)[0]) + 1;
-    $message = changeRow($table, $_POST[$table], 'id', $newId);
-    displayPopupNotification($message ? $message : "Successfully moved to end.", '/admin/' . $table);
+    $newId = array_pop(getMaxId($_POST['table'])[0]) + 1;
+    $message = changeRow($_POST['table'], $_POST['id'], 'id', $newId);
+    echo $message ? $message : "Successfully moved row " . $_POST['id'] . " to end.";
 } else {
     notLoggedIn();
 }
