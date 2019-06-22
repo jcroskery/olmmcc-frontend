@@ -90,9 +90,7 @@ function getTableContents($table, $name)
                 </form>
             </td>
             <td class='centerDiv'>
-                <form action='/api/database/delete.php' method='post'>
-                    <button class='delete' name=$table value=$id>Delete $name</button>
-                </form>
+                <button class='delete' name=$table value=$id>Delete $name</button>
             </td>
         <tr>
 HTML;
@@ -123,10 +121,10 @@ function outputTable($title, $table, $name)
         <tr>
             $addRow
             <td colspan='3' class='centerDiv'>
-                <button id='addSubmit' type='submit' name=$table>Add $name</button>
+                <button id='addSubmit' name=$table>Add $name</button>
             </td>
         </tr>
         </table>
 HTML;
-    wrapperEnd('account', '<script src="/js/alert.js"></script><script src="/api/notification/createNotification.js"></script><script src="/api/notification/closeNotification.js"></script><script src="/js/databaseAjax.js"></script>', false);
+    wrapperEnd('account', '<script src="/api/notification/createNotification.js"></script><script src="/api/notification/closeNotification.js"></script><script src="/js/databaseAjax.js"></script>', false);
 }

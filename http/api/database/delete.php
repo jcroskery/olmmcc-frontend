@@ -20,9 +20,8 @@ require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $table = array_key_first($_POST);
-    $result = deleteRow($table, $_POST[$table]);
-    displayPopupNotification($message ? $message : "Deletion successful.", '/admin/' . $table);
+    $message = deleteRow($_POST['table'], $_POST['id']);
+    echo $message ? $message : "Successfully deleted row " . $_POST['id'] . '.';
 } else {
     notLoggedIn();
 }
