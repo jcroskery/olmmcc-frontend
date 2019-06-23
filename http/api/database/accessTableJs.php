@@ -16,15 +16,22 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-include_once '/srv/http/helpers/wrapper.php';
-if ($_SESSION['admin']) {
-    wrapperBegin("Calendar Events", 'databaseClass');
-    echo <<<HTML
-        <table class='database' id='calendar'>
-            <caption>Calendar Events</caption>
-        </table>
-HTML;
-    wrapperEnd('account', '<script src="/api/notification/createNotification.js"></script><script src="/api/notification/closeNotification.js"></script><script src="/js/database.js"></script>', false);
+require_once '/srv/http/api/database/accessTable.php';
+require_once '/srv/http/helpers/wrapper.php';
+
+if($_SESSION['admin']) {
+    switch ($_POST['request']) {
+        case 'getColumnTitles':
+            $columns = getAllColumns($_POST['table']);
+            foreach($columns as $column) {
+                $titles[$column['Field']] = $column['Type'];
+            }
+            echo json_encode($titles);
+            return;
+        case 'getAllRows':
+            echo json_encode(getAllRows($_POST['table']));
+            return;
+    }
 } else {
     notLoggedIn();
 }
