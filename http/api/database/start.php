@@ -25,7 +25,7 @@ if ($_SESSION['admin']) {
         echo json_encode(['success' => false, 'message' => $result]);
     } else {
         $row = getRow($_POST['table'], 'id', $newId);
-        $message = "Successfully moved row " . $newId . ' to start.';
+        $message = "Successfully moved row " . $_POST['id'] . ' to start.';
         echo json_encode(['success' => true, 'message' => $message, 'row' => $row, 'oldId' => $_POST['id']]);
     }
 } else {
