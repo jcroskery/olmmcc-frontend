@@ -31,6 +31,13 @@ if($_SESSION['admin']) {
         case 'getAllRows':
             echo json_encode(getAllRows($_POST['table']));
             return;
+        case 'getRowTitles':
+            $rows = getAllRows($_POST['table']);
+            foreach($rows as $row){
+                $titles[] = $row["title"];
+            }
+            echo json_encode(['table' => $_POST['table'], 'titles' => $titles]);
+            return;
     }
 } else {
     notLoggedIn();

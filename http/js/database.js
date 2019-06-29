@@ -110,10 +110,28 @@ function submitXHR(changeForm, url, onLoad) {
     xobj.open("POST", url, true);
     xobj.send(changeForm);
 }
+function getOtherDatabaseTitles() {
+    let parsedResponse = JSON.parse(this.responseText);
+    databaseTitles = [];
+    databaseTitles[parsedResponse.table] = parsedResponse.titles;
+    createTableHeader();
+}
+function getParsedColumns() {
+    parsedColumns = JSON.parse(this.responseText);
+    for (let name in parsedColumns) {
+        if (name === 'article') { //check for article (and other database dependencies)
+            let changeForm = new FormData();
+            changeForm.append('table', name + 's');
+            changeForm.append('request', 'getRowTitles');
+            submitXHR(changeForm, "/api/database/accessTableJs.php", getOtherDatabaseTitles);
+            return;
+        }
+    }
+    createTableHeader();
+}
 function createTableHeader() {
     let tableHeaderRow = document.createElement('tr');
     tableHeaderRow.id = 'tableHeaderRow';
-    parsedColumns = JSON.parse(this.responseText);
     let tableHeader = '';
     for (let name in parsedColumns) {
         if(name !== 'id') {
@@ -135,6 +153,21 @@ function determineCellContents(type, name, value, add = false) {
         td.innerHTML = "<input type='date' name='" + name + "' value='" + value + "' />";
     } else if (type === 'text') {
         td.innerHTML = "<textarea name='" + name + "'>" + value + "</textarea>";
+    } else if (name === 'article') {
+        let tmpHtml = "<select name='" + name + "'>\
+            <option value=''>None</option>"
+        let otherTable = databaseTitles[name + 's']
+        for(let i = 0; i < otherTable.length; i++){
+            tmpHtml += "<option>" + otherTable[i] + "</option>";
+        }
+        tmpHtml += "</select>";
+        td.innerHTML = tmpHtml;
+        let options = td.lastChild.childNodes;
+        for(let i = 0; i < options.length; i++){
+            if(value === options[i].innerHTML) {
+                options[i].setAttribute('selected', 'selected');
+            }
+        }
     } else {
         td.innerHTML = '<input type="text" name="' + name + '" value="' + value + '" />';
     }
@@ -203,5 +236,5 @@ function createRows() {
     let changeForm = new FormData();
     changeForm.append('table', table.id);
     changeForm.append('request', 'getColumnTitles');
-    submitXHR(changeForm, "/api/database/accessTableJs.php", createTableHeader);
+    submitXHR(changeForm, "/api/database/accessTableJs.php", getParsedColumns);
 }

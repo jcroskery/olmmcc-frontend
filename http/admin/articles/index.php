@@ -16,9 +16,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/api/database/frontEnd.php';
-if($_SESSION['admin']){
-    outputTable('Song Articles', 'articles', "Article");
+include_once '/srv/http/helpers/wrapper.php';
+if ($_SESSION['admin']) {
+    wrapperBegin('Song Articles', 'databaseClass');
+    echo <<<HTML
+        <table class='database' id='articles'>
+            <caption>Articles</caption>
+        </table>
+HTML;
+    wrapperEnd('account', '<script src="/api/notification/createNotification.js"></script><script src="/api/notification/closeNotification.js"></script><script src="/js/database.js"></script>', false);
 } else {
     notLoggedIn();
 }
