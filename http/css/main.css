@@ -64,7 +64,7 @@ pre {
 }
 /*Beginning of topnav*/
 #topnav {
-    overflow: hidden;
+    overflow: visible;
     position: fixed;
     font-family: 'gotham', 'calibri', 'cambria', 'noto sans', 'sans';
     width: 100%;
