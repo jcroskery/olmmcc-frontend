@@ -24,11 +24,11 @@ function onChange(event) {
     changeForm.append('table', table.id);
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onSubmitForm);
+    xobj.addEventListener("load", onChangeComplete);
     xobj.open("POST", "/api/database/change.php", true);
     xobj.send(changeForm);
 }
-function onSubmitForm() {
+function onChangeComplete() {
     createNotification(this.responseText);
 }
 function onClickAdd() {
@@ -79,15 +79,29 @@ function onClickMoveToStart(event) {
     changeForm.append('table', table.id);
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onSubmitForm);
+    xobj.addEventListener("load", moveRowToStart);
     xobj.open("POST", "/api/database/start.php", true);
     xobj.send(changeForm);
+}
+function moveRowToStart() {
+    moveRow(this.responseText, 'start');
+}
+function moveRow(response, position) {
+    let parsedResponse = JSON.parse(response);
+    createNotification(parsedResponse.message);
+    if (parsedResponse.success) {
+        table.removeChild(document.getElementById(parsedResponse.oldId));
+        addRowToTable(parsedResponse.row, position);
+    }
 }
 function onClickMoveToEnd(event) {
     let changeForm = new FormData();
     changeForm.append('id', event.target.parentElement.parentElement.id);
     changeForm.append('table', table.id);
-    submitXHR(changeForm, "/api/database/end.php", onSubmitForm);
+    submitXHR(changeForm, "/api/database/end.php", moveRowToEnd);
+}
+function moveRowToEnd() {
+    moveRow(this.responseText, 'secondlast');
 }
 function submitXHR(changeForm, url, onLoad) {
     let xobj = new XMLHttpRequest();
@@ -98,6 +112,7 @@ function submitXHR(changeForm, url, onLoad) {
 }
 function createTableHeader() {
     let tableHeaderRow = document.createElement('tr');
+    tableHeaderRow.id = 'tableHeaderRow';
     parsedColumns = JSON.parse(this.responseText);
     let tableHeader = '';
     for (let name in parsedColumns) {
@@ -130,7 +145,7 @@ function determineCellContents(type, name, value, add = false) {
     }
     return td;
 }
-function addRowToTable(rowData) {
+function addRowToTable(rowData, position = 'end') {
     let tr = document.createElement('tr');
     tr.id = rowData['id'];
     for (name in rowData) {
@@ -152,7 +167,13 @@ function addRowToTable(rowData) {
     tr.appendChild(moveToStart);
     tr.appendChild(moveToEnd);
     tr.appendChild(deleteRow);
-    table.appendChild(tr);
+    if(position === 'start') {
+        document.getElementById('tableHeaderRow').insertAdjacentElement('afterend', tr); 
+    } else if(position === 'secondlast') {
+        document.getElementById('add').insertAdjacentElement('beforebegin', tr); 
+    } else {
+        table.appendChild(tr);
+    }
 }
 function addAddRowToTable() {
     let tr = document.createElement('tr');

@@ -20,8 +20,14 @@ require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
     $newId = getMaxId($_POST['table']) + 1;
-    $message = changeRow($_POST['table'], $_POST['id'], 'id', $newId);
-    echo $message ? $message : "Successfully moved row " . $_POST['id'] . " to end.";
+    $result = changeRow($_POST['table'], $_POST['id'], 'id', $newId);
+    if ($result) {
+        echo json_encode(['success' => false, 'message' => $result]);
+    } else {
+        $row = getRow($_POST['table'], 'id', $newId);
+        $message = "Successfully moved row " . $newId . ' to end.';
+        echo json_encode(['success' => true, 'message' => $message, 'row' => $row, 'oldId' => $_POST['id']]);
+    }
 } else {
     notLoggedIn();
 }
