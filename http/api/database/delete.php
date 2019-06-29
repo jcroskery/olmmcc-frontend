@@ -20,8 +20,13 @@ require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $message = deleteRow($_POST['table'], $_POST['id']);
-    echo $message ? $message : "Successfully deleted row " . $_POST['id'] . '.';
+    $result = deleteRow($_POST['table'], $_POST['id']);
+    if ($result) {
+        echo json_encode(['success' => false, 'message' => $result]);
+    } else {
+        $message = "Successfully deleted row " . $_POST['id'] . '.';
+        echo json_encode(['success' => true, 'message' => $message, 'id' => $_POST['id']]);
+    }
 } else {
     notLoggedIn();
 }

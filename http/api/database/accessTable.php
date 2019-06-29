@@ -79,7 +79,7 @@ function getMaxId($table)
     $stmt = $connection->prepare("SELECT MAX(id) FROM " . $table);
     $stmt->execute();
     $result = $stmt->get_result();
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return array_pop(mysqli_fetch_all($result, MYSQLI_NUM)[0]);
 }
 function getMinId($table)
 {
@@ -87,7 +87,7 @@ function getMinId($table)
     $stmt = $connection->prepare("SELECT MIN(id) FROM " . $table);
     $stmt->execute();
     $result = $stmt->get_result();
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    return array_pop(mysqli_fetch_all($result, MYSQLI_NUM)[0]);
 }
 
 function changeRow($table, $id, $columnName, $newValue)

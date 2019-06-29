@@ -28,7 +28,14 @@ if ($_SESSION['admin']) {
         }
     }
     $result = createRow($_POST['table'], $names, $contents);
-    echo $result ? $result : "Successfully added!";
+    if($result) {
+        echo json_encode(['success' => false, 'message' => $result]);
+    } else {
+        $rowId = getMaxId($_POST['table']);
+        $row = getRow($_POST['table'], 'id', $rowId);
+        $message = "Successfully added row " . $rowId . '.';
+        echo json_encode(['success' => true, 'message' => $message, 'row' => $row]);
+    }
 } else {
     notLoggedIn();
 }

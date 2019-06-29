@@ -40,9 +40,18 @@ function onClickAdd() {
     }
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onSubmitForm);
+    xobj.addEventListener("load", displayAddedRow);
     xobj.open("POST", "/api/database/add.php", true);
     xobj.send(changeForm);
+}
+function displayAddedRow() {
+    let parsedResponse = JSON.parse(this.responseText);
+    createNotification(parsedResponse.message);
+    if(parsedResponse.success) {
+        table.removeChild(document.getElementById('add')); //Remove old add row
+        addRowToTable(parsedResponse.row); //Create new row
+        addAddRowToTable(); //Create new add row
+    }
 }
 function onClickDelete(event) {
     let id = event.target.parentElement.parentElement.id;
@@ -52,9 +61,16 @@ function onClickDelete(event) {
         changeForm.append('table', table.id);
         let xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
-        xobj.addEventListener("load", onSubmitForm);
+        xobj.addEventListener("load", removeDeletedRow);
         xobj.open("POST", "/api/database/delete.php", true);
         xobj.send(changeForm);
+    }
+}
+function removeDeletedRow() {
+    let parsedResponse = JSON.parse(this.responseText);
+    createNotification(parsedResponse.message);
+    if (parsedResponse.success) {
+        table.removeChild(document.getElementById(parsedResponse.id)); //Remove deleted row
     }
 }
 function onClickMoveToStart(event) {
@@ -98,7 +114,7 @@ function createTableHeader() {
     changeForm.append('request', 'getAllRows');
     submitXHR(changeForm, "/api/database/accessTableJs.php", createRows);
 }
-function determineCellContents(type, name, value) {
+function determineCellContents(type, name, value, add = false) {
     let td = document.createElement('td');
     if (type === 'date') {
         td.innerHTML = "<input type='date' name='" + name + "' value='" + value + "' />";
@@ -107,37 +123,61 @@ function determineCellContents(type, name, value) {
     } else {
         td.innerHTML = '<input type="text" name="' + name + '" value="' + value + '" />';
     }
-    td.lastChild.addEventListener('change', onChange);
+    if(add) {
+        td.lastChild.className = 'add';
+    } else {
+        td.lastChild.addEventListener('change', onChange);
+    }
     return td;
+}
+function addRowToTable(rowData) {
+    let tr = document.createElement('tr');
+    tr.id = rowData['id'];
+    for (name in rowData) {
+        if (name !== 'id') {
+            tr.appendChild(determineCellContents(parsedColumns[name], name, rowData[name]));
+        }
+    }
+
+    let moveToStart = document.createElement('td'); //Options
+    let moveToEnd = document.createElement('td');
+    let deleteRow = document.createElement('td');
+    deleteRow.className = moveToEnd.className = moveToStart.className = 'centerDiv';
+    moveToStart.innerHTML = "<button name='start'>&#8593;</button>";
+    moveToEnd.innerHTML = "<button name='end'>&#8595;</button>";
+    deleteRow.innerHTML = "<button class='delete' name='delete'>Delete Row</button>";
+    moveToStart.lastChild.addEventListener('click', onClickMoveToStart);
+    moveToEnd.lastChild.addEventListener('click', onClickMoveToEnd);
+    deleteRow.lastChild.addEventListener('click', onClickDelete);
+    tr.appendChild(moveToStart);
+    tr.appendChild(moveToEnd);
+    tr.appendChild(deleteRow);
+    table.appendChild(tr);
+}
+function addAddRowToTable() {
+    let tr = document.createElement('tr');
+    tr.id = 'add';
+    for (name in parsedColumns) {
+        if (name !== 'id') {
+            tr.appendChild(determineCellContents(parsedColumns[name], name, "New " + name, true));
+        }
+    }
+
+    let addRow = document.createElement('td');
+    addRow.setAttribute('colspan', '3');
+    addRow.className = 'centerDiv';
+    addRow.innerHTML = "<button name='add'>Add Row</button>";
+    addRow.addEventListener('click', onClickAdd);
+    tr.appendChild(addRow);
+    table.appendChild(tr);
 }
 function createRows() {
     let parsedRows = JSON.parse(this.responseText);
     for(i in parsedRows) {
-        let tr = document.createElement('tr');
-        tr.id = parsedRows[i]['id'];
-        for(name in parsedRows[i]) {
-            if(name !== 'id') {
-                tr.appendChild(determineCellContents(parsedColumns[name], name, parsedRows[i][name]));
-            }
-        }
-
-        let moveToStart = document.createElement('td'); //Options
-        let moveToEnd = document.createElement('td');
-        let deleteRow = document.createElement('td');
-        deleteRow.className = moveToEnd.className = moveToStart.className = 'centerDiv';
-        moveToStart.innerHTML = "<button name='start'>&#8593;</button>";
-        moveToEnd.innerHTML = "<button name='end'>&#8595;</button>";
-        deleteRow.innerHTML = "<button class='delete' name='delete'>Delete Row</button>";
-        moveToStart.lastChild.addEventListener('click', onClickMoveToStart);
-        moveToEnd.lastChild.addEventListener('click', onClickMoveToEnd);
-        deleteRow.lastChild.addEventListener('click', onClickDelete);
-        tr.appendChild(moveToStart);
-        tr.appendChild(moveToEnd);
-        tr.appendChild(deleteRow);
-        table.appendChild(tr);
+        addRowToTable(parsedRows[i]);
     }
+    addAddRowToTable();
 }
-//document.getElementById('addSubmit').addEventListener('click', onClickAdd);
 {
     let changeForm = new FormData();
     changeForm.append('table', table.id);

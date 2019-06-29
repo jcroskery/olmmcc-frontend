@@ -19,7 +19,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/wrapper.php';
 if ($_SESSION['admin']) {
-    $newId = array_pop(getMinId($_POST["table"])[0]) - 1;
+    $newId = getMinId($_POST["table"]) - 1;
     $message = changeRow($_POST["table"], $_POST['id'], 'id', $newId);
     echo $message ? $message : "Successfully moved row " . $_POST['id'] . " to start.";
 } else {
