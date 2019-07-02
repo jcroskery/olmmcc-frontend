@@ -103,13 +103,6 @@ function onClickMoveToEnd(event) {
 function moveRowToEnd() {
     moveRow(this.responseText, 'secondlast');
 }
-function submitXHR(changeForm, url, onLoad) {
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onLoad);
-    xobj.open("POST", url, true);
-    xobj.send(changeForm);
-}
 function getOtherDatabaseTitles() {
     let parsedResponse = JSON.parse(this.responseText);
     databaseTitles = [];

@@ -15,16 +15,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-links = document.getElementsByClassName('songLink');
-for (i = 0; i < links.length; i++) {
-    links[i].onclick = displayPopupVideo;
-}
-let currentCode;
+
+let currentId;
 let displayed = false;
 function displayPopupVideo() {
     displayed = true;
     removeGraydiv();
-    display(this.id);
+    currentId = this.id;
+    display();
 }
 function removeGraydiv() {
     var element = document.getElementById("graydiv");
@@ -32,15 +30,21 @@ function removeGraydiv() {
         element.parentNode.removeChild(element);
     }
 }
-function display(videocode) {
-    currentCode = videocode;
+function display() {
     let graydiv = document.createElement("div");
     graydiv.id = 'graydiv';
-    document.getElementById("myPage").appendChild(graydiv);
-    graydiv.innerHTML = videocode;
+    let div = document.createElement('div');
+    let iframe = document.createElement('iframe');
+    iframe.className = 'video';
+    iframe.src = parsedResponse.songs[currentId].link;
+    iframe.frameBorder = 0;
+    iframe.allowFullscreen = true;
+    div.appendChild(iframe);
     let close = getCloseButton('closeVideo');
-    document.getElementsByClassName("videoPopup")[0].innerHTML += close;
-    document.getElementById('closeVideo').onclick = closeDiv;
+    div.innerHTML += close;
+    graydiv.appendChild(div);
+    document.getElementById("myPage").appendChild(graydiv);
+    document.getElementById('closeVideo').addEventListener('click', closeDiv);
 }
 function closeDiv() {
     displayed = false;
@@ -51,4 +55,32 @@ function keydown(event) {
         closeDiv();
     }
 }
-document.onkeydown = keydown;
+function displaySongLinks() {
+    parsedResponse = JSON.parse(this.responseText);
+    let p = document.createElement('p');
+    if(parsedResponse.title) {
+        let h3 = document.createElement('h3');
+        h3.textContent = parsedResponse.title;
+        p.textContent = parsedResponse.text;
+        document.getElementById('main-text').appendChild(h3);
+        document.getElementById('main-text').appendChild(p);
+        for (id in parsedResponse.songs){
+            let h4 = document.createElement('h4');
+            h4.textContent = parsedResponse.songs[id].role + ": ";
+            let a = document.createElement('a');
+            a.href = 'javascript:;';
+            a.id = id;
+            a.innerText = parsedResponse.songs[id].name;
+            a.addEventListener('click', displayPopupVideo);
+            h4.appendChild(a);
+            document.getElementById('main-text').appendChild(h4);
+        }
+        document.addEventListener('keydown', keydown);
+    } else {
+        p.textContent = "There is no post about the current songs yet, please check again soon!";
+        document.getElementById('main-text').appendChild(p);
+    }
+}
+{
+    submitXHR(new FormData(), "/api/songs/getSongs.php", displaySongLinks);
+}

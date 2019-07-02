@@ -16,19 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/api/songs/songArticle.php';
-include_once '/srv/http/api/database/accessTable.php';
-$formattedArticle;
-foreach(getAllRows('articles') as $article){
-    $json = [];
-    foreach($article as $propertyName => $property){
-        if($propertyName!=='id'){
-            $json[$propertyName] = $property;
-        }
-    }
-    $json['expiry'] = DateTime::createFromFormat('Y-m-d', $article['expiry'])->getTimestamp();
-    if(!isset($formattedArticle) || $formattedArticle['expiry'] <= $json['expiry']){
-        $formattedArticle = $json;
-    }   
-}
-displaySongArticle($formattedArticle);
+include_once '/srv/http/helpers/wrapper.php';
+wrapperBegin('Current Songs');
+echo <<<HTML
+    <div id="main-text">
+        <h1>This Month's Songs</h1>
+    </div>
+HTML;
+wrapperEnd('songs', '<script src="/js/popupHelper.js"></script><script src="/js/submitXhr.js"></script><script src="/songs/songs.js"></script>');

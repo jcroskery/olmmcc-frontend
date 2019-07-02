@@ -1,4 +1,3 @@
-<?php
 /*
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
@@ -16,28 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function youtube($video){
-    return <<<HTML
-    <div class='videoPopup'>
-        <iframe class='video' src=$video frameborder=0 allowfullscreen></iframe>
-    </div>
-HTML;
-}
-function ownvideo($video){
-    return <<<HTML
-    <div class='videoPopup'>
-        <video class='video' src=$video controls></video>
-    </div>
-HTML;
-}
-function createVideo($name, $role, $link){
-    $video;
-    if(preg_match('/https.*/', $link)){
-        $video = youtube($link);
-    } else {
-        $video = ownvideo($link);
-    }
-    return <<<HTML
-    <h4>$role: <a href="javascript:;" id="$video" class='songLink'>$name</a></h4>
-    HTML;
+function submitXHR(changeForm, url, onLoad) {
+    let xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.addEventListener("load", onLoad);
+    xobj.open("POST", url, true);
+    xobj.send(changeForm);
 }
