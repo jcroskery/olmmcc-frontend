@@ -16,5 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/api/pages/displayPage.php';
-displayPage('about');
+include_once '/srv/http/helpers/wrapper.php';
+wrapperBegin('About', 'aboutClass');
+echo <<<HTML
+<div id='main-text' class='about'>
+    <h1>About the Children's Choir</h1>
+</div>
+HTML;
+wrapperEnd('about', '<script src="/js/submitXhr.js"></script><script src="/api/pages/pages.js"></script>');

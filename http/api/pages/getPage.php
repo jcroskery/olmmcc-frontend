@@ -16,13 +16,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/wrapper.php';
 require_once '/srv/http/api/database/accessTable.php';
-function displayPage($topnavId) {
-    $article = getRow('pages', 'topnav_id', $topnavId);
-    $articleText = html_entity_decode($article['text']);
-    $text = '<div id="main-text"><H1>' . $article['title'] .  '</H1>' . $articleText . '</div>';
-    wrapperBegin($article['title'], $article['topnav_id'] . 'Class');
-    echo $text;
-    wrapperEnd($article['topnav_id']);
-}
+$article = getRow('pages', 'topnav_id', $_POST['page']);
+echo html_entity_decode($article['text']);

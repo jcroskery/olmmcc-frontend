@@ -16,5 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/api/pages/displayPage.php';
-displayPage('faq');
+include_once '/srv/http/helpers/wrapper.php';
+wrapperBegin('FAQ', 'faqClass');
+echo <<<HTML
+<div id='main-text' class='faq'>
+    <h1>Frequently Asked Questions</h1>
+</div>
+HTML;
+wrapperEnd('faq', '<script src="/js/submitXhr.js"></script><script src="/api/pages/pages.js"></script>');

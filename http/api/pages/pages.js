@@ -1,4 +1,3 @@
-<?php
 /*
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
@@ -16,11 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/wrapper.php';
-wrapperBegin('Home', 'homeClass');
-echo <<<HTML
-<div id='main-text' class='home'>
-    <h1>Home</h1>
-</div>
-HTML;
-wrapperEnd('home', '<script src="/js/submitXhr.js"></script><script src="/api/pages/pages.js"></script>');
+function displayPage() {
+    document.getElementById('main-text').innerHTML += this.responseText;
+}
+let topnavId = document.getElementById('main-text').className;
+let formData = new FormData();
+formData.append('page', topnavId);
+submitXHR(formData, '/api/pages/getPage.php', displayPage);
