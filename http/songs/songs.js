@@ -15,14 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-
-let currentId;
-let displayed = false;
 function displayPopupVideo() {
-    displayed = true;
     removeGraydiv();
-    currentId = this.id;
-    display();
+    display(this.id);
 }
 function removeGraydiv() {
     var element = document.getElementById("graydiv");
@@ -30,7 +25,7 @@ function removeGraydiv() {
         element.parentNode.removeChild(element);
     }
 }
-function display() {
+function display(currentId) {
     let graydiv = document.createElement("div");
     graydiv.id = 'graydiv';
     let div = document.createElement('div');
@@ -47,7 +42,6 @@ function display() {
     document.getElementById('closeVideo').addEventListener('click', closeDiv);
 }
 function closeDiv() {
-    displayed = false;
     removeGraydiv();
 }
 function keydown(event) {
