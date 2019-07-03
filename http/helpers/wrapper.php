@@ -61,7 +61,7 @@ function wrapperEnd($pageId = '', $otherScripts = '', $bottom = true)
             </svg>
         </div>
 HTML;
-        $otherScripts .= '<script src="/api/notification/closeNotification.js"></script>';
+        $otherScripts .= '<script src="/api/notification/notification.js"></script>';
         $_SESSION['notification'] = '';
     }
     echo <<<HTML

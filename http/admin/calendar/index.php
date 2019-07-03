@@ -24,7 +24,7 @@ if ($_SESSION['admin']) {
             <caption>Calendar Events</caption>
         </table>
 HTML;
-    wrapperEnd('account', '<script src="/api/notification/createNotification.js"></script><script src="/api/notification/closeNotification.js"></script><script src="/js/submitXhr.js"></script><script src="/js/database.js"></script>', false);
+    wrapperEnd('account', '<script src="/api/notification/notification.js"></script><script src="/js/submitXhr.js"></script><script src="/js/database.js"></script>', false);
 } else {
     notLoggedIn();
 }

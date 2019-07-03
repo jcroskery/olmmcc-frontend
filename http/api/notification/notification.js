@@ -29,3 +29,19 @@ function createNotification(notificationText) { //This is needed for ajax notifi
     document.getElementById('myPage').appendChild(notificationDiv);
     document.getElementById('closeNotification').addEventListener('click', closeNotification);
 }
+function closeNotification() {
+    var element = document.getElementById("notificationDiv");
+    if (element != null) {
+        element.parentNode.removeChild(element);
+    }
+}
+function keydown(event) {
+    if (event.keyCode == 27) {
+        closeNotification();
+    }
+}
+document.addEventListener('keydown', keydown);
+closeButton = document.getElementById('closeNotification');
+if (closeButton) {
+    closeButton.addEventListener('click', closeNotification);
+}

@@ -1,3 +1,4 @@
+<?php
 /*
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
@@ -14,20 +15,18 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
-function closeNotification() {
-    var element = document.getElementById("notificationDiv");
-    if (element != null) {
-        element.parentNode.removeChild(element);
+ */
+if(isset($_COOKIE["PHPSESSID"])) {
+    session_start();
+    $sessionData['session'] = 'active';
+    if($_SESSION['verified']) {
+        $sessionData['username'] = $_SESSION['username'];
+    } else {
+        $sessionData['username'] = '';
     }
-}
-function keydown(event) {
-    if (event.keyCode == 27) {
-        closeNotification();
-    }
-}
-document.addEventListener('keydown', keydown);
-closeButton = document.getElementById('closeNotification');
-if (closeButton) {
-    closeButton.addEventListener('click', closeNotification);
+    $sessionData['notification'] = $_SESSION['notification'];
+    $_SESSION['notification'] = '';
+    echo json_encode($sessionData);
+} else {
+    echo json_encode(['session' => 'none']);
 }
