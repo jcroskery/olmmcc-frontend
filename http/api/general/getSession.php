@@ -24,7 +24,7 @@ if(isset($_COOKIE["PHPSESSID"])) {
     } else {
         $sessionData['username'] = '';
     }
-    $sessionData['notification'] = $_SESSION['notification'];
+    $sessionData['notification'] = $_SESSION['notification'] ? $_SESSION['notification'] : '';
     $_SESSION['notification'] = '';
     echo json_encode($sessionData);
 } else {
