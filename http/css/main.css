@@ -141,7 +141,7 @@ td, .calendar .bodyUl li {
 th, .calendar .headerUl li {
     font-family: 'Tahoma', 'Arial', 'Helvetica', sans-serif;
 }
-body.calendarBody, body.databaseClass {
+body.calendarClass, body.databaseClass {
     background-image: none;
     background-color: lightblue;
 }
