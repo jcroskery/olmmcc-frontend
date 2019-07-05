@@ -18,17 +18,20 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/api/notification/displayNotification.php';
 $subscriptionOptions = ['You are now unsubscribed from receiving emails.', 'You are now subscribed to receive emails.', 'You are now subscribed to receive emails and reminders.'];
 if (loggedIn()) {
     $subscription_policy = $_POST['subscriptionPolicy'];
     if ($subscription_policy > -1 && $subscription_policy < 3) {
-        changeRow('users', $_SESSION['id'], 'subscription_policy', $subscription_policy);
-        $message = 'Subscription policy updated successfully! ' . $subscriptionOptions[$subscription_policy];
-        displayPopupNotification($message, '/account/');
+        if($_SESSION['subscription_policy'] != $subscription_policy) {
+            changeRow('users', $_SESSION['id'], 'subscription_policy', $subscription_policy);
+            $message = 'Subscription policy updated successfully! ' . $subscriptionOptions[$subscription_policy];
+            echo $message;
+        } else {
+            $message = 'This is already your subscription policy.';
+            echo $message;
+        }
     } else {
-        $message = 'This is already your subscription policy.';
-        displayPopupNotification($message, '/account/');
+        echo "Invalid subscription policy!";
     }
 } else {
     notLoggedIn();

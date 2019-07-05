@@ -32,7 +32,7 @@ if(loggedIn()){
     $message = "<p>Hi,</p>Click this link to delete your account. Caution! This action is permanent and irreversible.\r\n" . $link;
     queueEmail($subject, $message, $_SESSION['username'], $_SESSION['email']);
     $message = 'An email containing an link to delete your OLMMCC account has been sent to ' . $_SESSION['email'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
-    displayPopupNotification($message, '/account/');
+    echo $message;
 } else {
     notLoggedIn();
 }

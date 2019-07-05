@@ -18,16 +18,16 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/notification/displayNotification.php';
-function checkPasswords($password1, $password2, $returnLink)
+function checkPasswords($password1, $password2)
 {
     if ($password1 === $password2) {
         if (strlen($password1) <= 128 && strlen($password1) >= 8) {
             return true;
         } else {
-            displayPopupNotification('Please use a password between 8 and 128 characters long.', $returnLink);
+            echo 'Please use a password between 8 and 128 characters long.';
         }
     } else {
-        displayPopupNotification("Your passwords do not match. Please try again.", $returnLink);
+        echo "Your passwords do not match. Please try again.";
     }
     return false;
 }

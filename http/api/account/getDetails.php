@@ -18,25 +18,6 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/helpers/wrapper.php';
-if (loggedIn()) {
-    if ($_POST['username'] != '') {
-        if (getRow('users', 'username', $_POST['username'])) {
-            if ($_POST['username'] == $_SESSION['username']) {
-                $message = "This username is already registered to your account.";
-                echo $message;
-            } else {
-                $message = "Sorry, this username has already been taken. Please select another.";
-                echo $message;
-            }
-        } else {
-            changeRow('users', $_SESSION['id'], 'username', $_POST['username']);
-            $message = 'Sucessfully updated username!';
-            echo $message;
-        }
-    } else {
-        $message = 'An error occurred, please try again.';
-        echo $message;
-    }
-} else {
-    notLoggedIn();
+if(loggedIn()) {
+    echo json_encode(['email' => $_SESSION['email'], 'username' => $_SESSION['username'], 'admin' => $_SESSION['admin'], 'subscription_policy' => $_SESSION['subscription_policy']]);
 }

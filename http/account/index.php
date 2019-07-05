@@ -17,67 +17,42 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 include_once '/srv/http/helpers/wrapper.php';
-include_once '/srv/http/api/account/accountFunctions.php';
-refreshAccount();
-if (wrapperBegin('Your Account', true)) {
-    $email = $_SESSION['email'];
-    $username = $_SESSION['username'];
-    $subscriptionName = getSubscriptionPolicyName($_SESSION['subscription_policy']);
-    $subscriptionOptions = '<option disabled selected>' . $subscriptionName . '</option>';
-    for ($i = 0; $i < 3; $i++) {
-        if ($i != $_SESSION['subscription_policy']) {
-            $subscriptionOptions .= "<option value='$i'>" . getSubscriptionPolicyName($i) . "</option>";
-        }
-    }
-    $accountLevel = $_SESSION['admin'] ? 'Admin' : 'Member';
-    $disabled = $_SESSION['admin'] ? '' : "disabled='disabled'";
+if (wrapperBegin('Your Account', '', true)) {
     echo <<<HTML
         <div id="main-text" class='centerDiv'>
             <H1>Your Account</H1>
-            <form action='/account/email/' method='post'>
-                <label class='leftFloat' for='email'>Email: </label>
-                <input class='leftFloat' id='email' name='email' type='email' autocomplete='on' placeholder='Your new email address' required='required' value='$email'/>
-                <button class='rightFloat' type='submit'>Change Email</button>
-            </form>
+            <label class='leftFloat' for='email'>Email: </label>
+            <input class='leftFloat' id='email' name='email' type='email' autocomplete='on' placeholder='Your new email address' required='required'/>
+            <button class='rightFloat' id='changeEmail'>Change Email</button>
             <br><br>
-            <form action='/account/username/' method='post'>
-                <label class='leftFloat' for='username'>Username: </label>
-                <input name='username' class='leftFloat' id='username' type='text' autocomplete='on' placeholder='Your new username' required='required' value='$username'/>
-                <button class='rightFloat' type='submit'>Change Username</button>
-            </form>
+            <label class='leftFloat' for='username'>Username: </label>
+            <input name='username' class='leftFloat' id='username' type='text' autocomplete='on' placeholder='Your new username' required='required'/>
+            <button class='rightFloat' id='changeUsername'>Change Username</button>
             <br><br>
-            <form action="/account/subscription/" method='post'>
-                <label class='leftFloat' for='subscription'>Subscription policy: </label>
-                <select class='leftFloat' id='subscription' name='subscriptionPolicy'>
-                    $subscriptionOptions
-                </select>
-                <input class='rightFloat' type='submit' value='Change Subscription'/>
-            </form>
+            <label class='leftFloat' for='subscription'>Subscription policy: </label>
+            <select class='leftFloat' id='subscription' name='subscriptionPolicy'>
+                <option value='0'>No Emails</option>
+                <option value='1'>Emails</option>
+                <option value='2'>Emails and Reminders</option>
+            </select>
+            <button class='rightFloat' id='changeSubscription'>Change Subscription</button>
             <br><br><br>
-            <form action='/account/password/changePassword.php' method='post'>
-                <label class='leftFloat' for='currentPassword'>Current Password: </label>
-                <input name='currentPassword' class='leftFloat' id='currentPassword' type='password' placeholder='Your current password' required='required' />
-                <br><br>
-                <label class='leftFloat' for='newPassword1'>New Password: </label>
-                <input name='newPassword1' class='leftFloat' id='newPassword1' type='password' placeholder='Your new password' required='required' />
-                <br><br>
-                <label class='leftFloat' for='newPassword2'>Repeat Password: </label>
-                <input name='newPassword2' class='leftFloat' id='newPassword2' type='password' placeholder='Repeat your new password' required='required' />
-                <button class='rightFloat' type='submit'>Change Password</button>
-            </form>
+            <label class='leftFloat' for='currentPassword'>Current Password: </label>
+            <input name='currentPassword' class='leftFloat' id='currentPassword' type='password' placeholder='Your current password' required='required' />
+            <br><br>
+            <label class='leftFloat' for='newPassword1'>New Password: </label>
+            <input name='newPassword1' class='leftFloat' id='newPassword1' type='password' placeholder='Your new password' required='required' />
+            <br><br>
+            <label class='leftFloat' for='newPassword2'>Repeat Password: </label>
+            <input name='newPassword2' class='leftFloat' id='newPassword2' type='password' placeholder='Repeat your new password' required='required' />
+            <button class='rightFloat' id='changePassword'>Change Password</button>
             <br><br><br>
-            <label for='admin' class='leftFloat'>Account type: $accountLevel</label>
-            <form action='/account/delete'>
-                <button class='rightFloat delete' type='submit'>Delete Account</button>
-            </form>
-            <form class='inline' action='/admin/'>
-                <button $disabled id='admin' class='centerDiv inline' type='submit'>Go to Administrator settings</button>
-            </form>
+            <label for='admin' class='leftFloat' id='adminLabel'>Account type: </label>
+            <button class='rightFloat delete' id='delete'>Delete Account</button>
             <br><br>
         </div>
-
 HTML;
-    wrapperEnd('account');
+    wrapperEnd('account', '<script src="/api/notification/notification.js"></script><script src="/js/submitXhr.js"></script><script src="/account/account.js"></script>');
 } else {
     notLoggedIn();
 }

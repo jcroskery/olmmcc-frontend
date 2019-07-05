@@ -17,8 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-function refreshAccount()
-{
+require_once '/srv/http/helpers/wrapper.php';
+if(loggedIn()) {
     $row = getRow('users', 'id', $_SESSION['id']);
     $_SESSION['email'] = $row['email'];
     $_SESSION['username'] = $row['username'];
@@ -26,9 +26,4 @@ function refreshAccount()
     $_SESSION['admin'] = $row['admin'];
     $_SESSION['subscription_policy'] = $row['subscription_policy'];
     $_SESSION['invalid_email'] = $row['invalid_email'];
-}
-function getSubscriptionPolicyName($subscriptionPolicy)
-{
-    $subscriptionNames = ['No emails', 'Emails', 'Emails and reminders'];
-    return $subscriptionNames[$subscriptionPolicy];
 }

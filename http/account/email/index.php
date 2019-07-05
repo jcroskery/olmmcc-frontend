@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/api/email/queueEmail.php';
 require_once '/srv/http/helpers/wrapper.php';
 if (loggedIn()) {
@@ -25,10 +24,10 @@ if (loggedIn()) {
     if (getRow('users', 'email', $_SESSION['newEmail'])) {
         if ($_SESSION['email'] == $_SESSION['newEmail']) {
             $message = "This email address is already registered to this account.";
-            displayPopupNotification($message, '/account/');
+            echo $message;
         } else {
             $message = "Sorry, your chosen email address has already been registered. Please log in to your account.";
-            displayPopupNotification($message, '/login/');
+            echo $message;
         }
     } else {
         $emailCode;
@@ -39,11 +38,11 @@ if (loggedIn()) {
             $emailCode = $_SESSION['changeEmailVerificationId'];
         }
         $subject = "Email change request";
-        $link = "http://" . $_SERVER['HTTP_HOST'] . "/account/email/changeEmail.php?changeEmailVerificationId=3D" . $emailCode;
+        $link = "https://" . $_SERVER['HTTP_HOST'] . "/account/email/changeEmail.php?changeEmailVerificationId=3D" . $emailCode;
         $message = "<p>Hi,</p>Click this link to change your email address: " . $link;
         queueEmail($subject, $message, $_SESSION['username'], $_SESSION['email']);
         $message = 'An email containing an link to change your account email has been sent to ' . $_SESSION['email'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
-        displayPopupNotification($message, '/account/');
+        echo $message;
     }
 } else {
     notLoggedIn();
