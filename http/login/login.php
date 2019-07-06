@@ -32,14 +32,15 @@ if (password_verify($password, $row['password'])) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['admin'] = $row['admin'];
         $_SESSION['subscription_policy'] = $row['subscription_policy'];
-        $message = 'Successfully logged in!';
-        displayPopupNotification($message, '/');
+        $_SESSION['notification'] = 'Successfully logged in!';
+        echo json_encode(['url' => '/']);
     } else {
         $_SESSION['notVerifiedEmail'] = $row['email'];
         $_SESSION['notVerifiedUsername'] = $row['username'];
-        header('location: /account/verify/');
+        $_SESSION['notification'] = 'Please verify your account.';
+        echo json_encode(['url' => '/account/verify']);
     }
 } else {
     $message = "Wrong email or password, please try again.";
-    displayPopupNotification($message, '/login/');
+    echo json_encode(['url' => '', 'message' => $message]);
 }

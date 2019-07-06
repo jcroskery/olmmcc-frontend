@@ -18,17 +18,21 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
     if(parsedResponse.session === 'active') {
-        if(parsedResponse.username !== ''){
-            let signup = document.querySelectorAll("a[href='/signup']")[0];
-            signup.href = '/logout';
-            signup.textContent = "Logout";
-            let login = document.querySelectorAll("a[href='/login']")[0];
-            if(document.getElementById('active').href.includes('/account/')){
-                document.getElementById('active').textContent = "Welcome, " + parsedResponse.username;
-                login.id = 'active';
+        if(parsedResponse.username !== '') {
+            let signups = document.querySelectorAll("a[href='/signup']");
+            for(let i = 0; i < signups.length; i++) {
+                signups[i].href = '/logout';
+                signups[i].textContent = "Logout";
             }
-            login.href = '/account/';
-            login.textContent = "Welcome, " + parsedResponse.username;
+            let logins = document.querySelectorAll("a[href='/login']");
+            for(let i = 0; i < logins.length; i++) {
+                if (document.getElementById('active').href.includes('/account/')) {
+                    document.getElementById('active').textContent = "Welcome, " + parsedResponse.username;
+                    logins[i].id = 'active';
+                }
+                logins[i].href = '/account/';
+                logins[i].textContent = "Welcome, " + parsedResponse.username;
+            }
         }
         if(parsedResponse.notification !== '') {
             let script = document.createElement('script');
