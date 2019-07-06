@@ -15,8 +15,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+function changeDisplayedUsername() {
+    let parsedResponse = JSON.parse(this.responseText);
+    let accountLinks = document.querySelectorAll("a[href='/account/']");
+    for (let i = 0; i < accountLinks.length; i++) {
+        accountLinks[i].textContent = "Welcome, " + parsedResponse.username;
+    }
+}
 function displayResponse() {
-    submitXHR(new FormData(), "/api/account/refresh.php", null);
+    submitXHR(new FormData(), "/api/account/refresh.php", () => { submitXHR(new FormData(), "/api/general/getSession.php", changeDisplayedUsername)});
     createNotification(this.responseText);
 }
 function changeEmail() {
@@ -45,11 +52,17 @@ function deleteAccount() {
     submitXHR(new FormData(), "/account/delete/", displayResponse);
 }
 function displayDetails() {
+    if (!this.responseText) { //Not logged in
+        let formData = new FormData();
+        formData.append('admin', 0);
+        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/';})
+        return;
+    }
     let parsedResponse = JSON.parse(this.responseText);
     document.getElementById('email').value = parsedResponse.email;
     document.getElementById('username').value = parsedResponse.username;
     document.getElementById('subscription').selectedIndex = parsedResponse.subscription_policy;
-    if(parsedResponse.admin === 1){
+    if (parsedResponse.admin === 1) {
         document.getElementById('adminLabel').textContent += 'Admin';
         let adminButton = document.createElement('button');
         adminButton.id = 'admin';

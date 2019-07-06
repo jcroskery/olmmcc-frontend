@@ -23,7 +23,11 @@ function handleSession() {
             signup.href = '/logout';
             signup.textContent = "Logout";
             let login = document.querySelectorAll("a[href='/login']")[0];
-            login.href = '/account';
+            if(document.getElementById('active').href.includes('/account/')){
+                document.getElementById('active').textContent = "Welcome, " + parsedResponse.username;
+                login.id = 'active';
+            }
+            login.href = '/account/';
             login.textContent = "Welcome, " + parsedResponse.username;
         }
         if(parsedResponse.notification !== '') {
