@@ -24,7 +24,7 @@ function changeDisplayedUsername() {
 }
 function displayResponse() {
     submitXHR(new FormData(), "/api/account/refresh.php", () => { submitXHR(new FormData(), "/api/general/getSession.php", changeDisplayedUsername)});
-    createNotification(this.responseText);
+    createNotification(JSON.parse(this.responseText).message);
 }
 function changeEmail() {
     let formData = new FormData();

@@ -24,36 +24,36 @@ function checkPasswords($password1, $password2)
         if (strlen($password1) <= 128 && strlen($password1) >= 8) {
             return true;
         } else {
-            echo 'Please use a password between 8 and 128 characters long.';
+            echo json_encode(['message' => 'Please use a password between 8 and 128 characters long.']);
         }
     } else {
-        echo "Your passwords do not match. Please try again.";
+        echo json_encode(['message' => "Your passwords do not match. Please try again."]);
     }
     return false;
 }
-function checkUsername($username, $returnLink)
+function checkUsername($username)
 {
     if (strlen($username) <= 16 && strlen($username) >= 4 && !preg_match('/[^A-Za-z0-9]/', $username)) {
         if (getRow('users', 'username', $username)) {
-            displayPopupNotification("Sorry, this username has already been taken. Please select another.", $returnLink);
+            echo json_encode(['message' => "Sorry, this username has already been taken. Please select another."]);
         } else {
             return true;
         }
     } else {
-        displayPopupNotification('Sorry, your username is invalid. Please use between 4 and 16 characters and only letters and numbers for your username.', $returnLink);
+        echo json_encode(['message' => 'Sorry, your username is invalid. Please use between 4 and 16 characters and only letters and numbers for your username.']);
     }
     return false;
 }
-function checkEmail($email, $returnLink)
+function checkEmail($email)
 {
     if (strlen($email) <= 64) {
         if (getRow('users', 'email', $email)) {
-            displayPopupNotification('Sorry, your email address has already been registered. Please use a different email address or log in with your account.', $returnLink);
+            echo json_encode(['message' => 'Sorry, your email address has already been registered. Please use a different email address or log in with your account.']);
         } else {
             return true;
         }
     } else {
-        displayPopupNotification('Sorry, your email address is too long. Please use a different email address.', $returnLink);
+        echo json_encode(['message' => 'Sorry, your email address is too long. Please use a different email address.']);
     }
     return false;
 }

@@ -23,19 +23,19 @@ if (loggedIn()) {
         if (getRow('users', 'username', $_POST['username'])) {
             if ($_POST['username'] == $_SESSION['username']) {
                 $message = "This username is already registered to your account.";
-                echo $message;
+                echo json_encode(['message' => $message]);
             } else {
                 $message = "Sorry, this username has already been taken. Please select another.";
-                echo $message;
+                echo json_encode(['message' => $message]);
             }
         } else {
             changeRow('users', $_SESSION['id'], 'username', $_POST['username']);
             $message = 'Sucessfully updated username!';
-            echo $message;
+            echo json_encode(['message' => $message]);
         }
     } else {
         $message = 'An error occurred, please try again.';
-        echo $message;
+        echo json_encode(['message' => $message]);
     }
 } else {
     notLoggedIn();

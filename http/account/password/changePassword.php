@@ -27,10 +27,10 @@ if (loggedIn()) {
         if (!checkPasswords($_POST['newPassword1'], $_POST['newPassword2'], '/account/')) {return;}
         changeRow('users', $_SESSION['id'], 'password', password_hash($_POST['newPassword1'], PASSWORD_DEFAULT));
         $message = "Your password was successfully changed!";
-        echo $message;
+        echo json_encode(['message' => $message]);
     } else {
         $message = "Wrong password. Please try again.";
-        echo $message;
+        echo json_encode(['message' => $message]);
     }
 } else if (htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']) {
     //This was for people who weren't logged in---now it doesn't work

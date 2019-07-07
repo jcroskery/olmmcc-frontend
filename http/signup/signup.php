@@ -31,4 +31,5 @@ if (!checkUsername($username, '/signup/')) {return;}
 
 createRow('users', ['email', 'username', 'password', 'verified', 'admin', 'subscription_policy', 'invalid_email'], [$email, $username, password_hash($password1, PASSWORD_DEFAULT), 0, 0, 1, 0]);
 session_unset();
-displayPopupNotification("Your account was sucessfully created! Please login to your new account.", '/login/');
+$_SESSION['notification'] = "Your account was sucessfully created! Please login to your new account.";
+echo json_encode(['url' => '/login/']);

@@ -19,15 +19,15 @@ function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
     if(parsedResponse.session === 'active') {
         if(parsedResponse.username !== '') {
-            let signups = document.querySelectorAll("a[href='/signup']");
-            for(let i = 0; i < signups.length; i++) {
-                signups[i].href = '/logout';
-                signups[i].textContent = "Logout";
-            }
+            let signup = document.querySelectorAll("a[href='/signup']")[1]; //only the second one needs to be changed
+            signup.href = '/logout';
+            signup.textContent = "Logout";
+            signup.id = '';
             let logins = document.querySelectorAll("a[href='/login']");
             for(let i = 0; i < logins.length; i++) {
-                if (document.getElementById('active').href.includes('/account/')) {
-                    document.getElementById('active').textContent = "Welcome, " + parsedResponse.username;
+                let active = document.getElementById('active');
+                if (active && active.href.includes('/account/')) {
+                    active.textContent = "Welcome, " + parsedResponse.username;
                     logins[i].id = 'active';
                 }
                 logins[i].href = '/account/';

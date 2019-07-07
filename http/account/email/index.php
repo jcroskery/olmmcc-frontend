@@ -24,10 +24,10 @@ if (loggedIn()) {
     if (getRow('users', 'email', $_SESSION['newEmail'])) {
         if ($_SESSION['email'] == $_SESSION['newEmail']) {
             $message = "This email address is already registered to this account.";
-            echo $message;
+            echo json_encode(['message' => $message]);
         } else {
             $message = "Sorry, your chosen email address has already been registered. Please log in to your account.";
-            echo $message;
+            echo json_encode(['message' => $message]);
         }
     } else {
         $emailCode;
@@ -42,7 +42,7 @@ if (loggedIn()) {
         $message = "<p>Hi,</p>Click this link to change your email address: " . $link;
         queueEmail($subject, $message, $_SESSION['username'], $_SESSION['email']);
         $message = 'An email containing an link to change your account email has been sent to ' . $_SESSION['email'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
-        echo $message;
+        echo json_encode(['message' => $message]);
     }
 } else {
     notLoggedIn();

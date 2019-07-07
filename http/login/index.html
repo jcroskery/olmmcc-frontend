@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
-    <!--
+<!--
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
 
@@ -17,44 +17,48 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
     -->
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>OLMM Children's Choir - Login</title>
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
-        <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
-        <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
-        <meta name="description" content="Official site of the OLMM Children's Choir (OLMMCC).">
-        <meta name="keywords" content="olmmcc, choir, russell, childrens, about">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div id="myPage">
-			<div id='main-text'>
-        		<h1>Login</h1>
-        		<div class='centerDiv'>
-                	<label for='email'>Email: </label>
-                	<input type="email" id='email' name="email" autofocus="true" autocomplete="on" placeholder="Your email" required="required"/>
-                	<br>
-                	<label for='password'>Password: </label>
-                	<input type="password" id='password' name="password" autocomplete="off" placeholder="Your password"required="required"/>
-                	<br><br>
-                	<button id="login">Login</button>
-                	<br>
-					<span class='smallSpan'><a href='/account/password/'>Forgot your password?</a></span>
-        		</div>
-			</div>
-			<div class="bottom">
-                <span class='smallSpan'>
-                    &copy; Justus Croskery. 
-                    <a href='/terms'>Terms of Use</a> 
-                    <a href='/privacy/'>Privacy Policy</a>
-                </span>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>OLMM Children's Choir - Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
+    <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
+    <meta name="description" content="Official site of the OLMM Children's Choir (OLMMCC).">
+    <meta name="keywords" content="olmmcc, choir, russell, childrens, about">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="myPage">
+        <div id='main-text'>
+            <h1>Login</h1>
+            <div class='centerDiv'>
+                <label for='email'>Email: </label>
+                <input type="email" id='email' name="email" autofocus="true" autocomplete="on" placeholder="Your email"
+                    required="required" />
+                <br>
+                <label for='password'>Password: </label>
+                <input type="password" id='password' name="password" autocomplete="off" placeholder="Your password"
+                    required="required" />
+                <br><br>
+                <button id="login">Login</button>
+                <br>
+                <span class='smallSpan'><a href='/account/password/'>Forgot your password?</a></span>
             </div>
-            <div id='topnav'>
-                <a class="leftFloat" id='active' href="/login">Login</a>
-                <div class="dropdown">
-                    <input type="checkbox" id="dropdownCheck">
-                    <label for="dropdownCheck">
+        </div>
+        <div class="bottom">
+            <span class='smallSpan'>
+                &copy; Justus Croskery.
+                <a href='/terms'>Terms of Use</a>
+                <a href='/privacy/'>Privacy Policy</a>
+            </span>
+        </div>
+        <div id='topnav'>
+            <a class="leftFloat" id='active' href="/login">Login</a>
+            <div class="dropdown">
+                <input type="checkbox" id="dropdownCheck">
+                <label for="dropdownCheck">
                     <svg class="dropdownSvg" viewBox="0, 0, 50, 50">
                         <rect x="1" y="10" width="48" height="5" rx="2.5" ry="2.5"></rect>
                         <rect x="1" y="22.5" width="48" height="5" rx="2.5" ry="2.5"></rect>
@@ -74,9 +78,11 @@ along with this program. If not, see https://www.gnu.org/licenses/.
                 </div>
             </div>
         </div>
-		<script src="/js/submitXhr.js"></script>
-		<script src="/login/login.js"></script>
-		<script src="/api/notification/notification.js"></script>
-		<script src="/api/general/getSession.js"></script>
-    </body>
+        <script src="/js/submitXhr.js"></script>
+        <script src="/login/login.js"></script>
+        <script src="/api/notification/notification.js"></script>
+        <script src="/api/general/getSession.js"></script>
+    </div>
+</body>
+
 </html>

@@ -25,13 +25,15 @@ if (loggedIn()) {
         if($_SESSION['subscription_policy'] != $subscription_policy) {
             changeRow('users', $_SESSION['id'], 'subscription_policy', $subscription_policy);
             $message = 'Subscription policy updated successfully! ' . $subscriptionOptions[$subscription_policy];
-            echo $message;
+            echo json_encode(['message' => $message]);
         } else {
             $message = 'This is already your subscription policy.';
-            echo $message;
+            echo json_encode(['message' => $message]);
+
         }
     } else {
-        echo "Invalid subscription policy!";
+        $message =  "Invalid subscription policy!";
+        echo json_encode(['message' => $message]);
     }
 } else {
     notLoggedIn();
