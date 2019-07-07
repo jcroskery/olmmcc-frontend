@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/wrapper.php';
+session_start();
 if ($_SESSION['admin']) {
     $table = $_POST['table'];
     foreach ($_POST as $key => $value) {
@@ -26,6 +26,4 @@ if ($_SESSION['admin']) {
         }
     }
     echo $message != '' ? $message : 'Sucessfully updated row ' . $_POST['id'] . '!';
-} else {
-    notLoggedIn();
 }

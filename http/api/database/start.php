@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/wrapper.php';
+session_start();
 if ($_SESSION['admin']) {
     $newId = getMinId($_POST["table"]) - 1;
     $result = changeRow($_POST["table"], $_POST['id'], 'id', $newId);
@@ -28,6 +28,4 @@ if ($_SESSION['admin']) {
         $message = "Successfully moved row " . $_POST['id'] . ' to start.';
         echo json_encode(['success' => true, 'message' => $message, 'row' => $row, 'oldId' => $_POST['id']]);
     }
-} else {
-    notLoggedIn();
 }
