@@ -15,14 +15,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
+function redirect() {
+    window.location = JSON.parse(this.responseText).url;
+}
 function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
     if(parsedResponse.session === 'active') {
         if(parsedResponse.username !== '') {
-            let signup = document.querySelectorAll("a[href='/signup']")[1]; //only the second one needs to be changed
-            signup.href = '/logout';
+            let signups = document.querySelectorAll("a[href='/signup']");
+            let signup = signups[signups.length - 1]; //only the last one needs to be changed
+            signup.href = 'javascript:;';
             signup.textContent = "Logout";
             signup.id = '';
+            signup.addEventListener('click', () => { submitXHR(new FormData(), '/api/account/logout.php', redirect);});
             let logins = document.querySelectorAll("a[href='/login']");
             for(let i = 0; i < logins.length; i++) {
                 let active = document.getElementById('active');
@@ -41,7 +46,6 @@ function handleSession() {
             });
             script.src = '/api/notification/notification.js';
             document.body.appendChild(script);
-            console.log(parsedResponse.notification);
         }
     }
 }

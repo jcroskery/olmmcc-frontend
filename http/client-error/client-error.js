@@ -1,4 +1,3 @@
-<?php
 /*
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
@@ -16,5 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-require_once '/srv/http/api/notification/displayNotification.php';
-displayPopupNotification('A 400 series error has occurred. Most likely you are not allowed to view this page or the page does not exist.', '/');
+function redirect() {
+    window.location = JSON.parse(this.responseText).url;
+}
+submitXHR(new FormData(), "/api/error/clientError.php", redirect);

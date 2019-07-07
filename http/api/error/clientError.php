@@ -15,16 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
-*/
-include_once '../helpers/wrapper.php';
-$license = file_get_contents('/srv/LICENSE');
-wrapperBegin('License Agreement');
-echo <<<HTML
-<div id="main-text">
-<h1>License</h1>
-<pre>
-$license
-</pre>
-</div>
-HTML;
-wrapperEnd();
+ */
+session_start();
+$_SESSION['notification'] = 'A 400 series error has occurred. Most likely you are not allowed to view this page or the page does not exist.';
+echo json_encode(['url' => '/']);

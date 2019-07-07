@@ -16,12 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '../helpers/wrapper.php';
-require_once '/srv/http/api/notification/displayNotification.php';
-if(loggedIn()){
-    session_unset();
-    $message = 'Successfully logged out.';
-    displayPopupNotification($message, '/');
-} else {
-    notLoggedIn();
-}
+session_start();
+session_unset();
+$_SESSION['notification'] = 'Successfully logged out.';
+echo json_encode(['url' => '/']);
