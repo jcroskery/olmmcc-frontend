@@ -17,8 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/wrapper.php';
-
+session_start();
 if($_SESSION['admin']) {
     switch ($_POST['request']) {
         case 'getColumnTitles':
@@ -39,6 +38,4 @@ if($_SESSION['admin']) {
             echo json_encode(['table' => $_POST['table'], 'titles' => $titles]);
             return;
     }
-} else {
-    notLoggedIn();
 }

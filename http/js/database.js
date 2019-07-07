@@ -110,6 +110,12 @@ function getOtherDatabaseTitles() {
     createTableHeader();
 }
 function getParsedColumns() {
+    if (!this.responseText) { //Not logged in as admin
+        let formData = new FormData();
+        formData.append('admin', 1);
+        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/'; });
+        return;
+    }
     parsedColumns = JSON.parse(this.responseText);
     for (let name in parsedColumns) {
         if (name === 'article') { //check for article (and other database dependencies)

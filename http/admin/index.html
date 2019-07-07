@@ -20,7 +20,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>OLMM Children's Choir - Your Account</title>
+    <title>OLMM Children's Choir - Administrator Settings</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
     <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
@@ -31,42 +31,22 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 <body>
     <div id="myPage">
-        <div id="main-text" class='centerDiv'>
-            <H1>Your Account</H1>
-            <label class='leftFloat' for='email'>Email: </label>
-            <input class='leftFloat' id='email' name='email' type='email' autocomplete='on'
-                placeholder='Your new email address' required='required' />
-            <button class='rightFloat' id='changeEmail'>Change Email</button>
-            <br><br>
-            <label class='leftFloat' for='username'>Username: </label>
-            <input name='username' class='leftFloat' id='username' type='text' autocomplete='on'
-                placeholder='Your new username' required='required' />
-            <button class='rightFloat' id='changeUsername'>Change Username</button>
-            <br><br>
-            <label class='leftFloat' for='subscription'>Subscription policy: </label>
-            <select class='leftFloat' id='subscription' name='subscriptionPolicy'>
-                <option value='0'>No Emails</option>
-                <option value='1'>Emails</option>
-                <option value='2'>Emails and Reminders</option>
-            </select>
-            <button class='rightFloat' id='changeSubscription'>Change Subscription</button>
-            <br><br><br>
-            <label class='leftFloat' for='currentPassword'>Current Password: </label>
-            <input name='currentPassword' class='leftFloat' id='currentPassword' type='password'
-                placeholder='Your current password' required='required' />
-            <br><br>
-            <label class='leftFloat' for='newPassword1'>New Password: </label>
-            <input name='newPassword1' class='leftFloat' id='newPassword1' type='password'
-                placeholder='Your new password' required='required' />
-            <br><br>
-            <label class='leftFloat' for='newPassword2'>Repeat Password: </label>
-            <input name='newPassword2' class='leftFloat' id='newPassword2' type='password'
-                placeholder='Repeat your new password' required='required' />
-            <button class='rightFloat' id='changePassword'>Change Password</button>
-            <br><br><br>
-            <label for='admin' class='leftFloat' id='adminLabel'>Account type: </label>
-            <button class='rightFloat delete' id='delete'>Delete Account</button>
-            <br><br>
+        <div id="main-text">
+            <h1>Administrator Settings</h1>
+            <h2><a href='/admin/accounts'>Accounts</a></h2>
+            <p>Create, modify, and delete accounts.</p>
+            <h2><a href='/admin/articles'>Articles</a></h2>
+            <p>Create and edit song articles.</p>
+            <h2><a href='/admin/calendar'>Calendar</a></h2>
+            <p>Create, modify, and delete calendar events.</p>
+            <h2><a href='/admin/css'>CSS</a></h2>
+            <p>Change the style of pages with Cascading Style Sheets (CSS).</p>
+            <h2><a href='/admin/email'>Emails</a></h2>
+            <p>Send emails at a certain time, useful for special announcements.</p>
+            <h2><a href='/admin/pages'>Pages</a></h2>
+            <p>Edit the content of certain pages.</p>
+            <h2><a href='/admin/songs'>Songs</a></h2>
+            <p>Add, view, modify, and delete songs.</p>
         </div>
         <div class="bottom">
             <span class='smallSpan'>
@@ -102,7 +82,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
         <script src="/js/submitXhr.js"></script>
         <script src="/api/general/getSession.js"></script>
         <script src="/api/notification/notification.js"></script>
-        <script src="/account/account.js"></script>
+        <script src='/admin/admin.js'></script>
     </div>
 </body>
 

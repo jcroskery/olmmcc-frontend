@@ -1,4 +1,3 @@
-<?php
 /*
 Copyright (C) 2019  Justus Croskery
 To contact me, email me at justus@olmmcc.tk.
@@ -16,3 +15,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+function redirectLogin() {
+    if (JSON.parse(this.responseText).admin !== 1) {
+        let formData = new FormData();
+        formData.append('admin', 1);
+        submitXHR(formData, '/api/notification/createLoginNotification.php', () => {            
+            window.location = '/login/'; 
+        });
+    }
+}
+submitXHR(new FormData(), '/api/admin/checkAdmin.php', redirectLogin);
