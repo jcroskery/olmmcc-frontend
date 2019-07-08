@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
+/*
 require_once '/srv/http/api/notification/displayNotification.php';
 session_start();
 require_once '/srv/http/api/database/accessTable.php';
@@ -32,7 +33,6 @@ if ($_SESSION['id'] != '') {
         $_SESSION['invalid_email'] = '1';
         }
         }
-         */
         if ($_SESSION['invalid_email'] == 1) {
             /*
         } else if ($_SESSION['invalid_email'] == 1) {
@@ -53,7 +53,6 @@ if ($_SESSION['id'] != '') {
         refreshAccount();
         header('location: /account/email/changeEmail.php?changeEmailVerificationId=' . $_SESSION['changeEmailVerificationId']);
         }
-         */
         } else {
             $verificationid;
             if ($_SESSION['verificationid'] == '') {
@@ -79,3 +78,4 @@ if ($_SESSION['id'] != '') {
     $message = 'You are not logged in. Please log in.';
     displayPopupNotification($message, '/login/');
 }
+*/

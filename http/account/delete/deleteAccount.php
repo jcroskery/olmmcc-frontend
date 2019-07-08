@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-
+/*
 require_once '/srv/http/api/notification/displayNotification.php';
 include_once '/srv/http/api/database/accessTable.php';
 session_start();
@@ -29,3 +29,4 @@ if(htmlspecialchars($_SESSION['deleteCode']) == $_GET['deleteCode']){
     $message = "An error occurred.";
     displayPopupNotification($message, '/account/');
 }
+*/

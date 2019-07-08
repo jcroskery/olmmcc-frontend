@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/api/notification/displayNotification.php';
 function checkPasswords($password1, $password2)
 {
     if ($password1 === $password2) {

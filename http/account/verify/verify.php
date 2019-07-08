@@ -16,6 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
+/*
 require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/api/database/accessTable.php';
 session_start();
@@ -27,3 +28,4 @@ if(htmlspecialchars($_SESSION['verificationid']) == $_GET['verification']){
     $message = "An error occurred.";
     displayPopupNotification($message, '/login/');
 }
+*/
