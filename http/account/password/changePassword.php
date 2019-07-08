@@ -17,11 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/notification/displayNotification.php';
-require_once '/srv/http/api/session/sessionStart.php';
-require_once '/srv/http/helpers/wrapper.php';
+session_start();
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/account/validationFunctions.php';
-if (loggedIn()) {
+if ($_SESSION['verified']) {
     $correctPassword = getRow('users', 'id', $_SESSION['id'])['password'];
     if(password_verify($_POST['currentPassword'], $correctPassword)){
         if (!checkPasswords($_POST['newPassword1'], $_POST['newPassword2'], '/account/')) {return;}
@@ -35,6 +34,4 @@ if (loggedIn()) {
 } else if (htmlspecialchars($_SESSION['passwordChangeRequest']) == $_GET['passwordChangeRequest']) {
     //This was for people who weren't logged in---now it doesn't work
 
-} else {
-    notLoggedIn();
 }

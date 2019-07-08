@@ -16,10 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-require_once '/srv/http/api/notification/displayNotification.php';
-require_once '/srv/http/helpers/wrapper.php';
+session_start();
 require_once '/srv/http/api/email/queueEmail.php';
-if(loggedIn()){
+if($_SESSION['verified']){
     $deleteCode;
     if ($_SESSION['deleteCode'] == '') {
         $deleteCode = hash('sha512', $_SESSION['email'] . bin2hex(random_bytes(20)));
@@ -33,6 +32,4 @@ if(loggedIn()){
     queueEmail($subject, $message, $_SESSION['username'], $_SESSION['email']);
     $message = 'An email containing an link to delete your OLMMCC account has been sent to ' . $_SESSION['email'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
     echo json_encode(['message' => $message]);
-} else {
-    notLoggedIn();
 }

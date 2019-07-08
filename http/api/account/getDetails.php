@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/wrapper.php';
-if(loggedIn()) {
+session_start();
+if($_SESSION['verified']) {
     echo json_encode(['email' => $_SESSION['email'], 'username' => $_SESSION['username'], 'admin' => $_SESSION['admin'], 'subscription_policy' => $_SESSION['subscription_policy']]);
 }

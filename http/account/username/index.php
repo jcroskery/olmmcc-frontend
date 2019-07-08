@@ -17,8 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/helpers/wrapper.php';
-if (loggedIn()) {
+session_start();
+if ($_SESSION['verified']) {
     if ($_POST['username'] != '') {
         if (getRow('users', 'username', $_POST['username'])) {
             if ($_POST['username'] == $_SESSION['username']) {
@@ -37,6 +37,4 @@ if (loggedIn()) {
         $message = 'An error occurred, please try again.';
         echo json_encode(['message' => $message]);
     }
-} else {
-    notLoggedIn();
 }

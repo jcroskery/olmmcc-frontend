@@ -18,8 +18,8 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 require_once '/srv/http/api/database/accessTable.php';
 require_once '/srv/http/api/email/queueEmail.php';
-require_once '/srv/http/helpers/wrapper.php';
-if (loggedIn()) {
+session_start();
+if ($_SESSION['verified']) {
     $_SESSION['newEmail'] = $_POST['newEmail'];
     if (getRow('users', 'email', $_SESSION['newEmail'])) {
         if ($_SESSION['email'] == $_SESSION['newEmail']) {
@@ -44,6 +44,4 @@ if (loggedIn()) {
         $message = 'An email containing an link to change your account email has been sent to ' . $_SESSION['email'] . '. Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.';
         echo json_encode(['message' => $message]);
     }
-} else {
-    notLoggedIn();
 }

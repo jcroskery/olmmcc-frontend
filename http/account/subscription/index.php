@@ -16,10 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-include_once '/srv/http/helpers/wrapper.php';
 include_once '/srv/http/api/database/accessTable.php';
 $subscriptionOptions = ['You are now unsubscribed from receiving emails.', 'You are now subscribed to receive emails.', 'You are now subscribed to receive emails and reminders.'];
-if (loggedIn()) {
+if ($_SESSION['verified']) {
     $subscription_policy = $_POST['subscriptionPolicy'];
     if ($subscription_policy > -1 && $subscription_policy < 3) {
         if($_SESSION['subscription_policy'] != $subscription_policy) {
@@ -35,6 +34,4 @@ if (loggedIn()) {
         $message =  "Invalid subscription policy!";
         echo json_encode(['message' => $message]);
     }
-} else {
-    notLoggedIn();
 }

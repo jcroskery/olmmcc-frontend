@@ -18,7 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 require_once '/srv/http/api/notification/displayNotification.php';
 require_once '/srv/http/api/database/accessTable.php';
-require_once '/srv/http/api/session/sessionStart.php';
+session_start();
 if(htmlspecialchars($_SESSION['changeEmailVerificationId']) == $_GET['changeEmailVerificationId']){
     changeRow('users', $_SESSION['id'], 'email', $_SESSION['newEmail']);
     //Set email not invalid

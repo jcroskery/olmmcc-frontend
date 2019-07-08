@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function createNotification(notificationText) { //This is needed for ajax notifications, otherwise the code would only be in wrapper.php
+function createNotification(notificationText) {
     closeNotification(); //Let's close other notifications first
     let notificationDiv = document.createElement("div");
     notificationDiv.id = 'notificationDiv';
