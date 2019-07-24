@@ -21,4 +21,4 @@ function displayPage() {
 let topnavId = document.getElementById('main-text').className;
 let formData = new FormData();
 formData.append('page', topnavId);
-submitXHR(formData, '/api/pages/getPage.php', displayPage);
+submitXHR(formData, 'https://api.olmmcc.tk/get_page', displayPage);
