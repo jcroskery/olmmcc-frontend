@@ -31,11 +31,7 @@ function display(currentId) {
     let div = document.createElement('div');
     let iframe = document.createElement('iframe');
     iframe.className = 'video';
-    for(song in parsedResponse.songs) {
-        if(song.name = currentId) {
-            iframe.src = song.link;
-        }
-    }
+    iframe.src = parsedResponse.songs[currentId].link;
     iframe.frameBorder = 0;
     iframe.allowFullscreen = true;
     div.appendChild(iframe);
@@ -62,13 +58,13 @@ function displaySongLinks() {
         p.textContent = parsedResponse.text;
         document.getElementById('main-text').appendChild(h3);
         document.getElementById('main-text').appendChild(p);
-        for (song in parsedResponse.songs){
+        for (id in parsedResponse.songs){
             let h4 = document.createElement('h4');
-            h4.textContent = song.role + ": ";
+            h4.textContent = parsedResponse.songs[id].role + ": ";
             let a = document.createElement('a');
             a.href = 'javascript:;';
-            a.id = song.name;
-            a.innerText = song.name;
+            a.id = id;
+            a.innerText = parsedResponse.songs[id].name;
             a.addEventListener('click', displayPopupVideo);
             h4.appendChild(a);
             document.getElementById('main-text').appendChild(h4);
