@@ -18,13 +18,13 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 function loadImageList() {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open("get", "/api/gallery/echoImageList.php", true);
+    xobj.open("get", "https://api.olmmcc.tk/get_image_list", true);
     xobj.send();
     xobj.onload = onLoadImageList;
 }
 function onLoadImageList() {
     var response = this.responseText;
-    imageList = JSON.parse(response);
+    imageList = JSON.parse(response)["images"];
     currentImage = 0;
     displayImage(imageList[currentImage]);
     document.onkeydown = keydown;
