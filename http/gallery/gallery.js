@@ -15,13 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function loadImageList() {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("get", "https://api.olmmcc.tk/get_image_list", true);
-    xobj.send();
-    xobj.onload = onLoadImageList;
-}
 function onLoadImageList() {
     var response = this.responseText;
     imageList = JSON.parse(response)["images"];
@@ -57,4 +50,4 @@ function leftClick() {
 function rightClick(){
     displayImage(imageList[offsetCurrentImage(1)]);
 }
-loadImageList();
+submitXHR(new FormData(), "https://api.olmmcc.tk/get_image_list", onLoadImageList);
