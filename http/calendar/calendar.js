@@ -28,11 +28,7 @@ eventsArray = [];
 function loadJSON() {
     var data = new FormData();
     data.append("yearMonthString", currentYearMonthString);
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onGetEvents);
-    xobj.open("POST", "/api/calendar/echoCalendarEvents.php", true);
-    xobj.send(data);
+    submitXHR(data, "/api/calendar/echoCalendarEvents.php", onGetEvents);
 }
 function previousMonth() {
     setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
