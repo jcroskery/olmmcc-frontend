@@ -27,8 +27,8 @@ eventsArray = [];
 
 function loadJSON() {
     var data = new FormData();
-    data.append("yearMonthString", currentYearMonthString);
-    submitXHR(data, "/api/calendar/echoCalendarEvents.php", onGetEvents);
+    data.append("year_month", currentYearMonthString);
+    submitXHR(data, "https://api.olmmcc.tk/get_calendar_events", onGetEvents);
 }
 function previousMonth() {
     setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
@@ -173,7 +173,7 @@ function onGetEvents() {
         eventsArray[currentYearMonthString].push({
             date: new Date(obj.date + "T12:00:00"),
             title: obj.title,
-            time: timeFormatter(obj.startTime) + ' to ' + timeFormatter(obj.endTime),
+            time: timeFormatter(obj.start_time) + ' to ' + timeFormatter(obj.end_time),
             notes: obj.notes
         });
     }
