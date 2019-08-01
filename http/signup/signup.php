@@ -18,6 +18,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 */
 require_once '/srv/http/api/account/validationFunctions.php';
 require_once '/srv/http/api/database/accessTable.php';
+
 session_start();
 $email = strtolower($_POST['email']);
 $username = $_POST['username'];
