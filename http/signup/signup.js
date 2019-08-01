@@ -29,7 +29,7 @@ function submitSignup() {
     formData.append('username', document.getElementById('username').value);
     formData.append('password1', document.getElementById('password1').value);
     formData.append('password2', document.getElementById('password2').value);
-    submitXHR(formData, 'signup.php', handleSignup);
+    submitXHR(formData, 'https://api.olmmcc.tk/signup', handleSignup);
 }
 document.getElementById('signup').addEventListener('click', submitSignup);
 document.getElementById('password2').addEventListener('keydown', (event) => {
