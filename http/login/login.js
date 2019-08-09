@@ -17,9 +17,12 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 function handleLogin() {
     let parsedResponse = JSON.parse(this.responseText);
-    if(parsedResponse.url === '') {
+    if (parsedResponse.url === '') {
         createNotification(parsedResponse.message);
     } else {
+        let now = new Date();
+        now.setTime(now.getTime() + 30 * 24 * 3600 * 1000); //Days * hours * seconds * milliseconds
+        document.cookie = "session=" + parsedResponse.session + "; expires=" + now.toUTCString() + "; path=/; secure=true; sameSite=strict";
         window.location = parsedResponse.url;
     }
 }
@@ -27,7 +30,7 @@ function submitLogin() {
     let formData = new FormData();
     formData.append('email', document.getElementById('email').value);
     formData.append('password', document.getElementById('password').value);
-    submitXHR(formData, 'login.php', handleLogin);
+    submitXHR(formData, 'https://api.olmmcc.tk/login', handleLogin);
 }
 document.getElementById('login').addEventListener('click', submitLogin);
 document.getElementById('password').addEventListener('keydown', (event) => {
