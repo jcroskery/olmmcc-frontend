@@ -20,9 +20,8 @@ function handleLogin() {
     if (parsedResponse.url === '') {
         createNotification(parsedResponse.message);
     } else {
-        let now = new Date();
-        now.setTime(now.getTime() + 30 * 24 * 3600 * 1000); //Days * hours * seconds * milliseconds
-        document.cookie = "session=" + parsedResponse.session + "; expires=" + now.toUTCString() + "; path=/; secure=true; sameSite=strict";
+        window.localStorage.setItem("session", parsedResponse.session);
+        window.localStorage.setItem("notification", parsedResponse.message);
         window.location = parsedResponse.url;
     }
 }

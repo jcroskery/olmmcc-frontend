@@ -16,37 +16,54 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 function redirect() {
-    window.location = JSON.parse(this.responseText).url;
+    window.localStorage.removeItem("session");
+    window.localStorage.setItem("notification", "Successfully logged out!");
+    window.location = "/";
 }
 function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
-    if(parsedResponse.session === 'active') {
-        if(parsedResponse.username !== '') {
-            let signups = document.querySelectorAll("a[href='/signup']");
-            let signup = signups[signups.length - 1]; //only the last one needs to be changed
-            signup.href = 'javascript:;';
-            signup.textContent = "Logout";
-            signup.id = '';
-            signup.addEventListener('click', () => { submitXHR(new FormData(), '/api/account/logout.php', redirect);});
-            let logins = document.querySelectorAll("a[href='/login']");
-            for(let i = 0; i < logins.length; i++) {
-                let active = document.getElementById('active');
-                if (active && active.href.includes('/account/')) {
-                    active.textContent = "Welcome, " + parsedResponse.username;
-                    logins[i].id = 'active';
-                }
-                logins[i].href = '/account/';
-                logins[i].textContent = "Welcome, " + parsedResponse.username;
+    if (parsedResponse.session === 'active' && parsedResponse.username !== '') {
+        let signups = document.querySelectorAll("a[href='/signup']");
+        let signup = signups[signups.length - 1]; //only the last one needs to be changed
+        signup.href = 'javascript:;';
+        signup.textContent = "Logout";
+        signup.id = '';
+        signup.addEventListener('click', () => {
+            let deleteForm = new FormData();
+            deleteForm.append("session", window.localStorage.getItem("session"));
+            submitXHR(deleteForm, 'https://api.olmmcc.tk/kill_session', redirect);
+        });
+        let logins = document.querySelectorAll("a[href='/login']");
+        for (let i = 0; i < logins.length; i++) {
+            let active = document.getElementById('active');
+            if (active && active.href.includes('/account/')) {
+                active.textContent = "Welcome, " + parsedResponse.username;
+                logins[i].id = 'active';
             }
-        }
-        if(parsedResponse.notification !== '') {
-            let script = document.createElement('script');
-            script.addEventListener('load', () => {
-                createNotification(parsedResponse.notification)
-            });
-            script.src = '/api/notification/notification.js';
-            document.body.appendChild(script);
+            logins[i].href = '/account/';
+            logins[i].textContent = "Welcome, " + parsedResponse.username;
         }
     }
 }
-submitXHR(new FormData(), '/api/general/getSession.php', handleSession);
+(function () {
+    if (window.localStorage.getItem("notification") !== null) {
+        let handleNotification = () => {
+            createNotification(window.localStorage.getItem("notification"))
+            window.localStorage.removeItem("notification");
+        }
+        let scriptSrc = '/api/notification/notification.js';
+        let scripts = document.getElementsByTagName("script");
+        for (var i = 0; i < scripts.length; i++) {
+            if (scripts[i].getAttribute('src') === scriptSrc) {
+                return handleNotification();
+            }
+        }
+        let script = document.createElement('script');
+        script.addEventListener('load', handleNotification);
+        script.src = scriptSrc;
+        document.body.appendChild(script);
+    }
+})();
+let sessionForm = new FormData();
+sessionForm.append("session", window.localStorage.getItem("session"));
+submitXHR(sessionForm, 'https://api.olmmcc.tk/get_username', handleSession);
