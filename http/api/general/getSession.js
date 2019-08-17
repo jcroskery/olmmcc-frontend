@@ -22,7 +22,7 @@ function redirect() {
 }
 function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
-    if (parsedResponse.session === 'active' && parsedResponse.username !== '') {
+    if (parsedResponse.username !== '') {
         let signups = document.querySelectorAll("a[href='/signup']");
         let signup = signups[signups.length - 1]; //only the last one needs to be changed
         signup.href = 'javascript:;';
@@ -64,6 +64,9 @@ function handleSession() {
         document.body.appendChild(script);
     }
 })();
-let sessionForm = new FormData();
-sessionForm.append("session", window.localStorage.getItem("session"));
-submitXHR(sessionForm, 'https://api.olmmcc.tk/get_username', handleSession);
+if (window.localStorage.getItem("session")) {
+    let sessionForm = new FormData();
+    sessionForm.append("session", window.localStorage.getItem("session"));
+    sessionForm.append("details", "username");
+    submitXHR(sessionForm, 'https://api.olmmcc.tk/get_account', handleSession);
+}
