@@ -23,7 +23,16 @@ function changeDisplayedUsername() {
     }
 }
 function displayResponse() {
-    submitXHR(new FormData(), "/api/account/refresh.php", () => { submitXHR(new FormData(), "/api/general/getSession.php", changeDisplayedUsername)});
+    let refreshForm = new FormData();
+    refreshForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(refreshForm, "https://api.olmmcc.tk/refresh", 
+        () => {
+            let refreshForm = new FormData();
+            refreshForm.append("session", window.localStorage.getItem("session"));
+            refreshForm.append("details", "username");
+            submitXHR(refreshForm, 'https://api.olmmcc.tk/get_account', handleSession);
+        }
+    );
     createNotification(JSON.parse(this.responseText).message);
 }
 function changeEmail() {
@@ -43,10 +52,11 @@ function changeSubscription() {
 }
 function changePassword() {
     let formData = new FormData();
-    formData.append('currentPassword', document.getElementById('currentPassword').value);
-    formData.append('newPassword1', document.getElementById('newPassword1').value);
-    formData.append('newPassword2', document.getElementById('newPassword2').value);
-    submitXHR(formData, "/account/password/changePassword.php", displayResponse);
+    formData.append('current_password', document.getElementById('currentPassword').value);
+    formData.append('password1', document.getElementById('newPassword1').value);
+    formData.append('password2', document.getElementById('newPassword2').value);
+    formData.append("session", window.localStorage.getItem("session"));
+    submitXHR(formData, "https://api.olmmcc.tk/change_password", displayResponse);
 }
 function deleteAccount() {
     submitXHR(new FormData(), "/account/delete/", displayResponse);
@@ -55,7 +65,7 @@ function displayDetails() {
     if (!this.responseText) { //Not logged in
         let formData = new FormData();
         formData.append('admin', 0);
-        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/';})
+        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/'; })
         return;
     }
     let parsedResponse = JSON.parse(this.responseText);
@@ -80,4 +90,9 @@ document.getElementById('changeSubscription').addEventListener('click', changeSu
 document.getElementById('changePassword').addEventListener('click', changePassword);
 document.getElementById('delete').addEventListener('click', deleteAccount);
 
-submitXHR(new FormData(), "/api/account/getDetails.php", displayDetails);
+let accountForm = new FormData();
+accountForm.append("details", 
+    JSON.stringify(["username", "email", "subscription_policy", "admin"])
+);
+accountForm.append("session", window.localStorage.getItem("session"));
+submitXHR(accountForm, "https://api.olmmcc.tk/get_account", displayDetails);
