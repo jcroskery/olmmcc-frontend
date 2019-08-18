@@ -30,7 +30,7 @@ function displayResponse() {
             let refreshForm = new FormData();
             refreshForm.append("session", window.localStorage.getItem("session"));
             refreshForm.append("details", "username");
-            submitXHR(refreshForm, 'https://api.olmmcc.tk/get_account', handleSession);
+            submitXHR(refreshForm, 'https://api.olmmcc.tk/get_account', changeDisplayedUsername);
         }
     );
     createNotification(JSON.parse(this.responseText).message);
@@ -42,8 +42,9 @@ function changeEmail() {
 }
 function changeUsername() {
     let formData = new FormData();
+    formData.append("session", window.localStorage.getItem("session"));
     formData.append('username', document.getElementById('username').value);
-    submitXHR(formData, "/account/username/", displayResponse);
+    submitXHR(formData, "https://api.olmmcc.tk/change_username", displayResponse);
 }
 function changeSubscription() {
     let formData = new FormData();
