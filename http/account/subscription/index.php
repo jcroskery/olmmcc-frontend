@@ -31,7 +31,7 @@ if ($_SESSION['verified']) {
 
         }
     } else {
-        $message =  "Invalid subscription policy!";
+        $message = "Invalid subscription policy!";
         echo json_encode(['message' => $message]);
     }
 }

@@ -48,8 +48,9 @@ function changeUsername() {
 }
 function changeSubscription() {
     let formData = new FormData();
-    formData.append('subscriptionPolicy', document.getElementById('subscription').value);
-    submitXHR(formData, "/account/subscription/", displayResponse);
+    formData.append("session", window.localStorage.getItem("session"));
+    formData.append('subscription', document.getElementById('subscription').value);
+    submitXHR(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
 }
 function changePassword() {
     let formData = new FormData();
