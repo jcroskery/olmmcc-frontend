@@ -37,8 +37,9 @@ function displayResponse() {
 }
 function changeEmail() {
     let formData = new FormData();
-    formData.append('newEmail', document.getElementById('email').value);
-    submitXHR(formData, "/account/email/", displayResponse);
+    formData.append("session", window.localStorage.getItem("session"));
+    formData.append('email', document.getElementById('email').value);
+    submitXHR(formData, "https://api.olmmcc.tk/change_email", displayResponse);
 }
 function changeUsername() {
     let formData = new FormData();
@@ -48,8 +49,9 @@ function changeUsername() {
 }
 function changeSubscription() {
     let formData = new FormData();
-    formData.append('subscriptionPolicy', document.getElementById('subscription').value);
-    submitXHR(formData, "/account/subscription/", displayResponse);
+    formData.append("session", window.localStorage.getItem("session"));
+    formData.append('subscription', document.getElementById('subscription').value);
+    submitXHR(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
 }
 function changePassword() {
     let formData = new FormData();
@@ -73,7 +75,7 @@ function displayDetails() {
     document.getElementById('email').value = parsedResponse.email;
     document.getElementById('username').value = parsedResponse.username;
     document.getElementById('subscription').selectedIndex = parsedResponse.subscription_policy;
-    if (parsedResponse.admin === 1) {
+    if (parsedResponse.admin === "1") {
         document.getElementById('adminLabel').textContent += 'Admin';
         let adminButton = document.createElement('button');
         adminButton.id = 'admin';
