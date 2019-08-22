@@ -16,12 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
 function redirectLogin() {
-    if (JSON.parse(this.responseText).admin !== 1) {
-        let formData = new FormData();
-        formData.append('admin', 1);
-        submitXHR(formData, '/api/notification/createLoginNotification.php', () => {            
-            window.location = '/login/'; 
-        });
+    if (JSON.parse(this.responseText).admin !== "1") {
+        window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");        
+        window.location = '/login/'; 
     }
 }
-submitXHR(new FormData(), '/api/admin/checkAdmin.php', redirectLogin);
+let accountForm = new FormData();
+accountForm.append("details", "admin");
+accountForm.append("session", window.localStorage.getItem("session"));
+submitXHR(accountForm, "https://api.olmmcc.tk/get_account", redirectLogin);
