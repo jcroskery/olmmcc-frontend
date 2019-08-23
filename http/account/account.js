@@ -62,7 +62,9 @@ function changePassword() {
     submitXHR(formData, "https://api.olmmcc.tk/change_password", displayResponse);
 }
 function deleteAccount() {
-    submitXHR(new FormData(), "/account/delete/", displayResponse);
+    let formData = new FormData();
+    formData.append("session", window.localStorage.getItem("session"));
+    submitXHR(formData, "https://api.olmmcc.tk/delete_account", displayResponse);
 }
 function displayDetails() {
     if (!this.responseText) { //Not logged in

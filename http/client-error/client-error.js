@@ -15,7 +15,5 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function redirect() {
-    window.location = JSON.parse(this.responseText).url;
-}
-submitXHR(new FormData(), "/api/error/clientError.php", redirect);
+window.localStorage.setItem("notification", "A 400 series error has occurred. Most likely you are not allowed to view this page or the page does not exist.");
+window.location = "/";
