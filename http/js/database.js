@@ -35,7 +35,7 @@ function onClickAdd() {
     let changeForm = new FormData();
     changeForm.append('table', table.id);
     let addInputs = document.getElementsByClassName('add');
-    for(let i = 0; i < addInputs.length; i++) {
+    for (let i = 0; i < addInputs.length; i++) {
         changeForm.append(addInputs[i].name, addInputs[i].value);
     }
     let xobj = new XMLHttpRequest();
@@ -47,7 +47,7 @@ function onClickAdd() {
 function displayAddedRow() {
     let parsedResponse = JSON.parse(this.responseText);
     createNotification(parsedResponse.message);
-    if(parsedResponse.success) {
+    if (parsedResponse.success) {
         table.removeChild(document.getElementById('add')); //Remove old add row
         addRowToTable(parsedResponse.row); //Create new row
         addAddRowToTable(); //Create new add row
@@ -111,18 +111,20 @@ function getOtherDatabaseTitles() {
 }
 function getParsedColumns() {
     if (!this.responseText) { //Not logged in as admin
-        let formData = new FormData();
-        formData.append('admin', 1);
-        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/'; });
+        window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");
+        window.location = '/login/';
         return;
     }
-    parsedColumns = JSON.parse(this.responseText);
-    for (let name in parsedColumns) {
-        if (name === 'article') { //check for article (and other database dependencies)
+    let parsedText = JSON.parse(this.responseText);
+    parsedColumns = parsedText["columns"];
+    parsedRows = parsedText["rows"];
+    parsedTypes = parsedText["types"];
+    for (let i = 0; i < parsedColumns.length; i++) {
+        if (parsedColumns[i] === 'article') { //check for article (and other database dependencies)
             let changeForm = new FormData();
-            changeForm.append('table', name + 's');
-            changeForm.append('request', 'getRowTitles');
-            submitXHR(changeForm, "/api/database/accessTableJs.php", getOtherDatabaseTitles);
+            changeForm.append('table', parsedColumns[i] + 's');
+            changeForm.append("session", window.localStorage.getItem("session"));
+            submitXHR(changeForm, "https://api.olmmcc.tk/get_row_titles", getOtherDatabaseTitles);
             return;
         }
     }
@@ -132,19 +134,16 @@ function createTableHeader() {
     let tableHeaderRow = document.createElement('tr');
     tableHeaderRow.id = 'tableHeaderRow';
     let tableHeader = '';
-    for (let name in parsedColumns) {
-        if(name !== 'id') {
-            tableHeader += ('<th>' + name + '</th>');
+    parsedColumns.forEach(column => {
+        if (column !== 'id') {
+            tableHeader += ('<th>' + column + '</th>');
         }
-    }
+    });
     tableHeader += "<th colspan='3'>Options</th>";
     tableHeaderRow.innerHTML = tableHeader;
     table.appendChild(tableHeaderRow);
 
-    let changeForm = new FormData();
-    changeForm.append('table', table.id);
-    changeForm.append('request', 'getAllRows');
-    submitXHR(changeForm, "/api/database/accessTableJs.php", createRows);
+    createRows();
 }
 function determineCellContents(type, name, value, add = false) {
     let td = document.createElement('td');
@@ -156,21 +155,21 @@ function determineCellContents(type, name, value, add = false) {
         let tmpHtml = "<select name='" + name + "'>\
             <option value=''>None</option>"
         let otherTable = databaseTitles[name + 's']
-        for(let i = 0; i < otherTable.length; i++){
+        for (let i = 0; i < otherTable.length; i++) {
             tmpHtml += "<option>" + otherTable[i] + "</option>";
         }
         tmpHtml += "</select>";
         td.innerHTML = tmpHtml;
         let options = td.lastChild.childNodes;
-        for(let i = 0; i < options.length; i++){
-            if(value === options[i].innerHTML) {
+        for (let i = 0; i < options.length; i++) {
+            if (value === options[i].innerHTML) {
                 options[i].setAttribute('selected', 'selected');
             }
         }
     } else {
         td.innerHTML = '<input type="text" name="' + name + '" value="' + value + '" />';
     }
-    if(add) {
+    if (add) {
         td.lastChild.className = 'add';
     } else {
         td.lastChild.addEventListener('change', onChange);
@@ -179,10 +178,11 @@ function determineCellContents(type, name, value, add = false) {
 }
 function addRowToTable(rowData, position = 'end') {
     let tr = document.createElement('tr');
-    tr.id = rowData['id'];
-    for (name in rowData) {
-        if (name !== 'id') {
-            tr.appendChild(determineCellContents(parsedColumns[name], name, rowData[name]));
+    let id_index = parsedColumns.indexOf("id");
+    tr.id = rowData[id_index];
+    for (let i = 0; i < rowData.length; i++) {
+        if (i !== id_index) {
+            tr.appendChild(determineCellContents(parsedTypes[i], parsedColumns[i], rowData[i]));
         }
     }
 
@@ -199,10 +199,10 @@ function addRowToTable(rowData, position = 'end') {
     tr.appendChild(moveToStart);
     tr.appendChild(moveToEnd);
     tr.appendChild(deleteRow);
-    if(position === 'start') {
-        document.getElementById('tableHeaderRow').insertAdjacentElement('afterend', tr); 
-    } else if(position === 'secondlast') {
-        document.getElementById('add').insertAdjacentElement('beforebegin', tr); 
+    if (position === 'start') {
+        document.getElementById('tableHeaderRow').insertAdjacentElement('afterend', tr);
+    } else if (position === 'secondlast') {
+        document.getElementById('add').insertAdjacentElement('beforebegin', tr);
     } else {
         table.appendChild(tr);
     }
@@ -210,9 +210,9 @@ function addRowToTable(rowData, position = 'end') {
 function addAddRowToTable() {
     let tr = document.createElement('tr');
     tr.id = 'add';
-    for (name in parsedColumns) {
-        if (name !== 'id') {
-            tr.appendChild(determineCellContents(parsedColumns[name], name, "New " + name, true));
+    for (let i = 0; i < parsedColumns.length; i++) {
+        if (i !== parsedColumns.indexOf("id")) {
+            tr.appendChild(determineCellContents(parsedTypes[i], parsedColumns[i], "New " + parsedColumns[i], true));
         }
     }
 
@@ -225,8 +225,7 @@ function addAddRowToTable() {
     table.appendChild(tr);
 }
 function createRows() {
-    let parsedRows = JSON.parse(this.responseText);
-    for(i in parsedRows) {
+    for (i in parsedRows) {
         addRowToTable(parsedRows[i]);
     }
     addAddRowToTable();
@@ -234,6 +233,6 @@ function createRows() {
 {
     let changeForm = new FormData();
     changeForm.append('table', table.id);
-    changeForm.append('request', 'getColumnTitles');
-    submitXHR(changeForm, "/api/database/accessTableJs.php", getParsedColumns);
+    changeForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(changeForm, "https://api.olmmcc.tk/get_database", getParsedColumns);
 }
