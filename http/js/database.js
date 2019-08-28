@@ -59,11 +59,8 @@ function onClickDelete(event) {
         let changeForm = new FormData();
         changeForm.append('id', id);
         changeForm.append('table', table.id);
-        let xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-        xobj.addEventListener("load", removeDeletedRow);
-        xobj.open("POST", "/api/database/delete.php", true);
-        xobj.send(changeForm);
+        changeForm.append("session", window.localStorage.getItem("session"));
+        submitXHR(changeForm, "https://api.olmmcc.tk/delete_row", removeDeletedRow);
     }
 }
 function removeDeletedRow() {
@@ -80,7 +77,7 @@ function onClickMoveToStart(event) {
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.addEventListener("load", moveRowToStart);
-    xobj.open("POST", "/api/database/start.php", true);
+    xobj.open("POST", "https://api.olmmcc.tk/", true);
     xobj.send(changeForm);
 }
 function moveRowToStart() {
@@ -90,7 +87,7 @@ function moveRow(response, position) {
     let parsedResponse = JSON.parse(response);
     createNotification(parsedResponse.message);
     if (parsedResponse.success) {
-        table.removeChild(document.getElementById(parsedResponse.oldId));
+        table.removeChild(document.getElementById(parsedResponse.old_id));
         addRowToTable(parsedResponse.row, position);
     }
 }
@@ -98,7 +95,8 @@ function onClickMoveToEnd(event) {
     let changeForm = new FormData();
     changeForm.append('id', event.target.parentElement.parentElement.id);
     changeForm.append('table', table.id);
-    submitXHR(changeForm, "/api/database/end.php", moveRowToEnd);
+    changeForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(changeForm, "https://api.olmmcc.tk/move_row_to_end", moveRowToEnd);
 }
 function moveRowToEnd() {
     moveRow(this.responseText, 'secondlast');
