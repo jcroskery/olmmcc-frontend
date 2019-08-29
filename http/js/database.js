@@ -19,14 +19,12 @@ let table = document.getElementsByTagName('table')[0];
 function onChange(event) {
     let element = event.target;
     let changeForm = new FormData();
-    changeForm.append(element.name, element.value);
+    changeForm.append("name", element.name);
+    changeForm.append("value", element.value);
     changeForm.append('id', element.parentElement.parentElement.id);
     changeForm.append('table', table.id);
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onChangeComplete);
-    xobj.open("POST", "/api/database/change.php", true);
-    xobj.send(changeForm);
+    changeForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
 }
 function onChangeComplete() {
     createNotification(this.responseText);
@@ -35,14 +33,16 @@ function onClickAdd() {
     let changeForm = new FormData();
     changeForm.append('table', table.id);
     let addInputs = document.getElementsByClassName('add');
+    let names = [];
+    let values = [];
     for (let i = 0; i < addInputs.length; i++) {
-        changeForm.append(addInputs[i].name, addInputs[i].value);
+        names.push(addInputs[i].name);
+        values.push(addInputs[i].value);
     }
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", displayAddedRow);
-    xobj.open("POST", "/api/database/add.php", true);
-    xobj.send(changeForm);
+    changeForm.append("names", JSON.stringify(names));
+    changeForm.append("values", JSON.stringify(values));
+    changeForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(changeForm, "https://api.olmmcc.tk/add_row", displayAddedRow);
 }
 function displayAddedRow() {
     let parsedResponse = JSON.parse(this.responseText);
@@ -74,11 +74,8 @@ function onClickMoveToStart(event) {
     let changeForm = new FormData();
     changeForm.append('id', event.target.parentElement.parentElement.id);
     changeForm.append('table', table.id);
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", moveRowToStart);
-    xobj.open("POST", "https://api.olmmcc.tk/", true);
-    xobj.send(changeForm);
+    changeForm.append("session", window.localStorage.getItem("session"));
+    submitXHR(changeForm, "https://api.olmmcc.tk/move_row_to_start", moveRowToStart);
 }
 function moveRowToStart() {
     moveRow(this.responseText, 'start');
