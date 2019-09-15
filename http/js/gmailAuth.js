@@ -1,37 +1,13 @@
-function oauthSignIn() {
-    // Google's OAuth 2.0 endpoint for requesting an access token
-    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-
-    // Create <form> element to submit parameters to OAuth 2.0 endpoint.
-    var form = document.createElement('form');
-    form.setAttribute('method', 'GET'); // Send as a GET request.
-    form.setAttribute('action', oauth2Endpoint);
-
-    // Parameters to pass to OAuth 2.0 endpoint.
-    var params = {
-        'client_id': this.responseText.trim(),
-        'redirect_uri': 'https://www.olmmcc.tk/admin/email/',
-        'response_type': 'token',
-        'scope': 'https://mail.google.com/',
-        'include_granted_scopes': 'true',
-        'state': 'pass-through value'
-    };
-
-    // Add form parameters as hidden input values.
-    for (var p in params) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', p);
-        input.setAttribute('value', params[p]);
-        form.appendChild(input);
+function redirect() {
+    if (this.responseText !== "") {
+        window.location.replace(this.responseText);
+    } else {
+        window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");
+        window.location = "/login";
     }
-
-    // Add form to page and submit it to open the OAuth 2.0 endpoint.
-    document.body.appendChild(form);
-    form.submit();
 }
 {
     let form = new FormData();
     form.append("session", window.localStorage.getItem("session"));
-    submitXHR(form, "https://api.olmmcc.tk/get_gmail_auth_client_id", oauthSignIn);
+    submitXHR(form, "https://api.olmmcc.tk/get_gmail_auth_url", redirect);
 }
