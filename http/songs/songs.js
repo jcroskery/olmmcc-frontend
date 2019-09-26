@@ -18,8 +18,8 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 var songs = {
     parsedResponse : null,
     displayPopupVideo: function () {
-        removeGraydiv();
-        display(this.id);
+        songs.removeGraydiv();
+        songs.display(this.id);
     },
     removeGraydiv: function () {
         var element = document.getElementById("graydiv");
@@ -42,14 +42,14 @@ var songs = {
         div.innerHTML += close;
         graydiv.appendChild(div);
         document.getElementById("myPage").appendChild(graydiv);
-        document.getElementById('closeVideo').addEventListener('click', closeDiv);
+        document.getElementById('closeVideo').addEventListener('click', songs.closeDiv);
     },
     closeDiv: function () {
-        removeGraydiv();
+        songs.removeGraydiv();
     },
     keydown: function (event) {
         if (event.keyCode == 27) {
-            closeDiv();
+            songs.closeDiv();
         }
     },
     displaySongLinks: function () {
