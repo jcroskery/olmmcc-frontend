@@ -33,8 +33,7 @@ var songs = {
         let div = document.createElement('div');
         let iframe = document.createElement('iframe');
         iframe.className = 'video';
-        console.log(parsedResponse)
-        iframe.src = parsedResponse.songs[currentId].link;
+        iframe.src = songs.parsedResponse.songs[currentId].link;
         iframe.frameBorder = 0;
         iframe.allowFullscreen = true;
         div.appendChild(iframe);
@@ -53,21 +52,21 @@ var songs = {
         }
     },
     displaySongLinks: function () {
-        parsedResponse = JSON.parse(this.responseText);
+        songs.parsedResponse = JSON.parse(this.responseText);
         let p = document.createElement('p');
-        if (parsedResponse.title) {
+        if (songs.parsedResponse.title) {
             let h3 = document.createElement('h3');
-            h3.textContent = parsedResponse.title;
-            p.textContent = parsedResponse.text;
+            h3.textContent = songs.parsedResponse.title;
+            p.textContent = songs.parsedResponse.text;
             document.getElementById('main-text').appendChild(h3);
             document.getElementById('main-text').appendChild(p);
-            for (id in parsedResponse.songs) {
+            for (id in songs.parsedResponse.songs) {
                 let h4 = document.createElement('h4');
-                h4.textContent = parsedResponse.songs[id].role + ": ";
+                h4.textContent = songs.parsedResponse.songs[id].role + ": ";
                 let a = document.createElement('a');
                 a.href = 'javascript:;';
                 a.id = id;
-                a.innerText = parsedResponse.songs[id].name;
+                a.innerText = songs.parsedResponse.songs[id].name;
                 a.addEventListener('click', songs.displayPopupVideo);
                 h4.appendChild(a);
                 document.getElementById('main-text').appendChild(h4);
