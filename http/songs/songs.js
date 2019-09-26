@@ -68,7 +68,7 @@ var songs = {
                 a.href = 'javascript:;';
                 a.id = id;
                 a.innerText = parsedResponse.songs[id].name;
-                a.addEventListener('click', displayPopupVideo);
+                a.addEventListener('click', songs.displayPopupVideo);
                 h4.appendChild(a);
                 document.getElementById('main-text').appendChild(h4);
             }
