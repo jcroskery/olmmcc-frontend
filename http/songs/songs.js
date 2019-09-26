@@ -72,7 +72,7 @@ var songs = {
                 h4.appendChild(a);
                 document.getElementById('main-text').appendChild(h4);
             }
-            document.addEventListener('keydown', keydown);
+            document.addEventListener('keydown', songs.keydown);
         } else {
             p.textContent = "There is no post about the current songs yet, please check again soon!";
             document.getElementById('main-text').appendChild(p);
