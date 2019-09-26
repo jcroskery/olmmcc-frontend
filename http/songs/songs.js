@@ -31,6 +31,7 @@ function display(currentId) {
     let div = document.createElement('div');
     let iframe = document.createElement('iframe');
     iframe.className = 'video';
+    console.log(parsedResponse)
     iframe.src = parsedResponse.songs[currentId].link;
     iframe.frameBorder = 0;
     iframe.allowFullscreen = true;
