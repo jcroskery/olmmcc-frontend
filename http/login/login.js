@@ -15,31 +15,32 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-function handleLogin() {
-    let parsedResponse = JSON.parse(this.responseText);
-    if (parsedResponse.message != null) {
-        createNotification(parsedResponse.message);
-    } else {
-        window.localStorage.setItem("session", parsedResponse.session);
-        if (parsedResponse.verified == true) {
-            window.localStorage.setItem("notification", "Successfully logged in!");
-            window.location = "/";
-        } else {
-            let formData = new FormData();
-            formData.append("session", parsedResponse.session);
-            submitXHR(formData, 'https://api.olmmcc.tk/send_verification_email', showVerificationNotification);
-        }
-    }
-}
-function showVerificationNotification() {
-    let parsedResponse = JSON.parse(this.responseText);
-    createNotification("An verification link has been sent to your email at " + parsedResponse.email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
-}
 function submitLogin() {
     let formData = new FormData();
-    formData.append('email', document.getElementById('email').value);
+    let email = document.getElementById('email').value;
+    formData.append('email', email);
     formData.append('password', document.getElementById('password').value);
-    submitXHR(formData, 'https://api.olmmcc.tk/login', handleLogin);
+    submitXHR(formData, 'https://api.olmmcc.tk/login', function () {
+        let parsedResponse = JSON.parse(this.responseText);
+        if (parsedResponse.message != null) {
+            createNotification(parsedResponse.message);
+        } else {
+            window.localStorage.setItem("session", parsedResponse.session);
+            if (parsedResponse.verified == true) {
+                window.localStorage.setItem("notification", "Successfully logged in!");
+                window.location = "/";
+            } else {
+                let formData = new FormData();
+                formData.append("session", parsedResponse.session);
+                submitXHR(formData, 'https://api.olmmcc.tk/send_verification_email', function () {
+                    let response = JSON.parse(this.responseText);
+                    if (response.success == true) {
+                        createNotification("An verification link has been sent to your email at " + email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
+                    }
+                });
+            }
+        }
+    });
 }
 document.getElementById('login').addEventListener('click', submitLogin);
 document.getElementById('password').addEventListener('keydown', (event) => {
