@@ -17,13 +17,23 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 function handleLogin() {
     let parsedResponse = JSON.parse(this.responseText);
-    if (parsedResponse.url === '') {
+    if (parsedResponse.message != null) {
         createNotification(parsedResponse.message);
     } else {
         window.localStorage.setItem("session", parsedResponse.session);
-        window.localStorage.setItem("notification", parsedResponse.message);
-        window.location = parsedResponse.url;
+        if (parsedResponse.verified == true) {
+            window.localStorage.setItem("notification", "Successfully logged in!");
+            window.location = "/";
+        } else {
+            let formData = new FormData();
+            formData.append("session", parsedResponse.session);
+            submitXHR(formData, 'https://api.olmmcc.tk/send_verification_email', showVerificationNotification);
+        }
     }
+}
+function showVerificationNotification() {
+    let parsedResponse = JSON.parse(this.responseText);
+    window.localStorage.setItem("notification", "An verification link has been sent to your email at " + parsedResponse.email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
 }
 function submitLogin() {
     let formData = new FormData();
