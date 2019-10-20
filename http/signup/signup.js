@@ -17,11 +17,11 @@ along with this program. If not, see https://www.gnu.org/licenses/.
  */
 function handleSignup() {
     let parsedResponse = JSON.parse(this.responseText);
-    if (!parsedResponse.url) {
-        createNotification(parsedResponse.message);
+    if (!parsedResponse.success) {
+        createNotification("An error occurred. Please try again.");
     } else {
         window.localStorage.setItem("notification", "Your account was successfully created! Please log in to your account.");
-        window.location = parsedResponse.url;
+        window.location = "/login";
     }
 }
 function submitSignup() {
