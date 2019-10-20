@@ -33,7 +33,7 @@ function handleLogin() {
 }
 function showVerificationNotification() {
     let parsedResponse = JSON.parse(this.responseText);
-    window.localStorage.setItem("notification", "An verification link has been sent to your email at " + parsedResponse.email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
+    createNotification("An verification link has been sent to your email at " + parsedResponse.email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
 }
 function submitLogin() {
     let formData = new FormData();
