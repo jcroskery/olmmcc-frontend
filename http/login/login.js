@@ -25,7 +25,6 @@ function submitLogin() {
         if (parsedResponse.message != null) {
             createNotification(parsedResponse.message);
         } else {
-            window.localStorage.setItem("session", parsedResponse.session);
             if (parsedResponse.verified == true) {
                 window.localStorage.setItem("notification", "Successfully logged in!");
                 window.location = "/";
