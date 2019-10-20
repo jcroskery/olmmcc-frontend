@@ -26,15 +26,18 @@ function submitLogin() {
             createNotification(parsedResponse.message);
         } else {
             if (parsedResponse.verified == true) {
+                window.localStorage.setItem("session", parsedResponse.session);
                 window.localStorage.setItem("notification", "Successfully logged in!");
                 window.location = "/";
             } else {
+                window.localStorage.setItem("unverified_session", parsedResponse.session);
                 let formData = new FormData();
                 formData.append("session", parsedResponse.session);
                 submitXHR(formData, 'https://api.olmmcc.tk/send_verification_email', function () {
                     let response = JSON.parse(this.responseText);
                     if (response.success == true) {
-                        createNotification("An verification link has been sent to your email at " + email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
+                        window.localStorage.setItem("notification", "An verification code has been sent to your email at " + email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
+                        window.location = "/account/verify";
                     }
                 });
             }
