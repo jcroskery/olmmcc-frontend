@@ -20,6 +20,7 @@ function handleSignup() {
     if (!parsedResponse.url) {
         createNotification(parsedResponse.message);
     } else {
+        window.localStorage.setItem("notification", "Your account was successfully created! Please log in to your account.");
         window.location = parsedResponse.url;
     }
 }
