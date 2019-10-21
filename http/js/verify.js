@@ -10,8 +10,7 @@ function submitVerification() {
             window.localStorage.setItem("notification", "Your account has been successfully verified and you have been logged in!");
             window.location = "/";
         } else {
-            windown.localStorage.setItem("Something went wrong. Please log in again.");
-            window.location = "/login";
+            window.localStorage.setItem("Something went wrong. Your code may be incorrect.");
         }
     });
 }
