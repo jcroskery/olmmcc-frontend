@@ -37,9 +37,18 @@ function displayResponse() {
 }
 function changeEmail() {
     let formData = new FormData();
+    let email = document.getElementById('email').value;
     formData.append("session", window.localStorage.getItem("session"));
-    formData.append('email', document.getElementById('email').value);
-    submitXHR(formData, "https://api.olmmcc.tk/change_email", displayResponse);
+    formData.append('email', email);
+    submitXHR(formData, "https://api.olmmcc.tk/send_change_email", function () {
+        let parsedResponse = JSON.parse(this.responseText);
+        if (parsedResponse.success) {
+            window.localStorage.setItem("notification", "An email containing an link to change your account email has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+            window.location = "/account/email";
+        } else if (parsedResponse.message) {
+            createNotification(parsedResponse.message);
+        }
+    });
 }
 function changeUsername() {
     let formData = new FormData();
