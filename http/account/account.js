@@ -43,7 +43,7 @@ function changeEmail() {
     submitXHR(formData, "https://api.olmmcc.tk/send_change_email", function () {
         let parsedResponse = JSON.parse(this.responseText);
         if (parsedResponse.success) {
-            window.localStorage.setItem("notification", "An email containing an link to change your account email has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+            window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/email";
         } else if (parsedResponse.message) {
             createNotification(parsedResponse.message);
@@ -73,7 +73,15 @@ function changePassword() {
 function deleteAccount() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/delete_account", displayResponse);
+    submitXHR(formData, "https://api.olmmcc.tk/send_delete_email", function () {
+        let parsedResponse = JSON.parse(this.responseText);
+        if (parsedResponse.success) {
+            window.localStorage.setItem("notification", "An email containing a verification code for your account deletion request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+            window.location = "/account/delete";
+        } else if (parsedResponse.message) {
+            createNotification(parsedResponse.message);
+        }
+    });
 }
 function displayDetails() {
     if (!this.responseText) { //Not logged in
