@@ -64,11 +64,18 @@ function changeSubscription() {
 }
 function changePassword() {
     let formData = new FormData();
-    formData.append('current_password', document.getElementById('currentPassword').value);
     formData.append('password1', document.getElementById('newPassword1').value);
     formData.append('password2', document.getElementById('newPassword2').value);
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/change_password", displayResponse);
+    submitXHR(formData, "https://api.olmmcc.tk/change_password", function () {
+        let parsedResponse = JSON.parse(this.responseText);
+        if (parsedResponse.success) {
+            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+            window.location = "/account/password";
+        } else if (parsedResponse.message) {
+            createNotification(parsedResponse.message);
+        }
+    });
 }
 function deleteAccount() {
     let formData = new FormData();
