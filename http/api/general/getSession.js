@@ -22,7 +22,7 @@ function redirect() {
 }
 function handleSession() {
     parsedResponse = JSON.parse(this.responseText);
-    if (parsedResponse.username !== '') {
+    if (parsedResponse.username != undefined) {
         let signups = document.querySelectorAll("a[href='/signup']");
         let signup = signups[signups.length - 1]; //only the last one needs to be changed
         signup.href = 'javascript:;';
