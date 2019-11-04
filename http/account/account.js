@@ -67,11 +67,11 @@ function changePassword() {
     formData.append('password1', document.getElementById('newPassword1').value);
     formData.append('password2', document.getElementById('newPassword2').value);
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/change_password", function () {
+    submitXHR(formData, "https://api.olmmcc.tk/send_password_email", function () {
         let parsedResponse = JSON.parse(this.responseText);
         if (parsedResponse.success) {
             window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
-            window.location = "/account/password";
+            window.location = "/account/password/verify";
         } else if (parsedResponse.message) {
             createNotification(parsedResponse.message);
         }
