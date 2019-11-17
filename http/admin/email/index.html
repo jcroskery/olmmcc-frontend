@@ -31,6 +31,31 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 <body class='databaseClass'>
     <div id="myPage">
+        <div id="main-text">
+            <h1>Email</h1>
+            <div class="centerDiv">
+                <input type="radio" name="recipients" id="all_users" value="all_users" checked="checked" />
+                <label for="all_users">All Users</label>&emsp;
+                <input type="radio" name="recipients" id="specified" value="specified" />
+                <label for="specified">One specific recipient</label><br>
+                <label for="recipient" id="recipient_label" hidden>To:</label>
+                <input type="text" name="recipient" id="recipient" placeholder="Send to" hidden/>
+                <br id="recipient_br" hidden>
+                <br>
+                <label for="subject">Email Subject: </label>
+                <input type="text" id="subject" name="subject" placeholder="Email Subject"/> <br>
+                <label for="body">Body:</label><br>
+                <textarea id="body" name="body" rows="10" cols="72" placeholder="Email Body"></textarea><br>
+                <button id="send">Send</button>
+            </div>
+        </div>
+        <div class="bottom">
+            <span class='smallSpan'>
+                &copy; Justus Croskery.
+                <a href='/terms'>Terms of Use</a>
+                <a href='/privacy/'>Privacy Policy</a>
+            </span>
+        </div>
         <div id='topnav'>
             <a class="leftFloat" id="active" href="/account/"></a>
             <div class="dropdown">
@@ -58,6 +83,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
         <script src="/js/submitXhr.js"></script>
         <script src="/api/general/getSession.js"></script>
         <script src="/js/gmailFunctions.js"></script>
+        <script src="/api/notification/notification.js"></script>
     </div>
 </body>
 
