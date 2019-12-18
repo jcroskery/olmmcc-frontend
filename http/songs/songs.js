@@ -28,15 +28,24 @@ var songs = {
         }
     },
     display: function (currentId) {
+        let src = songs.parsedResponse.songs[currentId].link;
         let graydiv = document.createElement("div");
         graydiv.id = 'graydiv';
         let div = document.createElement('div');
-        let iframe = document.createElement('iframe');
-        iframe.className = 'video';
-        iframe.src = songs.parsedResponse.songs[currentId].link;
-        iframe.frameBorder = 0;
-        iframe.allowFullscreen = true;
-        div.appendChild(iframe);
+        if(src.includes("youtube-nocookie")) {
+            let iframe = document.createElement('iframe');
+            iframe.className = 'video';
+            iframe.src = src; 
+            iframe.frameBorder = 0;
+            iframe.allowFullscreen = true;
+            div.appendChild(iframe);
+        } else {
+            let video = document.createElement("video");
+            video.className = 'video';
+            video.src = src;
+            video.controls = true;
+            div.appendChild(video);
+        }
         let close = getCloseButton('closeVideo');
         div.innerHTML += close;
         graydiv.appendChild(div);
