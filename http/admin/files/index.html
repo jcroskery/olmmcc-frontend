@@ -33,15 +33,10 @@ along with this program. If not, see https://www.gnu.org/licenses/.
     <div id="myPage">
         <div id="main-text">
             <h1>Violin Songs</h1>
-            <p>Sonatina in F Major</p>
-            <audio controls="controls" src="/admin/files/Track 4.mp3"></audio>
-            <audio controls="controls" src="/admin/files/Track 24.mp3"></audio><br>
-            <p>Skye Boat Song</p>
-            <audio controls="controls" src="/admin/files/Track 8.mp3"></audio>
-            <audio controls="controls" src="/admin/files/Track 28.mp3"></audio><br>
-            <p>Donkey Doodle</p>
-            <audio controls="controls" src="/admin/files/Track 15.mp3"></audio>
-            <audio controls="controls" src="/admin/files/Track 35.mp3"></audio><br>
+            <div class="centerDiv" id="violinDiv">
+                <label class="centerFloat" for="song">Song Number:</label>
+                <input name="song" id="song" placeholder="Song Number Here" required="required" />
+            </div>
         </div>
         <div class="bottom">
             <span class='smallSpan'>
@@ -75,6 +70,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
             </div>
         </div>
         <script src="/js/submitXhr.js"></script>
+        <script src="files.js"></script>
         <script src="/api/general/getSession.js"></script>
     </div>
 </body>
