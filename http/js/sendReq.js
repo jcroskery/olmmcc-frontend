@@ -15,10 +15,23 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function submitXHR(changeForm, url, onLoad) {
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.addEventListener("load", onLoad);
-    xobj.open("POST", url, true);
-    xobj.send(changeForm);
+function sendReq(changeForm, url, onLoad) {
+    try {
+        fetch(url, { method: "POST", body: changeForm }).then((response) => {
+            return response.json();
+        })
+            .then((myJson) => {
+                onLoad(myJson);
+            });
+    } catch (e) {
+        let wrappedOnLoad = () => {
+            onLoad(JSON.parse(this.responseText));
+        }
+        let xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.addEventListener("load", wrappedOnLoad);
+        xobj.open("POST", url, true);
+        xobj.send(changeForm);
+    }
+
 }
