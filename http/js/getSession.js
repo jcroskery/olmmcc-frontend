@@ -20,9 +20,8 @@ function redirect() {
     window.localStorage.setItem("notification", "Successfully logged out!");
     window.location = "/";
 }
-function handleSession() {
-    parsedResponse = JSON.parse(this.responseText);
-    if (parsedResponse.username != undefined) {
+function handleSession(json) {
+    if (json.username != undefined) {
         let signups = document.querySelectorAll("a[href='/signup']");
         let signup = signups[signups.length - 1]; //only the last one needs to be changed
         signup.href = 'javascript:;';
@@ -37,11 +36,11 @@ function handleSession() {
         for (let i = 0; i < logins.length; i++) {
             let active = document.getElementById('active');
             if (active && active.href.includes('/account/')) {
-                active.textContent = "Welcome, " + parsedResponse.username;
+                active.textContent = "Welcome, " + json.username;
                 logins[i].id = 'active';
             }
             logins[i].href = '/account/';
-            logins[i].textContent = "Welcome, " + parsedResponse.username;
+            logins[i].textContent = "Welcome, " + json.username;
         }
     }
 }
@@ -68,5 +67,5 @@ if (window.localStorage.getItem("session")) {
     let sessionForm = new FormData();
     sessionForm.append("session", window.localStorage.getItem("session"));
     sessionForm.append("details", "username");
-    submitXHR(sessionForm, 'https://api.olmmcc.tk/get_account', handleSession);
+    sendReq(sessionForm, 'https://api.olmmcc.tk/get_account', handleSession);
 }
