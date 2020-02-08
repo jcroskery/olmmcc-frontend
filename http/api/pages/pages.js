@@ -15,10 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function displayPage() {
-    document.getElementById('main-text').innerHTML += this.responseText;
+function displayPage(json) {
+    document.getElementById('main-text').innerHTML += json.text;
 }
 let topnavId = document.getElementById('main-text').className;
 let formData = new FormData();
 formData.append('page', topnavId);
-submitXHR(formData, 'https://api.olmmcc.tk/get_page', displayPage);
+sendReq(formData, 'https://api.olmmcc.tk/get_page', displayPage);
