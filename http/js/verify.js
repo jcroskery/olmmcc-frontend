@@ -2,9 +2,8 @@ function submitVerification() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("unverified_session"));
     formData.append("code", document.getElementById('code').value);
-    submitXHR(formData, "https://api.olmmcc.tk/verify_account", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if(parsedResponse.success == true) {
+    sendReq(formData, "https://api.olmmcc.tk/verify_account", (json) => {
+        if (json.success == true) {
             window.localStorage.setItem("session", window.localStorage.getItem("unverified_session"));
             window.localStorage.removeItem("unverified_session");
             window.localStorage.setItem("notification", "Your account has been successfully verified and you have been logged in!");

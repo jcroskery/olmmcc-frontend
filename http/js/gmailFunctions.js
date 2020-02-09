@@ -2,7 +2,7 @@ if (window.location.search != "") {
     let formData = new FormData();
     formData.append("code", new RegExp('[?&]code=([^&]*)').exec(location.search)[1]);
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/send_gmail_code", () => {
+    sendReq(formData, "https://api.olmmcc.tk/send_gmail_code", (_) => {
         window.location.search = "";
     })
 }
@@ -16,9 +16,8 @@ document.getElementById("send").addEventListener("click", () => {
     formData.append("recipients", recipients);
     formData.append("subject", document.getElementById("subject").value);
     formData.append("body", document.getElementById("body").value);
-    submitXHR(formData, "https://api.olmmcc.tk/send_email", function() {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success == true) {
+    sendReq(formData, "https://api.olmmcc.tk/send_email", (json) => {
+        if (json.success == true) {
             createNotification("Successfully sent this email!");
         } else {
             createNotification("Something went wrong. Please try again.")

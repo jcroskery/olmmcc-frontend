@@ -15,38 +15,36 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function changeDisplayedUsername() {
-    let parsedResponse = JSON.parse(this.responseText);
+function changeDisplayedUsername(json) {
     let accountLinks = document.querySelectorAll("a[href='/account/']");
     for (let i = 0; i < accountLinks.length; i++) {
-        accountLinks[i].textContent = "Welcome, " + parsedResponse.username;
+        accountLinks[i].textContent = "Welcome, " + json.username;
     }
 }
-function displayResponse() {
+function displayResponse(json) {
     let refreshForm = new FormData();
     refreshForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(refreshForm, "https://api.olmmcc.tk/refresh", 
-        () => {
+    sendReq(refreshForm, "https://api.olmmcc.tk/refresh", 
+        (_) => {
             let refreshForm = new FormData();
             refreshForm.append("session", window.localStorage.getItem("session"));
             refreshForm.append("details", "username");
-            submitXHR(refreshForm, 'https://api.olmmcc.tk/get_account', changeDisplayedUsername);
+            sendReq(refreshForm, 'https://api.olmmcc.tk/get_account', changeDisplayedUsername);
         }
     );
-    createNotification(JSON.parse(this.responseText).message);
+    createNotification(json.message);
 }
 function changeEmail() {
     let formData = new FormData();
     let email = document.getElementById('email').value;
     formData.append("session", window.localStorage.getItem("session"));
     formData.append('email', email);
-    submitXHR(formData, "https://api.olmmcc.tk/send_change_email", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success) {
-            window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+    sendReq(formData, "https://api.olmmcc.tk/send_change_email", (json) => {
+        if (json.success) {
+            window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/email";
-        } else if (parsedResponse.message) {
-            createNotification(parsedResponse.message);
+        } else if (json.message) {
+            createNotification(json.message);
         }
     });
 }
@@ -54,54 +52,50 @@ function changeUsername() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
     formData.append('username', document.getElementById('username').value);
-    submitXHR(formData, "https://api.olmmcc.tk/change_username", displayResponse);
+    sendReq(formData, "https://api.olmmcc.tk/change_username", displayResponse);
 }
 function changeSubscription() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
     formData.append('subscription', document.getElementById('subscription').value);
-    submitXHR(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
+    sendReq(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
 }
 function changePassword() {
     let formData = new FormData();
     formData.append('password1', document.getElementById('newPassword1').value);
     formData.append('password2', document.getElementById('newPassword2').value);
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/send_password_email", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success) {
-            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+    sendReq(formData, "https://api.olmmcc.tk/send_password_email", (json) => {
+        if (json.success) {
+            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/password/verify";
-        } else if (parsedResponse.message) {
-            createNotification(parsedResponse.message);
+        } else if (json.message) {
+            createNotification(json.message);
         }
     });
 }
 function deleteAccount() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
-    submitXHR(formData, "https://api.olmmcc.tk/send_delete_email", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success) {
-            window.localStorage.setItem("notification", "An email containing a verification code for your account deletion request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+    sendReq(formData, "https://api.olmmcc.tk/send_delete_email", (json) => {
+        if (json.success) {
+            window.localStorage.setItem("notification", "An email containing a verification code for your account deletion request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/delete";
-        } else if (parsedResponse.message) {
-            createNotification(parsedResponse.message);
+        } else if (json.message) {
+            createNotification(json.message);
         }
     });
 }
-function displayDetails() {
-    if (!this.responseText) { //Not logged in
-        let formData = new FormData();
-        formData.append('admin', 0);
-        submitXHR(formData, '/api/notification/createLoginNotification.php', () => { window.location = '/login/'; })
+function displayDetails(json) {
+    if (json.session == "none") { //Not logged in
+        window.localStorage.setItem("notification", "Please log in to view this page."); 
+        window.location = '/login/';
         return;
     }
-    let parsedResponse = JSON.parse(this.responseText);
-    document.getElementById('email').value = parsedResponse.email;
-    document.getElementById('username').value = parsedResponse.username;
-    document.getElementById('subscription').selectedIndex = parsedResponse.subscription_policy;
-    if (parsedResponse.admin === "1") {
+    document.getElementById('email').value = json.email;
+    document.getElementById('username').value = json.username;
+    document.getElementById('subscription').selectedIndex = json.subscription_policy;
+    if (json.admin === "1") {
         document.getElementById('adminLabel').textContent += 'Admin';
         let adminButton = document.createElement('button');
         adminButton.id = 'admin';
@@ -124,4 +118,4 @@ accountForm.append("details",
     JSON.stringify(["username", "email", "subscription_policy", "admin"])
 );
 accountForm.append("session", window.localStorage.getItem("session"));
-submitXHR(accountForm, "https://api.olmmcc.tk/get_account", displayDetails);
+sendReq(accountForm, "https://api.olmmcc.tk/get_account", displayDetails);

@@ -15,9 +15,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-function handleSignup() {
-    let parsedResponse = JSON.parse(this.responseText);
-    if (!parsedResponse.success) {
+function handleSignup(json) {
+    if (!json.success) {
         createNotification("An error occurred. Please try again.");
     } else {
         window.localStorage.setItem("notification", "Your account was successfully created! Please log in to your account.");
@@ -30,7 +29,7 @@ function submitSignup() {
     formData.append('username', document.getElementById('username').value);
     formData.append('password1', document.getElementById('password1').value);
     formData.append('password2', document.getElementById('password2').value);
-    submitXHR(formData, 'https://api.olmmcc.tk/signup', handleSignup);
+    sendReq(formData, 'https://api.olmmcc.tk/signup', handleSignup);
 }
 document.getElementById('signup').addEventListener('click', submitSignup);
 document.getElementById('password2').addEventListener('keydown', (event) => {

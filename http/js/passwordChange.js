@@ -20,14 +20,13 @@ function changePassword() {
     formData.append('password1', document.getElementById('newPassword1').value);
     formData.append('password2', document.getElementById('newPassword2').value);
     formData.append("email", document.getElementById('email').value);
-    submitXHR(formData, "https://api.olmmcc.tk/send_password_email", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success) {
-            window.localStorage.setItem("session", parsedResponse.session);
-            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + parsedResponse.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+    sendReq(formData, "https://api.olmmcc.tk/send_password_email", (json) => {
+        if (json.success) {
+            window.localStorage.setItem("session", json.session);
+            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/password/verify";
-        } else if (parsedResponse.message) {
-            createNotification(parsedResponse.message);
+        } else if (json.message) {
+            createNotification(json.message);
         }
     });
 }

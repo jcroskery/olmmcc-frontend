@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-function redirect() {
+function redirect(json) {
     window.localStorage.removeItem("session");
     window.localStorage.setItem("notification", "Successfully logged out!");
     window.location = "/";
@@ -30,7 +30,7 @@ function handleSession(json) {
         signup.addEventListener('click', () => {
             let deleteForm = new FormData();
             deleteForm.append("session", window.localStorage.getItem("session"));
-            submitXHR(deleteForm, 'https://api.olmmcc.tk/kill_session', redirect);
+            sendReq(deleteForm, 'https://api.olmmcc.tk/kill_session', redirect);
         });
         let logins = document.querySelectorAll("a[href='/login']");
         for (let i = 0; i < logins.length; i++) {
@@ -50,7 +50,7 @@ function handleSession(json) {
             createNotification(window.localStorage.getItem("notification"))
             window.localStorage.removeItem("notification");
         }
-        let scriptSrc = '/api/notification/notification.js';
+        let scriptSrc = '/js/notification.js';
         let scripts = document.getElementsByTagName("script");
         for (var i = 0; i < scripts.length; i++) {
             if (scripts[i].getAttribute('src') === scriptSrc) {

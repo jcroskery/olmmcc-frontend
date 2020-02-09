@@ -2,9 +2,8 @@ function submitChange() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
     formData.append("code", document.getElementById('code').value);
-    submitXHR(formData, "https://api.olmmcc.tk/change_email", function () {
-        let parsedResponse = JSON.parse(this.responseText);
-        if (parsedResponse.success == true) {
+    sendReq(formData, "https://api.olmmcc.tk/change_email", (json) => {
+        if (json.success == true) {
             window.localStorage.setItem("notification", "Your email address has been successfully changed.");
             window.location = "/account";
         } else {

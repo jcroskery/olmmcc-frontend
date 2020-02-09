@@ -28,7 +28,7 @@ eventsArray = [];
 function loadJSON() {
     var data = new FormData();
     data.append("year_month", currentYearMonthString);
-    submitXHR(data, "https://api.olmmcc.tk/get_calendar_events", onGetEvents);
+    sendReq(data, "https://api.olmmcc.tk/get_calendar_events", onGetEvents);
 }
 function previousMonth() {
     setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
@@ -164,12 +164,10 @@ function onResize() {
         document.addEventListener('keydown', weekViewKeydown);
     }
 }
-function onGetEvents() {
+function onGetEvents(json) {
     eventsArray[currentYearMonthString] = [];
-    var response = this.responseText;
-    let actual_JSON = JSON.parse(response);
-    for (var i = 0; i < actual_JSON.length; i++) {
-        obj = actual_JSON[i];
+    for (var i = 0; i < json.length; i++) {
+        obj = json[i];
         eventsArray[currentYearMonthString].push({
             date: new Date(obj.date + "T12:00:00"),
             title: obj.title,
