@@ -15,9 +15,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function onLoadImageList() {
-    var response = this.responseText;
-    imageList = JSON.parse(response)["images"];
+function onLoadImageList(json) {
+    imageList = json.images;
     currentImage = 0;
     displayImage(imageList[currentImage]);
     document.onkeydown = keydown;
@@ -50,4 +49,4 @@ function leftClick() {
 function rightClick(){
     displayImage(imageList[offsetCurrentImage(1)]);
 }
-submitXHR(new FormData(), "https://api.olmmcc.tk/get_image_list", onLoadImageList);
+sendReq(new FormData(), "https://api.olmmcc.tk/get_image_list", onLoadImageList);

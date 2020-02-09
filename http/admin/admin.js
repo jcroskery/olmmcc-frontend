@@ -15,13 +15,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function redirectLogin() {
-    if (JSON.parse(this.responseText).admin !== "1") {
-        window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");        
+function redirectLogin(json) {
+    if (json.admin !== "1") {
+        window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");
         window.location = '/login/'; 
     }
 }
 let accountForm = new FormData();
 accountForm.append("details", "admin");
 accountForm.append("session", window.localStorage.getItem("session"));
-submitXHR(accountForm, "https://api.olmmcc.tk/get_account", redirectLogin);
+sendReq(accountForm, "https://api.olmmcc.tk/get_account", redirectLogin);

@@ -60,8 +60,8 @@ var songs = {
             songs.closeDiv();
         }
     },
-    displaySongLinks: function () {
-        songs.parsedResponse = JSON.parse(this.responseText);
+    displaySongLinks: (json) => {
+        songs.parsedResponse = json;
         let p = document.createElement('p');
         if (songs.parsedResponse.title) {
             let h3 = document.createElement('h3');
@@ -88,5 +88,5 @@ var songs = {
     }
 }
 {
-    submitXHR(new FormData(), "https://api.olmmcc.tk/get_songs", songs.displaySongLinks);
+    sendReq(new FormData(), "https://api.olmmcc.tk/get_songs", songs.displaySongLinks);
 }

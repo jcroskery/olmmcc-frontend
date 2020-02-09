@@ -24,7 +24,7 @@ function onChange(event) {
     changeForm.append('id', element.parentElement.parentElement.id);
     changeForm.append('table', table.id);
     changeForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
+    sendReq(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
 }
 function onChangeComplete() {
     createNotification(this.responseText);
@@ -42,14 +42,13 @@ function onClickAdd() {
     changeForm.append("names", JSON.stringify(names));
     changeForm.append("values", JSON.stringify(values));
     changeForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(changeForm, "https://api.olmmcc.tk/add_row", displayAddedRow);
+    sendReq(changeForm, "https://api.olmmcc.tk/add_row", displayAddedRow);
 }
-function displayAddedRow() {
-    let parsedResponse = JSON.parse(this.responseText);
-    createNotification(parsedResponse.message);
-    if (parsedResponse.success) {
+function displayAddedRow(json) {
+    createNotification(json.message);
+    if (json.success) {
         table.removeChild(document.getElementById('add')); //Remove old add row
-        addRowToTable(parsedResponse.row); //Create new row
+        addRowToTable(json.row); //Create new row
         addAddRowToTable(); //Create new add row
     }
 }
@@ -60,14 +59,13 @@ function onClickDelete(event) {
         changeForm.append('id', id);
         changeForm.append('table', table.id);
         changeForm.append("session", window.localStorage.getItem("session"));
-        submitXHR(changeForm, "https://api.olmmcc.tk/delete_row", removeDeletedRow);
+        sendReq(changeForm, "https://api.olmmcc.tk/delete_row", removeDeletedRow);
     }
 }
-function removeDeletedRow() {
-    let parsedResponse = JSON.parse(this.responseText);
-    createNotification(parsedResponse.message);
-    if (parsedResponse.success) {
-        table.removeChild(document.getElementById(parsedResponse.id)); //Remove deleted row
+function removeDeletedRow(json) {
+    createNotification(json.message);
+    if (json.success) {
+        table.removeChild(document.getElementById(json.id)); //Remove deleted row
     }
 }
 function onClickMoveToStart(event) {
@@ -75,17 +73,16 @@ function onClickMoveToStart(event) {
     changeForm.append('id', event.target.parentElement.parentElement.id);
     changeForm.append('table', table.id);
     changeForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(changeForm, "https://api.olmmcc.tk/move_row_to_start", moveRowToStart);
+    sendReq(changeForm, "https://api.olmmcc.tk/move_row_to_start", moveRowToStart);
 }
-function moveRowToStart() {
-    moveRow(this.responseText, 'start');
+function moveRowToStart(json) {
+    moveRow(json, 'start');
 }
-function moveRow(response, position) {
-    let parsedResponse = JSON.parse(response);
-    createNotification(parsedResponse.message);
-    if (parsedResponse.success) {
-        table.removeChild(document.getElementById(parsedResponse.old_id));
-        addRowToTable(parsedResponse.row, position);
+function moveRow(json, position) {
+    createNotification(json.message);
+    if (json.success) {
+        table.removeChild(document.getElementById(json.old_id));
+        addRowToTable(json.row, position);
     }
 }
 function onClickMoveToEnd(event) {
@@ -93,33 +90,31 @@ function onClickMoveToEnd(event) {
     changeForm.append('id', event.target.parentElement.parentElement.id);
     changeForm.append('table', table.id);
     changeForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(changeForm, "https://api.olmmcc.tk/move_row_to_end", moveRowToEnd);
+    sendReq(changeForm, "https://api.olmmcc.tk/move_row_to_end", moveRowToEnd);
 }
-function moveRowToEnd() {
-    moveRow(this.responseText, 'secondlast');
+function moveRowToEnd(json) {
+    moveRow(json, 'secondlast');
 }
-function getOtherDatabaseTitles() {
-    let parsedResponse = JSON.parse(this.responseText);
+function getOtherDatabaseTitles(json) {
     databaseTitles = [];
-    databaseTitles[parsedResponse.table] = parsedResponse.titles;
+    databaseTitles[json.table] = json.titles;
     createTableHeader();
 }
-function getParsedColumns() {
-    if (!this.responseText) { //Not logged in as admin
+function getParsedColumns(json) {
+    if (json.success == false) { //Not logged in as admin
         window.localStorage.setItem("notification", "Please log in to an administrator account to view this page.");
         window.location = '/login/';
         return;
     }
-    let parsedText = JSON.parse(this.responseText);
-    parsedColumns = parsedText["columns"];
-    parsedRows = parsedText["rows"];
-    parsedTypes = parsedText["types"];
+    parsedColumns = json.columns;
+    parsedRows = json.rows;
+    parsedTypes = json.types;
     for (let i = 0; i < parsedColumns.length; i++) {
         if (parsedColumns[i] === 'article') { //check for article (and other database dependencies)
             let changeForm = new FormData();
             changeForm.append('table', parsedColumns[i] + 's');
             changeForm.append("session", window.localStorage.getItem("session"));
-            submitXHR(changeForm, "https://api.olmmcc.tk/get_row_titles", getOtherDatabaseTitles);
+            sendReq(changeForm, "https://api.olmmcc.tk/get_row_titles", getOtherDatabaseTitles);
             return;
         }
     }
@@ -229,5 +224,5 @@ function createRows() {
     let changeForm = new FormData();
     changeForm.append('table', table.id);
     changeForm.append("session", window.localStorage.getItem("session"));
-    submitXHR(changeForm, "https://api.olmmcc.tk/get_database", getParsedColumns);
+    sendReq(changeForm, "https://api.olmmcc.tk/get_database", getParsedColumns);
 }
