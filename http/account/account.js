@@ -15,23 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function changeDisplayedUsername(json) {
-    let accountLinks = document.querySelectorAll("a[href='/account/']");
-    for (let i = 0; i < accountLinks.length; i++) {
-        accountLinks[i].textContent = "Welcome, " + json.username;
-    }
-}
 function displayResponse(json) {
-    let refreshForm = new FormData();
-    refreshForm.append("session", window.localStorage.getItem("session"));
-    sendReq(refreshForm, "https://api.olmmcc.tk/refresh", 
-        (_) => {
-            let refreshForm = new FormData();
-            refreshForm.append("session", window.localStorage.getItem("session"));
-            refreshForm.append("details", "username");
-            sendReq(refreshForm, 'https://api.olmmcc.tk/get_account', changeDisplayedUsername);
-        }
-    );
     createNotification(json.message);
 }
 function changeEmail() {
@@ -47,12 +31,6 @@ function changeEmail() {
             createNotification(json.message);
         }
     });
-}
-function changeUsername() {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
-    formData.append('username', document.getElementById('username').value);
-    sendReq(formData, "https://api.olmmcc.tk/change_username", displayResponse);
 }
 function changeSubscription() {
     let formData = new FormData();
@@ -93,7 +71,6 @@ function displayDetails(json) {
         return;
     }
     document.getElementById('email').value = json.email;
-    document.getElementById('username').value = json.username;
     document.getElementById('subscription').selectedIndex = json.subscription_policy;
     if (json.admin === "1") {
         document.getElementById('adminLabel').textContent += 'Admin';
@@ -108,14 +85,13 @@ function displayDetails(json) {
     }
 }
 document.getElementById('changeEmail').addEventListener('click', changeEmail);
-document.getElementById('changeUsername').addEventListener('click', changeUsername);
 document.getElementById('changeSubscription').addEventListener('click', changeSubscription);
 document.getElementById('changePassword').addEventListener('click', changePassword);
 document.getElementById('delete').addEventListener('click', deleteAccount);
 
 let accountForm = new FormData();
 accountForm.append("details", 
-    JSON.stringify(["username", "email", "subscription_policy", "admin"])
+    JSON.stringify(["email", "subscription_policy", "admin"])
 );
 accountForm.append("session", window.localStorage.getItem("session"));
 sendReq(accountForm, "https://api.olmmcc.tk/get_account", displayDetails);
