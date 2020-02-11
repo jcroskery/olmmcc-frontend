@@ -26,7 +26,6 @@ function handleSignup(json) {
 function submitSignup() {
     let formData = new FormData();
     formData.append('email', document.getElementById('email').value);
-    formData.append('username', document.getElementById('username').value);
     formData.append('password1', document.getElementById('password1').value);
     formData.append('password2', document.getElementById('password2').value);
     sendReq(formData, 'https://api.olmmcc.tk/signup', handleSignup);

@@ -21,7 +21,7 @@ function redirect(json) {
     window.location = "/";
 }
 function handleSession(json) {
-    if (json.username != undefined) {
+    if (json.session != "none") {
         let signups = document.querySelectorAll("a[href='/signup']");
         let signup = signups[signups.length - 1]; //only the last one needs to be changed
         signup.href = 'javascript:;';
@@ -36,11 +36,11 @@ function handleSession(json) {
         for (let i = 0; i < logins.length; i++) {
             let active = document.getElementById('active');
             if (active && active.href.includes('/account/')) {
-                active.textContent = "Welcome, " + json.username;
+                active.textContent = "Account Settings";
                 logins[i].id = 'active';
             }
             logins[i].href = '/account/';
-            logins[i].textContent = "Welcome, " + json.username;
+            logins[i].textContent = "Account Settings";
         }
     }
 }
@@ -66,6 +66,6 @@ function handleSession(json) {
 if (window.localStorage.getItem("session")) {
     let sessionForm = new FormData();
     sessionForm.append("session", window.localStorage.getItem("session"));
-    sessionForm.append("details", "username");
+    sessionForm.append("details", "");
     sendReq(sessionForm, 'https://api.olmmcc.tk/get_account', handleSession);
 }
