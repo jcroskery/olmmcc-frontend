@@ -15,26 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
-function handleSignup(json) {
-    if (json.message) {
-        createNotification(json.message);
-    } else {
-        window.localStorage.setItem("unverified_session", json.session);
-        let formData = new FormData();
-        formData.append("session", json.session);
-        sendReq(formData, 'https://api.olmmcc.tk/send_verification_email', (json) => {
-            if (json.success == true) {
-                window.localStorage.setItem("notification", "An verification code has been sent to your email at " + email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
-                window.location = "/account/verify";
-            }
-        });
-    }
-}
 function submitSignup() {
     let formData = new FormData();
-    email = document.getElementById('email').value
-    formData.append('email', email);
-    sendReq(formData, 'https://api.olmmcc.tk/signup', handleSignup);
+    formData.append('email', document.getElementById('email').value);
+    sendReq(formData, 'https://api.olmmcc.tk/signup', handleLogin);
 }
 document.getElementById('signup').addEventListener('click', submitSignup);
 document.getElementById('email').addEventListener('keydown', (event) => {
