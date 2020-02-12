@@ -6,7 +6,7 @@ function submitVerification() {
         if (json.success == true) {
             window.localStorage.setItem("session", window.localStorage.getItem("unverified_session"));
             window.localStorage.removeItem("unverified_session");
-            window.localStorage.setItem("notification", "Your account has been successfully verified and you have been logged in!");
+            window.localStorage.setItem("notification", "Success! You are now logged in.");
             window.location = "/";
         } else {
             createNotification("Something went wrong. Your code may be incorrect.");
