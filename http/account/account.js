@@ -38,20 +38,6 @@ function changeSubscription() {
     formData.append('subscription', document.getElementById('subscription').value);
     sendReq(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
 }
-function changePassword() {
-    let formData = new FormData();
-    formData.append('password1', document.getElementById('newPassword1').value);
-    formData.append('password2', document.getElementById('newPassword2').value);
-    formData.append("session", window.localStorage.getItem("session"));
-    sendReq(formData, "https://api.olmmcc.tk/send_password_email", (json) => {
-        if (json.success) {
-            window.localStorage.setItem("notification", "An email containing a verification code for your password change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
-            window.location = "/account/password/verify";
-        } else if (json.message) {
-            createNotification(json.message);
-        }
-    });
-}
 function deleteAccount() {
     let formData = new FormData();
     formData.append("session", window.localStorage.getItem("session"));
@@ -70,23 +56,14 @@ function displayDetails(json) {
         window.location = '/login/';
         return;
     }
+    if (json.admin === "1") {
+        window.location = "/admin";
+    }
     document.getElementById('email').value = json.email;
     document.getElementById('subscription').selectedIndex = json.subscription_policy;
-    if (json.admin === "1") {
-        document.getElementById('adminLabel').textContent += 'Admin';
-        let adminButton = document.createElement('button');
-        adminButton.id = 'admin';
-        adminButton.classList = 'centerDiv inline';
-        adminButton.addEventListener('click', () => { window.location = '/admin/'; });
-        adminButton.textContent = "Go to Administrator Settings";
-        document.getElementById('delete').insertAdjacentElement('afterend', adminButton);
-    } else {
-        document.getElementById('adminLabel').textContent += 'Member';
-    }
 }
 document.getElementById('changeEmail').addEventListener('click', changeEmail);
 document.getElementById('changeSubscription').addEventListener('click', changeSubscription);
-document.getElementById('changePassword').addEventListener('click', changePassword);
 document.getElementById('delete').addEventListener('click', deleteAccount);
 
 let accountForm = new FormData();
