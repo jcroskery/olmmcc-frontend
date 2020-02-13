@@ -20,7 +20,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>OLMM Children's Choir - Administrator Settings</title>
+    <title>OLMM Children's Choir - Member Accounts</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
     <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
@@ -29,32 +29,11 @@ along with this program. If not, see https://www.gnu.org/licenses/.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class='databaseClass'>
     <div id="myPage">
-        <div id="main-text">
-            <h1>Administrator Settings</h1>
-            <h2><a href='/admin/accounts/admin'>Administrator Accounts</a></h2>
-            <p>Create, modify, and delete administrator accounts.</p>
-            <h2><a href='/admin/articles'>Articles</a></h2>
-            <p>Create and edit song articles.</p>
-            <h2><a href='/admin/calendar'>Calendar</a></h2>
-            <p>Create, modify, and delete calendar events.</p>
-            <h2><a href='/admin/email'>Emails</a></h2>
-            <p>Send emails at a certain time, useful for special announcements.</p>
-            <h2><a href='/admin/accounts/member'>Member Accounts</a></h2>
-            <p>Create, modify, and delete member accounts.</p>
-            <h2><a href='/admin/files'>Other Files</a></h2>
-            <p>Other Random Files</p>
-            <h2><a href='/admin/songs'>Songs</a></h2>
-            <p>Add, view, modify, and delete songs.</p>
-        </div>
-        <div class="bottom">
-            <span class='smallSpan'>
-                &copy; Justus Croskery.
-                <a href='/terms'>Terms of Use</a>
-                <a href='/privacy/'>Privacy Policy</a>
-            </span>
-        </div>
+        <table class='database' id='users'>
+            <caption>Member Accounts</caption>
+        </table>
         <div id='topnav'>
             <a class="leftFloat" id="active" href="/account/"></a>
             <div class="dropdown">
@@ -82,7 +61,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
         <script src="/js/sendReq.js"></script>
         <script src="/js/getSession.js"></script>
         <script src="/js/notification.js"></script>
-        <script src='/admin/admin.js'></script>
+        <script src="/js/database.js"></script>
     </div>
 </body>
 
