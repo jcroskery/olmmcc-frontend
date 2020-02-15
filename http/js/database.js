@@ -26,8 +26,8 @@ function onChange(event) {
     changeForm.append("session", window.localStorage.getItem("session"));
     sendReq(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
 }
-function onChangeComplete() {
-    createNotification(this.responseText);
+function onChangeComplete(json) {
+    createNotification(json.message);
 }
 function onClickAdd() {
     let changeForm = new FormData();
