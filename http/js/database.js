@@ -26,8 +26,16 @@ function onChange(event) {
     changeForm.append("session", window.localStorage.getItem("session"));
     sendReq(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
 }
-function onChangeComplete() {
-    createNotification(this.responseText);
+function onChangeComplete(json) {
+    if(json.success) {
+        createNotification(json.message);
+    }
+    else if (json.authorized) {
+        window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+        window.location = "/account/email";
+    } else {
+        createNotification("You are not authorized to change other administrator accounts. Please log in with their account or connect to the backend database.");
+    }
 }
 function onClickAdd() {
     let changeForm = new FormData();
@@ -63,9 +71,14 @@ function onClickDelete(event) {
     }
 }
 function removeDeletedRow(json) {
-    createNotification(json.message);
     if (json.success) {
         table.removeChild(document.getElementById(json.id)); //Remove deleted row
+        createNotification(json.message);
+    } else if (json.authorized) {
+        window.localStorage.setItem("notification", "An email containing a verification code for your account deletion request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
+        window.location = "/account/delete";
+    } else {
+        createNotification("You are not authorized to change other administrator accounts. Please log in with their account or connect to the backend database.");
     }
 }
 function onClickMoveToStart(event) {

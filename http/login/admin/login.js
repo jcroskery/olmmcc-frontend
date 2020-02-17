@@ -20,25 +20,13 @@ function submitLogin() {
     let email = document.getElementById('email').value;
     formData.append('email', email);
     formData.append('password', document.getElementById('password').value);
-    sendReq(formData, 'https://api.olmmcc.tk/login', (json) => {
+    sendReq(formData, 'https://api.olmmcc.tk/admin_login', (json) => {
         if (json.message != null) {
             createNotification(json.message);
         } else {
-            if (json.verified == true) {
-                window.localStorage.setItem("session", json.session);
-                window.localStorage.setItem("notification", "Successfully logged in!");
-                window.location = "/";
-            } else {
-                window.localStorage.setItem("unverified_session", json.session);
-                let formData = new FormData();
-                formData.append("session", json.session);
-                sendReq(formData, 'https://api.olmmcc.tk/send_verification_email', (json) => {
-                    if (json.success == true) {
-                        window.localStorage.setItem("notification", "An verification code has been sent to your email at " + email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
-                        window.location = "/account/verify";
-                    }
-                });
-            }
+            window.localStorage.setItem("session", json.session);
+            window.localStorage.setItem("notification", "Successfully logged in!");
+            window.location = "/";
         }
     });
 }

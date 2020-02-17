@@ -41,3 +41,12 @@ document.getElementById("all_users").addEventListener("click", () => {
 if (document.getElementById("specified").checked) {
     unhide_recipient();
 }
+{
+    let formData = new FormData();
+    formData.append("session", window.localStorage.getItem("session"));
+    sendReq(formData, "https://api.olmmcc.tk/is_gmail_working", (json) => {
+        if (json.working == false) {
+            window.location = "/admin/email/auth";
+        }
+    });
+}

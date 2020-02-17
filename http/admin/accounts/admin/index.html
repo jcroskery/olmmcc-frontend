@@ -20,7 +20,7 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>OLMM Children's Choir - Forgot Your Password?</title>
+    <title>OLMM Children's Choir - Administrator Accounts</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <meta name="google-site-verification" content="OcL4_cqE4ATKo4jJzPRpPmK5hs8zPmri7wRGKHO2Osg" />
     <meta name="msvalidate.01" content="994981451F10A9DCC776A33A6B67BAAC" />
@@ -29,32 +29,13 @@ along with this program. If not, see https://www.gnu.org/licenses/.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class='databaseClass'>
     <div id="myPage">
-        <div id='main-text'>
-            <h1>Create a New Password</h1>
-            <div class="centerDiv">
-                <label for="email">Email: </label>
-                <input name='email' id='email' type='email' placeholder="Your account's email address" required='required' />
-                <br>
-                <label for='newPassword1'>New Password: </label>
-                <input name='newPassword1' id='newPassword1' type='password' placeholder='Your new password' required='required' />
-                <br>
-                <label for='newPassword2'>Repeat New Password: </label>
-                <input name='newPassword2' id='newPassword2' type='password' placeholder='Repeat your new password' required='required' />
-                <br><br>
-                <button id='changePassword'>Change Password</button>
-            </div>
-        </div>
-        <div class="bottom">
-            <span class='smallSpan'>
-                &copy; Justus Croskery.
-                <a href='/terms'>Terms of Use</a>
-                <a href='/privacy/'>Privacy Policy</a>
-            </span>
-        </div>
+        <table class='database' id='admin'>
+            <caption>Administrator Accounts</caption>
+        </table>
         <div id='topnav'>
-            <a class="leftFloat" id='active' href="/account/password">Forgot Your Password?</a>
+            <a class="leftFloat" id="active" href="/account/"></a>
             <div class="dropdown">
                 <input type="checkbox" id="dropdownCheck">
                 <label for="dropdownCheck">
@@ -77,10 +58,15 @@ along with this program. If not, see https://www.gnu.org/licenses/.
                 </div>
             </div>
         </div>
+        <br>
+        <div class="centerDiv">
+            <span class="smallSpan">Use ctrl-alt-h to hash a password</span>
+        </div>
         <script src="/js/sendReq.js"></script>
-        <script src="/js/passwordChange.js"></script>
-        <script src="/js/notification.js"></script>
         <script src="/js/getSession.js"></script>
+        <script src="/js/notification.js"></script>
+        <script src="/js/database.js"></script>
+        <script src="/js/hashpassword.js"></script>
     </div>
 </body>
 
