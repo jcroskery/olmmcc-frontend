@@ -5,8 +5,12 @@ function onKeyUp(e) {
             sendReq({
                 "password": active.value,
             }, "https://api.olmmcc.tk/hash_password", (json) => {
-                active.value = json.hash;
-                createNotification("Successfully hashed password.");
+                if (json.hash) {
+                    active.value = json.hash;
+                    createNotification("Successfully hashed password.");
+                } else if (json.message) {
+                    createNotification(json.message);
+                }
             });
         }
     }
