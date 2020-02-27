@@ -21,6 +21,7 @@ function submitLogin() {
             createNotification(json.message);
         } else {
             window.localStorage.setItem("unverified_session", json.session);
+            window.localStorage.removeItem("session");
             window.localStorage.setItem("notification", "An login code has been sent to your email at " + json.email + ". Please check your inbox and spam folder. If you do not receive the email then log in again.");
             window.location = "/login/verify/";
         }
