@@ -88,5 +88,5 @@ var songs = {
     }
 }
 {
-    sendReq(new FormData(), "https://api.olmmcc.tk/get_songs", songs.displaySongLinks);
+    sendReq({}, "https://api.olmmcc.tk/get_songs", songs.displaySongLinks);
 }

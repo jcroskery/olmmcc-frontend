@@ -26,9 +26,7 @@ caption = document.getElementsByTagName('h1')[0];
 eventsArray = [];
 
 function loadJSON() {
-    var data = new FormData();
-    data.append("year_month", currentYearMonthString);
-    sendReq(data, "https://api.olmmcc.tk/get_calendar_events", onGetEvents);
+    sendReq({ "year_month": currentYearMonthString }, "https://api.olmmcc.tk/get_calendar_events", onGetEvents);
 }
 function previousMonth() {
     setSelectedDate(date.getFullYear(), date.getMonth() - 1, 1);
@@ -39,7 +37,7 @@ function nextMonth() {
 function isCorrectDate(firstDate, secondDate) {
     return (firstDate.toDateString() == secondDate.toDateString());
 }
-function getFormattedYearMonthString(year, month){
+function getFormattedYearMonthString(year, month) {
     return year + "-" + (++month > 9 ? month : "0" + month) + "%";
 }
 function setSelectedDate(year, month, day, forcedRefresh = false) {
@@ -78,13 +76,13 @@ function drawCalendar() {
             currentElement.innerHTML = "<span class='weekday'>" + days[currentDate.getDay()]
                 + " </span>" + calendarDate;
             eventsArray[getFormattedYearMonthString(date.getFullYear(), date.getMonth())].forEach
-            (event => {
-                if (isCorrectDate(currentDate, event['date'])) {
-                    currentElement.innerHTML += ('<p class="calendarEventTitle">' +
-                        event['title'] + '</p>' + '<p class="calendarEvent">' + event['time']
-                        + '</p>');
-                }
-            });
+                (event => {
+                    if (isCorrectDate(currentDate, event['date'])) {
+                        currentElement.innerHTML += ('<p class="calendarEventTitle">' +
+                            event['title'] + '</p>' + '<p class="calendarEvent">' + event['time']
+                            + '</p>');
+                    }
+                });
         } else {
             currentElement.className = 'unNeededDate';
             currentElement.innerHTML = '';
@@ -136,12 +134,12 @@ function displayDetails() {
     let detailsDiv = document.createElement('div');
     detailsDiv.id = 'detailsDiv';
     eventsArray[getFormattedYearMonthString(date.getFullYear(), date.getMonth())].forEach
-    (event => {
-        if (isCorrectDate(date, event['date'])) {
-            detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4><p>Time: ' + 
-                event['time'] + '</p><p>Notes: ' + event['notes'] + '</p>';
-        }
-    });
+        (event => {
+            if (isCorrectDate(date, event['date'])) {
+                detailsDiv.innerHTML = '<h4>' + event['title'] + '</h4><p>Time: ' +
+                    event['time'] + '</p><p>Notes: ' + event['notes'] + '</p>';
+            }
+        });
     document.getElementById('graydiv').append(detailsDiv);
     let close = getCloseButton('closeDetails');
     document.getElementById("detailsDiv").innerHTML += close;

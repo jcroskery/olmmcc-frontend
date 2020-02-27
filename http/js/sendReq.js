@@ -15,8 +15,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
 */
-function sendReq(changeForm, url, onLoad) {
-    fetch(url, { method: "POST", body: changeForm }).then((response) => {
+function sendReq(params, url, onLoad) {
+    let session = window.localStorage.getItem("session");
+    if (session) {
+        params.session = session;
+    }
+    fetch(url, { method: "POST", body: JSON.stringify(params) }).then((response) => {
         return response.json();
     })
         .then((myJson) => {

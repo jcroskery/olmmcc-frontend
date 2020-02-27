@@ -16,11 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  */
 function submitLogin() {
-    let formData = new FormData();
-    let email = document.getElementById('email').value;
-    formData.append('email', email);
-    formData.append('password', document.getElementById('password').value);
-    sendReq(formData, 'https://api.olmmcc.tk/admin_login', (json) => {
+    sendReq({
+        'email': document.getElementById('email').value,
+        'password': document.getElementById('password').value
+    }, 'https://api.olmmcc.tk/admin_login', (json) => {
         if (json.message != null) {
             createNotification(json.message);
         } else {

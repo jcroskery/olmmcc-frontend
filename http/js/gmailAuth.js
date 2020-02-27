@@ -7,7 +7,5 @@ function redirect(json) {
     }
 }
 {
-    let form = new FormData();
-    form.append("session", window.localStorage.getItem("session"));
-    sendReq(form, "https://api.olmmcc.tk/get_gmail_auth_url", redirect);
+    sendReq({}, "https://api.olmmcc.tk/get_gmail_auth_url", redirect);
 }
