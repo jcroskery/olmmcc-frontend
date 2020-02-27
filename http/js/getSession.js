@@ -28,9 +28,7 @@ function handleSession(json) {
         signup.textContent = "Logout";
         signup.id = '';
         signup.addEventListener('click', () => {
-            let deleteForm = new FormData();
-            deleteForm.append("session", window.localStorage.getItem("session"));
-            sendReq(deleteForm, 'https://api.olmmcc.tk/kill_session', redirect);
+            sendReq({}, 'https://api.olmmcc.tk/kill_session', redirect);
         });
         let logins = document.querySelectorAll("a[href='/login']");
         for (let i = 0; i < logins.length; i++) {
@@ -64,8 +62,7 @@ function handleSession(json) {
     }
 })();
 if (window.localStorage.getItem("session")) {
-    let sessionForm = new FormData();
-    sessionForm.append("session", window.localStorage.getItem("session"));
-    sessionForm.append("details", "");
-    sendReq(sessionForm, 'https://api.olmmcc.tk/get_account', handleSession);
+    sendReq({
+        "details": "",
+    }, 'https://api.olmmcc.tk/get_account', handleSession);
 }

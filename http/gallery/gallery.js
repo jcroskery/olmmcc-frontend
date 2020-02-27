@@ -49,4 +49,4 @@ function leftClick() {
 function rightClick(){
     displayImage(imageList[offsetCurrentImage(1)]);
 }
-sendReq(new FormData(), "https://api.olmmcc.tk/get_image_list", onLoadImageList);
+sendReq({}, "https://api.olmmcc.tk/get_image_list", onLoadImageList);

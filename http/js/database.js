@@ -18,19 +18,17 @@ along with this program. If not, see https://www.gnu.org/licenses/.
 let table = document.getElementsByTagName('table')[0];
 function onChange(event) {
     let element = event.target;
-    let changeForm = new FormData();
-    changeForm.append("name", element.name);
-    changeForm.append("value", element.value);
-    changeForm.append('id', element.parentElement.parentElement.id);
-    changeForm.append('table', table.id);
-    changeForm.append("session", window.localStorage.getItem("session"));
-    sendReq(changeForm, "https://api.olmmcc.tk/change_row", onChangeComplete);
+    sendReq({
+        "name": element.name,
+        "value": element.value,
+        'id': element.parentElement.parentElement.id,
+        'table': table.id,
+    }, "https://api.olmmcc.tk/change_row", onChangeComplete);
 }
 function onChangeComplete(json) {
-    if(json.success) {
+    if (json.success) {
         createNotification(json.message);
-    }
-    else if (json.authorized) {
+    } else if (json.authorized) {
         window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
         window.location = "/account/email";
     } else {
@@ -38,8 +36,6 @@ function onChangeComplete(json) {
     }
 }
 function onClickAdd() {
-    let changeForm = new FormData();
-    changeForm.append('table', table.id);
     let addInputs = document.getElementsByClassName('add');
     let names = [];
     let values = [];
@@ -47,10 +43,11 @@ function onClickAdd() {
         names.push(addInputs[i].name);
         values.push(addInputs[i].value);
     }
-    changeForm.append("names", JSON.stringify(names));
-    changeForm.append("values", JSON.stringify(values));
-    changeForm.append("session", window.localStorage.getItem("session"));
-    sendReq(changeForm, "https://api.olmmcc.tk/add_row", displayAddedRow);
+    sendReq({
+        "names": JSON.stringify(names),
+        "values": JSON.stringify(values),
+        'table': table.id
+    }, "https://api.olmmcc.tk/add_row", displayAddedRow);
 }
 function displayAddedRow(json) {
     createNotification(json.message);
@@ -63,11 +60,10 @@ function displayAddedRow(json) {
 function onClickDelete(event) {
     let id = event.target.parentElement.parentElement.id;
     if (confirm('Are you sure you want to delete row ' + id + "?")) {
-        let changeForm = new FormData();
-        changeForm.append('id', id);
-        changeForm.append('table', table.id);
-        changeForm.append("session", window.localStorage.getItem("session"));
-        sendReq(changeForm, "https://api.olmmcc.tk/delete_row", removeDeletedRow);
+        sendReq({
+            'id': id,
+            'table': table.id,
+        }, "https://api.olmmcc.tk/delete_row", removeDeletedRow);
     }
 }
 function removeDeletedRow(json) {
@@ -82,11 +78,10 @@ function removeDeletedRow(json) {
     }
 }
 function onClickMoveToStart(event) {
-    let changeForm = new FormData();
-    changeForm.append('id', event.target.parentElement.parentElement.id);
-    changeForm.append('table', table.id);
-    changeForm.append("session", window.localStorage.getItem("session"));
-    sendReq(changeForm, "https://api.olmmcc.tk/move_row_to_start", moveRowToStart);
+    sendReq({
+        'id': event.target.parentElement.parentElement.id,
+        'table': table.id,
+    }, "https://api.olmmcc.tk/move_row_to_start", moveRowToStart);
 }
 function moveRowToStart(json) {
     moveRow(json, 'start');
@@ -99,11 +94,10 @@ function moveRow(json, position) {
     }
 }
 function onClickMoveToEnd(event) {
-    let changeForm = new FormData();
-    changeForm.append('id', event.target.parentElement.parentElement.id);
-    changeForm.append('table', table.id);
-    changeForm.append("session", window.localStorage.getItem("session"));
-    sendReq(changeForm, "https://api.olmmcc.tk/move_row_to_end", moveRowToEnd);
+    sendReq({
+        'id': event.target.parentElement.parentElement.id,
+        'table': table.id,
+    }, "https://api.olmmcc.tk/move_row_to_end", moveRowToEnd);
 }
 function moveRowToEnd(json) {
     moveRow(json, 'secondlast');
@@ -124,10 +118,9 @@ function getParsedColumns(json) {
     parsedTypes = json.types;
     for (let i = 0; i < parsedColumns.length; i++) {
         if (parsedColumns[i] === 'article') { //check for article (and other database dependencies)
-            let changeForm = new FormData();
-            changeForm.append('table', parsedColumns[i] + 's');
-            changeForm.append("session", window.localStorage.getItem("session"));
-            sendReq(changeForm, "https://api.olmmcc.tk/get_row_titles", getOtherDatabaseTitles);
+            sendReq({
+                'table': parsedColumns[i] + 's',
+            }, "https://api.olmmcc.tk/get_row_titles", getOtherDatabaseTitles);
             return;
         }
     }
@@ -234,8 +227,7 @@ function createRows() {
     addAddRowToTable();
 }
 {
-    let changeForm = new FormData();
-    changeForm.append('table', table.id);
-    changeForm.append("session", window.localStorage.getItem("session"));
-    sendReq(changeForm, "https://api.olmmcc.tk/get_database", getParsedColumns);
+    sendReq({
+        'table': table.id,
+    }, "https://api.olmmcc.tk/get_database", getParsedColumns);
 }

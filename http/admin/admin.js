@@ -21,7 +21,11 @@ function redirectLogin(json) {
         window.location = '/login/'; 
     }
 }
-let accountForm = new FormData();
-accountForm.append("details", "admin");
-accountForm.append("session", window.localStorage.getItem("session"));
-sendReq(accountForm, "https://api.olmmcc.tk/get_account", redirectLogin);
+
+if (!window.localStorage.getItem("session")) {
+    redirectLogin({"admin": 0});
+} else {
+    sendReq({
+        "details": "admin",
+    }, "https://api.olmmcc.tk/get_account", redirectLogin);
+}

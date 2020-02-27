@@ -1,8 +1,7 @@
 function submitDelete() {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
-    formData.append("code", document.getElementById('code').value);
-    sendReq(formData, "https://api.olmmcc.tk/delete_account", (json) => {
+    sendReq({
+        "code": document.getElementById('code').value
+    }, "https://api.olmmcc.tk/delete_account", (json) => {
         if (json.success == true) {
             window.localStorage.setItem("notification", "Your account has been successfully deleted.");
             window.localStorage.removeItem("session");

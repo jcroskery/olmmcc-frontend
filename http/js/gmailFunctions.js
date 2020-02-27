@@ -1,30 +1,27 @@
 if (window.location.search != "") {
-    let formData = new FormData();
-    formData.append("code", new RegExp('[?&]code=([^&]*)').exec(location.search)[1]);
-    formData.append("session", window.localStorage.getItem("session"));
-    sendReq(formData, "https://api.olmmcc.tk/send_gmail_code", (_) => {
+    sendReq({
+        "code": new RegExp('[?&]code=([^&]*)').exec(location.search)[1]
+    }, "https://api.olmmcc.tk/send_gmail_code", (_) => {
         window.location.search = "";
     })
 } else {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
-    sendReq(formData, "https://api.olmmcc.tk/is_gmail_working", (json) => {
+    sendReq({}, "https://api.olmmcc.tk/is_gmail_working", (json) => {
         if (json.working == false) {
             window.location = "/admin/email/auth";
         }
     });
 }
 document.getElementById("send").addEventListener("click", () => {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
+    let data = {
+        "subject": document.getElementById("subject").value,
+        "body": document.getElementById("body").value
+    };
     let recipients = document.querySelector('input[name = "recipients"]:checked').value;
     if (recipients == "specified") {
-        formData.append("recipient", document.getElementById("recipient").value);
+        data.recipient = document.getElementById("recipient").value;
     }
-    formData.append("recipients", recipients);
-    formData.append("subject", document.getElementById("subject").value);
-    formData.append("body", document.getElementById("body").value);
-    sendReq(formData, "https://api.olmmcc.tk/send_email", (json) => {
+    data.recipients = recipients;
+    sendReq(data, "https://api.olmmcc.tk/send_email", (json) => {
         if (json.success == true) {
             createNotification("Successfully sent this email!");
         } else {

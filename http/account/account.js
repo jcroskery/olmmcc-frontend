@@ -19,11 +19,9 @@ function displayResponse(json) {
     createNotification(json.message);
 }
 function changeEmail() {
-    let formData = new FormData();
-    let email = document.getElementById('email').value;
-    formData.append("session", window.localStorage.getItem("session"));
-    formData.append('email', email);
-    sendReq(formData, "https://api.olmmcc.tk/send_change_email", (json) => {
+    sendReq({
+        'email': document.getElementById('email').value
+    }, "https://api.olmmcc.tk/send_change_email", (json) => {
         if (json.success) {
             window.localStorage.setItem("notification", "An email containing a verification code for your email change request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/email";
@@ -33,15 +31,12 @@ function changeEmail() {
     });
 }
 function changeSubscription() {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
-    formData.append('subscription', document.getElementById('subscription').value);
-    sendReq(formData, "https://api.olmmcc.tk/change_subscription", displayResponse);
+    sendReq({
+        'subscription': document.getElementById('subscription').value
+    }, "https://api.olmmcc.tk/change_subscription", displayResponse);
 }
 function deleteAccount() {
-    let formData = new FormData();
-    formData.append("session", window.localStorage.getItem("session"));
-    sendReq(formData, "https://api.olmmcc.tk/send_delete_email", (json) => {
+    sendReq({}, "https://api.olmmcc.tk/send_delete_email", (json) => {
         if (json.success) {
             window.localStorage.setItem("notification", "An email containing a verification code for your account deletion request has been sent to " + json.email + ". Please check your inbox, including the spam folder, for the link. It may take a few minutes to receive the email.");
             window.location = "/account/delete";
@@ -57,7 +52,7 @@ function displayDetails(json) {
         return;
     }
     if (json.admin === "1") {
-        window.location = "/admin";
+        window.location = "/admin/";
     }
     document.getElementById('email').value = json.email;
     document.getElementById('subscription').selectedIndex = json.subscription_policy;
@@ -66,9 +61,10 @@ document.getElementById('changeEmail').addEventListener('click', changeEmail);
 document.getElementById('changeSubscription').addEventListener('click', changeSubscription);
 document.getElementById('delete').addEventListener('click', deleteAccount);
 
-let accountForm = new FormData();
-accountForm.append("details", 
-    JSON.stringify(["email", "subscription_policy", "admin"])
-);
-accountForm.append("session", window.localStorage.getItem("session"));
-sendReq(accountForm, "https://api.olmmcc.tk/get_account", displayDetails);
+if (!window.localStorage.getItem("session")) {
+    displayDetails({"session": "none"});
+} else {
+    sendReq({
+        "details": "email subscription_policy admin"
+    }, "https://api.olmmcc.tk/get_account", displayDetails);
+}
