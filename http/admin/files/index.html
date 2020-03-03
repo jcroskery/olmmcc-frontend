@@ -34,8 +34,17 @@ along with this program. If not, see https://www.gnu.org/licenses/.
         <div id="main-text">
             <h1>Violin Songs</h1>
             <div class="centerDiv" id="violinDiv">
-                <label class="centerFloat" for="song">Song Number:</label>
-                <input name="song" id="song" placeholder="Song Number Here" required="required" />
+                <select id='instruments' name='instruments'>
+                    <option value='violin'>Violin</option>
+                    <option selected="selected" value='piano'>Piano</option>
+                </select>
+                <select id='list' name='list'>
+                    <option value='a'>List A</option>
+                    <option value='b'>List B</option>
+                    <option value='c'>List C</option>
+                </select>
+                <select id='song' name='song'>
+                </select>
             </div>
         </div>
         <div class="bottom">
