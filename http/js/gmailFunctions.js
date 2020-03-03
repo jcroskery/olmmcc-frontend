@@ -14,7 +14,7 @@ if (window.location.search != "") {
 document.getElementById("send").addEventListener("click", () => {
     let data = {
         "subject": document.getElementById("subject").value,
-        "body": document.getElementById("body").value.replace(/([^\r]\n)/g, "\r\n")
+        "body": document.getElementById("body").value.replace(/\r\n|\n/gm, "\r\n")
     };
     let recipients = document.querySelector('input[name = "recipients"]:checked').value;
     if (recipients == "specified") {
