@@ -444,3 +444,8 @@ body.galleryClass {
     height: calc(100vh - 55px);
 }
 /*End of gallery*/
+/*Beginning of violin songs*/
+.songList {
+    font-size: 10px;
+}
+/*End of violin songs*/
