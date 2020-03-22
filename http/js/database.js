@@ -203,12 +203,22 @@ function addRowToTable(rowData, position = 'end') {
         table.appendChild(tr);
     }
 }
+function getNewValue(type, name) {
+    if (type === "tinyint(1)") {
+        return "0";
+    } else if (type === "date") {
+        return new Date().toISOString().slice(0, 10);
+    } else {
+        return "New " + name;
+    }
+}
 function addAddRowToTable() {
     let tr = document.createElement('tr');
     tr.id = 'add';
     for (let i = 0; i < parsedColumns.length; i++) {
         if (i !== parsedColumns.indexOf("id")) {
-            tr.appendChild(determineCellContents(parsedTypes[i], parsedColumns[i], "New " + parsedColumns[i], true));
+            let new_value = getNewValue(parsedTypes[i], parsedColumns[i]);
+            tr.appendChild(determineCellContents(parsedTypes[i], parsedColumns[i], new_value, true));
         }
     }
 
