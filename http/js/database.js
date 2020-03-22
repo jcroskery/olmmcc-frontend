@@ -20,10 +20,17 @@ function onChange(event) {
     let element = event.target;
     sendReq({
         "name": element.name,
-        "value": element.value,
+        "value": getElementValue(element),
         'id': element.parentElement.parentElement.id,
         'table': table.id,
     }, "https://api.olmmcc.tk/change_row", onChangeComplete);
+}
+function getElementValue(element) {
+    if (element.type === "checkbox") {
+        return element.checked ? "1" : "0";
+    } else {
+        return element.value;
+    }
 }
 function onChangeComplete(json) {
     if (json.success) {
@@ -41,7 +48,7 @@ function onClickAdd() {
     let values = [];
     for (let i = 0; i < addInputs.length; i++) {
         names.push(addInputs[i].name);
-        values.push(addInputs[i].value);
+        values.push(getElementValue(addInputs[i]));
     }
     sendReq({
         "names": JSON.stringify(names),
@@ -145,6 +152,9 @@ function determineCellContents(type, name, value, add = false) {
     let td = document.createElement('td');
     if (type === 'date') {
         td.innerHTML = "<input type='date' name='" + name + "' value='" + value + "' />";
+    } else if (type === "tinyint(1)") {
+        let checked = (value === '1') ? " checked" : "";
+        td.innerHTML = "<input type='checkbox' name='" + name + "'" + checked + " />";
     } else if (type === 'text') {
         td.innerHTML = "<textarea name='" + name + "'>" + value + "</textarea>";
     } else if (name === 'article') {
